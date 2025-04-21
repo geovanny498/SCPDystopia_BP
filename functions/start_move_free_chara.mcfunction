@@ -1,0 +1,1 @@
+event entity @e[type=lc:dt_chara] humanoid:start_move_free

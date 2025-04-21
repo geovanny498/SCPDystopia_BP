@@ -1,0 +1,6 @@
+kill @e[type=lc:dt_epsilon11]
+kill @e[type=lc:dt_eta10]
+kill @e[type=lc:dt_nu7]
+kill @e[type=lc:dt_beta7]
+kill @e[type=lc:dt_epsilon6]
+kill @e[type=lc:dt_alpha1]
