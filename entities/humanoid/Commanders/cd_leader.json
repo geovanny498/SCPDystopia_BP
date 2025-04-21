@@ -123,13 +123,13 @@
             },
             "minecraft:ranged_attack": {
                 "minecraft:shooter": {
-                    "def": "lc:dt_hk416_bullet_player_c"
+                    "def": "lc:dt_m4a1_bullet_player"
                 },
                 "minecraft:behavior.ranged_attack": {
                     "attack_radius_min": 6,
                     "priority": 1,
                     "target_in_sight_time": 0.5,
-                    "burst_shots": 100,
+                    "burst_shots": 50,
                     "burst_interval": 0.05,
                     "charge_charged_trigger": 0.0,
                     "charge_shoot_trigger": 1.0,
