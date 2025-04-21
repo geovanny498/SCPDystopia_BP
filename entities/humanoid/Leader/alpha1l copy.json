@@ -2,7 +2,7 @@
     "format_version": "1.21.70",
     "minecraft:entity": {
         "description": {
-            "identifier": "lc:dt_epsilon11c",
+            "identifier": "lc:dt_alpha1l",
             "is_spawnable": true,
             "is_summonable": true,
             "is_experimental": false,
@@ -123,19 +123,19 @@
             },
             "minecraft:ranged_attack": {
                 "minecraft:shooter": {
-                    "def": "lc:dt_p90_bullet_player_normal"
+                    "def": "lc:dt_m4a1_bullet_player"
                 },
                 "minecraft:behavior.ranged_attack": {
                     "attack_radius_min": 6,
                     "priority": 1,
                     "target_in_sight_time": 0.5,
                     "burst_shots": 50,
-                    "burst_interval": 0.07,
+                    "burst_interval": 0.08,
                     "charge_charged_trigger": 0.0,
                     "charge_shoot_trigger": 1.0,
                     "attack_interval_min": 1.0,
                     "attack_interval_max": 1.0,
-                    "attack_radius": 30.0,
+                    "attack_radius": 50.0,
                     "speed_multiplier": 1.15
                 },
                 "minecraft:behavior.nearest_attackable_target": {
@@ -250,11 +250,11 @@
                     "random_stop_interval": 0,
                     "reach_multiplier": 5,
                     "speed_multiplier": 1.25,
-                    "attack_duration": 0.15,
+                    "attack_duration": 0.05,
                     "hit_delay_pct": 0.1
                 },
                 "minecraft:attack": {
-                    "damage": 14
+                    "damage": 16
                 },
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
@@ -378,7 +378,7 @@
                     "broadcast_anger_on_being_attacked": true,
                     "broadcast_range": 128,
                     "broadcast_targets": [
-                        "dm"
+                        "alpha1"
                     ],
                     "calm_event": {
                         "event": "humanoid:on_calm",
@@ -407,11 +407,11 @@
                     "items": [
                         {
                             "item": "golden_apple",
-                            "heal_amount": 80
+                            "heal_amount": 90
                         },
                         {
                             "item": "golden_carrot",
-                            "heal_amount": 80
+                            "heal_amount": 45
                         }
                     ]
                 },
@@ -718,7 +718,7 @@
                     "within_radius": 64,
                     "speed_multiplier": 1.25,
                     "items": [
-                        "stick",
+                        "emerald",
                         "blaze_powder"
                     ]
                 }
@@ -1010,7 +1010,7 @@
                     "within_radius": 64,
                     "speed_multiplier": 1.25,
                     "items": [
-                        "stick",
+                        "emerald",
                         "blaze_powder"
                     ]
                 },
@@ -1306,7 +1306,7 @@
                     "within_radius": 64,
                     "speed_multiplier": 1.25,
                     "items": [
-                        "stick",
+                        "emerald",
                         "blaze_powder"
                     ]
                 },
@@ -1323,7 +1323,7 @@
             "humanoid:show_health": {
                 "minecraft:boss": {
                     "should_darken_sky": false,
-                    "name": "§1§lMTF Epsilon-11 Commander",
+                    "name": "§lMTF Alpha-1 Commander",
                     "hud_range": 5
                 }
             },
@@ -1389,7 +1389,7 @@
                     "player",
                     "human",
                     "mob",
-                    "dm",
+                    "alpha1",
                     "mtf",
                     "villager"
                 ]
@@ -1532,8 +1532,8 @@
                 ]
             },
             "minecraft:health": {
-                "value": 160,
-                "max": 160
+                "value": 180,
+                "max": 180
             },
             "minecraft:breathable": {
                 "total_supply": 15,
@@ -1545,7 +1545,7 @@
                 "priority": 0
             },
             "minecraft:attack": {
-                "damage": 14
+                "damage": 16
             },
             "minecraft:fire_immune": true,
             "minecraft:variable_max_auto_step": {

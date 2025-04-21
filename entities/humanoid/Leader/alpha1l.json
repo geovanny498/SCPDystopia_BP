@@ -1323,7 +1323,7 @@
             "humanoid:show_health": {
                 "minecraft:boss": {
                     "should_darken_sky": false,
-                    "name": "§l§lMTF Alpha-1 Leader",
+                    "name": "§lMTF Alpha-1 Leader",
                     "hud_range": 5
                 }
             },
