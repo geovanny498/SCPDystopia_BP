@@ -1,0 +1,174 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_poster",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ],
+                "poster:variant": [ 0, 1, 2, 3, 4 ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 2 ]
+            },
+            "minecraft:entity_collision": false,
+            "minecraft:geometry": "geometry.dt_poster",
+            "minecraft:destroy_time": 1.0,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:flammable": {
+                "flame_odds": 0,
+                "burn_odds": 0
+            },
+            "minecraft:block_light_absorption": 0.2,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "facing:direction": "(query.cardinal_facing_2d)",
+                    "poster:variant": 0
+                }
+            },
+            "poster:to_var0": {
+                "set_block_property": {
+                    "poster:variant": 0
+                }
+            },
+            "poster:to_var1": {
+                "set_block_property": {
+                    "poster:variant": 1
+                }
+            },
+            "poster:to_var2": {
+                "set_block_property": {
+                    "poster:variant": 2
+                }
+            },
+            "poster:to_var3": {
+                "set_block_property": {
+                    "poster:variant": 3
+                }
+            },
+            "poster:to_var4": {
+                "set_block_property": {
+                    "poster:variant": 4
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('poster:variant') == 0",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_poster_scplogo",
+                            "render_method": "alpha_test"
+                        }
+                    },
+                    "minecraft:on_interact": {
+                        "event": "poster:to_var1",
+                        "target": "self",
+                        "condition": "query.get_equipped_item_name('main_hand') == 'dt_wrench'"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('poster:variant') == 1",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_poster_ntf",
+                            "render_method": "alpha_test"
+                        }
+                    },
+                    "minecraft:on_interact": {
+                        "event": "poster:to_var2",
+                        "target": "self",
+                        "condition": "query.get_equipped_item_name('main_hand') == 'dt_wrench'"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('poster:variant') == 2",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_poster_recycle",
+                            "render_method": "alpha_test"
+                        }
+                    },
+                    "minecraft:on_interact": {
+                        "event": "poster:to_var3",
+                        "target": "self",
+                        "condition": "query.get_equipped_item_name('main_hand') == 'dt_wrench'"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('poster:variant') == 3",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_poster_cafeteria",
+                            "render_method": "alpha_test"
+                        }
+                    },
+                    "minecraft:on_interact": {
+                        "event": "poster:to_var4",
+                        "target": "self",
+                        "condition": "query.get_equipped_item_name('main_hand') == 'dt_wrench'"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('poster:variant') == 4",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_poster_winningson",
+                            "render_method": "alpha_test"
+                        }
+                    },
+                    "minecraft:on_interact": {
+                        "event": "poster:to_var0",
+                        "target": "self",
+                        "condition": "query.get_equipped_item_name('main_hand') == 'dt_wrench'"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

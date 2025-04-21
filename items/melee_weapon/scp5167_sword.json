@@ -1,0 +1,75 @@
+// CC-BY-SA 3.0
+{
+    "format_version": "1.16.100",
+    "minecraft:item": {
+        "description": {
+            "identifier": "lc:dt_scp5167_knife",
+            "category": "Equipment"
+        },
+        "components": {
+            "minecraft:use_duration": 3600,
+            "minecraft:can_destroy_in_creative": false,
+            "minecraft:damage": 6,
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.equipment"
+            },
+            "minecraft:durability": {
+                "max_durability": 50,
+                "damage_chance": {
+                    "min": 2,
+                    "max": 3
+                }
+            },
+            "minecraft:digger": {
+                "use_efficiency": false,
+                "destroy_speeds": [
+                    {
+                        "block": "minecraft:web",
+                        "speed": 15
+                    },
+                    {
+                        "block": "minecraft:bamboo",
+                        "speed": 10
+                    }
+                ]
+            },
+            "minecraft:hand_equipped": true,
+            "minecraft:max_stack_size": 1,
+            "minecraft:icon": {
+                "texture": "dt_scp5167_sword"
+            },
+            "minecraft:display_name": {
+                "value": "dt.nameslot.scp5167_knife"
+            },
+            "minecraft:weapon": {
+                "on_hurt_entity": {
+                    "event": "scp5167_sword:hurt_entity"
+                },
+                "on_hit_block": {
+                    "event": "scp5167_sword:reduce_durability",
+                    "target": "self"
+                }
+            }
+        },
+        "events": {
+            "scp5167_sword:hurt_entity": {
+                "run_command": {
+                    "command": [
+                        "playsound scpdt.scp5167.attack @a[r=10] ~~~"
+                    ],
+                    "target": "other"
+                },
+                "damage": {
+                    "type": "magic",
+                    "amount": 2
+                }
+            },
+            "scp5167_sword:reduce_durability": {
+                "damage": {
+                    "type": "magic",
+                    "amount": 2
+                }
+            }
+        }
+    }
+}

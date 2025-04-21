@@ -1,0 +1,31 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+    "identifier": "lc:dt_memo_book"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "ingredients": [
+      {
+        "item": "minecraft:book"
+      },
+      {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      {
+        "item": "minecraft:dye",
+        "data": 0
+      },
+      {
+        "item": "minecraft:dye",
+        "data": 2
+      }
+    ],
+    "result": {
+      "item": "lc:dt_memo_book",
+      "count": 2
+    }
+  }
+}

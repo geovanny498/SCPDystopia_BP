@@ -1,0 +1,29 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_ceiling1"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "###",
+      "#I#",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:concrete",
+        "data": 0
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "lc:dt_ceiling1",
+      "count": 20
+    }
+  }
+}

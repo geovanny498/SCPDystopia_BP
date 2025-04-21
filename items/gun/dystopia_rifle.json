@@ -1,0 +1,112 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_dystopia_rifle",
+			"category": "Equipment"
+		},
+		"components": {
+			"minecraft:use_duration": 0.1,
+			"minecraft:damage": 80,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.equipment"
+			},
+			"minecraft:durability": {
+				"max_durability": 3,
+				"damage_chance": {
+					"min": 0,
+					"max": 0
+				}
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "dt_dtrifle_icon"
+			},
+			"minecraft:display_name": {
+				"value": "§l§k§0:::§r§5§lDystopia Rifle Delta-1§l§k§0:::§r"
+			},
+			"minecraft:cooldown": {
+				"duration": 4.8,
+				"category": "dtrifle_shooting"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"condition": "(query.remaining_durability == 3) || (query.get_equipped_item_name(1) == 'dt_dtrifle_ammo')",
+					"event": "dtrifle:shooting"
+				}
+			},
+			"minecraft:weapon": {
+				"on_hurt_entity": {
+				},
+				"on_hit_block": {
+				}
+			}
+		},
+		"events": {
+			"dtrifle:shooting": {
+				"sequence": [
+					{
+						"condition": "!query.is_sneaking && (query.remaining_durability == 3)",
+						"shoot": {
+							"projectile": "lc:dt_dtrifle_bullet_player",
+							"launch_power": 1.0
+						},
+						"run_command": {
+							"command": [
+								"effect @s slowness 1 2 true",
+								"execute @s ~~~ playsound scpdt.dtrifle.shot @a[r=20] ~~~",
+								"playanimation @s animation.dt_misc.player_gun_fire",
+								"camerashake add @s 0.8 0.24 positional",
+								"title @s actionbar §b>>>> §e+§b <<<<",
+								"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.28 ^5"
+							],
+							"target": "holder"
+						},
+						"damage": {
+							"type": "magic",
+							"amount": 1
+						}
+					},
+					{
+						"condition": "query.is_sneaking && (query.remaining_durability == 3)",
+						"shoot": {
+							"projectile": "lc:dt_dtrifle_bullet_player_sneak",
+							"launch_power": 1.1
+						},
+						"run_command": {
+							"command": [
+								"effect @s slowness 1 2 true",
+								"execute @s ~~~ playsound scpdt.dtrifle.shot @a[r=20] ~~~",
+								"playanimation @s animation.dt_misc.player_gun_fire",
+								"camerashake add @s 0.8 0.24 positional",
+								"title @s actionbar §b>>>> §c+ §b<<<<",
+								"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.33 ^5"
+							],
+							"target": "holder"
+						},
+						"damage": {
+							"type": "magic",
+							"amount": 1
+						}
+					},
+					{
+						"condition": "(query.get_equipped_item_name(1) == 'dt_dtrifle_ammo') && (query.remaining_durability == 2)",
+						"run_command": {
+							"command": [
+								"effect @s slowness 4 2 true",
+								"replaceitem entity @s slot.weapon.offhand 0 lc:dt_dtrifle_ammo_empty",
+								"playsound scpdt.dtrifle.reload"
+							],
+							"target": "holder"
+						},
+						"damage": {
+							"type": "magic",
+							"amount": -1
+						}
+					}
+				]
+			}
+		}
+	}
+} 

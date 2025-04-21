@@ -1,0 +1,29 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_keycard_omni"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "BA",
+      "##"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:paper"
+      },
+      "A": {
+        "item": "minecraft:netherite_ingot"
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_keycard_omni"
+    }
+  }
+}

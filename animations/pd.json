@@ -1,0 +1,15 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.scp106.pd.enter": {
+      "animation_length": 5,
+      "timeline": {
+        "0.1": [ "/tp @a[tag=dt_enter_pd] ~~~" ],
+        "0.2": [ "/fog @a[r=3] push lc:dt_pd_fog dt_pd_fog", "/gamemode a @a[r=3,m=!1]", "/effect @a[r=3] slowness 4 3 true" ],
+        "0.3": [ "/tag @a[r=3] remove dt_enter_pd" ],
+        "0.4": [ "/playsound scpdt.pd.enter @a[r=3]" ],
+        "4": [ "/event entity @s pd_enter:enter_finish" ]
+      }
+    }
+  }
+}

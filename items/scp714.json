@@ -1,0 +1,45 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_scp714",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:use_duration": 1.6,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:hand_equipped": false,
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": {
+        "texture": "dt_scp714"
+      },
+      "minecraft:display_name": {
+        "value": "SCP-714 \"The Jaded Ring\""
+      },
+			"minecraft:cooldown": {
+				"duration": 3,
+				"category": "scp714"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"event": "scp714:use"
+				}
+			}
+    },
+    "events": {
+      "scp714:use": {
+        "run_command": {
+          "command": [
+            "playsound scpdt.scp714.use @a[r=10] ~~~",
+            "effect @s resistance 8 3",
+            "effect @s weakness 8 1",
+            "effect @s slowness 8 0"
+          ],
+          "target": "holder"
+        }
+      }
+    }
+  }
+}

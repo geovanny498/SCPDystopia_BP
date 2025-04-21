@@ -1,0 +1,48 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_scp207",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:use_duration": 1.6,
+      "minecraft:hand_equipped": false,
+      "minecraft:max_stack_size": 16,
+      "minecraft:icon": {
+        "texture": "dt_scp207"
+      },
+      "minecraft:display_name": {
+        "value": "SCP-207 \"Cola Bottles\""
+      },
+      "minecraft:food": {
+				"nutrition": 1,
+				"saturation_modifier": "low",
+				"can_always_eat": true,
+				"on_consume": {
+					"event": "on_consume",
+					"target": "self"
+				}
+			},
+			"minecraft:use_animation": "drink"
+    },
+    "events": {
+      "on_consume": {
+        "run_command": {
+          "command": [
+            "title @s actionbar I feel I will never be tired. But hurts...",
+            "playsound scpdt.scp294.drink.ew @a[r=13] ~~~",
+            "effect @s speed 120 2",
+            "effect @s strength 120 1",
+            "effect @s haste 120 0",
+            "effect @s poison 180 0"
+          ],
+          "target": "holder"
+        }
+      }
+    }
+  }
+}

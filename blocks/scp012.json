@@ -1,0 +1,88 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_scp012",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_scp012",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:entity_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:geometry": "geometry.dt_scp012",
+            "minecraft:destroy_time": 1.6,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:block_light_absorption": 0.7,
+            "tag:lc:dystopiablock": {},
+            "minecraft:ticking": {
+                "looping": true,
+                "range": [0.8, 0.8],
+                "on_tick": {
+                    "event": "scp012:damage",
+                    "target": "self"
+                }
+            }
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "facing:direction": "(query.cardinal_facing_2d)"
+                }
+            },
+            "scp012:damage": {
+                "run_command": {
+                    "command": [
+                        "effect @a[m=!c,r=5] slowness 3 1 true",
+                        "effect @a[m=!c,r=5] wither 2 1 true"
+                    ]
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

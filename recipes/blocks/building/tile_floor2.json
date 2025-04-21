@@ -1,0 +1,29 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_tile_floor2"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "I#",
+      "#I"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:concrete",
+        "data": 0
+      },
+      "I": {
+        "item": "minecraft:dye",
+        "data": 6
+      }
+    },
+    "result": {
+      "item": "lc:dt_tile_floor2",
+      "count": 20
+    }
+  }
+}

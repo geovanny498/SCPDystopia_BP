@@ -1,0 +1,141 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp_redacted",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "music"
+        ]
+      },
+      "animations": {
+        "music": "controller.animation.scp_redacted.music"
+      }
+    },
+    "component_groups": {
+      "spawning": {
+        "minecraft:mark_variant": {
+          "value": 0
+        }
+      },
+      "stage1_humanoid": {
+        "minecraft:mark_variant": {
+          "value": 1
+        },
+        "minecraft:health": {
+          "value": 300,
+          "max": 300
+        },
+        "minecraft:boss": {
+          "should_darken_sky": true,
+          "name": "§c[DATA REDACTED]",
+          "hud_range": 55
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "domain": "hand",
+                      "subject": "other",
+                      "value": "lc:dt_scp1023_arc"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "scp_redacted:stage1_died"
+              }
+            }
+          ]
+        }
+      },
+      "stage1_died": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scp_redactedd<scp_redacted:spawn_stage2"
+        }
+      },
+      "stage2_monster": {
+        "minecraft:mark_variant": {
+          "value": 2
+        }
+      }
+    },
+    "components": {
+      "minecraft:experience_reward": {
+        "on_death": "100"
+      },
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "inanimate" ]
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      }
+    },
+    "events": {
+      "scp_redacted:spawned": {
+        "add": {
+          "component_groups": [
+            "spawning"
+          ]
+        }
+      },
+      "scp_redacted:enter_stage1": {
+        "add": {
+          "component_groups": [
+            "stage1_humanoid"
+          ]
+        }
+      },
+      "scp_redacted:spawn_stage2": {
+        "add": {
+          "component_groups": [
+            "stage2_monster"
+          ]
+        }
+      },
+      "scp_redacted:stage1_died": {
+        "add": {
+          "component_groups": [
+            "stage1_died"
+          ]
+        }
+      },
+      "scp_redacted:stage2_died": {
+        "add": {
+          "component_groups": [
+            "stage2_died"
+          ]
+        }
+      }
+    }
+  }
+}
+  

@@ -1,0 +1,11 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.scpdt.dead_body.blood": {
+      "animation_length": 5,
+      "timeline": {
+        "4": [ "/summon lc:dt_blood ^^^0.01 blood:spawned_from_dead_body" ]
+      }
+    }
+  }
+}

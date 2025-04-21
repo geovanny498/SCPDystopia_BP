@@ -1,0 +1,9 @@
+give @p lc:dt_big_plant
+give @p lc:dt_coffee_mug_block
+give @p lc:dt_plant
+give @p lc:dt_speaker
+give @p lc:dt_telephone
+give @p lc:dt_weapon_crate
+give @p lc:dt_wines
+give @p lc:dt_scp173_plush
+give @p lc:dt_memo_book

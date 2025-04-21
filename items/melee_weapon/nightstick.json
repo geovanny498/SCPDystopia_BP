@@ -1,0 +1,48 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "lc:dt_nightstick",
+      "category": "Equipment"
+    },
+    "components": {
+      "minecraft:durability": {
+        "max_durability": 80,
+				"damage_chance": {
+					"min": 2,
+					"max": 6
+				}
+      },
+      "minecraft:weapon": {
+        "on_hurt_entity": {
+          "event": "lc:reduce_durability"
+        }
+      },
+      "minecraft:damage": 4,
+      "minecraft:enchantable": {
+        "value": 10,
+        "slot": "sword"
+      },
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.sword"
+      },
+      "minecraft:hand_equipped": true,
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": {
+        "texture": "dt_nightstick"
+      },
+      "minecraft:display_name": {
+        "value": "Nightstick"
+      }
+    },
+    "events": {
+      "lc:reduce_durability": {
+        "damage": {
+          "type": "durability",
+          "target": "self",
+          "amount": 5
+        }
+      }
+    }
+  }
+}

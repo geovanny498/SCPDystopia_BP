@@ -1,0 +1,51 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_mine",
+            "properties": {
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_mine",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -4, 0, -4 ],
+                "size": [ 8, 2, 8 ]
+            },
+            "minecraft:entity_collision": {
+                "origin": [ -4, 0, -4 ],
+                "size": [ 8, 8, 8 ]
+            },
+            "minecraft:geometry": "geometry.dt_mine",
+            "minecraft:destroy_time": 1.1,
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:block_light_absorption": 0.0,
+            "tag:lc:dystopiablock": {},
+            "minecraft:on_step_on": {
+                "event": "explode",
+                "target": "self"
+            }
+        },
+        "events": {
+            "explode": {
+                "run_command": {
+                    "command": [
+                        "summon lc:dt_mine_explosion ~~~",
+                        "setblock ~~~ air"
+                    ]
+                }
+            }
+        },
+        "permutations": [
+        ]
+    }
+}

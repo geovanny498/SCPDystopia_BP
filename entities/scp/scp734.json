@@ -1,0 +1,115 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp734",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 6 : 0"
+      },
+      "minecraft:knockback_resistance": {
+        "value": 0.1
+      },
+      "minecraft:mob_effect": {
+        "effect_range": 1.2,
+        "mob_effect": "wither",
+        "effect_time": 3,
+        "entity_filter": {
+          "any_of": [
+            { "test": "is_family", "subject": "other", "value": "player" },
+            { "test": "is_family", "subject": "other", "value": "human" },
+            { "test": "is_family", "subject": "other", "value": "villager" }
+          ] 
+        }
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_contact_with_water", "operator": "==", "value": true },
+            "cause": "drowning",
+            "damage_per_tick": 37
+          }
+        ]
+      },
+      "minecraft:health": {
+        "value": 33,
+        "max": 33
+      },
+      "minecraft:type_family": {
+        "family": [ "scp", "scp457", "mob", "monster" ]
+      },
+      "minecraft:attack": {
+        "damage": 7
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:follow_range": {
+        "value": 32,
+        "max": 32
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 0
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 1,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 7,
+        "speed_multiplier": 0.6
+      },
+      "minecraft:behavior.look_at_player": {
+        "probability": 0.04,
+        "priority": 6,
+        "look_distance": 7
+      },
+      "minecraft:movement": {
+        "value": 0.28
+      },
+      "minecraft:collision_box": {
+        "width": 0.5,
+        "height": 1.0
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.break_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": false,
+        "is_amphibious": false,
+        "can_path_over_water": false,
+        "avoid_sun": false,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_break_doors": true
+      }
+    }
+  }
+}
+  

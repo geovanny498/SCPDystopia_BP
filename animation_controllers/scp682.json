@@ -1,0 +1,82 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp682.sizes": {
+      "initial_state": "size5",
+      "states": {
+        "size5": {
+          "transitions": [
+            {
+              "size4": "query.health < 39880 && query.mark_variant == 0"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s scp682:to_size5"
+          ]
+        },
+        "size4": {
+          "transitions": [
+            {
+              "size5": "query.health > 40000 && query.mark_variant == 1"
+            },
+            {
+              "size3": "query.health < 39800 && query.mark_variant == 1"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s scp682:to_size4"
+          ]
+        },
+        "size3": {
+          "transitions": [
+            {
+              "size4": "query.health > 39880 && query.mark_variant == 2"
+            },
+            {
+              "size2": "query.health < 39700 && query.mark_variant == 2"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s scp682:to_size3"
+          ]
+        },
+        "size2": {
+          "transitions": [
+            {
+              "size3": "query.health > 39700 && query.mark_variant == 3"
+            },
+            {
+              "size1": "query.health < 39550 && query.mark_variant == 3"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s scp682:to_size2"
+          ]
+        },
+        "size1": {
+          "transitions": [
+            {
+              "size2": "query.health > 39700 && query.mark_variant == 4"
+            },
+            {
+              "size0": "query.health < 39600 && query.mark_variant == 4"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s scp682:to_size1"
+          ]
+        },
+        "size0": {
+          "transitions": [
+            {
+              "size1": "query.health > 39600 && query.mark_variant == 5"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s scp682:to_size0"
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:item": {
+        "description": {
+            "identifier": "lc:dt_classd_pants",
+            "category": "Equipment"
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.leggings"
+            },
+            "minecraft:max_stack_size": 1,
+            "minecraft:icon": {
+                "texture": "dt_classd_pants_icon"
+            },
+            "minecraft:durability": {
+                "max_durability": 90,
+                "damage_chance": {
+                    "min": 8,
+                    "max": 11
+                }
+            },
+            "minecraft:armor": {
+                "protection": 3
+            },
+            "minecraft:enchantable": {
+                "slot": "armor_legs",
+                "value": 10
+            },
+            "minecraft:wearable": {
+                "slot": "slot.armor.legs"
+            },
+            "minecraft:display_name": {
+                "value": "Class-D Pants"
+            }
+        }
+    }
+}

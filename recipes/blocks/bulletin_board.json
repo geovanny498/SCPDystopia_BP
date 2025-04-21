@@ -1,0 +1,30 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_bulletin_board"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "ABA",
+      "#A#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:planks"
+      },
+      "A": {
+        "item": "minecraft:paper"
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_bulletin_board",
+      "count": 2
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_toilet"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "A ",
+      "###",
+      "BBB"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:concrete",
+        "data": 0
+      },
+      "A": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "B": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "lc:dt_toilet",
+      "count": 2
+    }
+  }
+}

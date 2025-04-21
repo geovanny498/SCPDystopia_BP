@@ -1,0 +1,15 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.ci_truck.dispatch": {
+      "animation_length": 27,
+      "timeline": {
+        "0.1": [ "/playsound scpdt.ci_truck.come @a" ],
+        "6.12": [ "/stopsound @a scpdt.ci_truck.enter" ],
+        "6.13": [ "/playsound scpdt.ci_truck.enter @a" ],
+        "6.14": [ "/summon lc:dt_chaos_insurgency ~~~-3", "/summon lc:dt_chaos_insurgency ~~~-2", "/summon lc:dt_chaos_insurgency ~~~-1" ],
+        "6.15": [ "/summon lc:dt_chaos_insurgency ~~~3", "/summon lc:dt_chaos_insurgency ~~~2", "/summon lc:dt_chaos_insurgency ~~~1" ]
+      }
+    }
+  }
+}

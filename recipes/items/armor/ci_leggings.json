@@ -1,0 +1,31 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_ci_leggings"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "#X#",
+      "G G",
+      "# #"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "X": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "G": {
+        "item": "minecraft:dye",
+        "data":  2
+      }
+    },
+    "result": {
+      "item": "lc:dt_ci_leggings"
+    }
+  }
+}

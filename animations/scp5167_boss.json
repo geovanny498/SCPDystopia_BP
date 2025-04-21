@@ -1,0 +1,16 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.scp5167_boss.spawning": {
+      "animation_length": 10.0,
+      "timeline": {
+        "0.1": [ "/playsound beacon.activate @a[r=15] ~~~" ],
+        "0.2": [ "/playsound beacon.ambient @a[r=15] ~~~" ],
+        "5.0": [ "/playsound beacon.ambient @a[r=15] ~~~" ],
+        "9.23": [ "/playsound random.explode @a[r=15] ~~~" ],
+        "9.24": [ "/summon lc:dt_scp5167_boss ~~~" ],
+        "9.25": [ "/event entity @s scp5167_boss_spawner:death" ]
+      }
+    }
+  }
+}

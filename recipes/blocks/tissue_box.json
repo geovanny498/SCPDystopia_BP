@@ -1,0 +1,25 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+    "identifier": "lc:dt_tissue_box"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "ingredients": [
+      {
+        "item": "minecraft:paper"
+      },
+      {
+        "item": "minecraft:planks"
+      },
+      {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    ],
+    "result": {
+      "item": "lc:dt_tissue_box"
+    }
+  }
+}

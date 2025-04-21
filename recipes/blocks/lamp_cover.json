@@ -1,0 +1,31 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_lamp_cover"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "A##",
+      "#B#",
+      "##A"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "A": {
+        "item": "minecraft:iron_nugget"
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_lamp_cover",
+      "count": 10
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_scp914"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "IGI",
+      "GOG",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_block"
+      },
+      "O": {
+        "item": "lc:dt_enhanced_scpdystopia_orb"
+      },
+      "I": {
+        "item": "minecraft:copper_ingot"
+      },
+      "G": {
+        "item": "lc:dt_scp914_gear"
+      }
+    },
+    "result": {
+      "item": "lc:dt_scp914"
+    }
+  }
+}

@@ -1,0 +1,122 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_alarm",
+            "properties": {
+                "alarm:states": [ 1, 2 ],
+                "alarm:sound_repeat": [ true, false ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -5, 0, -5 ],
+                "size": [ 10, 16, 10 ]
+            },
+            "minecraft:entity_collision": {
+                "origin": [ -5, 0, -5 ],
+                "size": [ 10, 16, 10 ]
+            },
+            "minecraft:geometry": "geometry.dt_alarm",
+            "minecraft:destroy_time": 1.1,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:flammable": {
+                "flame_odds": 0,
+                "burn_odds": 0
+            },
+            "minecraft:block_light_absorption": 0.2,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "alarm:states": 1,
+                    "alarm:sound_repeat": false
+                }
+            },
+            "alarm:to_state1": {
+                "set_block_property": {
+                    "alarm:states": 1,
+                    "alarm:sound_repeat": false
+                },
+                "run_command": {
+                    "command": [
+                        "stopsound @a[r=32] scpdt.alarm"
+                    ]
+                }
+            },
+            "alarm:to_state2": {
+                "set_block_property": {
+                    "alarm:states": 2,
+                    "alarm:sound_repeat": true
+                },
+                "run_command": {
+                    "command": [
+                        "playsound scpdt.alarm @a[r=32] ~~~"
+                    ]
+                }
+            },
+            "alarm:sound": {
+                "run_command": {
+                    "command": [
+                        "playsound scpdt.alarm @a[r=32] ~~~"
+                    ]
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('alarm:states') == 1",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_alarm_off",
+                            "render_method": "opaque"
+                        }
+                    },
+                    "minecraft:on_interact": {
+                        "event": "alarm:to_state2",
+                        "target": "self"
+                    },
+                    "minecraft:block_light_emission": 0.0
+                }
+            },
+            {
+                "condition": "query.block_property('alarm:states') == 2",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_alarm_on",
+                            "render_method": "opaque"
+                        }
+                    },
+                    "minecraft:on_interact": {
+                        "event": "alarm:to_state1",
+                        "target": "self"
+                    },
+                    "minecraft:block_light_emission": 0.8
+                }
+            },
+            {
+                "condition": "query.block_property('alarm:sound_repeat') == true",
+                "components": {
+                    "minecraft:ticking": {
+                        "looping": true,
+                        "range": [2.74, 2.74],
+                        "on_tick": {
+                            "event": "alarm:sound",
+                            "target": "self"
+                        }
+                    }
+                }
+            }
+        ]
+    }
+}

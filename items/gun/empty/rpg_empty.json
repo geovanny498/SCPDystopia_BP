@@ -1,0 +1,78 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_rocket_launcher_empty",
+			"category": "Command"
+		},
+		"components": {
+			"minecraft:use_duration": 2.6,
+			"minecraft:damage": 4,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.equipment"
+			},
+			"minecraft:durability": {
+				"max_durability": 2,
+				"damage_chance": {
+					"min": 0,
+					"max": 0
+				}
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "dt_rpg_icon"
+			},
+			"minecraft:display_name": {
+				"value": "dt.nameslot.rocket_launcher_empty"
+			},
+			"minecraft:cooldown": {
+				"duration": 2.82,
+				"category": "dt_rpg_reload"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"condition": "query.remaining_durability == 1 || q.equipped_item_any_tag('slot.weapon.offhand', 'lc:rpg_rocket')",
+					"event": "rpg:reload"
+				}
+			},
+			"minecraft:weapon": {
+				"on_hurt_entity": {
+				},
+				"on_hit_block": {
+				}
+			}
+		},
+		"events": {
+			"rpg:reload": {
+				"sequence": [
+					{
+						"condition": "query.remaining_durability == 1",
+						"run_command": {
+							"command": [
+								"execute @s ~~~ playsound scpdt.rpg.reload_complete @a[r=10] ~~~",
+								"replaceitem entity @s slot.weapon.mainhand 0 lc:dt_rocket_launcher"
+							],
+							"target": "holder"
+						}
+					},
+					{
+						"condition": "query.remaining_durability == 2 && q.equipped_item_any_tag('slot.weapon.offhand', 'lc:rpg_rocket')",
+						"run_command": {
+							"command": [
+								"execute @s ~~~ playsound scpdt.rpg.reload @a[r=10] ~~~",
+								"playanimation @s animation.dt_misc.gun_reload_medium",
+								"replaceitem entity @s slot.weapon.offhand 0 air"
+							],
+							"target": "holder"
+						},
+						"damage": {
+							"type": "magic",
+							"amount": 1
+						}
+					}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,27 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.dt_env_controller.command": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "command": "query.is_alive == 1.0"
+            }
+          ]
+        },
+        "command": {
+          "transitions": [
+            {
+              "default": "query.is_alive == 1.0"
+            }
+          ],
+          "on_entry": [
+            "/execute @p[y=~50] ~~~ tp @e[type=lc:dt_environment_controller,y~-50,c=1] ~~-50~"
+          ]
+        }
+      }
+    }
+  }
+}

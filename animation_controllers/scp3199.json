@@ -1,0 +1,27 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp3199.spit_egg": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "doing": "query.is_sheared"
+            }
+          ]
+        },
+        "doing": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "animations": [
+            "spit_egg"
+          ]
+        }
+      }
+    }
+  }
+}

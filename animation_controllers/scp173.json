@@ -1,0 +1,74 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp173.blink": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "blink": "query.is_sheared && query.mark_variant == 0"
+            }
+          ]
+        },
+        "blink": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared || query.mark_variant == 1"
+            }
+          ],
+          "animations": [
+            "blinking"
+          ]
+        }
+      }
+    },
+    "controller.animation.scp173.cage": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "caged": "query.mark_variant == 1"
+            }
+          ]
+        },
+        "caged": {
+          "transitions": [
+            {
+              "default": "query.mark_variant == 0"
+            }
+          ],
+          "on_entry": [
+            "/ride @s start_riding @e[type=lc:dt_scp173_cage,c=1]",
+            "/playsound random.anvil_use @a[r=15] ~~~"
+          ]
+        }
+      }
+    },
+    "controller.animation.scp173.look": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "look": "(1.0)"
+            }
+          ]
+        },
+        "look": {
+          "transitions": [
+            {
+              "default": "(1.0)"
+            }
+          ],
+          "on_entry": [
+            "/execute @p ~~~ tp @e[type=lc:dt_look,c=1] ^ ^ ^10",
+            "/effect @e[r=10,type=lc:dt_scp173] slowness 1 255 true",
+            "/effect @e[r=10,type=lc:dt_scp173] weakness 1 255 true"
+          ]
+        }
+      }
+    }
+  }
+}

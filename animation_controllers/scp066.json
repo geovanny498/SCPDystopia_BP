@@ -1,0 +1,30 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp066.loud": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "loud": "query.mark_variant == 1"
+            }
+          ]
+        },
+        "loud": {
+          "transitions": [
+            {
+              "default": "query.mark_variant == 0"
+            }
+          ],
+          "animations": [
+            "earrape"
+          ],
+          "on_entry": [
+            "/playsound scpdt.scp066.earrape @a[r=30] ~~~"
+          ]
+        }
+      }
+    }
+  }
+}

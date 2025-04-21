@@ -1,0 +1,1 @@
+playsound scpdt.machine.off1 @a[r=10] ~~~

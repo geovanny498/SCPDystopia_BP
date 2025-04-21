@@ -1,0 +1,27 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp966.nightvision": {
+      "initial_state": "visible",
+      "states": {
+        "visible": {
+          "transitions": [
+            {
+              "invisible": "query.mark_variant == 1"
+            }
+          ]
+        },
+        "invisible": {
+          "transitions": [
+            {
+              "visible": "query.mark_variant == 0"
+            }
+          ],
+          "animations": [
+            "invisible"
+          ]
+        }
+      }
+    }
+  }
+}

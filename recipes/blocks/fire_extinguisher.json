@@ -1,0 +1,32 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_fire_extinguisher"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "###",
+      "IAI",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:dye",
+        "data": 1
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "U": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_fire_extinguisher",
+      "count": 2
+    }
+  }
+}

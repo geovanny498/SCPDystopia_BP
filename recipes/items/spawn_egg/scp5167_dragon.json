@@ -1,0 +1,31 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_scp5167_dragon_spawner_spawn_egg"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "X##",
+      "#S#",
+      "##X"
+    ],
+    "key": {
+      "#": {
+        "item": "lc:dt_enhanced_scpdystopia_orb"
+      },
+      "X": {
+        "item": "minecraft:fireball"
+      },
+      "S": {
+        "item": "lc:dt_imposter_totem"
+      }
+    },
+    "result": {
+      "item": "spawn_egg",
+      "data": "query.get_actor_info_id('lc:dt_scp5167_dragon_spawner')"
+    }
+  }
+}

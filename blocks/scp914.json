@@ -1,0 +1,2572 @@
+//Days of coding...
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_scp914",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ],
+                "scp914:level": [ 0, 1, 2, 3, 4 ], // 0 = Rough, 1 = Coarse, 2 = 1:1, 3 = Fine, 4 = VeryFine
+                "scp914:refining": [ 0, 1 ], // 0 = Refine ready, 1 = Refining
+                // 0 = Nothing, 1 = Gun ammo, 2 = Keycards, 3 = Dystopia orb , 4 = Gunpowder , 14 = Netherite , 15 = Diamond , 16 = Imposter Totem (refine_item)
+                "scp914:refine_item": [ 0, 1, 2, 3, 4, 14, 15, 16 ],
+                // 0 = level 1, 1 = level 2, 2 = level 3, 3 = level 4, 4 = level 5, 5 = omni
+                "scp914:refine_keycard": [ 0, 1, 2, 3, 4, 5 ],
+                // 0 = Normal orb, 1 = Enhanced orb
+                "scp914:refine_orb": [ 0, 1 ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_scp914",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:entity_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:destroy_time": 2.4,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:block_light_absorption": 0.8,
+            "minecraft:on_interact": {
+                "event": "scp914:interact",
+                "target": "self"
+            },
+            "minecraft:loot": "loot_tables/blocks/scpdt/scp914.json",
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "facing:direction": "(query.cardinal_facing_2d)",
+                    "scp914:level": 0,
+                    "scp914:refining": 0
+                }
+            },
+            "scp914:interact": {
+                "sequence": [
+                    //Level changing
+                    {
+                        "condition": "query.is_sneaking && (query.block_property('scp914:refining') == 0)",
+                        "sequence": [
+                            {
+                                "condition": "query.block_property('scp914:level') == 0",
+                                "set_block_property": {
+                                    "scp914:level": 1
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.scp914.change_level @a[r=10] ~~~",
+                                        "title @a[r=7] actionbar SCP-914 refining level changed to Coarse"
+                                    ]
+                                }
+                            },
+                            {
+                                "condition": "query.block_property('scp914:level') == 1",
+                                "set_block_property": {
+                                    "scp914:level": 2
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.scp914.change_level @a[r=10] ~~~",
+                                        "title @a[r=7] actionbar SCP-914 refining level changed to 1:1"
+                                    ]
+                                }
+                            },
+                            {
+                                "condition": "query.block_property('scp914:level') == 2",
+                                "set_block_property": {
+                                    "scp914:level": 3
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.scp914.change_level @a[r=10] ~~~",
+                                        "title @a[r=7] actionbar SCP-914 refining level changed to Fine"
+                                    ]
+                                }
+                            },
+                            {
+                                "condition": "query.block_property('scp914:level') == 3",
+                                "set_block_property": {
+                                    "scp914:level": 4
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.scp914.change_level @a[r=10] ~~~",
+                                        "title @a[r=7] actionbar SCP-914 refining level changed to VeryFine"
+                                    ]
+                                }
+                            },
+                            {
+                                "condition": "query.block_property('scp914:level') == 4",
+                                "set_block_property": {
+                                    "scp914:level": 0
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.scp914.change_level @a[r=10] ~~~",
+                                        "title @a[r=7] actionbar SCP-914 refining level changed to Rough"
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    //Refining below
+                    {
+                        "condition": "!query.is_sneaking && (query.block_property('scp914:refining') == 0)",
+                        "sequence": [
+                            {
+                                //Gun ammo
+                                "condition": "(query.get_equipped_item_name == 'dt_mp5k_ammo') || (query.get_equipped_item_name == 'dt_p90_ammo') || (query.get_equipped_item_name == 'dt_m16_ammo') || (query.get_equipped_item_name == 'dt_glock_ammo') || (query.get_equipped_item_name == 'dt_spas12_shell')",
+                                "sequence": [
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 0",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining gun ammo/shell as Rough"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 1
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 1",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining gun ammo/shell as Coarse"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 1
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 2",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining gun ammo/shell as 1:1"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 1
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 3",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining gun ammo/shell as Fine"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 1
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 4",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining gun ammo/shell as VeryFine"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 1
+                                        },
+                                        "decrement_stack": {}
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycards
+                                "sequence": [
+                                    //Keycard lvl 1
+                                    {
+                                        "condition": "query.get_equipped_item_name == 'dt_keycard1'",
+                                        "sequence": [
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 0",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 1 Keycard as Rough"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 0
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 1",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 1 Keycard as Coarse"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 0
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 2",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 1 Keycard as 1:1"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 0
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 3",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 1 Keycard as Fine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 0
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 4",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 1 Keycard as VeryFine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 0
+                                                },
+                                                "decrement_stack": {}
+                                            }
+                                        ]
+                                    },
+                                    //Keycard lvl 2
+                                    {
+                                        "condition": "query.get_equipped_item_name == 'dt_keycard2'",
+                                        "sequence": [
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 0",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 2 Keycard as Rough"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 1
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 1",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 2 Keycard as Coarse"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 1
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 2",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 2 Keycard as 1:1"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 1
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 3",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 2 Keycard as Fine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 1
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 4",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 2 Keycard as VeryFine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 1
+                                                },
+                                                "decrement_stack": {}
+                                            }
+                                        ]
+                                    },
+                                    //Keycard lvl 3
+                                    {
+                                        "condition": "query.get_equipped_item_name == 'dt_keycard3'",
+                                        "sequence": [
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 0",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 3 Keycard as Rough"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 2
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 1",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 3 Keycard as Coarse"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 2
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 2",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 3 Keycard as 1:1"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 2
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 3",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 3 Keycard as Fine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 2
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 4",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 3 Keycard as VeryFine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 2
+                                                },
+                                                "decrement_stack": {}
+                                            }
+                                        ]
+                                    },
+                                    //Keycard lvl 4
+                                    {
+                                        "condition": "query.get_equipped_item_name == 'dt_keycard4'",
+                                        "sequence": [
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 0",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 4 Keycard as Rough"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 3
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 1",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 4 Keycard as Coarse"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 3
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 2",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 4 Keycard as 1:1"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 3
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 3",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 4 Keycard as Fine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 3
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 4",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 4 Keycard as VeryFine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 3
+                                                },
+                                                "decrement_stack": {}
+                                            }
+                                        ]
+                                    },
+                                    //Keycard lvl 5
+                                    {
+                                        "condition": "query.get_equipped_item_name == 'dt_keycard5'",
+                                        "sequence": [
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 0",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 5 Keycard as Rough"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 4
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 1",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 5 Keycard as Coarse"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 4
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 2",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 5 Keycard as 1:1"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 4
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 3",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 5 Keycard as Fine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 4
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 4",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Level 5 Keycard as VeryFine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 4
+                                                },
+                                                "decrement_stack": {}
+                                            }
+                                        ]
+                                    },
+                                    //Keycard omni
+                                    {
+                                        "condition": "query.get_equipped_item_name == 'dt_keycard_omni'",
+                                        "sequence": [
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 0",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Omni Keycard as Rough"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 5
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 1",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Omni Keycard as Coarse"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 5
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 2",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Omni Keycard as 1:1"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 5
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 3",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Omni Keycard as Fine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 5
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            {
+                                                "condition": "query.block_property('scp914:level') == 4",
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                        "title @a[r=7] actionbar Refining Omni Keycard as VeryFine"
+                                                    ]
+                                                },
+                                                "set_block_property": {
+                                                    "scp914:refining": 1,
+                                                    "scp914:refine_item": 2,
+                                                    "scp914:refine_keycard": 5
+                                                },
+                                                "decrement_stack": {}
+                                            }
+                                        ]
+                                    }
+                                ]
+                            },
+                            {
+                                //Dystopia Orb
+                                "condition": "(query.get_equipped_item_name == 'dt_scpdystopia_orb')",
+                                "sequence": [
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 0",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining Dystopia Orb as Rough"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 3,
+                                            "scp914:refine_orb": 0
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 1",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining Dystopia Orb as Coarse"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 3,
+                                            "scp914:refine_orb": 0
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 2",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining Dystopia Orb as 1:1"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 3,
+                                            "scp914:refine_orb": 0
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 3",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining Dystopia Orb as Fine"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 3,
+                                            "scp914:refine_orb": 0
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 4",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining Dystopia Orb as VeryFine"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 3,
+                                            "scp914:refine_orb": 0
+                                        },
+                                        "decrement_stack": {}
+                                    }
+                                ]
+                            },
+                            {
+                                //Enhanced Dystopia Orb
+                                "condition": "(query.get_equipped_item_name == 'dt_enhanced_scpdystopia_orb')",
+                                "sequence": [
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 0",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining Enhanced Dystopia Orb as Rough"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 3,
+                                            "scp914:refine_orb": 1
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 1",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining Enhanced Dystopia Orb as Coarse"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 3,
+                                            "scp914:refine_orb": 1
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 2",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining Enhanced Dystopia Orb as 1:1"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 3,
+                                            "scp914:refine_orb": 1
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 3",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining Enhanced Dystopia Orb as Fine"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 3,
+                                            "scp914:refine_orb": 1
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 4",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining Enhanced Dystopia Orb as VeryFine"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 3,
+                                            "scp914:refine_orb": 1
+                                        },
+                                        "decrement_stack": {}
+                                    }
+                                ]
+                            },
+                            {
+                                //Gunpowder
+                                "condition": "(query.get_equipped_item_name == 'gunpowder')",
+                                "sequence": [
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 0",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining gunpowder as Rough"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 4
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 1",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining gunpowder as Coarse"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 4
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 2",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining gunpowder as 1:1"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 4
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 3",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Refining gunpowder as Fine"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 4
+                                        },
+                                        "decrement_stack": {}
+                                    },
+                                    {
+                                        "condition": "query.block_property('scp914:level') == 4",
+                                        "run_command": {
+                                            "command": [
+                                                "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                                "title @a[r=7] actionbar Gunpowder is explodable thing... right?"
+                                            ]
+                                        },
+                                        "set_block_property": {
+                                            "scp914:refining": 1,
+                                            "scp914:refine_item": 4
+                                        },
+                                        "decrement_stack": {}
+                                    }
+                                ]
+                            },
+                            {
+                                //Netherite
+                                "condition": "query.get_equipped_item_name == 'dt_scp914_gear'",
+                                "run_command": {
+                                    "command": [
+                                        "setblock ~~~ air 0 destroy",
+                                        "title @a[r=7] actionbar Error"
+                                    ]
+                                },
+                                "decrement_stack": {}
+                            },
+                            {
+                                //Netherite
+                                "condition": "query.get_equipped_item_name == 'netherite_ingot'",
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                        "title @a[r=7] actionbar You are trying to refine really OP thing..."
+                                    ]
+                                },
+                                "set_block_property": {
+                                    "scp914:refining": 1,
+                                    "scp914:refine_item": 14
+                                },
+                                "decrement_stack": {}
+                            },
+                            {
+                                //Diamond
+                                "condition": "query.get_equipped_item_name == 'diamond'",
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                        "title @a[r=7] actionbar You are trying to refine OP thing..."
+                                    ]
+                                },
+                                "set_block_property": {
+                                    "scp914:refining": 1,
+                                    "scp914:refine_item": 15
+                                },
+                                "decrement_stack": {}
+                            },
+                            {
+                                //Imposter totem
+                                "condition": "query.get_equipped_item_name == 'dt_imposter_totem'",
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.scp914.refine @a[r=30] ~~~",
+                                        "title @a[r=7] actionbar Refining imposter totem..."
+                                    ]
+                                },
+                                "set_block_property": {
+                                    "scp914:refining": 1,
+                                    "scp914:refine_item": 16
+                                },
+                                "decrement_stack": {}
+                            }
+                        ]
+                    }
+				]
+            },
+            "scp914:refine_finish": {
+                "sequence": [
+                    //Refined, misc
+                    {
+                        //Imposter totem
+                        "condition": "(query.block_property('scp914:refine_item') == 16)",
+                        "set_block_property": {
+                            "scp914:refine_item": 0,
+                            "scp914:refining": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp914/imposter_totem.json"
+                        },
+                        "run_command": {
+                            "command": [
+                                "playsound scpdt.fart @a[r=15] ~~~",
+                                "title @a[r=7] actionbar What the..."
+                            ]
+                        }
+                    },
+                    {
+                        //Diamond
+                        "condition": "(query.block_property('scp914:refine_item') == 15)",
+                        "set_block_property": {
+                            "scp914:refine_item": 0,
+                            "scp914:refining": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp914/diamond.json"
+                        },
+                        "run_command": {
+                            "command": [
+                                "title @a[r=7] actionbar I don't think survival will be fun if you do that"
+                            ]
+                        }
+                    },
+                    {
+                        //Netherite
+                        "condition": "(query.block_property('scp914:refine_item') == 14)",
+                        "set_block_property": {
+                            "scp914:refine_item": 0,
+                            "scp914:refining": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp914/netherite.json"
+                        },
+                        "run_command": {
+                            "command": [
+                                "title @a[r=7] actionbar Of course, NO"
+                            ]
+                        }
+                    },
+                    //Refined, Rough
+                    {
+                        "condition": "(query.block_property('scp914:level') == 0)",
+                        "sequence": [
+                            {
+                                //Gun ammo
+                                "condition": "(query.block_property('scp914:refine_item') == 1)",
+                                "randomize": [
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/gun_ammo_rough.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined gun ammo/shell"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine gun ammo/shell"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 1
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 0)",
+                                "randomize": [
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/sugarcane.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 4,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 2
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 1)",
+                                "randomize": [
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/sugarcane.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 5,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 3
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 2)",
+                                "randomize": [
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/paper.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 5,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 4
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 3)",
+                                "randomize": [
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/sugarcane.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 5,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 5
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 4)",
+                                "randomize": [
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/keycard2.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 5,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard omni
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 5)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/keycard3.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 6,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Dystopia Orb
+                                "condition": "(query.block_property('scp914:refine_item') == 3) && (query.block_property('scp914:refine_orb') == 0)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/dystopiaorb_rough.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined Dystopia Orb"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine Dystopia Orb"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Enhanced Dystopia Orb
+                                "condition": "(query.block_property('scp914:refine_item') == 3) && (query.block_property('scp914:refine_orb') == 1)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/e_dystopiaorb_rough.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined Enhanced Dystopia Orb"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 4,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine Enhanced Dystopia Orb"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Gunpowder
+                                "condition": "(query.block_property('scp914:refine_item') == 4)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/gunpowder_rough.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined gunpowder"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine gunpowder"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    //Refined, Coarse
+                    {
+                        "condition": "(query.block_property('scp914:level') == 1)",
+                        "sequence": [
+                            {
+                                //Gun ammo
+                                "condition": "(query.block_property('scp914:refine_item') == 1)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/gun_ammo_coarse.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined gun ammo/shell"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 1
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 0)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/paper.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 2
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 1)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard1.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 3
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 2)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard1.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 4
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 3)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard2.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 5
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 4)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard3.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard omni
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 5)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/sugarcane.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Dystopia Orb
+                                "condition": "(query.block_property('scp914:refine_item') == 3) && (query.block_property('scp914:refine_orb') == 0)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/dystopiaorb_coarse.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined Dystopia Orb"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 1,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine Dystopia Orb"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Enhanced Dystopia Orb
+                                "condition": "(query.block_property('scp914:refine_item') == 3) && (query.block_property('scp914:refine_orb') == 1)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/e_dystopiaorb_coarse.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined Enhanced Dystopia Orb"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine Enhanced Dystopia Orb"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Gunpowder
+                                "condition": "(query.block_property('scp914:refine_item') == 4)",
+                                "randomize": [
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/gunpowder_coarse.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined gunpowder"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine gunpowder"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    //Refined, 1:1
+                    {
+                        "condition": "(query.block_property('scp914:level') == 2)",
+                        "sequence": [
+                            {
+                                //Gun ammo
+                                "condition": "(query.block_property('scp914:refine_item') == 1)",
+                                "randomize": [
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine gun ammo/shell"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 5,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/gun_ammo_1_1.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined gun ammo/shell"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 1
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 0)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/paper.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 2
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 1)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard1.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 3
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 2)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard2.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 4
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 3)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard3.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 5
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 4)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard4.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard omni
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 5)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard5.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Dystopia Orb
+                                "condition": "(query.block_property('scp914:refine_item') == 3) && (query.block_property('scp914:refine_orb') == 0)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/dystopiaorb_1_1.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined Dystopia Orb"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 1,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine Dystopia Orb"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Enhanced Dystopia Orb
+                                "condition": "(query.block_property('scp914:refine_item') == 3) && (query.block_property('scp914:refine_orb') == 1)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/e_dystopiaorb_1_1.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined Enhanced Dystopia Orb"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine Enhanced Dystopia Orb"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Gunpowder
+                                "condition": "(query.block_property('scp914:refine_item') == 4)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/gunpowder_1_1.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined gunpowder"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 1,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine gunpowder"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    //Refined, Fine
+                    {
+                        "condition": "(query.block_property('scp914:level') == 3)",
+                        "sequence": [
+                            {
+                                //Gun ammo
+                                "condition": "(query.block_property('scp914:refine_item') == 1)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/gun_ammo_fine.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined gun ammo/shell"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 1
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 0)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard2.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 2
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 1)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard3.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 3
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 2)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard4.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 4
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 3)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "spawn_loot": {
+                                    "table": "loot_tables/blocks/scpdt/scp914/keycard5.json"
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar You have successfully refined keycard"
+                                    ]
+                                }
+                            },
+                            {
+                                //Keycard lvl 5
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 4)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/keycard_omni.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 5,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard omni
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 5)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/keycard_o5.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 8,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Dystopia Orb
+                                "condition": "(query.block_property('scp914:refine_item') == 3) && (query.block_property('scp914:refine_orb') == 0)",
+                                "randomize": [
+                                    {
+                                        "weight": 4,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/dystopiaorb_fine.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined Dystopia Orb"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 1,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine Dystopia Orb"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Enhanced Dystopia Orb
+                                "condition": "(query.block_property('scp914:refine_item') == 3) && (query.block_property('scp914:refine_orb') == 1)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/e_dystopiaorb_fine.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined Enhanced Dystopia Orb"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine Enhanced Dystopia Orb"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Gunpowder
+                                "condition": "(query.block_property('scp914:refine_item') == 4)",
+                                "randomize": [
+                                    {
+                                        "weight": 3,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/gunpowder_fine.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined gunpowder"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 1,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine gunpowder"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            }
+                        ]
+                    },
+                    //Refined, VeryFine
+                    {
+                        "condition": "(query.block_property('scp914:level') == 4)",
+                        "sequence": [
+                            {
+                                //Gun ammo
+                                "condition": "(query.block_property('scp914:refine_item') == 1)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/gun_ammo_veryfine.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined MP5K ammo"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 4,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine gun ammo/shell"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 1
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 0)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/keycard3.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 4,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 2
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 1)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 4,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 3
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 2)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/paper.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 4,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 4
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 3)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/sugarcane.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 4,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard lvl 5
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 4)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/paper.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 5,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Keycard omni
+                                "condition": "(query.block_property('scp914:refine_item') == 2) && (query.block_property('scp914:refine_keycard') == 5)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/sugarcane.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined keycard"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 6,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine keycard"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Dystopia Orb
+                                "condition": "(query.block_property('scp914:refine_item') == 3) && (query.block_property('scp914:refine_orb') == 0)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/dystopiaorb_veryfine.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined Dystopia Orb"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 4,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine Dystopia Orb"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Enhanced Dystopia Orb
+                                "condition": "(query.block_property('scp914:refine_item') == 3) && (query.block_property('scp914:refine_orb') == 1)",
+                                "randomize": [
+                                    {
+                                        "weight": 2,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/e_dystopiaorb_veryfine.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have successfully refined Enhanced Dystopia Orb"
+                                            ]
+                                        }
+                                    },
+                                    {
+                                        "weight": 4,
+                                        "set_block_property": {
+                                            "scp914:refine_item": 0,
+                                            "scp914:refining": 0
+                                        },
+                                        "spawn_loot": {
+                                            "table": "loot_tables/blocks/scpdt/scp914/scp914_scrap.json"
+                                        },
+                                        "run_command": {
+                                            "command": [
+                                                "title @a[r=7] actionbar You have failed to refine Enhanced Dystopia Orb"
+                                            ]
+                                        }
+                                    }
+                                ]
+                            },
+                            {
+                                //Gunpowder
+                                "condition": "(query.block_property('scp914:refine_item') == 4)",
+                                "set_block_property": {
+                                    "scp914:refine_item": 0,
+                                    "scp914:refining": 0
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "title @a[r=7] actionbar NOOOOOOOOOOO",
+                                        "summon tnt"
+                                    ]
+                                }
+                            }
+                        ]
+                    }
+                ]
+            }
+        },
+        "permutations": [
+            //Refining
+            {
+                "condition": "query.block_property('scp914:refining') == 1",
+                "components": {
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [14.5, 14.5],
+                        "on_tick": {
+                            "event": "scp914:refine_finish",
+                            "target": "self"
+                        }
+                    }
+                }
+            },
+            //Refining levels
+            {
+                "condition": "query.block_property('scp914:level') == 0",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_scp914_rough"
+                }
+            },
+            {
+                "condition": "query.block_property('scp914:level') == 1",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_scp914_coarse"
+                }
+            },
+            {
+                "condition": "query.block_property('scp914:level') == 2",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_scp914_1_1"
+                }
+            },
+            {
+                "condition": "query.block_property('scp914:level') == 3",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_scp914_fine"
+                }
+            },
+            {
+                "condition": "query.block_property('scp914:level') == 4",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_scp914_veryfine"
+                }
+            },
+            //Facing
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

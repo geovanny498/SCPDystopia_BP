@@ -1,0 +1,70 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_morphine_syringe",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:use_duration": 2.6,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:hand_equipped": true,
+      "minecraft:max_stack_size": 8,
+      "minecraft:icon": {
+        "texture": "dt_morphine_syringe"
+      },
+      "minecraft:display_name": {
+        "value": "Morphine Syringe"
+      },
+      "minecraft:cooldown": {
+				"duration": 4.5,
+				"category": "morphine"
+			},
+      "minecraft:on_use": {
+        "on_use": {
+          "event": "morphine:use"
+        }
+      }
+    },
+    "events": {
+			"morphine:use": {
+        "randomize": [
+          {
+            "weight": 23,
+            "add_mob_effect": {
+              "effect": "fatal_poison",
+              "target": "holder",
+              "duration": 1,
+              "amplifier": 4
+            },
+            "run_command": {
+              "command": [
+                "playsound scpdt.morphine.use @a[r=5] ~~~",
+                "title @s actionbar Ugh... I shouldn't use this in short time...",
+                "effect @s wither 0 0",
+                "effect @s nausea 8 0",
+                "effect @s wither 0 0",
+                "effect @s mining_fatigue 0 0",
+                "effect @s resistance 24 1"
+              ],
+              "target": "holder"
+            },
+            "decrement_stack": {}
+          },
+          {
+            "weight": 4,
+            "run_command": {
+              "command": [
+                "kill @s"
+              ],
+              "target": "holder"
+            },
+            "decrement_stack": {}
+          }
+        ]
+      }
+		}
+  }
+}

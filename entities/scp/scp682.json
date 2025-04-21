@@ -1,0 +1,564 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp682",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "size_change",
+          "heal"
+        ]
+      },
+      "animations": {
+        "size_change": "controller.animation.scp682.sizes",
+        "heal": "animation.scp682.heal"
+      }
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:despawn": {
+        }
+      },
+      "size5": {
+        /*
+        "minecraft:damage_sensor": {
+          "triggers": 
+          [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {"test": "is_family", "subject": "other", "operator": "!=", "value": "scp682"}
+                  ],
+                  "all_of": [
+                    {"test": "has_damage", "value": "fatal"}
+                  ]
+                },
+                "event": "scp682:to_size4"
+              }
+            }
+          ]
+        },
+        "minecraft:health": {
+          "value": 9000000,
+          "max": 9000000
+        },*/
+        "minecraft:attack": {
+          "damage": 84
+        },
+        "minecraft:knockback_resistance": {
+          "value": 10.0
+        },
+        "minecraft:mark_variant": {
+          "value": 0
+        },
+        "minecraft:movement": {
+          "value": 0.216
+        },
+        "minecraft:scale": {
+          "value": 2.44
+        }
+      },
+      "size4": {
+        /*
+        "minecraft:damage_sensor": {
+          "triggers": 
+          [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {"test": "is_family", "subject": "other", "operator": "!=", "value": "scp682"}
+                  ],
+                  "all_of": [
+                    {"test": "has_damage", "value": "fatal"}
+                  ]
+                },
+                "event": "scp682:to_size3"
+              }
+            }
+          ]
+        },*/
+        "minecraft:attack": {
+          "damage": 70
+        },
+        "minecraft:knockback_resistance": {
+          "value": 10.0
+        },
+        "minecraft:mark_variant": {
+          "value": 1
+        },/*
+        "minecraft:timer": {
+          "looping": false,
+          "time": [15,35],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp682:to_size5",
+            "target": "self"
+          }
+        },*/
+        /*
+        "minecraft:health": {
+          "value": 70,
+          "max": 70
+        },*/
+        "minecraft:movement": {
+          "value": 0.24
+        },
+        "minecraft:scale": {
+          "value": 2.18
+        }
+      },
+      "size3": {
+        /*
+        "minecraft:damage_sensor": {
+          "triggers": 
+          [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {"test": "is_family", "subject": "other", "operator": "!=", "value": "scp682"}
+                  ],
+                  "all_of": [
+                    {"test": "has_damage", "value": "fatal"}
+                  ]
+                },
+                "event": "scp682:to_size2"
+              }
+            }
+          ]
+        },*/
+        "minecraft:attack": {
+          "damage": 60
+        },
+        "minecraft:knockback_resistance": {
+          "value": 1.9
+        },
+        "minecraft:mark_variant": {
+          "value": 2
+        },/*
+        "minecraft:timer": {
+          "looping": false,
+          "time": [20,35],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp682:to_size4",
+            "target": "self"
+          }
+        },*/
+        /*
+        "minecraft:health": {
+          "value": 70,
+          "max": 70
+        },*/
+        "minecraft:movement": {
+          "value": 0.26
+        },
+        "minecraft:scale": {
+          "value": 1.86
+        }
+      },
+      "size2": {
+        /*
+        "minecraft:damage_sensor": {
+          "triggers": 
+          [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {"test": "is_family", "subject": "other", "operator": "!=", "value": "scp682"}
+                  ],
+                  "all_of": [
+                    {"test": "has_damage", "value": "fatal"}
+                  ]
+                },
+                "event": "scp682:to_size1"
+              }
+            }
+          ]
+        },*/
+        "minecraft:attack": {
+          "damage": 46
+        },
+        "minecraft:knockback_resistance": {
+          "value": 1.5
+        },
+        "minecraft:mark_variant": {
+          "value": 3
+        },/*
+        "minecraft:timer": {
+          "looping": false,
+          "time": [30,36],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp682:to_size3",
+            "target": "self"
+          }
+        },*/
+        /*
+        "minecraft:health": {
+          "value": 70,
+          "max": 70
+        },*/
+        "minecraft:movement": {
+          "value": 0.29
+        },
+        "minecraft:scale": {
+          "value": 1.4
+        }
+      },
+      "size1": {
+        /*
+        "minecraft:damage_sensor": {
+          "triggers": 
+          [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {"test": "is_family", "subject": "other", "operator": "!=", "value": "scp682"}
+                  ],
+                  "all_of": [
+                    {"test": "has_damage", "value": "fatal"}
+                  ]
+                },
+                "event": "scp682:to_size0"
+              }
+            }
+          ]
+        },*/
+        "minecraft:attack": {
+          "damage": 28
+        },
+        "minecraft:knockback_resistance": {
+          "value": 1.1
+        },
+        "minecraft:mark_variant": {
+          "value": 4
+        },/*
+        "minecraft:timer": {
+          "looping": false,
+          "time": [33,45],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp682:to_size2",
+            "target": "self"
+          }
+        },*/
+        /*
+        "minecraft:health": {
+          "value": 70,
+          "max": 70
+        },*/
+        "minecraft:movement": {
+          "value": 0.31
+        },
+        "minecraft:scale": {
+          "value": 1.2
+        }
+      },
+      "size0": {
+        /*
+        "minecraft:damage_sensor": {
+          "triggers": 
+          [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {"test": "is_family", "subject": "other", "operator": "!=", "value": "scp682"}
+                  ]
+                }
+            },
+            "deals_damage": false
+            }
+          ]
+        },*/
+        "minecraft:attack": {
+          "damage": 17
+        },
+        "minecraft:knockback_resistance": {
+          "value": 0.76
+        },
+        "minecraft:mark_variant": {
+          "value": 5
+        },/*
+        "minecraft:timer": {
+          "looping": false,
+          "time": [30,45],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp682:to_size1",
+            "target": "self"
+          }
+        },*/
+        /*
+        "minecraft:health": {
+          "value": 10000,
+          "max": 10000
+        },*/
+        "minecraft:movement": {
+          "value": 0.333
+        },
+        "minecraft:scale": {
+          "value": 1.06
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:type_family": {
+        "family": [ "scp", "scp682", "monster" ]
+      },
+      "minecraft:interact": {
+        "interactions": {
+          "on_interact": {
+            "filters": {
+              "all_of": [
+                { "test": "is_family", "subject": "other", "value": "player" },
+                { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_scp1023_arc" }
+              ]
+            },
+          "event": "scp682:despawn",
+          "target": "self"
+          },
+          "hurt_item": 0,
+          "swing": true,
+          "interact_text": "action.interact.scpdt.remove1"
+        }
+      },
+      "minecraft:health": {
+        "value": 40000,
+        "max": 40000
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:follow_range": {
+        "value": 64,
+        "max": 64
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2,
+        "entity_types": {
+          "filters": {
+            "any_of": [
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "scp682"
+              },
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "scp001_gg"
+              },
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "scp053"
+              }
+            ]
+          },
+          "max_dist": 80
+        }
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 0,
+        "within_radius": 32,
+        "reselect_targets": true,
+        "entity_types": [
+          {
+          "filters": {
+            "all_of": [
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp682" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp053" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp001_gg" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "sus" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "item" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "inanimate" }
+            ]
+          },
+          "max_dist": 32
+          }
+        ],
+        "must_see_forget_duration": 14.0,
+        "must_see": true
+      },
+      "minecraft:fire_immune": true,
+      "minecraft:behavior.delayed_attack": {
+        "priority": 1,
+        "attack_once": false,
+        "track_target": true,
+        "require_complete_path": false,
+        "random_stop_interval": 0,
+        "reach_multiplier": 2.42,
+        "speed_multiplier": 1.54,
+        "attack_duration": 0.30,
+        "hit_delay_pct": 0.25
+      },
+      "minecraft:area_attack" : {
+        "damage_range": 1.12,
+        "damage_per_tick": 6,
+        "cause": "contact",
+        "entity_filter": {
+          "all_of": [
+            { "test": "is_family", "subject": "other", "operator": "!=", "value": "projectile" },
+            { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp682" },
+            { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp001_gg" }
+          ]
+        }
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 6,
+        "speed_multiplier": 0.77
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:collision_box": {
+        "width": 0.9,
+        "height": 1.1
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:underwater_movement": {
+        "value": 0.2
+      },
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_sun": false,
+        "avoid_water": false,
+        "avoid_damage_blocks": false,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "scp682:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      },
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "size5"
+          ]
+        }
+      },
+      "scp682:to_size5": {
+        "add": {
+          "component_groups": [
+            "size5"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "size4"
+          ]
+        }
+      },
+      "scp682:to_size4": {
+        "add": {
+          "component_groups": [
+            "size4"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "size5",
+            "size3"
+          ]
+        }
+      },
+      "scp682:to_size3": {
+        "add": {
+          "component_groups": [
+            "size3"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "size4",
+            "size2"
+          ]
+        }
+      },
+      "scp682:to_size2": {
+        "add": {
+          "component_groups": [
+            "size2"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "size3",
+            "size1"
+          ]
+        }
+      },
+      "scp682:to_size1": {
+        "add": {
+          "component_groups": [
+            "size1"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "size2",
+            "size0"
+          ]
+        }
+      },
+      "scp682:to_size0": {
+        "add": {
+          "component_groups": [
+            "size0"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "size1"
+          ]
+        }
+      }
+    }
+  }
+}
+  

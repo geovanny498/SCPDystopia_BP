@@ -1,0 +1,268 @@
+{
+	"format_version": "1.10.0",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "lc:dt_scp106",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"is_experimental": false,
+			"scripts": {
+				"animate": [
+					"spawn",
+					"send_to_pd",
+					{
+						"move_another": "query.mark_variant == 1"
+					}
+				]
+			},
+			"animations": {
+				"spawning": "animation.scp106.spawn",
+				"spawn": "controller.animation.scp106.spawn",
+				"send_to_pd": "controller.animation.scp106.send_to_pd",
+				"sending_to_pd": "animation.scp106.send_to_pd",
+				"move_another": "animation.scp106.move_another"
+			}
+		},
+		"component_groups": {
+			"spawning": {
+				"minecraft:movement": {
+					"value": 0
+				},
+				"minecraft:is_sheared": {},
+				"minecraft:timer": {
+					"looping": false,
+					"time": 8.16,
+					"time_down_event": {
+						"event": "scp106:spawned"
+					}
+				}
+			},
+			"melee": {
+				"minecraft:movement": {
+					"value": 0.9
+				},
+				"minecraft:behavior.delayed_attack": {
+					"priority": 0,
+					"attack_once": false,
+					"track_target": true,
+					"require_complete_path": false,
+					"random_stop_interval": 0,
+					"reach_multiplier": 2.5,
+					"speed_multiplier": 1.1,
+					"attack_duration": 0.83,
+					"hit_delay_pct": 0.56
+				}
+			},
+			"can_send_pd": {
+				"minecraft:entity_sensor": {
+					"sensor_range": 1.9,
+					"relative_range": false,
+					"minimum_count": 1,
+					"event_filters": {
+						"any_of": [
+							{
+								"test": "is_family",
+								"subject": "other",
+								"operator": "==",
+								"value": "player"
+							}
+						]
+					},
+					"event": "scp106:send_pd"
+				}
+			},
+			"send_pd": {
+				"minecraft:timer": {
+					"looping": false,
+					"time": 1.5,
+					"randomInterval": false,
+					"time_down_event": {
+						"event": "scp106:can_send_pd"
+					}
+				},
+				"minecraft:is_saddled": {}
+			}
+		},
+		"components": {
+			"minecraft:is_hidden_when_invisible": {
+			},
+			"minecraft:pushable": {
+				"is_pushable": true,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:breathable": {
+				"totalSupply": 15,
+				"suffocateTime": 0,
+				"breathesWater": true
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 1.9
+			},
+			"minecraft:nameable": {},
+			"minecraft:navigation.float": {
+                "is_amphibious": true,
+                "can_pass_doors": true,
+                "can_break_doors": true,
+                "can_breach": true,
+                "can_path_from_air": true,
+                "can_path_over_lava": true,
+                "can_path_over_water": true,
+                "avoid_water": false,
+                "avoid_portals": true
+			},
+			"minecraft:movement.fly": {},
+			"minecraft:flying_speed": {
+				"value": 0.9
+			},
+			"minecraft:jump.static": {},
+			"minecraft:knockback_resistance": {
+				"value": 5.0
+			},
+			"minecraft:can_climb": {},
+			"minecraft:follow_range": {
+				"value": 30,
+				"max": 30
+			},
+			"minecraft:fall_damage": {
+				"value": 0.0
+			},
+			"minecraft:type_family": {
+				"family": [
+					"monster",
+					"scp",
+					"scp106"
+				]
+			},
+			"minecraft:health": {
+				"value": 50000,
+				"max": 50000
+			},
+			"minecraft:trail": {
+				"block_type": "lc:dt_scp106_corrosion"
+			},
+			"minecraft:experience_reward": {
+				"on_death": "query.last_hit_by_player ? 35 : 0"
+			},
+			"minecraft:attack": {
+				"damage": 200
+			},
+			"minecraft:behavior.mount_pathing": {
+				"priority": 2,
+				"speed_multiplier": 2,
+				"target_dist": 30,
+				"track_target": true
+			},
+			"minecraft:behavior.move_towards_restriction": {
+				"priority": 5
+			},
+			"minecraft:behavior.random_stroll": {
+				"priority": 7,
+				"speed_multiplier": 0.7
+			},
+			"minecraft:behavior.look_at_player": {
+				"priority": 8,
+				"look_distance": 6.0,
+				"probability": 0.02
+			},
+			"minecraft:behavior.look_at_entity": {
+				"priority": 9,
+				"look_distance": 6.0,
+				"probability": 0.02,
+				"filters": {
+					"test": "is_family",
+					"subject": "other",
+					"value": "mob"
+				}
+			},
+			"minecraft:behavior.nearest_attackable_target": {
+				"priority": 1,
+				"within_radius": 30,
+				"reselect_targets": true,
+				"must_reach": true,
+				"entity_types": [
+					{
+						"filters": {
+							"other_with_families": [
+								"human",
+								"villager",
+								"player"
+							]
+						},
+						"max_dist": 30
+					}
+				],
+				"must_see_forget_duration": 13.0,
+				"must_see": true
+			},
+			"minecraft:behavior.random_look_around": {
+				"priority": 9
+			},
+			"minecraft:behavior.hurt_by_target": {
+				"priority": 1
+			},
+			"minecraft:damage_sensor": [
+				{
+					"on_damage": {
+						"filters": {
+							"test": "has_damage",
+							"subject": "self",
+							"value": "suffocation"
+						}
+					},
+					"deals_damage": false
+				}
+			],
+			"minecraft:physics": {
+				"has_gravity": true,
+				"has_collision": false
+			},
+			"minecraft:conditional_bandwidth_optimization": {}
+		},
+		"events": {
+			"minecraft:entity_spawned": {
+				"add": {
+					"component_groups": [
+						"spawning"
+					]
+				}
+			},
+			"scp106:spawned": {
+				"add": {
+					"component_groups": [
+						"melee"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"spawning"
+					]
+				}
+			},
+			"scp106:can_send_pd": {
+				"add": {
+					"component_groups": [
+						"can_send_pd"
+					]
+				},
+				"remove": {
+					"component_groups": [
+						"send_pd"
+					]
+				}
+			},
+			"scp106:send_pd": {
+				"remove": {
+					"component_groups": [
+						"can_send_pd"
+					]
+				},
+				"add": {
+					"component_groups": [
+						"send_pd"
+					]
+				}
+			}
+		}
+	}
+}

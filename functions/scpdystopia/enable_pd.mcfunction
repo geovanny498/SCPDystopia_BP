@@ -1,0 +1,3 @@
+tellraw @s[tag=dt_pd_ready] {"rawtext":[{"text":"§eThis function is already runned. Run §l/function scpdystopia/proceed_pd§r§e to proceed."}]}
+tellraw @s[tag=!dt_pd_ready] {"rawtext":[{"text":"§c[Warning] §e(1.18+) This function will generate Pocket Dimension in Y=-45 and spawn some entities. And very unstable. Run §l/function scpdystopia/proceed_pd§r §eto proceed"}]}
+tag @s[tag=!dt_pd_ready] add dt_pd_ready

@@ -1,0 +1,207 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp035_scientist",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "spawntentacle"
+        ]
+      },
+      "animations": {
+        "spawntentacle": "controller.animation.scp035.tentacle"
+      }
+    },
+    "component_groups": {
+      "calm": {
+        "minecraft:on_target_acquired" : {
+          "event": "scp035:angry",
+          "target": "self"
+        }
+      },
+      "angry": {
+        "minecraft:on_target_escape": {
+          "event": "scp035:on_calm",
+          "target": "self"
+        },
+        "minecraft:angry": {
+          "duration": 120,
+          "broadcast_anger": false,
+          "calm_event": {
+            "event": "scp035:on_calm",
+            "target": "self"
+          }
+        },
+        "minecraft:behavior.summon_entity": {
+          "priority": 2,
+          "summon_choices": [
+            {
+              "min_activation_range": 0.0,
+              "max_activation_range": 13.0,
+              "cooldown_time": 20,
+              "weight": 3,
+              "cast_duration": 1.0,
+              "particle_color": "#FF664D59",
+              "start_sound_event": "cast.spell",
+              "sequence": [
+                {
+                  "shape": "circle",
+                  "target": "self",
+                  "base_delay": 1.12,
+                  "delay_per_summon": 0.12,
+                  "num_entities_spawned": 3,
+                  "entity_type": "lc:dt_scp035_tentacle",
+                  "size": 1.0,
+                  "entity_lifespan": 23,
+                  "sound_event": "prepare.attack"
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 12 : 0"
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": true
+        }
+      },
+      "minecraft:health": {
+        "value": 2500,
+        "max": 2500
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:type_family": {
+        "family": [ "scp", "scp035", "monster", "mob" ]
+      },
+      "minecraft:attack": {
+        "damage": 50
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:follow_range": {
+        "value": 48,
+        "max": 48
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2,
+        "entity_types": {
+          "filters": {
+            "test": "is_family",
+            "subject": "other",
+            "operator": "!=",
+            "value": "scp035"
+          },
+          "max_dist": 128
+        }
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:behavior.melee_attack": {
+        "priority": 1,
+        "speed_multiplier": 1.07
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 6,
+        "speed_multiplier": 0.81
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:movement": {
+        "value": 0.23
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.open_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "calm"
+          ]
+        }
+      },
+      "scp035:angry": {
+        "add": {
+          "component_groups": [
+            "angry"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "calm"
+          ]
+        }
+      },
+      "scp035:on_calm": {
+        "add": {
+          "component_groups": [
+            "calm"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "angry"
+          ]
+        }
+      }
+    }
+  }
+}
+  

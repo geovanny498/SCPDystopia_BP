@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp610.death": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "respawn": "query.is_sheared"
+            }
+          ]
+        },
+        "respawn": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/particle minecraft:dragon_destroy_block ~~~",
+            "/playsound scpdt.scp610.hurt @a ~~~ 1.0 0.7"
+          ]
+        }
+      }
+    }
+  }
+}

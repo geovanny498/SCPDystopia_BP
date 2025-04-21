@@ -1,0 +1,146 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_scp143_log",
+            "properties": {
+                "lc:facing_direction": [0, 1, 2]
+            }
+        },
+        "components": {
+			"minecraft:creative_category": {
+				"category": "nature",
+				"group": "itemGroup.name.log"
+			},
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_scp143_log",
+                    "render_method": "opaque"
+                },
+                "ends": {
+                    "texture": "dt_scp143_log_top",
+                    "render_method": "opaque"
+                },
+                "up": "ends",
+                "down": "ends"
+            },
+            "minecraft:loot": "loot_tables/blocks/scpdt/scp143/scp143_log.json",
+            "minecraft:destroy_time": 1.0,
+            "minecraft:unit_cube": {},
+            "minecraft:ticking": {
+                "looping": true,
+                "range": [6.0, 8.0],
+                "on_tick": {
+                    "event": "lc:update_leaves"
+                }
+            },
+            "minecraft:on_player_placing": {
+                "event": "lc:set_facing_direction"
+            }
+        },
+        "events": {
+            "lc:update_leaves": {
+                "run_command": {
+                    "command": [
+                        "fill ~3 ~3 ~3 ~-3 ~-3 ~-3 lc:dt_scp143_fake_leaves 0 replace lc:dt_scp143_leaves",
+						"fill ~3 ~3 ~3 ~-3 ~-3 ~-3 lc:dt_scp143_leaves 0 replace lc:dt_scp143_fake_leaves"
+					]
+                }
+            },
+            "lc:set_facing_direction": {
+                "set_block_property": {
+                    "lc:facing_direction": "math.floor( query.block_face / 2.0 )"
+                }
+            },
+            "lc:become_stripped_0": {
+                "sequence": [
+                    {
+                        "run_command": {
+                            "command": [
+								"setblock ~~~ lc:dt_scp143_stripped_log",
+								"playsound hit.wood @a ~~~"
+							]
+                        }
+                    },
+                    {
+                        "damage": {
+                            "type": "durability",
+                            "amount": 1,
+                            "target": "item"
+                        }
+                    }
+                ]
+            },
+            "lc:become_stripped1": {
+                "sequence": [
+                    {
+                        "run_command": {
+                            "command": [
+								"structure load dt_scp143_stripped_log1 ~~~",
+								"playsound hit.wood @a ~~~"
+							]
+                        }
+                    },
+                    {
+                        "damage": {
+                            "type": "durability",
+                            "amount": 1,
+                            "target": "item"
+                        }
+                    }
+                ]
+            },
+            "lc:become_stripped2": {
+                "sequence": [
+                    {
+                        "run_command": {
+                            "command": [
+								"structure load dt_scp143_stripped_log2 ~~~",
+								"playsound hit.wood @a ~~~"
+							]
+                        }
+                    },
+                    {
+                        "damage": {
+                            "type": "durability",
+                            "amount": 1,
+                            "target": "item"
+                        }
+                    }
+                ]
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('lc:facing_direction') == 0",
+                "components": {
+                    "minecraft:rotation": [0, 0, 0],
+                    "minecraft:on_interact": {
+                        "condition": "query.equipped_item_any_tag('slot.weapon.mainhand', 'minecraft:is_axe')",
+                        "event": "lc:become_stripped_0"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('lc:facing_direction') == 1",
+                "components": {
+                    "minecraft:rotation": [90, 0, 0],
+                    "minecraft:on_interact": {
+                        "condition": "query.equipped_item_any_tag('slot.weapon.mainhand', 'minecraft:is_axe')",
+                        "event": "lc:become_stripped1"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('lc:facing_direction') == 2",
+                "components": {
+                    "minecraft:rotation": [0, 0, 90],
+                    "minecraft:on_interact": {
+                        "condition": "query.equipped_item_any_tag('slot.weapon.mainhand', 'minecraft:is_axe')",
+                        "event": "lc:become_stripped2"
+                    }
+                }
+            }
+        ]
+    }
+}

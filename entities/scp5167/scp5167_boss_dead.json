@@ -1,0 +1,87 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp5167_boss_dead",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "a"
+        ]
+      },
+      "animations": {
+        "a": "controller.animation.scp5167_boss.death"
+      }
+    },
+    "component_groups": {
+      "despawn_timer": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": 13.0,
+          "time_down_event": {
+            "event": "scp5167_boss:despawn"
+          }
+        }
+      },
+      "despawn": {
+        "minecraft:health": {
+          "value": 0,
+          "max": 0
+        }
+      }
+    },
+    "components": {
+      "minecraft:loot": {
+        "table": "loot_tables/entities/scpdt/scp5167_boss.json"
+      },
+      "minecraft:experience_reward": {
+        "on_death": "1500"
+      },
+      "minecraft:damage_sensor": {
+        "triggers": 
+        [
+          {
+            "cause": "all",
+            "deals_damage": false
+          }
+        ]
+      },
+      "minecraft:health": {
+        "value": 20,
+        "max": 20
+      },
+      "minecraft:type_family": {
+        "family": [ "dead_body" ]
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:collision_box": {
+        "width": 0.9,
+        "height": 2.9
+      },
+      "minecraft:physics": {
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "despawn_timer"
+          ]
+        }
+      },
+      "scp5167_boss:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      }
+    }
+  }
+}
+  

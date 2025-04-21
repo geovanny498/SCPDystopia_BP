@@ -1,0 +1,132 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_ak",
+			"category": "Equipment"
+		},
+		"components": {
+			"minecraft:use_duration": 2.6,
+			"minecraft:damage": 4,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.equipment"
+			},
+			"minecraft:durability": {
+				"max_durability": 31,
+				"damage_chance": {
+					"min": 0,
+					"max": 0
+				}
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "dt_ak_icon"
+			},
+			"minecraft:display_name": {
+				"value": "dt.nameslot.ak"
+			},
+			"minecraft:cooldown": {
+				"duration": 0.1,
+				"category": "dt_ak_shooting"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"event": "ak:shoot"
+				}
+			},
+			"minecraft:weapon": {
+				"on_hurt_entity": {
+				},
+				"on_hit_block": {
+				}
+			},
+			"tag:lc:class_d_can_equip": {},
+			"tag:lc:ak": {}
+		},
+		"events": {
+			"ak:shoot": {
+				"sequence": [
+					{
+						"condition": "(query.remaining_durability == 1)",
+						"run_command": {
+							"command": [
+								"execute @s ~~~ playsound scpdt.gun.shot_dry @a[r=10] ~~~",
+								"replaceitem entity @s slot.weapon.mainhand 0 lc:dt_ak_empty"
+							],
+							"target": "holder"
+						}
+					},
+					{
+						"condition": "(query.remaining_durability > 1)",
+						"sequence": [
+							{
+								"condition": "!q.is_on_ground",
+								"shoot": {
+									"projectile": "lc:dt_ak_bullet_player_uncertain",
+									"launch_power": 5
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.ak.shot @a[r=10] ~~~",
+										"playanimation @s animation.dt_misc.player_gun_fire",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.03 ^1",
+										"camerashake add @s 1 0.16 rotational",
+										"title @s actionbar §c-          §f+          §c-"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							},
+							{
+								"condition": "!q.is_sneaking && q.is_on_ground",
+								"shoot": {
+									"projectile": "lc:dt_ak_bullet_player",
+									"launch_power": 5
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.ak.shot @a[r=10] ~~~",
+										"playanimation @s animation.dt_misc.player_gun_fire",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.03 ^1",
+										"camerashake add @s 0.28 0.15 rotational",
+										"title @s actionbar §c-  §f+  §c-"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							},
+							{
+								"condition": "q.is_sneaking && q.is_on_ground",
+								"shoot": {
+									"projectile": "lc:dt_ak_bullet_player_sneak",
+									"launch_power": 5
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.ak.shot @a[r=10] ~~~",
+										"playanimation @s animation.dt_misc.player_gun_fire",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.04 ^1",
+										"camerashake add @s 0.2 0.22 rotational",
+										"title @s actionbar §c-§f+§c-"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

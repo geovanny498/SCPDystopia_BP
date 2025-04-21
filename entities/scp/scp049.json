@@ -1,0 +1,210 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp049",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "docile": {
+        "minecraft:type_family": {
+          "family": [ "docile" ]
+        },
+        "minecraft:on_hurt": {
+          "event": "scp049:to_hostile",
+          "target": "self"
+        },
+        "minecraft:movement": {
+          "value": 0.292
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": [61,80],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp049:to_hostile",
+            "target": "self"
+          }
+        }
+      },
+      "hostile": {
+        "minecraft:type_family": {
+          "family": [ "scp", "scp049", "zombie", "monster", "mob" ]
+        },
+        "minecraft:movement": {
+          "value": 0.312
+        },
+        "minecraft:follow_range": {
+          "value": 128,
+          "max": 128
+        },
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 0,
+          "within_radius": 32,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+            "filters": {
+              "other_with_families": [ "villager", "human", "player" ]
+            },
+            "max_dist": 32
+            }
+          ],
+          "must_see_forget_duration": 64.0,
+          "must_see": true
+        },
+        "minecraft:interact": {
+          "interactions": {
+            "on_interact": {
+              "filters": {
+                "all_of": [
+                  { "test": "is_family", "subject": "other", "value": "player" },
+                  { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "red_flower" },
+                  { "test": "has_component", "operator": "!=", "value": "docile" }
+                ]
+              },
+            "event": "scp049:to_docile",
+            "target": "self"
+            },
+            "hurt_item": 1,
+            "swing": true,
+            "play_sounds": "scp049_docile",
+            "interact_text": "action.interact.scp049.docile"
+          }
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 16 : 0"
+      },
+      "minecraft:knockback_resistance": {
+        "value": 0.7
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": true
+        }
+      },
+      "minecraft:health": {
+        "value": 7500,
+        "max": 7500
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:attack": {
+        "damage": 100
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:behavior.delayed_attack": {
+        "priority": 0,
+        "attack_once": false,
+        "track_target": true,
+        "require_complete_path": false,
+        "random_stop_interval": 0,
+        "reach_multiplier": 2.4,
+        "speed_multiplier": 1.14,
+        "attack_duration": 0.5,
+        "hit_delay_pct": 0.27
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 6,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.open_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "hostile"
+          ]
+        }
+      },
+      "scp049:to_hostile": {
+        "add": {
+          "component_groups": [
+            "hostile"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "docile"
+          ]
+        }
+      },
+      "scp049:to_docile": {
+        "add": {
+          "component_groups": [
+            "docile"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "hostile"
+          ]
+        }
+      }
+    }
+  }
+}
+  

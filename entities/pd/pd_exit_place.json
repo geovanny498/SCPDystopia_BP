@@ -1,0 +1,68 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_pd_exit_place",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+        ]
+      },
+      "animations": {
+      }
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:despawn": {}
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "inanimate", "pd" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:health": {
+        "value": 10,
+        "max": 10
+      },
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:collision_box": {
+        "width": 0.2,
+        "height": 0.2
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+          ]
+        }
+      },
+      "pd_exit_place:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      }
+    }
+  }
+}
+  

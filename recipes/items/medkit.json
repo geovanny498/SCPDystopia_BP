@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+    "identifier": "lc:dt_medkit"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "ingredients": [
+      {
+        "item": "minecraft:dye",
+        "data": 1
+      },
+      {
+        "item": "minecraft:golden_apple"
+      },
+      {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    ],
+    "result": {
+      "item": "lc:dt_medkit",
+      "count": 6
+    }
+  }
+}

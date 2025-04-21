@@ -1,0 +1,151 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_commentary",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "commentary"
+        ]
+      },
+      "animations": {
+        "commentary": "controller.animation.commentary.lc"
+      }
+    },
+    "component_groups": {
+      "placed": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": 2,
+          "time_down_event": {
+            "event": "minecraft:start_despawn"
+          }
+        }
+      },
+      "despawn": {
+        "minecraft:despawn": {}
+      },
+      "you_tried_to_use_summon": {
+        "minecraft:mark_variant": {
+          "value": 0
+        }
+      },
+      "amogus": {
+        "minecraft:mark_variant": {
+          "value": 1
+        }
+      },
+      "thanks": {
+        "minecraft:mark_variant": {
+          "value": 2
+        }
+      },
+      "main_features": {
+        "minecraft:mark_variant": {
+          "value": 3
+        }
+      },
+      "compatibility": {
+        "minecraft:mark_variant": {
+          "value": 4
+        }
+      },
+      "first_version": {
+        "minecraft:mark_variant": {
+          "value": 5
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "inanimate" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:health": {
+        "value": 10,
+        "max": 10
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": false
+      },
+      "minecraft:collision_box": {
+        "width": 0.01,
+        "height": 0.01
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "placed",
+            "you_tried_to_use_summon"
+          ]
+        }
+      },
+      "minecraft:start_despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      },
+      "commentary:amogus": {
+        "add": {
+          "component_groups": [
+            "placed",
+            "amogus"
+          ]
+        }
+      },
+      "commentary:thanks": {
+        "add": {
+          "component_groups": [
+            "placed",
+            "thanks"
+          ]
+        }
+      },
+      "commentary:main_features": {
+        "add": {
+          "component_groups": [
+            "placed",
+            "main_features"
+          ]
+        }
+      },
+      "commentary:compatibility": {
+        "add": {
+          "component_groups": [
+            "placed",
+            "compatibility"
+          ]
+        }
+      },
+      "commentary:first_version": {
+        "add": {
+          "component_groups": [
+            "placed",
+            "first_version"
+          ]
+        }
+      }
+    }
+  }
+}
+  

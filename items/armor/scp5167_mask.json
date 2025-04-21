@@ -1,0 +1,38 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:item": {
+        "description": {
+            "identifier": "lc:dt_scp5167_mask",
+            "category": "Equipment"
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.helmet"
+            },
+            "minecraft:max_stack_size": 1,
+            "minecraft:icon": {
+                "texture": "dt_scp5167_mask_icon"
+            },
+            "minecraft:durability": {
+                "max_durability": 180,
+                "damage_chance": {
+                    "min": 5,
+                    "max": 9
+                }
+            },
+            "minecraft:armor": {
+                "protection": 2
+            },
+            "minecraft:enchantable": {
+                "slot": "armor_head",
+                "value": 10
+            },
+            "minecraft:wearable": {
+                "slot": "slot.armor.head"
+            },
+            "minecraft:display_name": {
+                "value": "SCP-5167 Mask"
+            }
+        }
+    }
+}

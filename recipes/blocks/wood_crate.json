@@ -1,0 +1,32 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_wood_crate"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "A#A",
+      "#B#",
+      "A#A"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:planks",
+        "data": 0
+      },
+      "A": {
+        "item": "minecraft:stick"
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_wood_crate",
+      "count": 6
+    }
+  }
+}

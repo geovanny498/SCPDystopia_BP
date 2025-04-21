@@ -1,0 +1,46 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_cup_amogus",
+      "category": "Command"
+    },
+    "components": {
+      "minecraft:use_duration": 1.6,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:hand_equipped": false,
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": {
+        "texture": "dt_cup_red"
+      },
+      "minecraft:display_name": {
+        "value": "Cup of Amogus"
+      },
+      "minecraft:cooldown": {
+				"duration": 5.5,
+				"category": "drink"
+			},
+      "minecraft:on_use": {
+        "on_use": {
+          "event": "cup:drink"
+        }
+      }
+    },
+    "events": {
+			"cup:drink": {
+        "run_command": {
+          "command": [
+            "title @s actionbar I drink a meme... No...",
+            "playsound scpdt.scp294.drink.spit @a[r=13] ~~~"
+          ],
+          "target": "holder"
+        },
+        "transform_item": {
+          "transform": "lc:dt_empty_cup"
+        }
+			}
+		}
+  }
+}

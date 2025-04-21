@@ -1,0 +1,54 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:item": {
+        "description": {
+            "identifier": "lc:dt_nvg",
+            "category": "Equipment"
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.helmet"
+            },
+            "minecraft:max_stack_size": 1,
+            "minecraft:icon": {
+                "texture": "dt_nvg_icon"
+            },
+            "minecraft:durability": {
+                "max_durability": 264,
+                "damage_chance": {
+                    "min": 6,
+                    "max": 9
+                }
+            },
+            "minecraft:armor": {
+                "protection": 4
+            },
+            "minecraft:enchantable": {
+                "slot": "armor_head",
+                "value": 10
+            },
+            "minecraft:wearable": {
+                "slot": "slot.armor.head"
+            },
+            "minecraft:display_name": {
+                "value": "Night Vision Goggles"
+            },
+            "minecraft:on_use": {
+				"on_use": {
+					"event": "nvg:use"
+				}
+			}
+        },
+        "events": {
+            "nvg:use": {
+                "run_command": {
+                    "command": [
+                        "function z_env_controller/spawn",
+                        "function z_env_controller/nvg_effect"
+                    ],
+                    "target": "holder"
+                }
+            }
+        }
+    }
+}

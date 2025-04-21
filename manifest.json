@@ -1,0 +1,24 @@
+{
+    "format_version": 2,
+    "header": {
+        "description": "§l§bMade by LC Studios MC. Helped by Kaiboi39 and RianDewa45.\n§cYou have to enable Holiday Creator Features and Molang Features in experiments.\n§7Thank you for download!",
+        "name": "§g[DEV] §d§lSCP: Dystopia BP §7v1.8.1§f",
+        "uuid": "0b342e6a-74d1-4f0e-9ec1-44848741705c",
+        "version": [ 1, 8, 1 ],
+        "min_engine_version": [ 1, 17, 0 ]
+    },
+    "modules": [
+        {
+            "description": "THIS ADDON HAS 100 OVER 3D BLOCKS",
+            "type": "data",
+            "uuid": "d9103392-6212-4669-acd3-5017756f47c8",
+            "version": [ 1, 8, 1 ]
+        }
+    ],
+    "dependencies": [
+        {
+            "uuid": "03cce329-48ac-45be-ae8a-4301f4687e46",
+            "version": [ 1, 8, 1 ]
+        }
+    ]
+}

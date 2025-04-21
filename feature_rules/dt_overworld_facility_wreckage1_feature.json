@@ -1,0 +1,45 @@
+{
+    "format_version": "1.13.0",
+    "minecraft:feature_rules": {
+        "description": {
+            "identifier": "lc:dt_overworld_facility_wreckage1_feature",
+            "places_feature": "lc:dt_facility_wreckage1_feature"
+        },
+        "conditions": {
+            "placement_pass": "first_pass",
+            "minecraft:biome_filter": {
+                "test": "has_biome_tag",
+                "operator": "==",
+                "value": "overworld"
+            }
+        },
+        "distribution": {
+            "iterations": 1,
+            "x": {
+                "extent": [
+                    0,
+                    8
+                ],
+                "distribution": "uniform"
+            },
+            "y": {
+				"extent": [
+					5,
+					60
+				],
+				"distribution": "uniform"
+			},
+            "z": {
+                "extent": [
+                    0,
+                    8
+                ],
+                "distribution": "uniform"
+            },
+            "scatter_chance": {
+                "numerator": 5,
+                "denominator": 10
+            }
+        }
+    }
+}

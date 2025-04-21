@@ -1,0 +1,561 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_scp294",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ],
+                "scp294:dispense": [ 0, 1],
+                "scp294:coin": [ 0, 1],
+                "scp294:word": [ 0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_scp294",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:entity_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:geometry": "geometry.dt_scp294",
+            "minecraft:destroy_time": 1.9,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:on_interact": {
+                "event": "scp294:interact",
+                "target": "self"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:block_light_absorption": 1.0,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "facing:direction": "(query.cardinal_facing_2d)",
+                    "scp294:word": 0,
+                    "scp294:dispense": 0,
+                    "scp294:coin": 0
+                }
+            },
+            "scp294:interact": {
+                "sequence": [
+                    {
+                        "condition": "query.block_property('scp294:coin') == 0",
+                        "sequence": [
+                            {
+                                "condition": "(query.get_equipped_item_name == 'dt_coin')",
+                                "set_block_property": {
+                                    "scp294:coin": 1
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.scp294.coin @a[r=10] ~~~",
+                                        "title @a[r=8] actionbar §7Coin inserted§f"
+                                    ]
+                                },
+                                "decrement_stack": {}
+                            }
+                        ]
+                    },
+                    {
+                        "condition": "query.block_property('scp294:coin') == 1",
+                        "sequence": [
+                            {
+                                "condition": "query.block_property('scp294:dispense') == 0",
+                                "sequence": [
+                                    {
+                                        "condition": "query.is_sneaking",
+                                        "sequence": [
+                                            //To: coffee
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 0",
+                                                "set_block_property": {
+                                                    "scp294:word": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fCoffee"
+                                                    ]
+                                                }
+                                            },
+                                            //To: orange juice
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 1",
+                                                "set_block_property": {
+                                                    "scp294:word": 2
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fOrange Juice"
+                                                    ]
+                                                }
+                                            },
+                                            //To: cola
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 2",
+                                                "set_block_property": {
+                                                    "scp294:word": 3
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fCola"
+                                                    ]
+                                                }
+                                            },
+                                            //To: iron
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 3",
+                                                "set_block_property": {
+                                                    "scp294:word": 4
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fIron"
+                                                    ]
+                                                }
+                                            },
+                                            //To: gold
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 4",
+                                                "set_block_property": {
+                                                    "scp294:word": 5
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fGold"
+                                                    ]
+                                                }
+                                            },
+                                            //To: pizza
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 5",
+                                                "set_block_property": {
+                                                    "scp294:word": 6
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fPizza"
+                                                    ]
+                                                }
+                                            },
+                                            //To: me
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 6",
+                                                "set_block_property": {
+                                                    "scp294:word": 7
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fMe"
+                                                    ]
+                                                }
+                                            },
+                                            //To: boyfriend
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 7",
+                                                "set_block_property": {
+                                                    "scp294:word": 8
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fBoyfriend"
+                                                    ]
+                                                }
+                                            },
+                                            //To: girlfriend
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 8",
+                                                "set_block_property": {
+                                                    "scp294:word": 9
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fGirlfriend"
+                                                    ]
+                                                }
+                                            },
+                                            //To: amogus
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 9",
+                                                "set_block_property": {
+                                                    "scp294:word": 10
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fAmogus"
+                                                    ]
+                                                }
+                                            },
+                                            //To: water
+                                            {
+                                                "condition": "query.block_property('scp294:word') == 10",
+                                                "set_block_property": {
+                                                    "scp294:word": 0
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Word: §fWater"
+                                                    ]
+                                                }
+                                            }
+                                        ]
+                                    },
+                                    {
+                                        "condition": "!query.is_sneaking && (query.get_equipped_item_name == 'dt_empty_cup')",
+                                        "sequence": [
+                                            //Dispense: water
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 0",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense1 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fWater"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            //Dispense: coffee
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 1",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense1 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fCoffee"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            //Dispense: orange juice
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 2",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense1 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fOrange Juice"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            //Dispense: cola
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 3",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense1 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fCola"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            //Dispense: iron
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 4",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense2 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fIron"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            //Dispense: gold
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 5",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense2 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fGold"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            //Dispense: pizza
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 6",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense2 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fPizza"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            //Dispense: me
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 7",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense3 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fMe"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            //Dispense: boyfriend
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 8",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense3 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fBoyfriend"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            //Dispense: girlfriend
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 9",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense3 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fGirlfriend"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            },
+                                            //Dispense: amogus
+                                            {
+                                                "condition":"query.block_property('scp294:word') == 10",
+                                                "set_block_property": {
+                                                    "scp294:dispense": 1
+                                                },
+                                                "run_command": {
+                                                    "command": [
+                                                        "playsound scpdt.scp294.dispense2 @a[r=10] ~~~",
+                                                        "title @a[r=8] actionbar §7Dispense: §fAmogus"
+                                                    ]
+                                                },
+                                                "decrement_stack": {}
+                                            }
+                                        ]
+                                    }
+                                ]
+                            }
+                        ]
+                    }
+                ]
+            },
+            "scp294:dispense_finish": {
+                "condition": "query.block_property('scp294:dispense') == 1",
+                "sequence": [
+                    //Water
+                    {
+                        "condition": "query.block_property('scp294:word') == 0",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/water.json"
+                        }
+                    },
+                    //Coffee
+                    {
+                        "condition": "query.block_property('scp294:word') == 1",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/coffee.json"
+                        }
+                    },
+                    //Orange juice
+                    {
+                        "condition": "query.block_property('scp294:word') == 2",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/orange_juice.json"
+                        }
+                    },
+                    //Cola
+                    {
+                        "condition": "query.block_property('scp294:word') == 3",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/cola.json"
+                        }
+                    },
+                    //Iron
+                    {
+                        "condition": "query.block_property('scp294:word') == 4",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/iron.json"
+                        }
+                    },
+                    //Gold
+                    {
+                        "condition": "query.block_property('scp294:word') == 5",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/gold.json"
+                        }
+                    },
+                    //Pizza
+                    {
+                        "condition": "query.block_property('scp294:word') == 6",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/pizza.json"
+                        }
+                    },
+                    //Me
+                    {
+                        "condition": "query.block_property('scp294:word') == 7",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/me.json"
+                        }
+                    },
+                    //Boyfriend
+                    {
+                        "condition": "query.block_property('scp294:word') == 8",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/boyfriend.json"
+                        }
+                    },
+                    //Girlfriend
+                    {
+                        "condition": "query.block_property('scp294:word') == 9",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/girlfriend.json"
+                        }
+                    },
+                    //Amogus
+                    {
+                        "condition": "query.block_property('scp294:word') == 10",
+                        "set_block_property": {
+                            "scp294:dispense": 0,
+                            "scp294:coin": 0
+                        },
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp294/amogus.json"
+                        }
+                    }
+                ]
+            }
+        },
+        "permutations": [
+            //Dispense
+            {
+                "condition": "query.block_property('scp294:dispense') == 1",
+                "components": {
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [6.0, 7.5],
+                        "on_tick": {
+                            "event": "scp294:dispense_finish",
+                            "target": "self"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

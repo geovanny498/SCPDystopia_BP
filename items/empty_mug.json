@@ -1,0 +1,23 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_empty_mug",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:use_duration": 1.6,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:hand_equipped": true,
+      "minecraft:max_stack_size": 64,
+      "minecraft:icon": {
+        "texture": "dt_empty_mug"
+      },
+      "minecraft:display_name": {
+        "value": "Empty Mug"
+      }
+    }
+  }
+}

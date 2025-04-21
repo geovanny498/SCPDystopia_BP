@@ -1,0 +1,1319 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scientist",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "d1": {
+        "minecraft:variant": {
+          "value": 0
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_tro_helmet"
+                    },
+                    {
+                      "other_with_families": ["scpfoundation"]
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_eta10_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_epsilon11_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp049"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_zombie_d1"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp049"
+                    },
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp610"
+                    },
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "human:dead_d1"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp610"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_scp610"
+              }
+            }
+          ]
+        }
+      },
+      "zombie_d1": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_scp049_2<scp049_2:d1>"
+        }
+      },
+      "death_d1": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_dead<d1>"
+        }
+      },
+      "d2": {
+        "minecraft:variant": {
+          "value": 1
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_tro_helmet"
+                    },
+                    {
+                      "other_with_families": ["scpfoundation"]
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_eta10_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_epsilon11_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp049"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_zombie_d2"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp049"
+                    },
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp610"
+                    },
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "human:dead_d2"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp610"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_scp610"
+              }
+            }
+          ]
+        }
+      },
+      "zombie_d2": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_scp049_2<scp049_2:d2>"
+        }
+      },
+      "death_d2": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_dead<d2>"
+        }
+      },
+      "d3": {
+        "minecraft:variant": {
+          "value": 2
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_tro_helmet"
+                    },
+                    {
+                      "other_with_families": ["scpfoundation"]
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_eta10_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_epsilon11_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp049"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_zombie_d3"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp049"
+                    },
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp610"
+                    },
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "human:dead_d3"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp610"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_scp610"
+              }
+            }
+          ]
+        }
+      },
+      "zombie_d3": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_scp049_2<scp049_2:d3>"
+        }
+      },
+      "death_d3": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_dead<d3>"
+        }
+      },
+      "kaiboi39": {
+        "minecraft:variant": {
+          "value": 3
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_tro_helmet"
+                    },
+                    {
+                      "other_with_families": ["scpfoundation"]
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_eta10_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_epsilon11_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp049"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_zombie_kaiboi39"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp049"
+                    },
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp610"
+                    },
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "human:dead_kaiboi39"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp610"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_scp610"
+              }
+            }
+          ]
+        }
+      },
+      "zombie_kaiboi39": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_scp049_2<scp049_2:kaiboi39>"
+        }
+      },
+      "death_kaiboi39": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_dead<kaiboi39>"
+        }
+      },
+      "lc": {
+        "minecraft:variant": {
+          "value": 4
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_tro_helmet"
+                    },
+                    {
+                      "other_with_families": ["scpfoundation"]
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_eta10_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_epsilon11_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp049"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_zombie_lc"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp049"
+                    },
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp610"
+                    },
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "human:dead_lc"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp610"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_scp610"
+              }
+            }
+          ]
+        }
+      },
+      "zombie_lc": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_scp049_2<scp049_2:lc>"
+        }
+      },
+      "death_lc": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_dead<lc>"
+        }
+      },
+      "rian": {
+        "minecraft:variant": {
+          "value": 5
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_tro_helmet"
+                    },
+                    {
+                      "other_with_families": ["scpfoundation"]
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_eta10_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_epsilon11_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp049"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_zombie_rian"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp049"
+                    },
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp610"
+                    },
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "human:dead_rian"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp610"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_scp610"
+              }
+            }
+          ]
+        }
+      },
+      "zombie_rian": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_scp049_2<scp049_2:rian>"
+        }
+      },
+      "death_rian": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_dead<rian>"
+        }
+      },
+      "bb607": {
+        "minecraft:variant": {
+          "value": 6
+        },
+        "minecraft:damage_sensor": {
+          "triggers": [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_tro_helmet"
+                    },
+                    {
+                      "other_with_families": ["scpfoundation"]
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_eta10_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_epsilon11_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp049"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_zombie_bb607"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp049"
+                    },
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp610"
+                    },
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "human:dead_bb607"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp610"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_scp610"
+              }
+            }
+          ]
+        }
+      },
+      "zombie_bb607": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_scp049_2<scp049_2:bb607>"
+        }
+      },
+      "death_bb607": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scientist_dead<bb607>"
+        }
+      },
+      "scp610": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scp610<minecraft:entity_spawned>"
+        }
+      },
+      "stop": {
+        "minecraft:interact": {
+          "interactions": {
+            "on_interact": {
+              "filters": {
+                "all_of": [
+                  { "test": "is_family", "subject": "other", "value": "player" },
+                  { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_commander" },
+                  { "test": "has_component", "operator": "!=", "value": "move" }
+                ]
+              },
+            "event": "officer:to_move",
+            "target": "self"
+            },
+            "hurt_item": 0,
+            "swing": true,
+            "interact_text": "action.interact.scpdt.officer.move"
+          }
+        },
+        "minecraft:movement": {
+          "value": 0.0
+        }
+      },
+      "move": {
+        "minecraft:interact": {
+          "interactions": {
+            "on_interact": {
+              "filters": {
+                "all_of": [
+                  { "test": "is_family", "subject": "other", "value": "player" },
+                  { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_commander" },
+                  { "test": "has_component", "operator": "!=", "value": "stop" }
+                ]
+              },
+            "event": "officer:to_stop",
+            "target": "self"
+            },
+            "hurt_item": 0,
+            "swing": true,
+            "interact_text": "action.interact.scpdt.officer.stop"
+          }
+        },
+        "minecraft:movement": {
+          "value": 0.26
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 1
+        }
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [ "human", "scpfoundation", "mob", "scientist", "villager" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": true
+        }
+      },
+      "minecraft:health": {
+        "value": 20,
+        "max": 20
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:attack": {
+        "damage": 3
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:follow_range": {
+        "value": 38,
+        "max": 38
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.panic": {
+        "priority": 1,
+        "speed_multiplier": 1.25
+      },
+      "minecraft:behavior.avoid_mob_type": {
+        "priority": 0,
+        "entity_types": [
+          {
+            "filters": {
+              "any_of": [
+                { "test" :  "is_family", "subject" : "other", "value" :  "monster"},
+                { "test" :  "is_family", "subject" : "other", "value" :  "scp"},
+                { "test" :  "is_family", "subject" : "other", "value" : "chaos"},
+                { "test" :  "is_family", "subject" : "other", "value" : "chaos_insurgency"},
+                { "test" :  "has_equipment", "subject" : "other", "domain": "head", "operator": "==", "value" : "lc:dt_ci_helmet"}
+              ]
+            },
+            "max_dist": 14,
+            "walk_speed_multiplier": 1.42,
+            "sprint_speed_multiplier": 1.42
+          }
+        ]
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:behavior.trade_with_player": {
+        "priority": 1
+      },
+      "minecraft:behavior.look_at_trading_player": {
+        "priority": 1
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 8,
+        "look_distance": 7,
+        "probability": 0.03
+      },
+      "minecraft:trade_table": {
+        "display_name": "scpdt.scientist.trade",
+        "table": "trading/scpdt/scientist.json",
+        "convert_trades_economy": false,
+        "new_screen": true
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.open_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "sequence": [
+          {
+            "randomize": [
+              {
+                "weight": 2,
+                "add": {
+                  "component_groups": [ "d1" ]
+                }
+              },
+              {
+                "weight": 2,
+                "add": {
+                  "component_groups": [ "d2" ]
+                }
+              },
+              {
+                "weight": 2,
+                "add": {
+                  "component_groups": [ "d3" ]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": [ "kaiboi39" ]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": [ "lc" ]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": [ "rian" ]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": [ "bb607" ]
+                }
+              }
+            ]
+          },
+          {
+            "add": {
+              "component_groups": [
+                "move"
+              ]
+            }
+          }
+        ]
+      },
+      "become_zombie_d1": {
+        "add": {
+          "component_groups": [
+            "zombie_d1"
+          ]
+        }
+      },
+      "become_zombie_d2": {
+        "add": {
+          "component_groups": [
+            "zombie_d2"
+          ]
+        }
+      },
+      "become_zombie_d3": {
+        "add": {
+          "component_groups": [
+            "zombie_d3"
+          ]
+        }
+      },
+      "become_zombie_kaiboi39": {
+        "add": {
+          "component_groups": [
+            "zombie_kaiboi39"
+          ]
+        }
+      },
+      "become_zombie_lc": {
+        "add": {
+          "component_groups": [
+            "zombie_lc"
+          ]
+        }
+      },
+      "become_zombie_rian": {
+        "add": {
+          "component_groups": [
+            "zombie_rian"
+          ]
+        }
+      },
+      "become_zombie_bb607": {
+        "add": {
+          "component_groups": [
+            "zombie_bb607"
+          ]
+        }
+      },
+      "officer:to_move": {
+        "add": {
+          "component_groups": [
+            "move"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "stop"
+          ]
+        }
+      },
+      "officer:to_stop": {
+        "add": {
+          "component_groups": [
+            "stop"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "move"
+          ]
+        }
+      },
+      "become_scp610": {
+        "add": {
+          "component_groups": [
+            "scp610"
+          ]
+        }
+      },
+      "human:dead_d1": {
+        "add": {
+          "component_groups": [
+            "death_d1"
+          ]
+        }
+      },
+      "human:dead_d2": {
+        "add": {
+          "component_groups": [
+            "death_d2"
+          ]
+        }
+      },
+      "human:dead_d3": {
+        "add": {
+          "component_groups": [
+            "death_d3"
+          ]
+        }
+      },
+      "human:dead_kaiboi39": {
+        "add": {
+          "component_groups": [
+            "death_kaiboi39"
+          ]
+        }
+      },
+      "human:dead_lc": {
+        "add": {
+          "component_groups": [
+            "death_lc"
+          ]
+        }
+      },
+      "human:dead_rian": {
+        "add": {
+          "component_groups": [
+            "death_rian"
+          ]
+        }
+      },
+      "human:dead_bb607": {
+        "add": {
+          "component_groups": [
+            "death_bb607"
+          ]
+        }
+      }
+    }
+  }
+}
+  

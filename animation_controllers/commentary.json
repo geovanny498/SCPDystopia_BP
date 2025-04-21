@@ -1,0 +1,68 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.commentary.lc": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "you_tried_to_use_summon": "query.mark_variant == 0"
+            },
+            {
+              "amogus": "query.mark_variant == 1"
+            },
+            {
+              "thanks": "query.mark_variant == 2"
+            },
+            {
+              "main_features": "query.mark_variant == 3"
+            },
+            {
+              "compatibility": "query.mark_variant == 4"
+            },
+            {
+              "first_version": "query.mark_variant == 5"
+            }
+          ]
+        },
+        "you_tried_to_use_summon": {
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§l[§6L§8C§f]§r §7You tried to spawn this entity. Good try\"}]}",
+            "/playsound scpdt.commentary.triedtospawnentity @a"
+          ]
+        },
+        "amogus": {
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§l[§6L§8C§f]§r §7Actually, there was no reasons. I just love that meme.\"}]}",
+            "/playsound scpdt.commentary.amogus @a"
+          ]
+        },
+        "thanks": {
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§l[§6L§8C§f]§r §7I hope SCP: Dystopia will be best useful SCP addon. Thank you for using SCP: Dystopia!\"}]}",
+            "/playsound scpdt.commentary.thanks @a"
+          ]
+        },
+        "main_features": {
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§l[§6L§8C§f]§r §7I'm trying to make best SCP addon for build SCP facility. This is why I made a lot of 3D blocks.\"}]}",
+            "/playsound scpdt.commentary.main_features @a"
+          ]
+        },
+        "compatibility": {
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§l[§6L§8C§f]§r §7Exiting almost gun addons has no compatibility with other gun addons. But this addon is not. SCP: Dystopia will work with any addons. Except for shaders or some resource packs.\"}]}",
+            "/playsound scpdt.commentary.compatibility @a"
+          ]
+        },
+        "first_version": {
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§l[§6L§8C§f]§r §7When I was making first version, SCP: Dystopia was very very simple. It has only 5 SCPs. And I wasn't going to make this addon any bigger.\"}]}",
+            "/playsound scpdt.commentary.first_version @a"
+          ]
+        }
+      }
+    }
+  }
+}

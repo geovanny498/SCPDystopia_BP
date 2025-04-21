@@ -1,0 +1,80 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "lc:dt_fire_axe",
+      "category": "Equipment"
+    },
+    "components": {
+      "minecraft:durability": {
+        "max_durability": 375,
+        "damage_chance": {
+          "min": 4,
+          "max": 7
+        }
+      },
+      "minecraft:weapon": {
+        "on_hurt_entity": {
+          "event": "lc:reduce_durability"
+        }
+      },
+      "minecraft:damage": 9,
+      "minecraft:enchantable": {
+        "value": 10,
+        "slot": "axe"
+      },
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.axe"
+      },
+      "minecraft:hand_equipped": true,
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": {
+        "texture": "dt_fire_axe"
+      },
+      "minecraft:display_name": {
+        "value": "Fire Axe"
+      },
+      "minecraft:mining_speed": 1,
+      "minecraft:digger": {
+        "use_efficiency": true,
+        "destroy_speeds": [
+          {
+            "block": {
+              "tags": "q.any_tag('wood', 'pumpkin', 'plant')"
+            },
+            "speed": 12
+          },
+          {
+            "block": "minecraft:chest",
+            "speed": 12
+          },
+          {
+            "block": "minecraft:melon_block",
+            "speed": 12
+          }
+        ]
+      },
+      "tag:minecraft:is_axe": {}
+    },
+    "events": {
+      "lc:reduce_durability": {
+        "randomize": [
+          {
+            "damage": {
+              "type": "durability",
+              "target": "self",
+              "amount": 4
+            }
+          },
+          {
+            "damage": {
+              "type": "durability",
+              "target": "self",
+              "amount": 6
+            }
+          }
+        ]
+      }
+    }
+  }
+}

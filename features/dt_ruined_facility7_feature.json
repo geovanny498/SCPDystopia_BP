@@ -1,0 +1,19 @@
+{
+    "format_version": "1.13.0",
+    "minecraft:structure_template_feature": {
+        "description": {
+            "identifier": "lc:dt_ruined_facility7_feature"
+        },
+        "structure_name": "mystructure:ruined_facility7",
+        "adjustment_radius": 4,
+        "facing_direction": "random",
+        "constraints": {
+            "block_intersection": {
+                "block_allowlist": [
+                    "minecraft:air",
+                    "minecraft:stone"
+                ]
+            }
+        }
+    }
+}

@@ -1,0 +1,237 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp577",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "angry": {
+        "minecraft:timer": {
+          "looping": true,
+          "time": [0.6,0.8],
+          "time_down_event": {
+            "event": "scp577:spawn_explode",
+            "target": "self"
+          }
+        },
+        "minecraft:angry": {
+          "duration": 13,
+          "broadcast_anger": false,
+          "calm_event": {
+            "event": "minecraft:on_calm",
+            "target": "self"
+          }
+        }
+      },
+      "calm": {
+        "minecraft:on_target_acquired": {
+          "event": "minecraft:become_angry",
+          "target": "self"
+        }
+      },
+      "spawn_explosion": {
+        "minecraft:area_attack" : {
+          "damage_range": 2.5,
+          "damage_per_tick": 7,
+          "cause": "contact",
+          "entity_filter": {
+            "all_of": [
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp557" }
+            ]
+          }
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": [0.1,0.2],
+          "time_down_event": {
+            "event": "scp577:stop_explode",
+            "target": "self"
+          }
+        },
+        "minecraft:spawn_entity": {
+          "entities": [
+            {
+              "spawn_sound": "plop",
+              "min_wait_time": 0,
+              "max_wait_time": 0,
+              "spawn_entity": "lc:dt_scp577_explode",
+              "spawn_event": "minecraft:entity_spawned",
+              "single_use": true,
+              "num_to_spawn": 1
+            }
+          ]
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 9 : 0"
+      },
+      "minecraft:knockback_resistance": {
+        "value": 0.1
+      },
+      "minecraft:health": {
+        "value": 30,
+        "max": 30
+      },
+      "minecraft:type_family": {
+        "family": [ "scp", "scp577", "mob", "monster" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "other_with_families": [
+                  "scp577"
+                ]
+              }
+            },
+            "deals_damage": false
+          }
+        ]
+      },
+      "minecraft:attack": {
+        "damage": 6
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:follow_range": {
+        "value": 22,
+        "max": 22
+      },
+      "minecraft:behavior.melee_attack": {
+        "priority": 1,
+        "speed_multiplier": 1.4,
+        "track_target": true
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 0
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 0,
+        "within_radius": 9,
+        "entity_types": [
+          {
+            "filters": {
+              "other_with_families": [
+                "villager",
+                "human",
+                "player"
+              ]
+            },
+            "max_dist": 9
+          }
+        ],
+        "must_see_forget_duration": 7.0,
+        "must_see": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 1,
+        "speed_multiplier": 0.9
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 7,
+        "speed_multiplier": 0.9
+      },
+      "minecraft:behavior.look_at_player": {
+        "probability": 0.04,
+        "priority": 6,
+        "look_distance": 12
+      },
+      "minecraft:movement": {
+        "value": 0.31
+      },
+      "minecraft:collision_box": {
+        "width": 0.4,
+        "height": 0.7
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.break_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": false,
+        "is_amphibious": false,
+        "can_path_over_water": false,
+        "avoid_sun": false,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_break_doors": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "calm"
+          ]
+        }
+      },
+      "minecraft:become_angry": {
+        "add": {
+          "component_groups": [
+            "angry"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "calm"
+          ]
+        }
+      },
+      "minecraft:on_calm": {
+        "add": {
+          "component_groups": [
+            "calm"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "angry"
+          ]
+        }
+      },
+      "scp577:spawn_explode": {
+        "add": {
+          "component_groups": [
+            "spawn_explosion"
+          ]
+        }
+      },
+      "scp577:stop_explode": {
+        "remove": {
+          "component_groups": [
+            "spawn_explosion"
+          ]
+        }
+      }
+    }
+  }
+}
+  

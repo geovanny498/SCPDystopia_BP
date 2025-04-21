@@ -1,0 +1,36 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_experiment_tools"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "ABC",
+      "#D#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "A": {
+        "item": "minecraft:glass"
+      },
+      "B": {
+        "item": "minecraft:planks"
+      },
+      "C": {
+        "item": "minecraft:iron_nugget"
+      },
+      "D": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_experiment_tools",
+      "count": 3
+    }
+  }
+}

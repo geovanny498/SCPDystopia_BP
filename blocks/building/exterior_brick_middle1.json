@@ -1,0 +1,18 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:block": {
+		"description": {
+			"identifier": "lc:dt_exterior_brick_middle1",
+			"is_experimental": false
+		},
+		"components": {
+			"minecraft:creative_category": {
+                "group": "itemGroup.name.stone",
+                "category": "Nature"
+            },
+			"minecraft:destroy_time": 1.5,
+			"minecraft:explosion_resistance": 14.0,
+            "tag:lc:dystopiablock": {}
+		}
+	}
+}

@@ -1,0 +1,14 @@
+give @p lc:dt_button
+give @p lc:dt_camera
+give @p lc:dt_ceiling_monitor
+give @p lc:dt_lab_monitor
+give @p lc:dt_coffee_machine
+give @p lc:dt_control_panel
+give @p lc:dt_keyreader1
+give @p lc:dt_keyreader2
+give @p lc:dt_keyreader3
+give @p lc:dt_keyreader4
+give @p lc:dt_keyreader5
+give @p lc:dt_laptop
+give @p lc:dt_pc
+give @p lc:dt_desktop_display

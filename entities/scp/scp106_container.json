@@ -1,0 +1,151 @@
+{
+    "format_version": "1.13.0",
+    "minecraft:entity": {
+        "description": {
+            "identifier": "lc:dt_scp106_container",
+            "is_spawnable": true,
+            "is_summonable": true,
+            "is_experimental": false,
+            "runtime_identifier": "minecraft:shulker"
+        },
+        "component_groups": {
+            "able_to_ride": {
+                "minecraft:rideable": {
+                    "seat_count": 1,
+                    "pull_in_entities": true,
+                    "family_types": [
+                        "scp106"
+                    ],
+                    "seats": {
+                        "position": [
+                            0.0,
+                            0.2,
+                            0.0
+                        ]
+                    }
+                },
+                "minecraft:interact": {
+                    "interactions": {
+                        "on_interact": {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    }
+                                ]
+                            },
+                            "event": "scp106c:uncontain",
+                            "target": "self"
+                        },
+                        "hurt_item": 0,
+                        "swing": true,
+                        "interact_text": "action.interact.scpdt.scp106_container.contain_not"
+                    }
+                }
+            },
+            "uncontain": {
+                "minecraft:timer": {
+                    "looping": false,
+                    "time": 0.2,
+                    "time_down_event": {
+                        "event": "scp106c:to_be_able_to_ride"
+                    }
+                }
+            },
+            "minecraft:death": {
+                "minecraft:despawn": {}
+            }
+        },
+        "components": {
+            "minecraft:type_family": {
+                "family": [
+                    "inanimate"
+                ]
+            },
+            "minecraft:collision_box": {
+                "width": 0.7,
+                "height": 0.4
+            },
+            "minecraft:interact": {
+                "interactions": [
+                    {
+                        "on_interact": {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "hand",
+                                        "value": "lc:dt_scp1023_arc"
+                                    }
+                                ]
+                            },
+                            "event": "scp106c:death",
+                            "interact_text": "Remove"
+                        },
+                        "swing": true,
+                        "use_item": false
+                    }
+                ]
+            },
+            "minecraft:health": {
+                "value": 35
+            },
+            "minecraft:damage_sensor": {
+                "triggers": {
+                    "cause": "all",
+                    "deals_damage": true
+                }
+            },
+            "minecraft:pushable": {
+                "is_pushable": false,
+                "is_pushable_by_piston": false
+            },
+            "minecraft:physics": {
+                "has_gravity": false,
+                "has_collision": false
+            },
+            "minecraft:conditional_bandwidth_optimization": {}
+        },
+        "events": {
+            "minecraft:entity_spawned": {
+                "add": {
+                    "component_groups": [
+                        "able_to_ride"
+                    ]
+                }
+            },
+            "scp106c:uncontain": {
+                "add": {
+                    "component_groups": [
+                        "uncontain"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "able_to_ride"
+                    ]
+                }
+            },
+            "scp106c:to_be_able_to_ride": {
+                "add": {
+                    "component_groups": [
+                        "able_to_ride"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "uncontain"
+                    ]
+                }
+            }
+        }
+    }
+}

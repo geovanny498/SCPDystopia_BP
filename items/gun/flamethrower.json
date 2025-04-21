@@ -1,0 +1,131 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_flamethrower",
+			"category": "Equipment"
+		},
+		"components": {
+			"minecraft:use_duration": 2.6,
+			"minecraft:damage": 3,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.equipment"
+			},
+			"minecraft:durability": {
+				"max_durability": 81,
+				"damage_chance": {
+					"min": 0,
+					"max": 0
+				}
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "dt_flamethrower_icon"
+			},
+			"minecraft:display_name": {
+				"value": "dt.nameslot.flamethrower"
+			},
+			"minecraft:cooldown": {
+				"duration": 0.1,
+				"category": "dt_ft_shooting"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"event": "flamethrower:shoot"
+				}
+			},
+			"minecraft:weapon": {
+				"on_hurt_entity": {
+				},
+				"on_hit_block": {
+				}
+			},
+			"tag:lc:flamethrower": {}
+		},
+		"events": {
+			"flamethrower:shoot": {
+				"sequence": [
+					{
+						"condition": "(query.remaining_durability == 1)",
+						"run_command": {
+							"command": [
+								"execute @s ~~~ playsound scpdt.gun.shot_dry @a[r=10] ~~~",
+								"replaceitem entity @s slot.weapon.mainhand 0 lc:dt_flamethrower_empty"
+							],
+							"target": "holder"
+						}
+					},
+					{
+						"condition": "(query.remaining_durability > 1)",
+						"sequence": [
+							{
+								"condition": "!q.is_on_ground",
+								"shoot": {
+									"projectile": "lc:dt_flame_player_uncertain",
+									"launch_power": 1
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.flamethrower.fire @a[r=10] ~~~ 0.8",
+										"playanimation @s animation.dt_misc.player_gun_fire",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.02 ^1",
+										"camerashake add @s 0.5 0.23 rotational",
+										"title @s actionbar §c(         §f+         §c)"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							},
+							{
+								"condition": "!q.is_sneaking && q.is_on_ground",
+								"shoot": {
+									"projectile": "lc:dt_flame_player",
+									"launch_power": 1
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.flamethrower.fire @a[r=10] ~~~ 0.8",
+										"playanimation @s animation.dt_misc.player_gun_fire",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.02 ^1",
+										"camerashake add @s 0.17 0.23 rotational",
+										"title @s actionbar §c(    §f+    §c)"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							},
+							{
+								"condition": "q.is_sneaking && q.is_on_ground",
+								"shoot": {
+									"projectile": "lc:dt_flame_player_sneak",
+									"launch_power": 1
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.flamethrower.fire @a[r=10] ~~~",
+										"playanimation @s animation.dt_misc.player_gun_fire",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.02 ^1",
+										"camerashake add @s 0.13 0.37 rotational",
+										"title @s actionbar §c(  §f+  §c)"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 3
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

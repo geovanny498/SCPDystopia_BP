@@ -1,0 +1,152 @@
+{
+    "format_version": "1.12.0",
+    "minecraft:entity": {
+        "description": {
+            "identifier": "lc:dt_scp5167_dragon_shot",
+            "is_spawnable": false,
+            "is_summonable": true,
+            "is_experimental": false,
+            "runtime_identifier": "minecraft:snowball"
+        },
+        "component_groups": {
+            "minecraft:exploding": {
+                "minecraft:explode": {
+                    "fuse_length": 0,
+                    "fuse_lit": true,
+                    "power": 0.7,
+                    "causes_fire": false,
+                    "fire_affected_by_griefing": true,
+                    "destroy_affected_by_griefing": true
+                }
+            },
+            "despawning": {
+                "minecraft:despawn": {}
+            } 
+        },
+        "components": {
+            "minecraft:tick_world": {
+				"distance_to_players": 128,
+				"never_despawn": false,
+				"radius": 2
+			},
+            "minecraft:type_family": {
+                "family": [
+                    "bullet",
+                    "projectile",
+                    "sus"
+                ]
+            },
+            "minecraft:break_blocks": {
+                "breakable_blocks": [
+                    "glass",
+                    "glass_pane",
+                    "stained_glass",
+                    "stained_glass_pane",
+                    "standing_sign",
+                    "vine",
+                    "wall_banner",
+                    "wall_sign",
+                    "web",
+                    "wheat"
+                ]
+            },
+            "minecraft:collision_box": {
+                "width": 0.05,
+                "height": 0.05
+            },
+            "minecraft:spawn_entity": [
+                {
+                    "min_wait_time": 0,
+                    "max_wait_time": 0,
+                    "single_use": true,
+                    "spawn_entity": "lc:none",
+                    "spawn_sound": "purr",
+                    "num_to_spawn": 1
+                }
+            ],
+            "minecraft:projectile": {
+                "on_hit": {
+                    "impact_damage": {
+                        "damage": 11,
+                        "knockback": true,
+                        "semi_random_diff_damage": false,
+                        "destroy_on_hit": true
+                    },
+                    "definition_event": {
+                        "affect_projectile": true,
+                        "event_trigger": {
+                            "event": "minecraft:explode",
+                            "target": "self"
+                        }
+                    },
+                    "mob_effect": {
+                        "effect": "wither",
+                        "durationeasy": 0,
+                        "durationnormal": 10,
+                        "durationhard": 20,
+                        "amplifier": 2
+                    }
+                },
+                "power": 5.0,
+                "gravity": 0.0,
+                "inertia": 1.1,
+                "uncertainty_base": 19.3,
+                "uncertainty_multiplier": 2.5,
+                "anchor": 1,
+                "offset": [
+                    0,
+                    -2,
+                    1
+                ],
+                "reflect_on_hurt": true,
+                "catch_fire": false
+            },
+            "minecraft:mob_effect": {
+                "effect_range": 1.7,
+                "mob_effect": "wither",
+                "effect_time": 3,
+                "entity_filter": {
+                    "any_of": [
+                        {
+                            "test": "is_family",
+                            "subject": "other",
+                            "operator": "!=",
+                            "value": "sus"
+                        }
+                    ]
+                }
+            },
+            "minecraft:physics": {},
+            "minecraft:timer": {
+                "looping": false,
+                "time": 3.0,
+                "time_down_event": {
+                    "event": "minecraft:start_despawn"
+                }
+            },
+            "minecraft:conditional_bandwidth_optimization": {
+                "default_values": {
+                    "max_optimized_distance": 80.0,
+                    "max_dropped_ticks": 7,
+                    "use_motion_prediction_hints": true
+                }
+            }
+        },
+        "events": {
+            "minecraft:explode": {
+                "add": {
+                    "component_groups": [
+                        "minecraft:exploding"
+                    ]
+                }
+            },
+            "minecraft:start_despawn": {
+                "add": {
+                    "component_groups": [
+                        "despawning"
+                    ]
+                }
+            }
+        }
+    }
+}

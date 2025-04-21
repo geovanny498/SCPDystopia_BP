@@ -1,0 +1,49 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp106.spawn": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "blink": "query.is_sheared"
+            }
+          ]
+        },
+        "blink": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "animations": [
+            "spawning"
+          ]
+        }
+      }
+    },
+    "controller.animation.scp106.send_to_pd": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "go": "query.is_saddled"
+            }
+          ]
+        },
+        "go": {
+          "transitions": [
+            {
+              "default": "!query.is_saddled"
+            }
+          ],
+          "animations": [
+            "sending_to_pd"
+          ]
+        }
+      }
+    }
+  }
+}

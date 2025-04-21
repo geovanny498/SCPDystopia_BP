@@ -1,0 +1,631 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_field_doctor",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "zombie": {
+        "minecraft:transformation": {
+          "into": "lc:dt_field_doctor_scp049_2"
+        }
+      },
+      "scp610": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scp610<minecraft:entity_spawned>"
+        }
+      },
+      "move": {
+        "minecraft:mark_variant": {
+          "value": 0
+        },
+        "minecraft:movement": {
+          "value": 0.27
+        },
+        "minecraft:behavior.random_look_around": {
+          "priority": 9
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 8,
+          "speed_multiplier": 0.8
+        }
+      },
+      "fighting": {
+        "minecraft:shooter": {
+          "def": "lc:dt_hk_mp5_bullet"
+        },
+        "minecraft:behavior.ranged_attack": {
+          "priority": 0,
+          "attack_interval_min": 2.68,
+          "attack_interval_max": 2.7,
+          "burst_shots": 30,
+          "burst_interval": 0.1,
+          "attack_radius": 56,
+          "speed_multiplier": 1.0
+        }
+      },
+      "despawning": {
+        "minecraft:despawn": {
+        }
+      },
+      "waiting_patient": {
+        "minecraft:interact": {
+          "interactions": {
+            "on_interact": {
+              "filters": {
+                "any_of": [
+                  {
+                    "all_of": [
+                      {
+                        "test": "is_family",
+                        "subject": "other",
+                        "value": "player"
+                      },
+                      {
+                        "test": "has_equipment",
+                        "domain": "head",
+                        "subject": "other",
+                        "operator": "==",
+                        "value": "lc:dt_epsilon11_helmet"
+                      }
+                    ]
+                  },
+                  {
+                    "all_of": [
+                      {
+                        "test": "is_family",
+                        "subject": "other",
+                        "value": "player"
+                      },
+                      {
+                        "test": "has_equipment",
+                        "domain": "head",
+                        "subject": "other",
+                        "operator": "==",
+                        "value": "lc:dt_eta10_helmet"
+                      }
+                    ]
+                  },
+                  {
+                    "all_of": [
+                      {
+                        "test": "is_family",
+                        "subject": "other",
+                        "value": "player"
+                      },
+                      {
+                        "test": "has_equipment",
+                        "domain": "head",
+                        "subject": "other",
+                        "operator": "==",
+                        "value": "lc:dt_tro_helmet"
+                      }
+                    ]
+                  }
+                ]
+              },
+              "event": "field_doctor:found_patient",
+              "target": "self"
+            },
+            "hurt_item": 1,
+            "swing": true,
+            "interact_text": "action.interact.scpdt.field_doctor.demand_medkit"
+          }
+        }
+      },
+      "found_patient": {
+        "minecraft:mark_variant": {
+          "value": 1
+        },
+        "minecraft:timer": {
+					"looping": false,
+					"time": 3.1,
+					"randomInterval": false,
+					"time_down_event": {
+						"event": "field_doctor:finish_cure"
+					}
+				}
+      },
+      "give_heal": {
+        "minecraft:timer": {
+					"looping": false,
+					"time": 7.0,
+					"randomInterval": false,
+					"time_down_event": {
+						"event": "field_doctor:heal_end"
+					}
+				},
+        "minecraft:spawn_entity": {
+          "entities": [
+            {
+              "min_wait_time": 0,
+              "max_wait_time": 0,
+              "spawn_sound": "plop",
+              "spawn_item": "lc:dt_medkit",
+              "single_use": true
+            },
+            {
+              "min_wait_time": 0,
+              "max_wait_time": 0,
+              "spawn_sound": "plop",
+              "spawn_item": "lc:dt_painkillers",
+              "single_use": true
+            }
+          ]
+        }
+      },
+      "death_field_doctor": {
+        "minecraft:transformation": {
+          "into": "lc:dt_field_doctor_dead<field_doctor>"
+        }
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [ "player", "human", "scpfoundation", "mob", "checkpoint_guard", "guard", "villager", "field_doctor" ]
+      },
+      "minecraft:knockback_resistance": {
+        "value": 0.24
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_tro_helmet"
+                  },
+                  {
+                    "other_with_families": ["scpfoundation", "checkpoint_guard", "mtf"]
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_eta10_helmet"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_epsilon11_helmet"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp049"
+                  }
+                ],
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "become_zombie"
+            }
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "not",
+                    "value": "scp049"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "not",
+                    "value": "scp610"
+                  }
+                ],
+                "any_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "human:dead_field_doctor"
+            }
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp610"
+                  }
+                ],
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "become_scp610"
+            }
+          }
+        ]
+      },
+      "minecraft:mob_effect": {
+        "effect_range": 8.0,
+        "mob_effect": "regeneration",
+        "effect_time": 2,
+        "entity_filter": {
+          "any_of": [
+            {
+              "all_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "==",
+                  "value": "scpfoundation"
+                }
+              ]
+            },
+            {
+              "all_of": [
+                {
+                  "test": "has_equipment",
+                  "subject": "other",
+                  "domain": "head",
+                  "operator": "==",
+                  "value": "lc:dt_tro_helmet"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "==",
+                  "value": "player"
+                }
+              ]
+            },
+            {
+              "all_of": [
+                {
+                  "test": "has_equipment",
+                  "subject": "other",
+                  "domain": "head",
+                  "operator": "==",
+                  "value": "lc:dt_eta10_helmet"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "==",
+                  "value": "player"
+                }
+              ]
+            },
+            {
+              "all_of": [
+                {
+                  "test": "has_equipment",
+                  "subject": "other",
+                  "domain": "head",
+                  "operator": "==",
+                  "value": "lc:dt_epsilon11_helmet"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "==",
+                  "value": "player"
+                }
+              ]
+            }
+          ]
+        }
+      },
+      "minecraft:health": {
+        "value": 53,
+        "max": 53
+      },
+      "minecraft:healable": {
+        "items": [
+          {
+            "item": "lc:dt_medkit",
+            "heal_amount": 11
+          },
+          {
+            "item": "lc:dt_painkillers",
+            "heal_amount": 7
+          }
+        ]
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:attack": {
+        "damage": 6
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2,
+        "entity_types": {
+          "filters": {
+            "any_of": [
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "scpfoundation"
+              }
+            ]
+          },
+          "max_dist": 60
+        }
+      },
+      "minecraft:follow_range": {
+        "value": 32,
+        "max": 32
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 1,
+        "within_radius": 56,
+        "reselect_targets": true,
+        "entity_types": [
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "!=",
+                  "value": "scp096"
+                },
+                {
+                  "other_with_families": [ "monster", "scp", "pillager", "hoglin", "piglin", "class_d", "chaos_insurgency", "chaos" ]
+                },
+                {
+                  "test": "in_contact_with_water",
+                  "operator": "!=",
+                  "value": true
+                }
+              ]
+            },
+            "max_dist": 56
+          },
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "==",
+                  "value": "player"
+                },
+                {
+                  "test": "has_equipment",
+                  "subject": "other",
+                  "domain": "head",
+                  "operator": "==",
+                  "value": "lc:dt_ci_helmet"
+                }
+              ]
+            },
+            "max_dist": 56
+          },
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "==",
+                  "value": "player"
+                },
+                {
+                  "test": "has_equipment",
+                  "subject": "other",
+                  "domain": "head",
+                  "operator": "==",
+                  "value": "lc:dt_scp5167_mask"
+                }
+              ]
+            },
+            "max_dist": 56
+          }
+        ],
+        "must_see_forget_duration": 20.0,
+        "must_see": true
+      },
+      "minecraft:behavior.look_at_entity": {
+        "priority": 6,
+        "look_distance": 4.5,
+        "filters": {
+          "all_of": [
+            { "test": "is_family", "subject": "other", "operator": "==", "value": "scp" },
+            { "test": "is_family", "subject": "other", "operator": "==", "value": "monster" }
+          ]
+        }
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 1.0
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 8,
+        "look_distance": 6,
+        "probability": 0.04
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 5,
+        "close_door_after": true
+      },
+      "minecraft:pushable": {
+        "is_pushable":false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:nameable": {
+          "always_show": true
+        },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.open_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_sun": false,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "sequence": [
+          {
+            "add": {
+              "component_groups": [
+                "fighting",
+                "move",
+                "waiting_patient"
+              ]
+            }
+          }
+        ]
+      },
+      "become_zombie": {
+        "add": {
+          "component_groups": [
+            "zombie"
+          ]
+        }
+      },
+      "minecraft:start_despawn": {
+        "add": {
+          "component_groups": [
+            "despawning"
+          ]
+        }
+      },
+      "field_doctor:found_patient": {
+        "add": {
+          "component_groups": [
+            "found_patient"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "waiting_patient",
+            "move"
+          ]
+        }
+      },
+      "field_doctor:finish_cure": {
+        "add": {
+          "component_groups": [
+            "waiting_patient",
+            "fighting",
+            "give_heal",
+            "move"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "found_patient"
+          ]
+        }
+      },
+      "field_doctor:heal_end": {
+        "remove": {
+          "component_groups": [
+            "give_heal"
+          ]
+        }
+      },
+      "become_scp610": {
+        "add": {
+          "component_groups": [
+            "scp610"
+          ]
+        }
+      },
+      "human:dead_field_doctor": {
+        "add": {
+          "component_groups": [
+            "death_field_doctor"
+          ]
+        }
+      }
+    }
+  }
+}
+   

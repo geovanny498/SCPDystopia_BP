@@ -1,0 +1,31 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_hang_lamp"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      " A ",
+      " B ",
+      "B#B"
+    ],
+    "key": {
+      "A": {
+        "item": "minecraft:stick"
+      },
+      "B": {
+        "item": "minecraft:iron_ingot"
+      },
+      "#": {
+        "item": "lc:dt_dystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_hang_lamp",
+      "count": 4
+    }
+  }
+}

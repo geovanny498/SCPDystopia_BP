@@ -1,0 +1,82 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.dt_scp096.animation_controller1": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "triggered": "query.mark_variant == 1"
+            },
+            {
+              "angry": "query.mark_variant == 2"
+            }
+          ],
+          "animations": [
+            "calm_cry"
+          ]
+        },
+        "triggered": {
+          "transitions": [
+            {
+              "angry": "query.mark_variant == 2"
+            }
+          ],
+          "on_entry": [
+          ],
+          "animations": [
+            "triggered"
+          ]
+        },
+        "angry": {
+          "transitions": [
+            {
+              "becoming_calm": "query.mark_variant == 0"
+            }
+          ],
+          "animations": [
+            "angry_scream",
+            "chasing_music",
+            "stuck_check"
+          ]
+        },
+        "becoming_calm": {
+          "transitions": [
+            {
+              "default": "query.all_animations_finished"
+            }
+          ],
+          "animations": [
+            "stop_chasing"
+          ]
+        }
+      }
+    },
+    "controller.animation.dt_scp096.climbing": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "climbing": "query.is_wall_climbing == 1.0"
+            }
+          ]
+        },
+        "climbing": {
+          "animations": [
+            "climb"
+          ],
+          "transitions": [
+            {
+              "default": "query.is_wall_climbing == 0.0"
+            }
+          ],
+          "on_exit": [
+            "/summon lc:dt_transformation_use ^ ^-0.4 ^-0.7 transformation_use:scp096_knockback"
+          ]
+        }
+      }
+    }
+  }
+}

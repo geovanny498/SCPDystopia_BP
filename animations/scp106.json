@@ -1,0 +1,21 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.scp106.spawn": {
+      "animation_length": 10,
+      "timeline": {
+        "0.1": [ "/playsound scpdt.scp106.spawn @a[r=15] ~~~" ],
+        "4.5": [ "/playsound scpdt.scp106.idle @a[r=15] ~~~" ]
+      }
+    },
+    "animation.scp106.send_to_pd": {
+      "animation_length": 10,
+      "timeline": {
+        "0.1": [ "/effect @s slowness 2 255 true", "/effect @a[r=2] blindness 5 255 true" ],
+        "0.12": [ "/summon lc:dt_pd_exit_place" ],
+        "0.25": [ "/execute @a[r=2] ~~~ tp @e[type=lc:dt_pd_enter,c=1]" ],
+        "0.3": [ "/event entity @e[type=lc:dt_pd_enter,c=1] pd_enter:enter" ]
+      }
+    }
+  }
+}

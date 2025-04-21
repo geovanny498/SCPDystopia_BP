@@ -1,0 +1,35 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_hand_dryer"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "AA",
+      "BC",
+      "##"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:concrete",
+        "data": 1
+      },
+      "A": {
+        "item": "minecraft:iron_nugget"
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "C": {
+        "item": "minecraft:redstone"
+      }
+    },
+    "result": {
+      "item": "lc:dt_hand_dryer",
+      "count": 3
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.scp682.heal": {
+      "animation_length": 10,
+      "loop": true,
+      "timeline": {
+        "0.1": [ "/effect @s regeneration 1000 4 true" ]
+      }
+    }
+  }
+}

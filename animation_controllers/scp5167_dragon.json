@@ -1,0 +1,100 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp5167_dragon.stronger": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "stronger": "query.health < 530 && query.is_alive"
+            },
+            {
+              "angry": "query.health < 175 && query.is_alive"
+            },
+            {
+              "die": "!query.is_alive"
+            }
+          ],
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§4[SCP-5167 Dragon] §cAghhh... My reign has revived...\"}]}"
+          ]
+        },
+        "stronger": {
+          "transitions": [
+            {
+              "angry": "query.health < 175 && query.is_alive"
+            },
+            {
+              "die": "!query.is_alive"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s scp5167_dragon:to_stronger",
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§4[SCP-5167 Dragon] §cYou don't know my true power...\"}]}",
+            "/summon lc:dt_scp5167_dragon_son ~~~",
+            "/summon lc:dt_scp5167_dragon_son ~~~",
+            "/summon lc:dt_scp5167_dragon_son ~~~"
+          ]
+        },
+        "angry": {
+          "transitions": [
+            {
+              "die": "!query.is_alive"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s scp5167_dragon:to_angry",
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§4[SCP-5167 Dragon] §cDIE NOW!\"}]}",
+            "/effect @s regeneration 10000 1 true",
+            "/summon lc:dt_scp5167_dragon_son ~~~",
+            "/summon lc:dt_scp5167_dragon_son ~~~",
+            "/summon lc:dt_scp5167_dragon_son ~~~",
+            "/summon lc:dt_scp5167_dragon_son ~~~",
+            "/summon lc:dt_scp5167_dragon_son ~~~",
+            "/summon lc:dt_scp5167",
+            "/summon lc:dt_scp5167"
+          ]
+        },
+        "die": {
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§4[SCP-5167 Dragon] §cHOW UGHHHHHH DO AGHHHHHH YOUGHHHHH KILLLAGGH MEEEGGHHHHH!!!\"}]}"
+          ]
+        }
+      }
+    },
+    "controller.animation.scp5167_dragon.death": {
+      "initial_state": "die",
+      "states": {
+        "die": {
+          "on_entry": [
+            "/playsound scpdt.scp5167_dragon.death @a[r=50] ~~~",
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§4[SCP-5167 Dragon] §cHOW UGHHHHHH DO AGHHHHHH YOUGHHHHH KILLLAGGH MEEEGGHHHHH!!!\"}]}"
+          ]
+        }
+      }
+    },
+    "controller.animation.scp5167_dragon.spawn": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "spawn": "query.is_sheared"
+            }
+          ]
+        },
+        "spawn": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "animations": [
+            "spawning"
+          ]
+        }
+      }
+    }
+  }
+}

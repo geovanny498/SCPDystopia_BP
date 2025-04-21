@@ -1,0 +1,22 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_mystery_syringe",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:use_duration": 1.6,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:icon": {
+        "texture": "dt_mystery_syringe"
+      },
+      "minecraft:display_name": {
+        "value": "Mystery Syringe"
+      }
+    }
+  }
+}

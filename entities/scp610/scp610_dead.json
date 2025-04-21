@@ -1,0 +1,90 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp610_dead",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "a"
+        ]
+      },
+      "animations": {
+        "a": "controller.animation.scp610.death"
+      }
+    },
+    "component_groups": {
+      "respawn_timer": {
+        "minecraft:is_sheared": {},
+        "minecraft:timer": {
+          "looping": false,
+          "time": 11.0,
+          "time_down_event": {
+            "event": "scp610:respawn"
+          }
+        }
+      },
+      "respawn": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scp610<minecraft:entity_spawned>"
+        }
+      }
+    },
+    "components": {
+      "minecraft:loot": {
+        "table": "loot_tables/entities/scpdt/scp610.json"
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 15 : 0"
+      },
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
+      "minecraft:health": {
+        "value": 13,
+        "max": 13
+      },
+      "minecraft:type_family": {
+        "family": [ "monster", "scp610", "scp", "mob", "dead" ]
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:collision_box": {
+        "width": 0.7,
+        "height": 0.9
+      },
+      "minecraft:physics": {
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "respawn_timer"
+          ]
+        }
+      },
+      "scp610:respawn": {
+        "add": {
+          "component_groups": [
+            "respawn"
+          ]
+        }
+      }
+    }
+  }
+}
+  

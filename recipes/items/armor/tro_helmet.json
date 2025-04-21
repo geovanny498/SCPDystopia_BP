@@ -1,0 +1,30 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_tro_helmet"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "#X#",
+      "GGG"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "X": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "G": {
+        "item": "minecraft:stained_glass",
+        "data": 4
+      }
+    },
+    "result": {
+      "item": "lc:dt_tro_helmet"
+    }
+  }
+}

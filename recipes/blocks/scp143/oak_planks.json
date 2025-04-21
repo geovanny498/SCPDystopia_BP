@@ -1,0 +1,25 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_scp143_log_to_oak_planks"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "group": "planks",
+    "pattern": [
+      "#"
+    ],
+    "key": {
+      "#": {
+        "item": "lc:dt_scp143_log"
+      }
+    },
+    "result": {
+      "item": "minecraft:planks",
+      "data": 0,
+      "count": 4
+    }
+  }
+}

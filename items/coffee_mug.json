@@ -1,0 +1,38 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_coffee_mug",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:use_duration": 1.6,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:hand_equipped": false,
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": {
+        "texture": "dt_coffee_mug"
+      },
+      "minecraft:display_name": {
+        "value": "Coffee Mug"
+      },
+      "minecraft:use_animation": "drink",
+      "minecraft:food": {
+				"nutrition": 3,
+				"saturation_modifier": "low",
+				"can_always_eat": true,
+        "using_converts_to": "lc:dt_empty_mug",
+				"on_consume": {
+					"event": "coffee:drink",
+					"target": "self"
+				}
+			}
+    },
+    "events": {
+			"coffee:drink": {
+			}
+		}
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_rack1"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "A A",
+      "###",
+      "| |"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:concrete",
+        "data": 7
+      },
+      "A": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "|": {
+        "item": "minecraft:concrete",
+        "data": 0
+      }
+    },
+    "result": {
+      "item": "lc:dt_rack1",
+      "count": 12
+    }
+  }
+}

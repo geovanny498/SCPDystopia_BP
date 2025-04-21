@@ -1,0 +1,53 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp106.pd.enter": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "enter": "query.is_sheared"
+            }
+          ]
+        },
+        "enter": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "animations": [
+            "entered"
+          ]
+        }
+      }
+    },
+    "controller.animation.scp106.pd.exit": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "exit": "query.is_sheared"
+            }
+          ]
+        },
+        "exit": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.pd.exit @a[r=1.4]",
+            "/fog @a[r=1.4] remove dt_pd_fog",
+            "/effect @a[r=1.4] blindness 3 255 true",
+            "/execute @a[r=1.4] ~~~ tp @e[type=lc:dt_pd_exit_place,c=1]",
+            "/event entity @e[type=lc:dt_pd_exit_place,c=1] pd_exit_place:despawn"
+          ]
+        }
+      }
+    }
+  }
+}

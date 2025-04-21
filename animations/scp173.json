@@ -1,0 +1,22 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.scp173.blink": {
+      "animation_length": 11,
+      "loop": true,
+      "timeline": {
+        "0.1": [ "/event entity @s scp173:to_stop", "/function scpdystopia/spawn_look" ],
+        "0.2": [ "/execute @a[r=3.5,m=!c] ~~~ playsound scpdt.scp173.horror @s" ],
+        "10": [ "/event entity @s scp173:to_move", "/function scpdystopia/remove_look", "/effect @a[m=!1,r=40] blindness 2 255 true" ],
+        "10.1": [ "/effect @s clear" ]
+      }
+    },
+    "animation.scp173.stopped": {
+      "animation_length": 0.1,
+      "loop": true,
+      "timeline": {
+        "0.0": [ "/execute @e[type=lc:dt_scp131,r=2.7] ~~~ effect @e[type=lc:dt_scp173,r=2.7] weakness 1 255 true", "/execute @e[type=lc:dt_scp131,r=2.7] ~~~ effect @e[type=lc:dt_scp173,r=2.7] slowness 1 255 true" ]
+      }
+    }
+  }
+}

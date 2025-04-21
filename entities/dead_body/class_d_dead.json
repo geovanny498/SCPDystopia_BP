@@ -1,0 +1,178 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_class_d_dead",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "death"
+        ]
+      },
+      "animations": {
+        "death": "animation.scpdt.dead_body.blood"
+      }
+    },
+    "component_groups": {
+      "delete_timer": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": 35,
+          "randomInterval": false,
+          "time_down_event": {
+            "event": "body:delete"
+          }
+        }
+      },
+      "death": {
+        "minecraft:despawn": {
+        }
+      },
+      "d1": {
+        "minecraft:variant": {
+          "value": 0
+        }
+      },
+      "d2": {
+        "minecraft:variant": {
+          "value": 1
+        }
+      },
+      "d3": {
+        "minecraft:variant": {
+          "value": 2
+        }
+      },
+      "d4": {
+        "minecraft:variant": {
+          "value": 3
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 0.4
+      },
+      "minecraft:type_family": {
+        "family": [ "dead_body" ]
+      },
+      "minecraft:health": {
+        "value": 20,
+        "max": 20
+      },
+      "minecraft:interact": {
+        "interactions": {
+          "on_interact": {
+            "filters": {
+              "all_of": [
+                { "test": "is_family", "subject": "other", "value": "player" },
+                { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_commander" }
+              ]
+            },
+          "event": "body:stop_delete_timer",
+          "target": "self"
+          },
+          "hurt_item": 0,
+          "swing": true,
+          "interact_text": "action.interact.scpdt.stop_dead_body_timer"
+        }
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp049"
+                  }
+                ],
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "body:become_scp049_2"
+            }
+          }
+        ]
+      },
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:collision_box": {
+        "width": 0.7,
+        "height": 1.1
+      },
+      "minecraft:nameable": {},
+      "minecraft:conditional_bandwidth_optimization": {}
+    },
+    "events": {
+      "body:delete": {
+        "add": {
+          "component_groups": [
+            "death"
+          ]
+        }
+      },
+      "body:stop_delete_timer": {
+        "remove": {
+          "component_groups": [
+            "delete_timer"
+          ]
+        }
+      },
+      "d1": {
+        "add": {
+          "component_groups": [
+            "d1",
+            "delete_timer"
+          ]
+        }
+      },
+      "d2": {
+        "add": {
+          "component_groups": [
+            "d2",
+            "delete_timer"
+          ]
+        }
+      },
+      "d3": {
+        "add": {
+          "component_groups": [
+            "d3",
+            "delete_timer"
+          ]
+        }
+      },
+      "d4": {
+        "add": {
+          "component_groups": [
+            "d4",
+            "delete_timer"
+          ]
+        }
+      },
+      "body:become_scp049_2": {
+        "add": {
+          "component_groups": [
+            "scp049_2"
+          ]
+        }
+      }
+    }
+  }
+}
+  

@@ -1,0 +1,72 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_epsilon11_apache_combat_crash",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "crash"
+        ]
+      },
+      "animations": {
+        "crash": "animation.epsilon11_apache_combat.crash"
+      }
+    },
+    "component_groups": {
+      "death": {
+        "minecraft:despawn": {
+        }
+      },
+      "explosion": {
+        "minecraft:explode": {
+          "fuse_length": 0.0,
+          "fuse_lit": true,
+          "power": 7,
+          "causes_fire": true,
+          "destroy_affected_by_griefing": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "inanimate" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:health": {
+        "value": 10,
+        "max": 10
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:collision_box": {
+        "width": 3,
+        "height": 5
+      }
+    },
+    "events": {
+      "apache_combat_crash:explode": {
+        "add": {
+          "component_groups": [
+            "explosion"
+          ]
+        }
+      }
+    }
+  }
+}
+  

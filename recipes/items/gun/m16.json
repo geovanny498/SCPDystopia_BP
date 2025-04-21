@@ -1,0 +1,33 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+      "identifier": "lc:dt_m16"
+    },
+    "tags": [
+      "dystopia_craftbench"
+    ],
+    "pattern": [
+      "  A",
+      "##B",
+      "  C"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_block"
+      },
+      "A": {
+        "item": "minecraft:iron_nugget"
+      },
+      "B": {
+        "item": "minecraft:iron_ingot"
+      },
+      "C": {
+        "item": "lc:dt_enhanced_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_m16"
+    }
+  }
+}

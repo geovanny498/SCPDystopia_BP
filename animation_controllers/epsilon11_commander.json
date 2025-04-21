@@ -1,0 +1,33 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.epsilon11_commander.retreat": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "retreat": "query.health < 26"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s epsilon11:to_fight"
+          ]
+        },
+        "retreat": {
+          "transitions": [
+            {
+              "default": "query.health > 27"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.epsilon11.omfg @p[r=8]",
+            "/event entity @s epsilon11:to_retreat",
+            "/summon lc:dt_epsilon11 ~~~",
+            "/summon lc:dt_epsilon11 ~~~"
+          ]
+        }
+      }
+    }
+  }
+}

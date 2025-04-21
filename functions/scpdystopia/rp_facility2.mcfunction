@@ -1,0 +1,1 @@
+structure load mystructure:dt_rp_facility2 ~ ~ ~2

@@ -1,0 +1,36 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_electrical_panel"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "ABD",
+      "#C#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "A": {
+        "item": "minecraft:stone_button"
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "C": {
+        "item": "minecraft:redstone_block"
+      },
+      "D": {
+        "item": "minecraft:lever"
+      }
+    },
+    "result": {
+      "item": "lc:dt_electrical_panel",
+      "count": 2
+    }
+  }
+}

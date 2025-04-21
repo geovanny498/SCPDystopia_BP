@@ -1,0 +1,546 @@
+{
+  "minecraft:entity": {
+    "events": {
+      "scp096:normal_speed": {
+        "remove": {
+          "component_groups": [
+            "speed_fast"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "speed_normal"
+          ]
+        }
+      },
+      "scp096:fast_speed": {
+        "remove": {
+          "component_groups": [
+            "speed_normal"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "speed_fast"
+          ]
+        }
+      },
+      "normal": {
+        "remove": {
+          "component_groups": [
+            "minecraft:chase"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "minecraft:normal"
+          ]
+        }
+      },
+      "minecraft:on_calm": {
+        "remove": {
+          "component_groups": [
+            "scp096:still_angry",
+            "minecraft:scp096_angry",
+            "minecraft:triggered"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "minecraft:scp096_calm",
+            "minecraft:scp096_closed"
+          ]
+        }
+      },
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "minecraft:scp096_calm",
+            "without_bag"
+          ]
+        }
+      },
+      "minecraft:become_angry": {
+        "remove": {
+          "component_groups": [
+            "minecraft:scp096_calm",
+            "minecraft:scp096_closed"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "minecraft:scp096_angry",
+            "minecraft:triggered"
+          ]
+        }
+      },
+      "angry": {
+        "remove": {
+          "component_groups": [
+            "minecraft:normal"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "minecraft:chase"
+          ]
+        }
+      },
+      "scp096:still_angry": {
+        "remove": {
+          "component_groups": [
+            "minecraft:scp096_angry"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "scp096:still_angry"
+          ]
+        }
+      },
+      "scp096:to_angry_no_calm": {
+        "remove": {
+          "component_groups": [
+            "scp096:still_angry"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "minecraft:scp096_angry"
+          ]
+        }
+      },
+      "scp096:to_serial_killer": {
+        "add": {
+          "component_groups": [
+            "scp096:serialkiller"
+          ]
+        }
+      },
+      "scp096:stop_serial_killer": {
+        "remove": {
+          "component_groups": [
+            "scp096:serialkiller"
+          ]
+        }
+      },
+      "scp096:drop_bag_end": {
+        "remove": {
+          "component_groups": [
+            "drop_bag"
+          ]
+        }
+      },
+      "scp096:remove_bag": {
+        "add": {
+          "component_groups": [
+            "without_bag"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "with_bag"
+          ]
+        }
+      },
+      "scp096:wear_bag": {
+        "add": {
+          "component_groups": [
+            "with_bag"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "without_bag"
+          ]
+        }
+      }
+    },
+    "description": {
+      "is_summonable": true,
+      "is_spawnable": true,
+      "is_experimental": false,
+      "identifier": "lc:dt_scp096"
+    },
+    "components": {
+      "minecraft:conditional_bandwidth_optimization": {
+        "default_values": {
+          "max_optimized_distance": 100.0,
+          "max_dropped_ticks": 10,
+          "use_motion_prediction_hints": true
+        }
+      },
+      "minecraft:leashable": {
+        "soft_distance": 3.0,
+        "hard_distance": 5.0,
+        "max_distance": 12.0,
+        "can_be_stolen": false
+      },
+      "minecraft:target_nearby_sensor": {
+        "outside_range": 31,
+        "on_outside_range": {
+          "target": "self",
+          "event": "scp096:fast_speed"
+        },
+        "on_inside_range": {
+          "target": "self",
+          "event": "scp096:normal_speed"
+        },
+        "inside_range": 30
+      },
+      "minecraft:pushable": {
+        "is_pushable_by_piston": false,
+        "is_pushable": false
+      },
+      "minecraft:physics": {},
+      "minecraft:navigation.walk": {
+        "is_amphibious": true,
+        "can_pass_doors": true,
+        "can_break_doors": true,
+        "avoid_water": false,
+        "avoid_portals": true
+      },
+      "minecraft:nameable": {
+        "default_trigger": {
+          "event": "scp096:stop_serial_killer",
+          "target": "self"
+        },
+        "name_actions": [
+          {
+            "name_filter": "ShyBoy",
+            "on_named": {
+              "event": "scp096:to_serial_killer",
+              "target": "self"
+            }
+          }
+        ]
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:movement": {
+        "value": 0.12
+      },
+      "minecraft:is_hidden_when_invisible": {},
+      "minecraft:knockback_resistance": {
+        "value": 0.23
+      },
+      "minecraft:health": {
+        "value": 20000,
+        "max": 20000
+      },
+      "minecraft:follow_range": {
+        "value": 3000,
+        "max": 3000
+      },
+      "minecraft:damage_sensor": [
+        {
+          "deals_damage": true
+        }
+      ],
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0,
+        "breathes_air": true,
+        "breathes_water": true
+      },
+      "minecraft:can_climb": {},
+      "minecraft:behavior.random_look_around": {
+        "priority": 9
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 7,
+        "speed_multiplier": 0.85
+      },
+      "minecraft:annotation.break_door": {
+        "break_time": 1,
+        "min_difficulty": "normal"
+      },
+      "minecraft:behavior.move_indoors": {
+        "speed_multiplier": 9,
+        "priority": 4
+      },
+      "minecraft:behavior.delayed_attack": {
+        "priority": 1,
+        "attack_once": false,
+        "track_target": true,
+        "require_complete_path": false,
+        "random_stop_interval": 0,
+        "reach_multiplier": 5,
+        "speed_multiplier": 4.16,
+        "attack_duration": 0.02,
+        "hit_delay_pct": 0.01
+      },
+      "minecraft:behavior.look_at_player": {
+        "probability": 0.04,
+        "priority": 8,
+        "look_distance": 6
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 5
+      },
+      "minecraft:behavior.float": {
+        "priority": 0
+      },
+      "minecraft:attack": {
+        "damage": 1400
+      }
+    },
+    "component_groups": {
+      "without_bag": {
+        "minecraft:variant": {
+          "value": 0
+        },
+        "minecraft:type_family": {
+          "family": [
+            "scp096",
+            "scp",
+            "mob",
+            "monster",
+            "scp096_without_bag"
+          ]
+        },
+        "minecraft:interact": {
+          "interactions": {
+            "on_interact": {
+              "filters": {
+                "all_of": [
+                  { "test": "is_family", "subject": "other", "value": "player" },
+                  { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_scp096_bag" },
+                  { "test": "is_sneaking", "subject": "other", "operator": "==" }
+                ]
+              },
+            "event": "scp096:wear_bag",
+            "target": "self"
+            },
+            "use_item": true,
+            "swing": true,
+            "play_sounds": "armor.equip_leather",
+            "interact_text": "action.interact.scpdt.scp096.wear_bag"
+          }
+        },
+        "minecraft:lookat": {
+          "search_radius": 64.0,
+          "set_target": true,
+          "look_cooldown": 5.0,
+          "filters": {
+            "any_of": [
+              {
+                "all_of": [
+                  {
+                    "other_with_families": [ "human", "mob", "scp" ]
+                  },
+                  {
+                    "subject": "other",
+                    "test": "is_family",
+                    "operator": "not",
+                    "value": "scp096"
+                  }
+                ]
+              },
+              {
+                "all_of": [
+                  {
+                    "subject": "other",
+                    "test": "is_family",
+                    "value": "player"
+                  },
+                  {
+                    "test": "has_equipment",
+                    "domain": "head",
+                    "subject": "other",
+                    "operator": "not",
+                    "value": "lc:dt_scramble"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      },
+      "with_bag": {
+        "minecraft:variant": {
+          "value": 1
+        },
+        "minecraft:type_family": {
+          "family": [
+            "scp096_with_bag",
+            "mob"
+          ]
+        },
+        "minecraft:interact": {
+          "interactions": {
+            "on_interact": {
+              "filters": {
+                "all_of": [
+                  { "test": "is_family", "subject": "other", "value": "player" },
+                  { "test": "is_sneaking", "subject": "other", "operator": "==" }
+                ]
+              },
+            "event": "scp096:remove_bag",
+            "target": "self"
+            },
+            "use_item": false,
+            "swing": true,
+            "play_sounds": "armor.equip_leather",
+            "interact_text": "action.interact.scpdt.scp096.remove_bag"
+          }
+        }
+      },
+      "drop_bag": {
+        "minecraft:spawn_entity": {
+          "entities": {
+            "min_wait_time": 0,
+            "max_wait_time": 0,
+            "spawn_sound": "plop",
+            "spawn_item": "lc:dt_scp096_bag"
+          }
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": [1,1],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp096:drop_bag_end",
+            "target": "self"
+          }
+        }
+      },
+      "scp096:serialkiller": {
+        "minecraft:attack": {
+          "damage": 9999990
+        },
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 0,
+          "within_radius": 32,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp096"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "inanimate"
+                  }
+                ]
+              },
+              "max_dist": 32
+            }
+          ],
+          "must_see_forget_duration": 320.0,
+          "must_see": true
+        }
+      },
+      "speed_normal": {
+        "minecraft:movement": {
+          "value": 0.12
+        }
+      },
+      "speed_fast": {
+        "minecraft:movement": {
+          "value": 0.16
+        }
+      },
+      "minecraft:triggered": {
+        "minecraft:on_target_acquired": {},
+        "minecraft:behavior.summon_entity": {
+          "summon_choices": [
+            {
+              "weight": 1,
+              "start_sound_event": "plop",
+              "sequence": [
+                {
+                  "target": "self",
+                  "sound_event": "",
+                  "size": 10,
+                  "shape": "circle",
+                  "num_entities_spawned": 0,
+                  "entity_type": "",
+                  "entity_lifespan": 10,
+                  "delay_per_summon": 0,
+                  "base_delay": 0
+                }
+              ],
+              "cooldown_time": 100000,
+              "cast_duration": 13
+            }
+          ],
+          "probability": 100,
+          "priority": 0
+        }
+      },
+      "minecraft:scp096_closed": {},
+      "minecraft:scp096_calm": {
+        "minecraft:jump.static": {},
+        "minecraft:on_target_acquired": {
+          "target": "self",
+          "event": "minecraft:become_angry"
+        }
+      },
+      "minecraft:scp096_angry": {
+        "minecraft:jump.static": {
+          "jump_power": 0.6
+        },
+        "minecraft:underwater_movement": {
+          "value": 0.6
+        },
+        "minecraft:break_blocks": {
+          "breakable_blocks": [
+            "iron_door",
+            "tnt",
+            "glass"
+          ]
+        },
+        "minecraft:on_target_acquired": {},
+        "minecraft:angry": {
+          "duration": 300000,
+          "calm_event": {
+            "target": "self",
+            "event": "scp096:still_angry"
+          },
+          "broadcast_anger": false
+        }
+      },
+      "scp096:still_angry": {
+        "minecraft:jump.static": {},
+        "minecraft:on_target_acquired": {
+          "target": "self",
+          "event": "scp096:to_angry_no_calm"
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": [
+            90,
+            110
+          ],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "minecraft:on_calm",
+            "target": "self"
+          }
+        }
+      },
+      "minecraft:normal": {
+        "minecraft:variant": {
+          "value": 0
+        }
+      },
+      "minecraft:chase": {
+        "minecraft:variant": {
+          "value": 1
+        }
+      }
+    }
+  },
+  "format_version": "1.16.0"
+}

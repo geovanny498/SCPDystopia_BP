@@ -1,0 +1,30 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_facility_wall_middle2"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "###",
+      "###",
+      "SSS"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:concrete",
+        "data": 0
+      },
+      "S": {
+        "item": "minecraft:dye",
+        "data": 8
+      }
+    },
+    "result": {
+      "item": "lc:dt_facility_wall_middle2",
+      "count": 20
+    }
+  }
+}

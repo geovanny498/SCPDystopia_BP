@@ -1,0 +1,253 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_sheaf_of_papers",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:use_duration": 2.6,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": {
+        "texture": "dt_sheaf_of_papers"
+      },
+      "minecraft:display_name": {
+        "value": "SCP-001 \"Sheaf of Papers\""
+      },
+      "minecraft:cooldown": {
+				"duration": 6.0,
+				"category": "scp001"
+			},
+      "minecraft:on_use": {
+        "on_use": {
+          "event": "use"
+        }
+      }
+    },
+    "events": {
+			"use": {
+        "randomize": [
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp096"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp049"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp939"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp087_1"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp007"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp035_scientist"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp058"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp106"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp173"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp131"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp191"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp098"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp4959"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp5167"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 4,
+            "run_command": {
+              "command": ["summon lc:dt_scp682"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp457"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp577"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp5535"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 5,
+            "run_command": {
+              "command": ["summon lc:dt_scp734"],
+              "target": "holder"
+            }
+          },
+          {
+            "weight": 4,
+            "randomize": [
+              {
+                "weight": 16,
+                "add_mob_effect": {
+                  "effect": "weakness",
+                  "target": "holder",
+                  "duration": 130,
+                  "amplifier": 1
+                },
+                "run_command": {
+                  "command": ["playsound scpdt.scp1025.read @a[r=10] ~~~", "title @s actionbar You got SCP-1025 effect"],
+                  "target": "holder"
+                }
+              },
+              {
+                "weight": 14,
+                "add_mob_effect": {
+                  "effect": "slowness",
+                  "target": "holder",
+                  "duration": 140,
+                  "amplifier": 0
+                },
+                "run_command": {
+                  "command": ["playsound scpdt.scp1025.read @a[r=10] ~~~", "title @s actionbar You got SCP-1025 effect"],
+                  "target": "holder"
+                }
+              },
+              {
+                "weight": 10,
+                "add_mob_effect": {
+                  "effect": "hunger",
+                  "target": "holder",
+                  "duration": 60,
+                  "amplifier": 1
+                },
+                "run_command": {
+                  "command": ["playsound scpdt.scp1025.read @a[r=10] ~~~", "title @s actionbar You got SCP-1025 effect"],
+                  "target": "holder"
+                }
+              },
+              {
+                "weight": 13,
+                "add_mob_effect": {
+                  "effect": "mining_fatigue",
+                  "target": "holder",
+                  "duration": 120,
+                  "amplifier": 0
+                },
+                "run_command": {
+                  "command": ["playsound scpdt.scp1025.read @a[r=10] ~~~", "title @s actionbar You got SCP-1025 effect"],
+                  "target": "holder"
+                }
+              },
+              {
+                "weight": 3,
+                "add_mob_effect": {
+                  "effect": "poison",
+                  "target": "holder",
+                  "duration": 43,
+                  "amplifier": 0
+                },
+                "run_command": {
+                  "command": ["playsound scpdt.scp1025.read @a[r=10] ~~~", "title @s actionbar You got SCP-1025 effect"],
+                  "target": "holder"
+                }
+              },
+              {
+                "weight": 2,
+                "add_mob_effect": {
+                  "effect": "wither",
+                  "target": "holder",
+                  "duration": 16,
+                  "amplifier": 0
+                },
+                "run_command": {
+                  "command": ["playsound scpdt.scp1025.read @a[r=10] ~~~", "title @s actionbar You got SCP-1025 effect"],
+                  "target": "holder"
+                }
+              }
+            ]
+          }
+        ]
+      }
+		}
+  }
+}

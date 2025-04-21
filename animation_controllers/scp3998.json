@@ -1,0 +1,27 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp3998.burning": {
+      "initial_state": "day",
+      "states": {
+        "day": {
+          "transitions": [
+            {
+              "night": "query.is_sheared"
+            }
+          ]
+        },
+        "night": {
+          "transitions": [
+            {
+              "day": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/fill ~2 ~0 ~2 ~-2 ~-0 ~-2 fire 0 keep"
+          ]
+        }
+      }
+    }
+  }
+}

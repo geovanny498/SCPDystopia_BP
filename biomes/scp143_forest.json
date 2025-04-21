@@ -1,0 +1,47 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:biome": {
+    "description": {
+      "identifier": "scp143_forest"
+    },
+    "components": {
+      "minecraft:climate": {
+        "downfall": 0.5,
+        "snow_accumulation": [
+          0.0,
+          0.0
+        ],
+        "temperature": 0.5
+      },
+      "minecraft:overworld_height": {
+        "noise_type": "default"
+      },
+      "animal": {},
+      "monster": {},
+      "dt_scp143": {},
+      "overworld": {},
+      "flower_forest": {},
+      "forest": {},
+      "minecraft:surface_parameters": {
+        "top_material": "minecraft:grass",
+        "mid_material": "minecraft:dirt",
+        "foundation_material": "minecraft:stone",
+        "sea_floor_material": "minecraft:dirt",
+        "sea_material": "minecraft:water",
+        "sea_floor_depth": 15
+      },
+      "minecraft:overworld_generation_rules": {
+        "generate_for_climates": [
+          [
+            "cold",
+            4
+          ],
+          [
+            "medium",
+            15
+          ]
+        ]
+      }
+    }
+  }
+}

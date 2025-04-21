@@ -1,0 +1,143 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scpdt.class_d_v2.pick_gun_m16": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "gun_taken": "query.is_sheared"
+            }
+          ]
+        },
+        "gun_taken": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.class_d.take_gun @a[r=20] ~~~",
+            "/replaceitem entity @e[type=lc:dt_class_d,c=1,r=5,tag=!armed_class_d] slot.weapon.mainhand 0 lc:dt_m16"
+          ]
+        }
+      }
+    },
+    "controller.animation.scpdt.class_d_v2.pick_gun_p90": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "gun_taken": "query.is_sheared"
+            }
+          ]
+        },
+        "gun_taken": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.class_d.take_gun @a[r=20] ~~~",
+            "/replaceitem entity @e[type=lc:dt_class_d,c=1,r=5,tag=!armed_class_d] slot.weapon.mainhand 0 lc:dt_p90"
+          ]
+        }
+      }
+    },
+    "controller.animation.scpdt.class_d_v2.pick_gun_mp5k": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "gun_taken": "query.is_sheared"
+            }
+          ]
+        },
+        "gun_taken": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.class_d.take_gun @a[r=20] ~~~",
+            "/replaceitem entity @e[type=lc:dt_class_d,c=1,r=5,tag=!armed_class_d] slot.weapon.mainhand 0 lc:dt_mp5k"
+          ]
+        }
+      }
+    },
+    "controller.animation.scpdt.class_d_v2.pick_gun_m4a1": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "gun_taken": "query.is_sheared"
+            }
+          ]
+        },
+        "gun_taken": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.class_d.take_gun @a[r=20] ~~~",
+            "/replaceitem entity @e[type=lc:dt_class_d,c=1,r=5,tag=!armed_class_d] slot.weapon.mainhand 0 lc:dt_m4a1"
+          ]
+        }
+      }
+    },
+    "controller.animation.scpdt.class_d_v2.pick_gun_glock": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "gun_taken": "query.is_sheared"
+            }
+          ]
+        },
+        "gun_taken": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.class_d.take_gun @a[r=20] ~~~",
+            "/replaceitem entity @e[type=lc:dt_class_d,c=1,r=5,tag=!armed_class_d] slot.weapon.mainhand 0 lc:dt_glock"
+          ]
+        }
+      }
+    },
+    "controller.animation.scpdt.class_d_v2.pick_gun_scar": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "gun_taken": "query.is_sheared"
+            }
+          ]
+        },
+        "gun_taken": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.class_d.take_gun @a[r=20] ~~~",
+            "/replaceitem entity @e[type=lc:dt_class_d,c=1,r=5,tag=!armed_class_d] slot.weapon.mainhand 0 lc:dt_scar"
+          ]
+        }
+      }
+    }
+  }
+}

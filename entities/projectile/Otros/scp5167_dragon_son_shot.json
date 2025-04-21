@@ -1,0 +1,165 @@
+{
+    "format_version": "1.12.0",
+    "minecraft:entity": {
+        "description": {
+            "identifier": "lc:dt_scp5167_dragon_son_shot",
+            "is_spawnable": false,
+            "is_summonable": true,
+            "is_experimental": false,
+            "runtime_identifier": "minecraft:snowball"
+        },
+        "component_groups": {
+            "transform": {
+                "minecraft:transformation": {
+                    "into": "lc:dt_scp5167<amogus:tiny>"
+                }
+            },
+            "transform_solidier_explode": {
+                "minecraft:transformation": {
+                    "into": "lc:dt_scp5167_solidier<scp5167_soldier:to_run>"
+                }
+            },
+            "transform_solidier": {
+                "minecraft:transformation": {
+                    "into": "lc:dt_scp5167_solidier<minecraft:entity_spawned>"
+                }
+            },
+            "despawning": {
+                "minecraft:despawn": {}
+            } 
+        },
+        "components": {
+            "minecraft:tick_world": {
+				"distance_to_players": 128,
+				"never_despawn": false,
+				"radius": 2
+			},
+            "minecraft:type_family": {
+                "family": [
+                    "bullet",
+                    "projectile",
+                    "sus"
+                ]
+            },
+            "minecraft:break_blocks": {
+                "breakable_blocks": [
+                    "glass",
+                    "glass_pane",
+                    "stained_glass",
+                    "stained_glass_pane",
+                    "standing_sign",
+                    "vine",
+                    "wall_banner",
+                    "wall_sign",
+                    "web",
+                    "wheat"
+                ]
+            },
+            "minecraft:collision_box": {
+                "width": 0.02,
+                "height": 0.02
+            },
+            "minecraft:spawn_entity": [
+                {
+                    "min_wait_time": 0,
+                    "max_wait_time": 0,
+                    "single_use": true,
+                    "spawn_entity": "lc:none",
+                    "spawn_sound": "purr",
+                    "num_to_spawn": 1
+                }
+            ],
+            "minecraft:projectile": {
+                "on_hit": {
+                    "impact_damage": {
+                        "damage": 7,
+                        "knockback": false,
+                        "semi_random_diff_damage": false,
+                        "destroy_on_hit": true
+                    },
+                    "definition_event": {
+                        "affect_projectile": true,
+                        "eventTrigger": {
+                            "event": "scp5167_dragon_son_shot:transform",
+                            "target": "self"
+                        }
+                    },
+                    "mob_effect": {
+                        "effect": "wither",
+                        "durationeasy": 0,
+                        "durationnormal": 100,
+                        "durationhard": 500,
+                        "amplifier": 1
+                    }
+                },
+                "shoot_sound": "explode",
+                "hit_sound": "bow.hit",
+                "power": 5.16,
+                "gravity": 0.0,
+                "inertia": 1.12,
+                "uncertainty_base": 4.45,
+                "uncertainty_multiplier": 1.54,
+                "anchor": 1,
+                "offset": [
+                    0,
+                    -1.5,
+                    0
+                ],
+                "reflect_on_hurt": true,
+                "catch_fire": false
+            },
+            "minecraft:physics": {},
+            "minecraft:timer": {
+                "looping": false,
+                "time": 2.5,
+                "time_down_event": {
+                    "event": "minecraft:start_despawn"
+                }
+            },
+            "minecraft:conditional_bandwidth_optimization": {
+                "default_values": {
+                    "max_optimized_distance": 80.0,
+                    "max_dropped_ticks": 7,
+                    "use_motion_prediction_hints": true
+                }
+            }
+        },
+        "events": {
+            "scp5167_dragon_son_shot:transform": {
+                "randomize": [
+                    {
+                        "weight": 98,
+                        "add": {
+                            "component_groups": [
+                                "transform"
+                            ]
+                        }
+                    },
+                    {
+                        "weight": 56,
+                        "add": {
+                            "component_groups": [
+                                "transform_solidier_explode"
+                            ]
+                        }
+                    },
+                    {
+                        "weight": 33,
+                        "add": {
+                            "component_groups": [
+                                "transform_solidier"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "minecraft:start_despawn": {
+                "add": {
+                    "component_groups": [
+                        "despawning"
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,29 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_panel_wall_red"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "#I",
+      "#I",
+      "#I"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:dye",
+        "data": 1
+      },
+      "ID": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "lc:dt_panel_wall_red",
+      "count": 20
+    }
+  }
+}

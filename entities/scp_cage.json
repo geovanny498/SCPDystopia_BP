@@ -1,0 +1,109 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp173_cage",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "death": {
+        "minecraft:spawn_entity": {
+          "entities": {
+            "min_wait_time": 0,
+            "max_wait_time": 0,
+            "spawn_sound": "plop",
+            "spawn_item": "lc:dt_scp173_cage_spawn_egg"
+          }
+        },
+        "minecraft:despawn": {
+        }
+      },
+      "ready_to_contain": {
+      },
+      "has_rider": {}
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 0.8
+      },
+      "minecraft:type_family": {
+        "family": [ "scp173_cage", "scp_cage" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "fall",
+          "deals_damage": false
+        }
+      },
+      "minecraft:health": {
+        "value": 20,
+        "max": 20
+      },
+      "minecraft:rideable": {
+        "seat_count": 1,
+        "family_types": [
+          "scp"
+        ],
+        "seats": {
+          "position": [
+            0.0,
+            0.4,
+            0.0
+          ]
+        }
+      },
+      "minecraft:leashable": {
+        "soft_distance": 1.0,
+        "hard_distance": 2.2,
+        "max_distance": 15.0
+      },
+      "minecraft:interact": {
+        "interactions": {
+          "on_interact": {
+            "filters": {
+              "all_of": [
+                { "test": "is_family", "subject": "other", "value": "player" },
+                { "test": "is_sneaking", "subject": "other", "operator": "==" }
+              ]
+            },
+          "event": "cage:death",
+          "target": "self"
+          },
+          "hurt_item": 0,
+          "swing": true,
+          "interact_text": "action.interact.scpdt.scp173_cage.remove"
+        }
+      },
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:collision_box": {
+        "width": 0.9,
+        "height": 0.5
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+          ]
+        }
+      },
+      "cage:death": {
+        "add": {
+          "component_groups": [
+            "death"
+          ]
+        }
+      }
+    }
+  }
+}
+  

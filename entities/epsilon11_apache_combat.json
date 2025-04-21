@@ -1,0 +1,429 @@
+{
+  "format_version": "1.18.10",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_epsilon11_apache_combat",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          {
+            "launch": "query.mark_variant == 0"
+          },
+          {
+            "fly": "query.mark_variant == 1"
+          }
+        ]
+      },
+      "animations": {
+        "launch": "animation.epsilon11_apache_combat.launch",
+        "fly": "animation.epsilon11_apache_combat.fly"
+      }
+    },
+    "component_groups": {
+      "launching": {
+        "minecraft:mark_variant": {
+          "value": 0
+        },
+        "minecraft:custom_hit_test": {
+          "hitboxes": [
+            {
+              "width": 6.5,
+              "height": 6,
+              "pivot": [ 0, 0.5, 0 ]
+            },
+            {
+              "width": 4,
+              "height": 5,
+              "pivot": [ 0, 0.5, 16 ]
+            },
+            {
+              "width": 5,
+              "height": 4,
+              "pivot": [ 0, 0.5, -32 ]
+            },
+            {
+              "width": 5,
+              "height": 5,
+              "pivot": [ 0, 0.5, -64 ]
+            }
+          ]
+        }
+      },
+      "flying": {
+        "minecraft:mark_variant": {
+          "value": 1
+        },
+        "minecraft:custom_hit_test": {
+          "hitboxes": [
+            {
+              "width": 6.5,
+              "height": 6,
+              "pivot": [ 0, 2.0, 0 ]
+            },
+            {
+              "width": 3,
+              "height": 5,
+              "pivot": [ 0, 2.0, 16 ]
+            },
+            {
+              "width": 5,
+              "height": 4,
+              "pivot": [ 0, 2.0, -32 ]
+            },
+            {
+              "width": 5,
+              "height": 5,
+              "pivot": [ 0, 2.0, -64 ]
+            }
+          ]
+        },
+        "minecraft:shooter": {
+          "def": "lc:dt_apache_bullet"
+        },
+        "minecraft:behavior.avoid_mob_type": {
+          "priority": 0,
+          "entity_types": [
+            {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "apache"
+                  }
+                ]
+              },
+              "max_dist": 17,
+              "walk_speed_multiplier": 1.2,
+              "sprint_speed_multiplier": 1.3
+            }
+          ]
+        },
+        "minecraft:behavior.ranged_attack": {
+          "priority": 1,
+          "attack_interval_min": 3,
+          "attack_interval_max": 3.05,
+          "burst_shots": 130,
+          "burst_interval": 0.08,
+          "attack_radius": 80,
+          "speed_multiplier": 1.0
+        },
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 2,
+          "within_radius": 80,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp096"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp001_gg"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "enderman"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp280"
+                  },
+                  {
+                    "other_with_families": [ "monster", "scp", "pillager", "hoglin", "piglin", "class_d", "chaos_insurgency", "chaos" ]
+                  },
+                  {
+                    "test": "in_contact_with_water",
+                    "operator": "!=",
+                    "value": true
+                  }
+                ]
+              },
+              "max_dist": 80
+            },
+            {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "==",
+                    "value": "player"
+                  },
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_ci_helmet"
+                  }
+                ]
+              },
+              "max_dist": 80
+            }
+          ],
+          "must_see_forget_duration": 40.0,
+          "must_see": true
+        },
+        "minecraft:behavior.random_hover": {
+          "priority": 4,
+          "hover_height": [ 20, 28 ],
+          "interval": 5,
+          "speed_multiplier": 1.4,
+          "xz_dist": 15,
+          "y_dist": 15,
+          "y_offset": 0.0
+        }
+      },
+      "random_hover": {
+        "minecraft:flying_speed": {
+          "value": 0.23
+        },
+        "minecraft:interact": {
+          "interactions": [
+            {
+              "on_interact": {
+                "filters": {
+                  "all_of": [
+                    { "test": "is_family", "subject": "other", "value": "player" },
+                    { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_commander" }
+                  ]
+                },
+              "event": "apache_combat:stop_hover",
+              "target": "self"
+              },
+              "hurt_item": 0,
+              "swing": true,
+              "interact_text": "action.interact.scpdt.apache.stop_hover"
+            }
+          ]
+        }
+      },
+      "no_random_hover": {
+        "minecraft:flying_speed": {
+          "value": 0.0
+        },
+        "minecraft:behavior.random_look_around": {
+          "priority": 3
+        },
+        "minecraft:interact": {
+          "interactions": [
+            {
+              "on_interact": {
+                "filters": {
+                  "all_of": [
+                    { "test": "is_family", "subject": "other", "value": "player" },
+                    { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_commander" }
+                  ]
+                },
+              "event": "apache_combat:resume_hover",
+              "target": "self"
+              },
+              "hurt_item": 0,
+              "swing": true,
+              "interact_text": "action.interact.scpdt.apache.resume_hover"
+            },
+            {
+              "on_interact": {
+                "filters": {
+                  "all_of": [
+                    { "test": "is_family", "subject": "other", "value": "player" },
+                    { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_scp1023_arc" }
+                  ]
+                },
+              "event": "apache_combat:despawn",
+              "target": "self"
+              },
+              "hurt_item": 0,
+              "swing": true,
+              "interact_text": "action.interact.scpdt.remove1"
+            }
+          ]
+        },
+        "minecraft:is_sheared": {}
+      },
+      "despawn": {
+        "minecraft:despawn": {}
+      },
+      "crash": {
+        "minecraft:transformation": {
+          "into": "lc:dt_epsilon11_apache_combat_crash"
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "scpfoundation", "helicopter", "epsilon11", "mob", "apache", "apache_combat" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject":"other",
+                    "value": "rocket"
+                  },
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "apache_combat:go_crash"
+            }
+          }
+        ]
+      },
+      "minecraft:follow_range": {
+        "value": 276,
+        "max": 276
+      },
+      "minecraft:movement.hover": {
+        "max_turn": 8.0
+      },
+      "minecraft:balloonable": {
+        "mass": 1
+      },
+      "minecraft:behavior.float": {
+        "priority": 19
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2
+      },
+      "minecraft:jump.static": {},
+      "minecraft:can_fly": {},
+      "minecraft:movement": {
+        "value": 0.3
+      },
+      "minecraft:flying_speed": {
+        "value": 0.23
+      },
+      "minecraft:health": {
+        "value": 360,
+        "max": 360
+      },
+      "minecraft:nameable": {},
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:collision_box": {
+        "width": 3,
+        "height": 5
+      },
+      "minecraft:navigation.hover": {
+        "can_path_over_water": true,
+        "can_sink": false,
+        "can_pass_doors": false,
+        "can_path_from_air": true,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "avoid_sun": false
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+        "minecraft:conditional_bandwidth_optimization": {
+          "default_values": {
+            "max_optimized_distance": 60.0,
+            "max_dropped_ticks": 10,
+            "use_motion_prediction_hints": true
+          },
+          "conditional_values": [
+            {
+              "max_optimized_distance": 0.0,
+              "max_dropped_ticks": 0,
+              "conditional_values": [
+                { "test": "has_target", "subject": "self", "operator": "==", "value": true}
+              ]
+            }
+          ]
+        }
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "launching"
+          ]
+        }
+      },
+      "apache_combat:flying": {
+        "add": {
+          "component_groups": [
+            "flying",
+            "random_hover"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "launching"
+          ]
+        }
+      },
+      "apache_combat:stop_hover": {
+        "add": {
+          "component_groups": [
+            "no_random_hover"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "random_hover"
+          ]
+        }
+      },
+      "apache_combat:resume_hover": {
+        "remove": {
+          "component_groups": [
+            "no_random_hover"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "random_hover"
+          ]
+        }
+      },
+      "apache_combat:go_crash": {
+        "add": {
+          "component_groups": [
+            "crash"
+          ]
+        }
+      },
+      "apache_combat:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      }
+    }
+  }
+}
+  

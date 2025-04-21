@@ -1,0 +1,29 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+    "identifier": "lc:dt_cleaning_tools"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "ingredients": [
+      {
+        "item": "minecraft:bucket"
+      },
+      {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      {
+        "item": "minecraft:wool",
+        "data": 0
+      },
+      {
+        "item": "minecraft:stick"
+      }
+    ],
+    "result": {
+      "item": "lc:dt_cleaning_tools"
+    }
+  }
+}

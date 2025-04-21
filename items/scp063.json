@@ -1,0 +1,49 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_scp063",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:use_duration": 1.6,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+			"minecraft:durability": {
+				"max_durability": 120,
+				"damage_chance": {
+					"min": 2,
+					"max": 4
+				}
+			},
+      "minecraft:hand_equipped": false,
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": {
+        "texture": "dt_scp063"
+      },
+      "minecraft:display_name": {
+        "value": "SCP-063 \"The World's Best TothBrush\""
+      },
+			"minecraft:cooldown": {
+				"duration": 3,
+				"category": "scp063"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"event": "scp063:use"
+				}
+			}
+    },
+    "events": {
+      "scp063:use": {
+        "run_command": {
+          "command": [
+            "effect @s haste 8 13"
+          ],
+          "target": "holder"
+        }
+      }
+    }
+  }
+}

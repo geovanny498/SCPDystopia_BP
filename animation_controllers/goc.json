@@ -1,0 +1,22 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.dt_goc_soldier_retreating.anim_cont": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "explode": "query.health < 70"
+            }
+          ]
+        },
+        "explode": {
+          "on_entry": [
+            "/event entity @s minecraft:explode"
+          ]
+        }
+      }
+    }
+  }
+}

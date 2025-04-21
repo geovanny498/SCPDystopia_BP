@@ -1,0 +1,38 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:item": {
+        "description": {
+            "identifier": "lc:dt_classd_shirt",
+            "category": "Equipment"
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.chestplate"
+            },
+            "minecraft:max_stack_size": 1,
+            "minecraft:icon": {
+                "texture": "dt_classd_shirt_icon"
+            },
+            "minecraft:durability": {
+                "max_durability": 90,
+                "damage_chance": {
+                    "min": 8,
+                    "max": 13
+                }
+            },
+            "minecraft:armor": {
+                "protection": 3
+            },
+            "minecraft:enchantable": {
+                "slot": "armor_chest",
+                "value": 10
+            },
+            "minecraft:wearable": {
+                "slot": "slot.armor.chest"
+            },
+            "minecraft:display_name": {
+                "value": "Class-D Shirt"
+            }
+        }
+    }
+}

@@ -1,0 +1,30 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_keyreader4"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "#A",
+      "#B"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "A": {
+        "item": "lc:dt_keycard4"
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_keyreader4",
+      "count": 2
+    }
+  }
+}

@@ -1,0 +1,110 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_keyread",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "key_reader"
+        ]
+      },
+      "animations": {
+        "key_reader": "controller.animation.keycard.reader"
+      }
+    },
+    "component_groups": {
+      "place": {
+        "minecraft:is_sheared": {
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": 3,
+          "time_down_event": {
+            "event": "keyread:remove_place"
+          }
+        }
+      },
+      "death_process": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": 1,
+          "time_down_event": {
+            "event": "keyread:death"
+          }
+        }
+      },
+      "death": {
+        "minecraft:despawn": {}
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "inanimate" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:health": {
+        "value": 10,
+        "max": 10
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": false
+      },
+      "minecraft:collision_box": {
+        "width": 0.01,
+        "height": 0.01
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "place"
+          ]
+        }
+      },
+      "keyread:death": {
+        "add": {
+          "component_groups": [
+            "death"
+          ]
+        }
+      },
+      "keyread:place": {
+        "add": {
+          "component_groups": [
+            "place"
+          ]
+        }
+      },
+      "keyread:remove_place": {
+        "remove": {
+          "component_groups": [
+            "place"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "death_process"
+          ]
+        }
+      }
+    }
+  }
+}
+  

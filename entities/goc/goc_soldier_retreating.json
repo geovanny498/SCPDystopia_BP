@@ -1,0 +1,105 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_goc_soldier_retreating",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "controller1"
+        ]
+      },
+      "animations": {
+        "controller1": "controller.animation.dt_goc_soldier_retreating.anim_cont"
+      }
+    },
+    "component_groups": {
+      "despawn_timer": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": 4,
+          "randomInterval": false,
+          "time_down_event": {
+            "event": "goc_soldier_retreating:despawn",
+            "target": "self"
+          }
+        }
+      },
+      "death": {
+        "minecraft:despawn": {
+        }
+      },
+      "explode": {
+        "minecraft:explode": {
+          "fuse_length": 0.0,
+          "fuse_lit": true,
+          "power": 2,
+          "causes_fire": false,
+          "destroy_affected_by_griefing": true
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "inanimate" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "other_with_families": [
+                  "goc"
+                ]
+              }
+            },
+            "deals_damage": false
+          }
+        ]
+      },
+      "minecraft:health": {
+        "value": 100,
+        "max": 100
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      }
+    },
+    "events": {
+      "goc_soldier_retreating:spawned": {
+        "add": {
+          "component_groups": [
+            "despawn_timer"
+          ]
+        }
+      },
+      "goc_soldier_retreating:despawn": {
+        "add": {
+          "component_groups": [
+            "death"
+          ]
+        }
+      },
+      "minecraft:explode": {
+        "add": {
+          "component_groups": [
+            "explode"
+          ]
+        }
+      }
+    }
+  }
+}
+  

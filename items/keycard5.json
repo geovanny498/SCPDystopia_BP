@@ -1,0 +1,29 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_keycard5",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:use_duration": 3600,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:hand_equipped": true,
+      "minecraft:allow_off_hand": true,
+      "minecraft:max_stack_size": 64,
+      "minecraft:icon": {
+        "texture": "dt_keycard5"
+      },
+      "minecraft:display_name": {
+        "value": "Level 5 Secure Access Keycard"
+      },
+      "tag:lc:can_lvl1": {},
+      "tag:lc:can_lvl2": {},
+      "tag:lc:can_lvl3": {},
+      "tag:lc:can_lvl4": {},
+      "tag:lc:can_lvl5": {}
+    }
+  }
+}

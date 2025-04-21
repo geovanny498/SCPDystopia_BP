@@ -1,0 +1,36 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_exterior_brick_middle2"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "I#S",
+      "#I#",
+      "BBB"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:brick"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "S": {
+        "item": "minecraft:dye",
+        "data": 7
+      },
+      "B": {
+        "item": "minecraft:dye",
+        "data": 8
+      }
+    },
+    "result": {
+      "item": "lc:dt_exterior_brick_middle2",
+      "count": 20
+    }
+  }
+}

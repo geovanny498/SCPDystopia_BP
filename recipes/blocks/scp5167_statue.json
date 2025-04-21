@@ -1,0 +1,25 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+    "identifier": "lc:dt_scp5167_statue"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "ingredients": [
+      {
+        "item": "lc:dt_imposter_totem"
+      },
+      {
+        "item": "minecraft:stone"
+      },
+      {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    ],
+    "result": {
+      "item": "lc:dt_scp5167_statue"
+    }
+  }
+}

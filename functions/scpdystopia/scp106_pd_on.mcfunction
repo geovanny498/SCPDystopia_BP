@@ -1,0 +1,1 @@
+event entity @e[type=lc:dt_scp106] scp106:can_send_pd

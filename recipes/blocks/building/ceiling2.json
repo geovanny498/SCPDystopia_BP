@@ -1,0 +1,30 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_ceiling2"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "###",
+      "#A#",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:concrete",
+        "data": 0
+      },
+      "A": {
+        "item": "minecraft:dye",
+        "data": 7
+      }
+    },
+    "result": {
+      "item": "lc:dt_ceiling2",
+      "count": 20
+    }
+  }
+}

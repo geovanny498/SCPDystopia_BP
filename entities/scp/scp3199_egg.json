@@ -1,0 +1,111 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp3199_egg",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "pick": {
+        "minecraft:spawn_entity": {
+          "entities": {
+            "single_use": true,
+            "min_wait_time": 0,
+            "max_wait_time": 0,
+            "spawn_sound": "plop",
+            "spawn_item": "lc:dt_scp3199_egg_item"
+          }
+        },
+        "minecraft:despawn": {
+        }
+      },
+      "hatch": {
+        "minecraft:transformation": {
+          "begin_transform_sound": "remedy",
+          "into": "lc:dt_scp3199<scp3199:spawn_as_baby>"
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 0.2
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? Math.Random(1,3) : 0"
+      },
+      "minecraft:type_family": {
+        "family": [ "scp3199", "scp", "monster" ]
+      },
+      "minecraft:health": {
+        "value": 6,
+        "max": 6
+      },
+      "minecraft:timer": {
+        "looping": false,
+        "randomInterval": true,
+        "time": [ 23, 34 ],
+        "time_down_event": {
+          "event": "scp3199_egg:hatch",
+          "target": "self"
+        }
+      },
+      "minecraft:interact": {
+        "interactions": {
+          "on_interact": {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "player"
+                }
+              ]
+            },
+            "event": "scp3199_egg:pick",
+            "target": "self"
+          },
+          "hurt_item": 0,
+          "swing": true,
+          "interact_text": "action.interact.scpdt.scp3199_egg.pick"
+        }
+      },
+      "minecraft:nameable": {},
+      "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:collision_box": {
+        "width": 0.3,
+        "height": 0.3
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+        "default_values": {
+          "max_optimized_distance": 80.0,
+          "max_dropped_ticks": 10,
+          "use_motion_prediction_hints": true
+        }
+      }
+    },
+    "events": {
+      "scp3199_egg:hatch": {
+        "add": {
+          "component_groups": [
+            "hatch"
+          ]
+        }
+      },
+      "scp3199_egg:pick": {
+        "add": {
+          "component_groups": [
+            "pick"
+          ]
+        }
+      }
+    }
+  }
+}
+  

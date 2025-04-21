@@ -1,0 +1,225 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_m249_turret",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "cont"
+        ]
+      },
+      "animations": {
+        "cont": "controller.animation.scpdt.instantkill"
+      }
+    },
+    "component_groups": {
+      "death": {
+        "minecraft:is_sheared": {},
+        "minecraft:loot": {
+          "table": "loot_tables/entities/scpdt/m249_turret.json"
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "scpfoundation", "player", "human", "mob", "mtf", "villager" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_tro_helmet"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_eta10_helmet"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_epsilon11_helmet"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "other_with_families": [
+                  "scpfoundation",
+                  "mtf",
+                  "m249_turret"
+                ]
+              }
+            },
+            "deals_damage": false
+          }
+        ]
+      },
+      "minecraft:health": {
+        "value": 300,
+        "max": 300
+      },
+      "minecraft:attack": {
+        "damage": 6
+      },
+      "minecraft:movement": {
+        "value": 0.0
+      },
+      "minecraft:shooter": {
+        "def": "lc:dt_m16_bullet_player_sneak"
+      },
+      "minecraft:behavior.ranged_attack": {
+        "priority": 0,
+        "attack_interval_min": 1.4,
+        "attack_interval_max": 1.4,
+        "burst_shots": 100,
+        "burst_interval": 0.1,
+        "attack_radius": 100,
+        "speed_multiplier": 1.0
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 1,
+        "within_radius": 100,
+        "reselect_targets": true,
+        "attack_interval": 0.5,
+        "entity_types": [
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "other_with_families": [
+                    "monster",
+                    "warden",
+                    "chaos_insurgency",
+                    "scp",
+                    "pillager",
+                    "hoglin",
+                    "piglin"
+                  ]
+                }
+              ]
+            },
+            "max_dist": 100
+          }
+        ],
+        "must_see_forget_duration": 30.0,
+        "must_see": true
+      },
+      "minecraft:interact": {
+        "interactions": [
+          {
+            "on_interact": {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "player"
+                  }
+                ]
+              },
+              "event": "minecraft:death",
+              "interact_text": "Turn back to item"
+            },
+            "swing": true
+          }
+        ]
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:jump.static": {},
+      "minecraft:can_climb": {},
+      "minecraft:follow_range": {
+        "value": 100,
+        "max": 100
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:collision_box": {
+        "width": 0.4,
+        "height": 1.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {},
+      "minecraft:physics": {},
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:annotation.open_door": {},
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_sun": false,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "minecraft:death": {
+        "add": {
+          "component_groups": [
+            "death"
+          ]
+        }
+      }
+    }
+  }
+}

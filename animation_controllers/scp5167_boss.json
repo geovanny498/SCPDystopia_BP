@@ -1,0 +1,95 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp5167_boss.stronger": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "stronger": "query.health < 290 && query.is_alive"
+            },
+            {
+              "angry": "query.health < 165 && query.is_alive"
+            },
+            {
+              "die": "!query.is_alive"
+            }
+          ],
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§4[SCP-5167 Boss] §cHaha... you can't defeat me.\"}]}"
+          ]
+        },
+        "stronger": {
+          "transitions": [
+            {
+              "angry": "query.health < 165 && query.is_alive"
+            },
+            {
+              "die": "!query.is_alive"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s scp5167_boss:to_stronger",
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§4[SCP-5167 Boss] §cHm. You have good skills. But still powerless.\"}]}",
+            "/summon lc:dt_scp5167",
+            "/summon lc:dt_scp5167"
+          ]
+        },
+        "angry": {
+          "transitions": [
+            {
+              "die": "!query.is_alive"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s scp5167_boss:to_angry",
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§4[SCP-5167 Boss] §cWHY YOU ARE NOT DEAD!\"}]}",
+            "/summon lc:dt_scp5167 ~~~ lc:dt_scp5167:mad",
+            "/summon lc:dt_scp5167 ~~~ lc:dt_scp5167:mad",
+            "/summon lc:dt_scp5167 ~~~ lc:dt_scp5167:mad",
+            "/summon lc:dt_scp5167 ~~~ lc:dt_scp5167:mad",
+            "/effect @s regeneration 10000 1 true"
+          ]
+        },
+        "die": {
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§4[SCP-5167 Boss] §cNOOOOOOOO!!\"}]}"
+          ]
+        }
+      }
+    },
+    "controller.animation.scp5167_boss.death": {
+      "initial_state": "die",
+      "states": {
+        "die": {
+          "on_entry": [
+            "/tellraw @a {\"rawtext\":[{\"text\":\"§4[SCP-5167 Boss] §cNOOOOOOOO!!\"}]}"
+          ]
+        }
+      }
+    },
+    "controller.animation.scp5167_boss.spawn": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "spawn": "query.is_sheared"
+            }
+          ]
+        },
+        "spawn": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "animations": [
+            "spawning"
+          ]
+        }
+      }
+    }
+  }
+}

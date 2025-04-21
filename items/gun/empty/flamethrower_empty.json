@@ -1,0 +1,84 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_flamethrower_empty",
+			"category": "Command"
+		},
+		"components": {
+			"minecraft:use_duration": 2.6,
+			"minecraft:damage": 3,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.equipment"
+			},
+			"minecraft:durability": {
+				"max_durability": 2,
+				"damage_chance": {
+					"min": 0,
+					"max": 0
+				}
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "dt_flamethrower_icon"
+			},
+			"minecraft:display_name": {
+				"value": "dt.nameslot.flamethrower.empty"
+			},
+			"minecraft:cooldown": {
+				"duration": 7.63,
+				"category": "dt_ft_reloading"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"condition": "(query.remaining_durability == 1) || (query.get_equipped_item_name(1) == 'dt_flamethrower_fuel')",
+					"event": "flamethrower:reload"
+				}
+			},
+			"minecraft:weapon": {
+				"on_hurt_entity": {
+				},
+				"on_hit_block": {
+				}
+			},
+			"tag:lc:flamethrower": {}
+		},
+		"events": {
+			"flamethrower:reload": {
+				"sequence": [
+					{
+						"condition": "(query.remaining_durability == 1)",
+						"run_command": {
+							"command": [
+								"execute @s ~~~ playsound scpdt.gun.reload_complete @a[r=10] ~~~",
+								"replaceitem entity @s slot.weapon.mainhand 0 lc:dt_flamethrower"
+							],
+							"target": "holder"
+						}
+					},
+					{
+						"condition": "(query.remaining_durability > 1) && (query.get_equipped_item_name(1) == 'dt_flamethrower_fuel')",
+						"sequence": [
+							{
+								"run_command": {
+									"command": [
+										"effect @s slowness 7 2 true",
+										"execute @s ~~~ playsound scpdt.flamethrower.reload @a[r=10] ~~~",
+										"replaceitem entity @s slot.weapon.offhand 0 air",
+										"playanimation @s animation.dt_misc.gun_reload_extra_long"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

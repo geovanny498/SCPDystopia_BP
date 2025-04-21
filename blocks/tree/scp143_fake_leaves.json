@@ -1,0 +1,36 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_scp143_fake_leaves"
+        },
+        "components": {
+            "minecraft:destroy_time": 2,
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_scp143_leaves",
+                    "render_method": "alpha_test"
+                }
+            },
+            "minecraft:flammable": {
+                "burn_odds": 50,
+                "flame_odds": 50
+            },
+            "minecraft:ticking": {
+                "range": [0.1, 0.1],
+                "on_tick": {
+                    "event": "lc:update_leaves"
+                }
+            },
+            "minecraft:unit_cube": {},
+            "minecraft:loot": "loot_tables/blocks/scpdt/scp143/scp143_leaves.json"
+        },
+        "events": {
+            "lc:update_leaves": {
+                "run_command": {
+                    "command": ["setblock ~~~ lc:dt_scp143_leaves"]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,36 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_bomb_activator"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "#C#",
+      "TOT",
+      "#B#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "O": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "C": {
+        "item": "minecraft:stone_button"
+      },
+      "B": {
+        "item": "minecraft:redstone"
+      },
+      "T": {
+        "item": "minecraft:tnt"
+      }
+    },
+    "result": {
+      "item": "lc:dt_bomb_activator"
+    }
+  }
+}

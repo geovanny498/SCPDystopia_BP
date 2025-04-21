@@ -1,0 +1,145 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_toilet",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ],
+                "toilet:buttghost": [ 0, 1 ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:entity_collision": false,
+            "minecraft:geometry": "geometry.dt_toilet",
+            "minecraft:destroy_time": 1.4,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:on_interact": {
+                "event": "toilet:sit"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:flammable": {
+                "flame_odds": 0,
+                "burn_odds": 0
+            },
+            "minecraft:block_light_emission": 0.0,
+            "minecraft:block_light_absorption": 0.2,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "placement_state": {
+                "randomize": [
+                    {
+                        "weight": 20,
+                        "set_block_property": {
+                            "facing:direction": "(query.cardinal_facing_2d)",
+                            "toilet:buttghost": 0
+                        }
+                    },
+                    {
+                        "weight": 1,
+                        "set_block_property": {
+                            "facing:direction": "(query.cardinal_facing_2d)",
+                            "toilet:buttghost": 1
+                        }
+                    }
+                ]
+            },
+            "toilet:sit": {
+                "sequence": [
+                    {
+                        "condition": "query.block_property('toilet:buttghost') == 0",
+                        "run_command": {
+                            "command": [
+                                "function scpdt_system/sit_toilet"
+                            ],
+                          "target": "self"
+                        }
+                    },
+                    {
+                        "condition": "query.block_property('toilet:buttghost') == 1",
+                        "run_command": {
+                            "command": [
+                                "function scpdt_system/sit_buttghost"
+                            ],
+                          "target": "self"
+                        }
+                    }
+                ]
+            },
+            "toilet:buttghost_sound": {
+                "run_command": {
+                    "command": [
+                        "playsound scpdt.scp789j.butt @a[r=20] ~~~"
+                    ],
+                  "target": "self"
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('toilet:buttghost') == 0",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_toilet",
+                            "render_method": "opaque"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('toilet:buttghost') == 1",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_toilet_buttghost",
+                            "render_method": "opaque"
+                        }
+                    },
+                    "minecraft:ticking": {
+                        "looping": true,
+                        "range": [7, 7],
+                        "on_tick": {
+                            "event": "toilet:buttghost_sound",
+                            "target": "self"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

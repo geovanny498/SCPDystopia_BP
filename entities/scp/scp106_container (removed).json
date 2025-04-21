@@ -1,0 +1,239 @@
+{
+    "format_version": "1.13.0",
+    "minecraft:entity": {
+        "description": {
+            "identifier": "lc:dt_scp106_container_removed",
+            "is_spawnable": false,
+            "is_summonable": false,
+            "is_experimental": false,
+            "runtime_identifier": "minecraft:shulker",
+            "scripts": {
+                "animate": [
+                    "c1",
+                    "c2"
+                ]
+            },
+            "animations": {
+                "c1": "controller.animation.scp106_container.contain",
+                "c2": "controller.animation.scp106_container.contain2"
+            }
+        },
+        "component_groups": {
+            "uncontain_string": {
+                "minecraft:is_saddled": {}
+            },
+            "try_contain": {
+                "minecraft:is_sheared": {},
+                "minecraft:timer": {
+                    "looping": false,
+                    "time": 0.1,
+                    "time_down_event": {
+                        "event": "scp106c:try_contain_end"
+                    }
+                }
+            },
+            "contained": {
+                "minecraft:environment_sensor": {
+                    "triggers": [
+                        {
+                            "filters": {
+                                "test": "has_rider",
+                                "operator": "!=",
+                                "value": true
+                            },
+                            "event": "scp106c:to_be_not_contained"
+                        }
+                    ]
+                },
+                "minecraft:interact": {
+                    "interactions": {
+                        "on_interact": {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    }
+                                ]
+                            },
+                            "event": "scp106c:uncontain",
+                            "target": "self"
+                        },
+                        "hurt_item": 0,
+                        "swing": true,
+                        "interact_text": "action.interact.scpdt.scp106_container.contain_not"
+                    }
+                }
+            },
+            "ready_to_contain": {
+                "minecraft:environment_sensor": {
+                    "triggers": [
+                        {
+                            "filters": {
+                                "test": "has_rider",
+                                "operator": "==",
+                                "value": true
+                            },
+                            "event": "scp106c:to_be_contained"
+                        }
+                    ]
+                },
+                "minecraft:interact": {
+                    "interactions": {
+                        "on_interact": {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    }
+                                ]
+                            },
+                            "event": "scp106c:try_contain",
+                            "target": "self"
+                        },
+                        "hurt_item": 0,
+                        "swing": true,
+                        "interact_text": "action.interact.scpdt.scp106_container.contain"
+                    }
+                }
+            },
+            "minecraft:death": {
+                "minecraft:despawn": {}
+            }
+        },
+        "components": {
+            "minecraft:type_family": {
+                "family": [
+                    "inanimate"
+                ]
+            },
+            "minecraft:collision_box": {
+                "width": 0.7,
+                "height": 0.4
+            },
+            "minecraft:rideable": {
+                "seat_count": 1,
+                "family_types": [
+                    "scp106"
+                ],
+                "seats": {
+                    "position": [
+                        0.0,
+                        0.2,
+                        0.0
+                    ]
+                }
+            },
+            "minecraft:interact": {
+                "interactions": [
+                    {
+                        "on_interact": {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "hand",
+                                        "value": "lc:dt_scp1023_arc"
+                                    }
+                                ]
+                            },
+                            "event": "scp106c:death",
+                            "interact_text": "Remove"
+                        },
+                        "swing": true,
+                        "use_item": false
+                    }
+                ]
+            },
+            "minecraft:health": {
+                "value": 35
+            },
+            "minecraft:damage_sensor": {
+                "triggers": {
+                    "cause": "all",
+                    "deals_damage": true
+                }
+            },
+            "minecraft:pushable": {
+                "is_pushable": false,
+                "is_pushable_by_piston": false
+            },
+            "minecraft:physics": {
+                "has_gravity": false,
+                "has_collision": false
+            },
+            "minecraft:conditional_bandwidth_optimization": {}
+        },
+        "events": {
+            "minecraft:entity_spawned": {
+                "add": {
+                    "component_groups": [
+                        "ready_to_contain"
+                    ]
+                }
+            },
+            "scp106c:death": {
+                "add": {
+                    "component_groups": [
+                        "minecraft:death"
+                    ]
+                }
+            },
+            "scp106c:try_contain": {
+                "add": {
+                    "component_groups": [
+                        "try_contain"
+                    ]
+                }
+            },
+            "scp106c:try_contain_end": {
+                "remove": {
+                    "component_groups": [
+                        "try_contain"
+                    ]
+                }
+            },
+            "scp106c:to_be_contained": {
+                "add": {
+                    "component_groups": [
+                        "contained"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "ready_to_contain"
+                    ]
+                }
+            },
+            "scp106c:to_be_not_contained": {
+                "add": {
+                    "component_groups": [
+                        "ready_to_contain",
+                        "uncontain_string"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "contained"
+                    ]
+                }
+            },
+            "scp106c:uncontain": {
+                "add": {
+                    "component_groups": [
+                        "uncontain_string"
+                    ]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,95 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_scp143_leaves",
+            "properties": {
+                "lc:decaying": [
+                    true,
+                    false
+                ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "category": "nature",
+                "group": "itemGroup.name.leaves"
+            },
+            "minecraft:destroy_time": 0.35,
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_scp143_leaves",
+                    "render_method": "alpha_test"
+                }
+            },
+            "minecraft:flammable": {
+                "burn_odds": 50,
+                "flame_odds": 50
+            },
+            "minecraft:unit_cube": {},
+            "minecraft:loot": "loot_tables/empty.json",
+            "minecraft:on_player_placing": {
+                "event": "lc:set_property_false"
+            },
+            "minecraft:on_player_destroyed": {
+                "event": "lc:on_destroyed"
+            }
+        },
+        "events": {
+            "lc:set_property_false": {
+                "set_block_property": {
+                    "lc:decaying": false
+                }
+            },
+            "lc:set_property_true": {
+                "set_block_property": {
+                    "lc:decaying": true
+                }
+            },
+            "lc:on_destroyed": {
+                "sequence": [
+                    {
+                        "condition": "query.get_equipped_item_name == 'shears'",
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp143/scp143_leaves_block.json"
+                        }
+                    },
+                    {
+                        "condition": "query.get_equipped_item_name != 'shears'",
+                        "spawn_loot": {
+                            "table": "loot_tables/blocks/scpdt/scp143/scp143_leaves.json"
+                        }
+                    }
+                ]
+            },
+            "lc:decay": {
+                "run_command": {
+                    "command": [
+                        "setblock ~~~ air 0 destroy"
+                    ]
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('lc:decaying') == true",
+                "components": {
+                    "minecraft:ticking": {
+                        "looping": true,
+                        "range": [
+                            15.0,
+                            20.0
+                        ],
+                        "on_tick": {
+                            "event": "lc:decay"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('lc:decaying') == false",
+                "components": {}
+            }
+        ]
+    }
+}

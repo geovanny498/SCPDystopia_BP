@@ -1,0 +1,177 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp001_gg_old",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "despawn": {
+        "minecraft:despawn": {
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": true
+        }
+      },
+      "minecraft:health": {
+        "value": 9500000,
+        "max": 9500000
+      },
+      "minecraft:type_family": {
+        "family": [ "scp", "scp001_gg", "scp001" ]
+      },
+      "minecraft:interact": {
+        "interactions": {
+          "on_interact": {
+            "filters": {
+              "all_of": [
+                { "test": "is_family", "subject": "other", "value": "player" },
+                { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_scp1023_arc" }
+              ]
+            },
+          "event": "scp001_gg:despawn",
+          "target": "self"
+          },
+          "hurt_item": 0,
+          "swing": true,
+          "interact_text": "action.interact.scpdt.remove1"
+        }
+      },
+      "minecraft:attack": {
+        "damage": 2500
+      },
+      "minecraft:scale": {
+        "value": 1.33
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:follow_range": {
+        "value": 16,
+        "max": 16
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2,
+        "entity_types": {
+          "filters": {
+            "all_of": [
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "scp001_gg"
+              },
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "scp682"
+              },
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "sus"
+              }
+            ]
+          },
+          "max_dist": 30
+        }
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 0,
+        "within_radius": 12,
+        "reselect_targets": true,
+        "attack_interval": 1,
+        "entity_types": [
+          {
+          "filters": {
+            "all_of": [
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp682" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp001_gg" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "sus" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "item" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "inanimate" }
+            ]
+          },
+          "max_dist": 12
+          }
+        ],
+        "must_see_forget_duration": 10.0,
+        "must_see": true
+      },
+      "minecraft:behavior.delayed_attack": {
+        "priority": 1,
+        "attack_once": false,
+        "track_target": true,
+        "require_complete_path": false,
+        "random_stop_interval": 0,
+        "reach_multiplier": 8.74,
+        "speed_multiplier": 0.0,
+        "attack_duration": 3.24,
+        "hit_delay_pct": 2.75
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:movement": {
+        "value": 0.0
+      },
+      "minecraft:collision_box": {
+        "width": 1.2,
+        "height": 6.5
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_sun": false,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "scp001_gg:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      }
+    }
+  }
+}
+  

@@ -1,0 +1,519 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_janitor",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "become_zombie": {
+        "minecraft:transformation": {
+          "into": "lc:dt_janitor_scp049_2"
+        }
+      },
+      "scp610": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scp610<minecraft:entity_spawned>"
+        }
+      },
+      "not_clearing_body": {
+        "minecraft:on_target_acquired": {
+          "event": "janitor:start_clear_dead_body",
+          "target": "self"
+        }
+      },
+      "clearing_body": {
+        "minecraft:angry": {
+          "duration": 30,
+          "broadcast_anger": false,
+          "calm_event": {
+            "event": "janitor:stop_clear_dead_body",
+            "target": "self"
+          }
+        }
+      },
+      "default": {
+        "minecraft:mark_variant": {
+          "value": 0
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 0.9
+        },
+        "minecraft:behavior.look_at_player": {
+          "priority": 8,
+          "look_distance": 8,
+          "probability": 0.04
+        },
+        "minecraft:navigation.walk": {
+          "can_float": true,
+          "is_amphibious": true,
+          "can_path_over_water": true,
+          "avoid_damage_blocks": true,
+          "can_pass_doors": true,
+          "can_open_doors": true
+        },
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "filters": {
+                "test": "is_avoiding_mobs",
+                "operator": "==",
+                "value": true
+              },
+              "event": "janitor:to_avoiding"
+            }
+          ]
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": [15,32],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "janitor:start_mopping",
+            "target": "self"
+          }
+        }
+      },
+      "mopping": {
+        "minecraft:mark_variant": {
+          "value": 1
+        },
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "filters": {
+                "test": "is_avoiding_mobs",
+                "operator": "==",
+                "value": true
+              },
+              "event": "janitor:to_avoiding"
+            }
+          ]
+        },
+        "minecraft:timer": {
+          "looping": true,
+          "time": [20,37],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "janitor:stop_mopping",
+            "target": "self"
+          }
+        }
+      },
+      "avoiding": {
+        "minecraft:mark_variant": {
+          "value": 0
+        },
+        "minecraft:navigation.walk": {
+          "can_float": true,
+          "can_path_over_water": true,
+          "avoid_damage_blocks": true,
+          "avoid_water": true,
+          "can_pass_doors": true,
+          "can_open_doors": true
+        },
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "filters": {
+                "test": "is_avoiding_mobs",
+                "operator": "!=",
+                "value": true
+              },
+              "event": "janitor:stop_avoiding"
+            }
+          ]
+        }
+      },
+      "death": {
+        "minecraft:transformation": {
+          "into": "lc:dt_janitor_dead<janitor>"
+        }
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [
+          "human",
+          "scpfoundation",
+          "janitor",
+          "mob",
+          "villager"
+        ]
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_tro_helmet"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_eta10_helmet"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_epsilon11_helmet"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "other_with_families": [
+                  "scpfoundation",
+                  "mtf",
+                  "m249_turret"
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp049"
+                  }
+                ],
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "become_zombie"
+            }
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "not",
+                    "value": "scp049"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "not",
+                    "value": "scp610"
+                  },
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "human:dead"
+            }
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp610"
+                  }
+                ],
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "become_scp610"
+            }
+          }
+        ]
+      },
+      "minecraft:health": {
+        "value": 20,
+        "max": 20
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:attack": {
+        "damage": 3
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:jump.static": {},
+      "minecraft:follow_range": {
+        "value": 38,
+        "max": 38
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.panic": {
+        "priority": 1,
+        "speed_multiplier": 1.2
+      },
+      "minecraft:behavior.melee_attack": {
+        "priority": 2
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 2,
+        "within_radius": 16,
+        "reselect_targets": true,
+        "entity_types": [
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "other_with_families": [ "dead_body" ]
+                }
+              ]
+            },
+            "max_dist": 16
+          }
+        ],
+        "must_see_forget_duration": 10.0,
+        "must_see": true
+      },
+      "minecraft:behavior.avoid_mob_type": {
+        "priority": 0,
+        "entity_types": [
+          {
+            "filters": {
+              "any_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "monster"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "scp"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "hoglin"
+                },
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "value": "zoglin"
+                }
+              ]
+            },
+            "max_dist": 21,
+            "walk_speed_multiplier": 1.42,
+            "sprint_speed_multiplier": 1.42
+          }
+        ]
+      },
+      "minecraft:movement": {
+        "value": 0.26
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {},
+      "minecraft:physics": {},
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:annotation.open_door": {}
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "default",
+            "not_clearing_body"
+          ]
+        }
+      },
+      "become_zombie": {
+        "add": {
+          "component_groups": [
+            "become_zombie"
+          ]
+        }
+      },
+      "janitor:start_mopping": {
+        "sequence": [
+          {
+            "filters": {
+              "test": "has_target",
+              "operator": "!=",
+              "value": true
+            },
+            "add": {
+              "component_groups": [
+                "mopping"
+              ]
+            },
+            "remove": {
+              "component_groups": [
+                "default"
+              ]
+            }
+          }
+        ]
+      },
+      "janitor:stop_mopping": {
+        "add": {
+          "component_groups": [
+            "default"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "mopping"
+          ]
+        }
+      },
+      "janitor:to_avoiding": {
+        "add": {
+          "component_groups": [
+            "avoiding"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "default",
+            "mopping",
+            "clearing_body",
+            "not_clearing_body"
+          ]
+        }
+      },
+      "janitor:stop_avoiding": {
+        "add": {
+          "component_groups": [
+            "default",
+            "not_clearing_body"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "avoiding"
+          ]
+        }
+      },
+      "janitor:start_clear_dead_body": {
+        "add": {
+          "component_groups": [
+            "clearing_body"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "mopping"
+          ]
+        }
+      },
+      "janitor:stop_clear_dead_body": {
+        "add": {
+          "component_groups": [
+            "not_clearing_body"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "clearing_body"
+          ]
+        }
+      },
+      "become_scp610": {
+        "add": {
+          "component_groups": [
+            "scp610"
+          ]
+        }
+      },
+      "human:dead": {
+        "add": {
+          "component_groups": [
+            "death"
+          ]
+        }
+      }
+    }
+  }
+}    }
+    }
+  }
+}

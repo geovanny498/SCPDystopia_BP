@@ -1,0 +1,43 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.dt_class_d_v2.anim_cont_bp": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "picking_up_gun": "q.equipped_item_any_tag('slot.weapon.mainhand', 'lc:class_d_can_equip')"
+            }
+          ]
+        },
+        "picking_up_gun": {
+          "animations": [
+            "pickup_gun"
+          ],
+          "transitions": [
+            {
+              "got_a_gun": "query.all_animations.finished"
+            }
+          ],
+          "on_entry": [
+            "/tag @s add armed_class_d"
+          ]
+        },
+        "got_a_gun": {
+          "transitions": [
+            {
+              "default": "q.equipped_item_any_tag('slot.weapon.mainhand', 'lc:class_d_can_equip') == 0"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s class_d_v2:got_a_gun"
+          ],
+          "on_exit": [
+            "/event entity @s class_d_v2:lost_gun"
+          ]
+        }
+      }
+    }
+  }
+}

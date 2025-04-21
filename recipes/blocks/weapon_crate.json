@@ -1,0 +1,31 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_weapon_crate"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "###",
+      "ABA"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:dye",
+        "data": 2
+      },
+      "A": {
+        "item": "minecraft:iron_ingot"
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_weapon_crate",
+      "count": 4
+    }
+  }
+}

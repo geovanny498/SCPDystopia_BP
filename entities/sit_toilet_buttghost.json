@@ -1,0 +1,116 @@
+{
+    "format_version": "1.13.0",
+    "minecraft:entity": {
+        "description": {
+            "identifier": "lc:dt_sit_toilet_buttghost",
+            "is_spawnable": false,
+            "is_summonable": true,
+            "is_experimental": false,
+            "scripts": {
+                "animate": [
+                    "sit",
+                    "fart"
+                ]
+            },
+            "animations": {
+                "sit": "controller.animation.toilet_buttghost.sit",
+                "fart": "controller.animation.toilet.fart"
+            }
+        },
+        "component_groups": {
+            "minecraft:death": {
+                "minecraft:despawn": {}
+            },
+            "fart": {
+                "minecraft:is_sheared": {}
+            }
+        },
+        "components": {
+            "minecraft:timer": {
+                "looping": false,
+                "time": 25.0,
+                "time_down_event": {
+                    "event": "scpdt:fart"
+                }
+            },
+            "minecraft:type_family": {
+                "family": [ "inanimate" ]
+            },
+            "minecraft:collision_box": {
+                "width": 0.1,
+                "height": 0.1
+            },
+            "minecraft:rideable": {
+                "seat_count": 1,
+                "family_types": [
+                    "player"
+                ],
+                "interact_text": "Sit to the chair",
+                "pull_in_entities": true,
+                "seats": {
+                    "position": [
+                        0.0,
+                        0.5,
+                        0.0
+                    ]
+                }
+            },
+            "minecraft:interact": {
+                "interactions": [
+                    {
+                        "on_interact": {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "hand",
+                                        "value": "lc:dt_scp1023_arc"
+                                    }
+                                ]
+                            },
+                            "event": "sit:death",
+                            "interact_text": "Remove"
+                        },
+                        "swing": true,
+                        "use_item": false
+                    }
+                ]
+            },
+            "minecraft:health": {
+                "value": 1
+            },
+            "minecraft:damage_sensor": {
+                "triggers": {
+                    "cause": "all",
+                    "deals_damage": false
+                }
+            },
+            "minecraft:pushable": {
+                "is_pushable": false,
+                "is_pushable_by_piston": false
+            },
+            "minecraft:physics": {
+                "has_gravity": false,
+                "has_collision": false
+            }
+        },
+        "events": {
+            "sit:death": {
+                "add": {
+                    "component_groups": ["minecraft:death"]
+                }
+            },
+            "scpdt:fart": {
+                "add": {
+                    "component_groups": ["fart"]
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,18 @@
+[ SCP: Dystopia v1.8.0 ]
+
+- Added: SCP-268.
+- Added: SCP-3199.
+- Added: SCP-1000
+- Added: More color variations on SCP-131.
+- Added: Mystery Syringe (can stop SCP-3199's reproductive cycle).
+- Added: Combat AH-64D Apache.
+- Added: Rocket Launcher.
+- Added: Flamethrower.
+- Added: AK Rifle.
+- Added: SCP-096 picture.
+- Added: New loot tables.
+- Fixed: SCP-096 is not playing animation when player reloaded world or chunk.
+- Optimized: All bullets are optimized.
+- Optimized: Night vison goggles and SCP-966.
+- Optimized: Fixed minecraft:is_hidden_when_invisible of almost all mobs. 
+- Misc: Guns overhauled (Part 1).

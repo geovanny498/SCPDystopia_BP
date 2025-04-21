@@ -1,0 +1,230 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp191",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "stay"
+        ]
+      },
+      "animations": {
+        "stay": "controller.animation.scp191.stay"
+      }
+    },
+    "component_groups": {
+      "normal_move": {
+        "minecraft:behavior.move_towards_restriction": {
+          "priority": 5,
+          "speed_multiplier": 1
+        },
+        "minecraft:behavior.avoid_mob_type": {
+          "priority": 0,
+          "entity_types": [
+            {
+              "filters": {
+                "any_of": [
+                  { "test" :  "is_family", "subject" : "other", "value" :  "scp"},
+                  { "test" :  "is_family", "subject" : "other", "value" :  "monster"}
+                ]
+              },
+              "max_dist": 13,
+              "sprint_speed_multiplier": 1.67
+            }
+          ]
+        },
+        "minecraft:behavior.move_indoors": {
+          "priority": 4,
+          "speed_multiplier": 0.8
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 1
+        },
+        "minecraft:movement": {
+          "value": 0.22
+        }
+      },
+      "stay": {
+        "minecraft:movement": {
+          "value": 0
+        }
+      },
+      "tamed": {
+        "minecraft:is_tamed": {
+        },
+        "minecraft:behavior.follow_owner": {
+          "priority": 2,
+          "speed_multiplier": 1.23,
+          "start_distance": 6,
+          "stop_distance": 3
+        },
+        "minecraft:attack": {
+          "damage": 4
+        },
+        "minecraft:behavior.owner_hurt_by_target": {
+          "priority": 1
+        },
+        "minecraft:behavior.owner_hurt_target": {
+          "priority": 2
+        },
+        "minecraft:type_family": {
+          "family": [ "scp191", "player" ]
+        },
+        "minecraft:sittable": {
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 10 : 0"
+      },
+      "minecraft:tameable": {
+        "probability": 0.34,
+        "tame_items": "cookie",
+        "tame_event": {
+          "event": "minecraft:on_tame",
+          "target": "self"
+        }
+      },
+      "minecraft:healable": {
+        "items": [
+          {
+            "item": "rabbit_stew",
+            "heal_amount": 12
+          },
+          {
+            "item": "bread",
+            "heal_amount": 6
+          },
+          {
+            "item": "cooked_porkchop",
+            "heal_amount": 8
+          },
+          {
+            "item": "cooked_fish",
+            "heal_amount": 5
+          },
+          {
+            "item": "cooked_salmon",
+            "heal_amount": 5
+          },
+          {
+            "item": "cooked_beef",
+            "heal_amount": 8
+          },
+          {
+            "item": "cooked_chicken",
+            "heal_amount": 6
+          },
+          {
+            "item": "muttonCooked",
+            "heal_amount": 6
+          }
+        ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": true
+        }
+      },
+      "minecraft:health": {
+        "value": 56,
+        "max": 56
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:type_family": {
+        "family": [ "scp191" ]
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:behavior.stay_while_sitting": {
+        "priority": 3
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 6,
+        "target_distance": 6.0,
+        "probability": 0.02
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.open_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [ "normal_move" ]
+        }
+      },
+      "minecraft:on_tame": {
+        "add": {
+          "component_groups": [ "tamed" ]
+        }
+      },
+      "scp191:stay": {
+        "add": {
+          "component_groups": [ "stay" ]
+        },
+        "remove": {
+          "component_groups": [ "normal_move" ]
+        }
+      },
+      "scp191:stay_r": {
+        "add": {
+          "component_groups": [ "normal_move" ]
+        },
+        "remove": {
+          "component_groups": [ "stay" ]
+        }
+      }
+    }
+  }
+}
+  

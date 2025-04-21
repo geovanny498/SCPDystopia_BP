@@ -1,0 +1,131 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_m4a1",
+			"category": "Equipment"
+		},
+		"components": {
+			"minecraft:use_duration": 0.1,
+			"minecraft:damage": 190,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.equipment"
+			},
+			"minecraft:durability": {
+				"max_durability": 100000,
+				"damage_chance": {
+					"min": 0,
+					"max": 0
+				}
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "dt_m4a1_icon"
+			},
+			"minecraft:display_name": {
+				"value": "§l§k§0:::§r§5§lT.A.R Chain Saw Rifle Delta-1§l§k§0:::§r"
+			},
+			"minecraft:cooldown": {
+				"duration": 0.01,
+				"category": "m4a1"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"event": "m4a1:shoot"
+				}
+			},
+			"minecraft:weapon": {
+				"on_hurt_entity": {
+				},
+				"on_hit_block": {
+				}
+			},
+			"tag:lc:class_d_can_equip": {}
+		},
+		"events": {
+			"m4a1:shoot": {
+				"sequence": [
+					{
+						"condition": "(query.remaining_durability == 1)",
+						"run_command": {
+							"command": [
+								"execute @s ~~~ playsound scpdt.gun.shot_dry @a[r=10] ~~~",
+								"replaceitem entity @s slot.weapon.mainhand 0 lc:dt_m4a1_empty"
+							],
+							"target": "holder"
+						}
+					},
+					{
+						"condition": "(query.remaining_durability > 1)",
+						"sequence": [
+							{
+								"condition": "(!query.is_sneaking && (query.ground_speed > 2)) || !query.is_on_ground",
+								"shoot": {
+									"projectile": "lc:dt_m4a1_bullet_player_uncertain",
+									"launch_power": 10
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.death.shot @a[r=10] ~~~",
+										"playanimation @s animation.dt_misc.player_m4a1_fire",
+										"camerashake add @s 0.24 0.28 rotational",
+										"title @s actionbar §c>>         §7+         §c<<",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.25 ^5"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							},
+							{
+								"condition": "(!query.is_sneaking && (query.ground_speed < 2)) && query.is_on_ground",
+								"shoot": {
+									"projectile": "lc:dt_m4a1_bullet_player",
+									"launch_power": 18
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.death.shot @a[r=10] ~~~",
+										"playanimation @s animation.dt_misc.player_m4a1_fire",
+										"camerashake add @s 0.14 0.2 rotational",
+										"title @s actionbar §c>>    §f+    §c<<",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.25 ^5"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							},
+							{
+								"condition": "query.is_on_ground && query.is_sneaking",
+								"shoot": {
+									"projectile": "lc:dt_m4a1_bullet_player_sneak",
+									"launch_power": 20
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.death.shot @a[r=10] ~~~",
+										"playanimation @s animation.dt_misc.player_m4a1_fire",
+										"camerashake add @s 0.1 0.18 rotational",
+										"title @s actionbar §c>>§e+§c<<",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.3 ^5"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}  

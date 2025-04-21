@@ -1,0 +1,49 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp106_container.contain": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "contain": "query.is_sheared"
+            }
+          ]
+        },
+        "contain": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/ride @e[type=lc:dt_scp106,c=1,r=2.7] start_riding @s"
+          ]
+        }
+      }
+    },
+    "controller.animation.scp106_container.contain2": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "uncontain": "query.is_saddled"
+            }
+          ]
+        },
+        "uncontain": {
+          "transitions": [
+            {
+              "default": "!query.is_saddled"
+            }
+          ],
+          "on_entry": [
+            "/ride @e[type=lc:dt_scp106,c=1,r=2.7] stop_riding"
+          ]
+        }
+      }
+    }
+  }
+}

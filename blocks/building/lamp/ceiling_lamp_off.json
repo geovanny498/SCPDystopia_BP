@@ -1,0 +1,18 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:block": {
+		"description": {
+			"identifier": "lc:dt_ceiling_lamp_off",
+			"is_experimental": false
+		},
+		"components": {
+			"minecraft:creative_category": {
+                "group": "itemGroup.name.stone",
+                "category": "Nature"
+            },
+			"minecraft:destroy_time": 0.7,
+			"minecraft:explosion_resistance": 4.0,
+            "tag:lc:dystopiablock": {}
+		}
+	}
+}

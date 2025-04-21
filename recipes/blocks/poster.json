@@ -1,0 +1,31 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_poster"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "#B",
+      "A#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:paper"
+      },
+      "A": {
+        "item": "minecraft:dye",
+        "data": 7
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_poster",
+      "count": 3
+    }
+  }
+}

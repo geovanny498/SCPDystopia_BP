@@ -1,0 +1,29 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_laptop"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "BAB",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "A": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "B": {
+        "item": "minecraft:glass"
+      }
+    },
+    "result": {
+      "item": "lc:dt_laptop"
+    }
+  }
+}

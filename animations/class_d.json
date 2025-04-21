@@ -1,0 +1,11 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.dt_class_d_v2.pickup_gun": {
+      "animation_length": 2.1,
+      "timeline": {
+        "0": [ "/effect @s slowness 2 6 true", "/event entity @s class_d_v2:got_a_gun" ]
+      }
+    }
+  }
+}

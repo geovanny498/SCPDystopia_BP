@@ -1,0 +1,46 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_scp096_picture",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:use_duration": 1.6,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:max_stack_size": 1,
+      "minecraft:hand_equipped": true,
+      "minecraft:icon": {
+        "texture": "dt_scp096_pictures"
+      },
+      "minecraft:display_name": {
+        "value": "dt.nameslot.scp096_picture"
+      },
+      "minecraft:cooldown": {
+				"duration": 21.8,
+				"category": "dt_scp096_picture_opening"
+			},
+      "minecraft:on_use": {
+				"on_use": {
+					"event": "picture:look"
+				}
+			}
+    },
+    "events": {
+      "picture:look": {
+        "shoot": {
+          "projectile": "lc:dt_scp096_picture_t",
+          "launch_power": 0.0
+        },
+        "run_command": {
+          "command": [
+            "title @s actionbar You can't undone this. It will come."
+          ],
+          "target": "holder"
+        }
+      }
+    }
+  }
+}

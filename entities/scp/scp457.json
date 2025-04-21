@@ -1,0 +1,143 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp457",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 15 : 0"
+      },
+      "minecraft:knockback_resistance": {
+        "value": 0.34
+      },
+      "minecraft:damage_sensor": {
+        "triggers": 
+        [
+          {
+            "cause": "fall",
+            "deals_damage": false
+          }
+        ]
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_contact_with_water", "operator": "==", "value": true },
+            "cause": "drowning",
+            "damage_per_tick": 160
+          }
+        ]
+      },
+      "minecraft:fire_immune": true,
+      "minecraft:health": {
+        "value": 460,
+        "max": 460
+      },
+      "minecraft:type_family": {
+        "family": [ "scp", "scp457", "mob", "monster" ]
+      },
+      "minecraft:attack": {
+        "damage": 7
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:follow_range": {
+        "value": 32,
+        "max": 32
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 0
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 0,
+        "within_radius": 32,
+        "reselect_targets": false,
+        "attack_interval": 0.7,
+        "entity_types": [
+          {
+          "filters": {
+            "other_with_families": [ "villager", "human", "player" ]
+          },
+          "max_dist": 32
+          }
+        ],
+        "must_see_forget_duration": 20.0,
+        "must_see": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:trail": {
+        "block_type": "minecraft:fire"
+      },
+      "breakable_blocks": [
+        "tallgrass",
+        "red_flower",
+        "yellow_flower",
+        "double_plant"
+      ],
+      "minecraft:behavior.melee_attack": {
+        "priority": 0,
+        "speed_multiplier": 1.06,
+        "track_target": true
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 1,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 7,
+        "speed_multiplier": 0.6
+      },
+      "minecraft:behavior.look_at_player": {
+        "probability": 0.02,
+        "priority": 6,
+        "look_distance": 7
+      },
+      "minecraft:movement": {
+        "value": 0.30
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.break_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": false,
+        "is_amphibious": false,
+        "can_path_over_water": false,
+        "avoid_sun": false,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_break_doors": true
+      }
+    }
+  }
+}
+  

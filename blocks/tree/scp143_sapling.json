@@ -1,0 +1,169 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_scp143_sapling",
+            "properties": {
+                "lc:growing": [0, 1, 2]
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('lc:growing') == 0",
+                "components": {
+                    "minecraft:on_interact": {
+                        "condition": "query.get_equipped_item_name('main_hand') == 'bone_meal'",
+                        "event": "bone_meal_1"
+                    },
+                    "minecraft:ticking": {
+                        "range": [120, 180],
+                        "on_tick": {
+                            "event": "grow_1"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('lc:growing') == 1",
+                "components": {
+                    "minecraft:on_interact": {
+                        "condition": "query.get_equipped_item_name('main_hand') == 'bone_meal'",
+                        "event": "bone_meal_2"
+                    },
+                    "minecraft:ticking": {
+                        "range": [120, 180],
+                        "on_tick": {
+                            "event": "grow_2"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('lc:growing') == 2",
+                "components": {
+                    "minecraft:on_interact": {
+                        "condition": "query.get_equipped_item_name('main_hand') == 'bone_meal'",
+                        "event": "bone_meal_3"
+                    },
+                    "minecraft:ticking": {
+                        "range": [120, 180],
+                        "on_tick": {
+                            "event": "grow_3"
+                        }
+                    }
+                }
+            }
+        ],
+        "components": {
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_scp143_sapling",
+                    "render_method": "alpha_test",
+                    "face_dimming": false,
+                    "ambient_occlusion": false
+                }
+            },
+            "minecraft:pick_collision": {
+                "origin": [-6, 0, -6],
+                "size": [12, 13, 12]
+            },
+            "minecraft:loot": "loot_tables/blocks/scpdt/scp143/scp143_sapling.json",
+            "minecraft:geometry": "geometry.dt_scp143_sapling",
+            "minecraft:destroy_time": 0.01,
+            "minecraft:entity_collision": false,
+            "minecraft:breathability": "air",
+            "minecraft:block_light_absorption": 0,
+            "minecraft:placement_filter": {
+                "conditions": [
+                    {
+                        "block_filter": ["minecraft:dirt", "minecraft:grass", "minecraft:podzol"],
+                        "allowed_faces": ["up"]
+                    }
+                ]
+            },
+            "minecraft:ticking": {
+                "range": [1, 1],
+                "on_tick": {
+                    "event": "grow_0"
+                }
+            },
+            "tag:wood": {}
+        },
+        "events": {
+            "grow_0": {
+                "set_block_property": {
+                    "lc:growing": 0
+                }
+            },
+            "grow_1": {
+                "sequence": [
+                    {
+                        "run_command": {
+                            "command": ["particle minecraft:crop_growth_emitter ~~~"]
+                        }
+                    },
+                    {
+                        "set_block_property": {
+                            "lc:growing": 1
+                        }
+                    }
+                ]
+            },
+            "grow_2": {
+                "sequence": [
+                    {
+                        "run_command": {
+                            "command": ["particle minecraft:crop_growth_emitter ~~~"]
+                        }
+                    },
+                    {
+                        "set_block_property": {
+                            "lc:growing": 2
+                        }
+                    }
+                ]
+            },
+            "grow_3": {
+                "run_command": {
+                    "command": ["particle minecraft:crop_growth_emitter ~~~", "structure load dt_scp143_tree ~-2 ~ ~-2"]
+                }
+            },
+            "bone_meal_1": {
+                "sequence": [
+                    {
+                        "decrement_stack": {}
+                    },
+                    {
+                        "trigger": {
+                            "event": "grow_1"
+                        }
+                    }
+                ]
+            },
+            "bone_meal_2": {
+                "sequence": [
+                    {
+                        "decrement_stack": {}
+                    },
+                    {
+                        "trigger": {
+                            "event": "grow_2"
+                        }
+                    }
+                ]
+            },
+            "bone_meal_3": {
+                "sequence": [
+                    {
+                        "decrement_stack": {}
+                    },
+                    {
+                        "trigger": {
+                            "event": "grow_3"
+                        }
+                    }
+                ]
+            }
+        }
+    }
+}

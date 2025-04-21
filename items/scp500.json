@@ -1,0 +1,41 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_scp500",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:icon": {
+        "texture": "dt_scp500"
+      },
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:use_duration": 1.6,
+      "minecraft:display_name": {
+        "value": "SCP-500-1"
+      },
+      "minecraft:food": {
+				"nutrition": 4,
+				"saturation_modifier": "low",
+				"can_always_eat": true,
+				"on_consume": {
+					"event": "on_consume",
+					"target": "self"
+				}
+			},
+			"minecraft:use_animation": "eat"
+    },
+    "events": {
+      "on_consume": {
+        "add_mob_effect": {
+          "effect": "regeneration",
+          "target": "holder",
+          "duration": 60,
+          "amplifier": 3
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,16 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_furnace": {
+    "description": {
+      "identifier": "lc:dt_scp939_flesh_cooked"
+    },
+    "tags": [
+      "furnace",
+      "smoker",
+      "campfire",
+      "soul_campfire"
+    ],
+    "input": "lc:dt_scp939_flesh",
+    "output": "lc:dt_scp939_flesh_cooked"
+  }
+}

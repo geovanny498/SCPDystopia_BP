@@ -1,0 +1,22 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp5167_soldier.run": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "retreat": "query.health < 20"
+            }
+          ]
+        },
+        "retreat": {
+          "on_entry": [
+            "/event entity @s scp5167_soldier:to_run"
+          ]
+        }
+      }
+    }
+  }
+}

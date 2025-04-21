@@ -1,0 +1,48 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_scp049_doc",
+			"category": "Items"
+		},
+		"components": {
+			"minecraft:use_duration": 0.1,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.items"
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 64,
+			"minecraft:icon": {
+				"texture": "dt_scp049_doc"
+			},
+			"minecraft:display_name": {
+				"value": "SCP-049 Document [Sneak + Use]"
+			},
+			"minecraft:cooldown": {
+				"duration": 5,
+				"category": "dt_scp_document"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"condition": "query.is_sneaking",
+					"event": "document:spawn_facility"
+				}
+			}
+		},
+		"events": {
+			"document:spawn_facility": {
+				"decrement_stack": {
+					"ignore_game_mode": false
+				},
+				"run_command": {
+					"command": [
+						"function scpdystopia/spawn_look",
+						"structure load mystructure:dt_room_scp049 ~1 ~ ~1",
+						"playsound random.anvil_land @a[r=13] ~~~"
+					],
+					"target": "holder"
+				}
+			}
+		}
+	}
+}

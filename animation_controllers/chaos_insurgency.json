@@ -1,0 +1,31 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.chaos_insurgency.retreat": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "retreat": "query.health < 18"
+            }
+          ],
+          "on_entry": [
+            "/event entity @s epsilon11:to_fight"
+          ]
+        },
+        "retreat": {
+          "transitions": [
+            {
+              "default": "query.health > 19"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.chaos.retreat @a[r=13] ~~~",
+            "/event entity @s ci:to_retreat"
+          ]
+        }
+      }
+    }
+  }
+}

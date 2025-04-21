@@ -1,0 +1,29 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_hcz_floor"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "III",
+      "I#I",
+      "III"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_block",
+        "data": 7
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "lc:dt_hcz_floor",
+      "count": 30
+    }
+  }
+}

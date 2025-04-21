@@ -1,0 +1,75 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_eta10_squad",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "spawn_squad"
+        ]
+      },
+      "animations": {
+        "spawn_squad": "controller.animation.eta10.spawn_squad"
+      }
+    },
+    "component_groups": {
+      "spawn_able": {
+        "minecraft:is_sheared": {}
+      },
+      "death": {
+        "minecraft:despawn": {
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "inanimate" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:health": {
+        "value": 10,
+        "max": 10
+      },
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:collision_box": {
+        "width": 0.1,
+        "height": 0.1
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "spawn_able"
+          ]
+        }
+      },
+      "squad:death": {
+        "add": {
+          "component_groups": [
+            "death"
+          ]
+        }
+      }
+    }
+  }
+}
+  

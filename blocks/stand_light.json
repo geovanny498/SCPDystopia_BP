@@ -1,0 +1,88 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_stand_light",
+            "properties": {
+                "stand_light:lit": [true, false]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:entity_collision": {
+                "origin": [ -1, 0, -1 ],
+                "size": [ 2, 16, 2 ]
+            },
+            "minecraft:geometry": "geometry.dt_stand_light",
+            "minecraft:destroy_time": 1.2,
+            "minecraft:on_player_placing": {
+                "event": "stand_light:place"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:flammable": {
+                "flame_odds": 0,
+                "burn_odds": 0
+            },
+            "minecraft:block_light_absorption": 0.0,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "stand_light:place": {
+                "set_block_property": {
+                    "stand_light:lit": true
+                }
+            },
+            "stand_light:on": {
+                "set_block_property": {
+                    "stand_light:lit": true
+                }
+            },
+            "stand_light:off": {
+                "set_block_property": {
+                    "stand_light:lit": false
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('stand_light:lit') == true",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_stand_light",
+                            "render_method": "opaque"
+                        }
+                    },
+                    "minecraft:on_interact": {
+                        "event": "stand_light:off",
+                        "target": "self"
+                    },
+                    "minecraft:block_light_emission": 1.0
+                }
+            },
+            {
+                "condition": "query.block_property('stand_light:lit') == false",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_stand_light_off",
+                            "render_method": "opaque"
+                        }
+                    },
+                    "minecraft:on_interact": {
+                        "event": "stand_light:on",
+                        "target": "self"
+                    },
+                    "minecraft:block_light_emission": 0.0
+                }
+            }
+        ]
+    }
+}

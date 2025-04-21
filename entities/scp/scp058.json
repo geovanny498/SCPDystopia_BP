@@ -1,0 +1,193 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp058",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "big": {
+        "minecraft:experience_reward": {
+          "on_death": "query.last_hit_by_player ? 9 : 0"
+        },
+        "minecraft:knockback_resistance": {
+          "value": 0.28
+        },
+        "minecraft:health": {
+          "value": 88,
+          "max": 88
+        },
+        "minecraft:attack": {
+          "damage": 7
+        },
+        "minecraft:movement": {
+          "value": 0.279
+        },
+        "minecraft:scale": {
+          "value": 1.48
+        }
+      },
+      "normal": {
+        "minecraft:experience_reward": {
+          "on_death": "query.last_hit_by_player ? 6 : 0"
+        },
+        "minecraft:knockback_resistance": {
+          "value": 0.09
+        },
+        "minecraft:health": {
+          "value": 72,
+          "max": 72
+        },
+        "minecraft:attack": {
+          "damage": 5
+        },
+        "minecraft:movement": {
+          "value": 0.273
+        },
+        "minecraft:scale": {
+          "value": 1.0
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
+      "minecraft:loot": {
+        "table": "loot_tables/entities/scpdt/scp058.json"
+      },
+      "minecraft:damage_sensor": {
+        "triggers": 
+        [
+          {
+            "cause": "fall",
+            "deals_damage": false
+          }
+        ]
+      },
+      "minecraft:type_family": {
+        "family": [ "scp", "scp058", "mob", "monster" ]
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 8
+          }
+        ]
+      },
+      "minecraft:follow_range": {
+        "value": 64,
+        "max": 64
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2,
+        "entity_types": {
+          "filters": {
+            "test": "is_family",
+            "subject": "other",
+            "operator": "!=",
+            "value": "scp058"
+          },
+          "max_dist": 40
+        }
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 0,
+        "within_radius": 20,
+        "reselect_targets": true,
+        "entity_types": [
+          {
+          "filters": {
+            "other_with_families": [ "villager", "human", "player" ]
+          },
+          "max_dist": 20
+          }
+        ],
+        "must_see_forget_duration": 17.0,
+        "must_see": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:behavior.melee_attack": {
+        "priority": 1,
+        "speed_multiplier": 1.21,
+        "track_target": true
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 1.0
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 6,
+        "speed_multiplier": 0.78
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:collision_box": {
+        "width": 0.7,
+        "height": 1.4
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.open_door": {
+      },
+      "minecraft:navigation.walk": {
+        "is_amphibious": true,
+        "can_float": true,
+        "can_path_over_water": true,
+        "can_pass_doors": true,
+        "can_open_doors": false,
+        "avoid_damage_blocks": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "sequence": [
+          {
+            "randomize": [
+              {
+                "weight": 100,
+                "add": {
+                  "component_groups": [ "normal" ]
+                }
+              },
+              {
+                "weight": 10,
+                "add": {
+                  "component_groups": [ "big" ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
+  

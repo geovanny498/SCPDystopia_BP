@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_scp914_gear"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "O#O",
+      "###",
+      "O#O"
+    ],
+    "key": {
+      "O": {
+        "item": "lc:dt_enhanced_scpdystopia_orb"
+      },
+      "#": {
+        "item": "minecraft:iron_ingot"
+      }
+    },
+    "result": {
+      "item": "lc:dt_scp914_gear"
+    }
+  }
+}

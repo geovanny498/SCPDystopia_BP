@@ -1,0 +1,39 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_scp610_pond",
+            "properties": {
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_scp610_pond",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:entity_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 8, 16 ]
+            },
+            "minecraft:destroy_time": 0.7,
+            "minecraft:unit_cube": {},
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:flammable": {
+                "flame_odds": 19,
+                "burn_odds": 19
+            },
+            "tag:lc:dystopiablock": {},
+            "tag:dirt": {}
+        },
+        "events": {
+        },
+        "permutations": [
+        ]
+    }
+}

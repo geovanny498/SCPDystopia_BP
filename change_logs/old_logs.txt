@@ -1,0 +1,545 @@
+ SCP: Dystopia - Update Changelogs
+=============================================
+
+_____________________________________________________________________
+
+[ v1.8.0 ]
+
+- Added: SCP-268.
+- Added: SCP-3199.
+- Added: Mystery Syringe (can stop SCP-3199's reproductive cycle).
+- Added: Combat AH-64D Apache.
+- Added: Rocket Launcher.
+- Added: Flamethrower.
+- Added: SCP-096 picture.
+- Added: New loot tables.
+- Fixed: SCP-096 is not playing animation when reload world or chunk.
+- Optimized: All bullets are optimized.
+- Optimized: Night vison goggles and SCP-966.
+- Optimized: Fixed minecraft:is_hidden_when_invisible of almost all mobs. 
+- Misc: Guns overhauled.
+
+_____________________________________________________________________
+
+
+
+== v1.7.2 Early Access 4 ==
+
+- Fixed new SCP-096
+
+== v1.7.2 Early Access 3 ==
+
+- Completely changed SCP-096
+
+== v1.7.2 Early Access 2 ==
+
+- Added document of SCP-173, SCP-096, SCP-939
+- You can only spawn SCP-173 facility yet
+
+== v1.7.2 Early Access 1 ==
+
+- Added SCP-207
+- Added SCP-714
+- Added SCP-063
+- Added M4A1 with realistic hands!
+
+== v1.7.2 Early Access 2 ==
+
+- Added dead bodies for Epsilon11, Eta10, ClassD, TROs
+
+== v1.7.2 Early Access 1 ==
+
+- Added lc:dt_big_number_sign
+- Added shooting and reloading animation for all guns.
+- Added lc:dt_nvg
+- Added lc:dt_nvg
+- Added lc:dt_scp966
+- SPC-096 will not target you if you are wearing SCRAMBLE goggles.
+- Fixed model of scattered documents block.
+
+== v1.7.1 Public Release ==
+
+- Added lc:dt_towel
+- Added lc:dt_mirror
+- Added lc:dt_restroom_sign
+- Added Hammer Down variant of lc:dt_scp049_2
+- Changed all door system to more simple one
+- SCP-049-2 is more deadly
+
+== v1.7.1 Early Access 8 ==
+
+- Language fix
+- Added lc:dt_label029
+- Added lc:dt_label079
+- Added lc:dt_hang_lamp
+- Added lc:dt_blood_stain
+- Added lc:dt_nuclear_box
+- Added lc:dt_barbed_wire
+- Added lc:dt_scattered_documents
+- Added lc:dt_data_bank
+- Added lc:dt_coolant
+
+== v1.7.1 Early Access 7 ==
+
+- Improved suscharger
+- Added lc:dt_storage_box
+- Added lc:dt_coolant
+- Added lc:dt_data_bank
+- Added lc:dt_fire_extinguisher
+- Added lc:dt_floor_vent
+- Added lc:dt_heating
+- Added lc:dt_low_wood_bench
+- Added lc:dt_water_dispenser
+- Added lc:dt_cafeteria_chair
+- Few more
+
+== v1.7.1 Early Access 6 ==
+
+- Added lc:dt_nu7
+- Added pickup animation for all guns
+- Changed reload animation of M16, MP5A3, SPAS-12
+
+== v1.7.1 Early Access 5 ==
+
+- Added lc:dt_scar and related things
+
+== v1.7.1 Early Access 4 ==
+
+- Added few variants for wall sign
+- Added lc:dt_scp066
+- Added lc:dt_label012
+- Added lc:dt_label610
+- Added lc:dt_label066
+- All gun shoot power are very speedy
+- Improved dog SCP-939
+
+== v1.7.1 Early Access 3 ==
+
+- New SCP-939 model
+- You can spawn tamable SCP-939 with command: /summon lc:dt_scp939_dog
+
+== v1.7.1 Early Access 2 ==
+
+- Added lc:dt_field_doctor
+Fixed some issues
+
+== v1.7.1 Early Access 1 ==
+
+- Added lc:dt_scp610
+- Added Pocket Dimension
+
+== v1.7.0 Early Access 5 ==
+
+- Added SCP-143
+- Added SCP-143 biome
+- You can't open O5 door with omni keycard anymore
+
+== v1.7.0 Early Access 4 ==
+
+- Added lc:dt_scp096_bag
+- Added lc:dt_scp173_cage
+- Added lc:dt_bomb_activator
+- Added recipe for new armors
+- You can hide SCP-096's face ith using paper bag
+- Optimized SCP-096 sound volume
+
+== v1.7.0 Early Access 3 ==
+
+- Added developer commentary (use function command)
+- Added lc:dt_scp577
+- Fixed collision box of lc:dt_scp734
+
+== v1.7.0 Early Access 2 ==
+
+- Added lc:dt_janitor
+- Added lc:dt_janitor_scp049_2
+- Added lc:dt_o5_member
+- Added lc:dt_scp5535
+- Added lc:dt_sheaf_of_papers (SCP-001)
+- Added baby variant for SCP-098
+- Increased SCP-939 movement speed
+- Changed SCP-098 health to 50 (before: 57)
+
+== v1.7.0 Early Access 1 ==
+
+[ VERSION NUMBER HAS BEEN CHANGED TO 1.7.0 ]
+
+- Added lc:dt_scp5167_soldier
+- Added lc:dt_scp330
+- Added lc:dt_label330
+- New officer model
+- You can deal with scientist and O5 personnel
+- You can heal tamed chaos insurgency or mtf with painkillers/medkit
+- You can craft MP5A3 in Dystopia Craftbench
+- Fixed lc:dt_dtrifle_ammo recipe
+- Added melee damage for all guns
+- Changed stack size of all gun ammo (not mag) to 64
+- You can't carry ammo in offhand anymore
+
+== v1.6.3 Early Access 4 ==
+
+- You can tame Chaos Isurgency with CI currency
+- You can tame MTFs with higher lvl keycards
+- Chaos insurgency will trust you if you are wearning CI helmet
+- SCP Foundation personnel will trust you if you are wearning tro helmet
+- Added lc:dt_mp5a3
+- Added lc:dt_ci_helmet
+- Added lc:dt_ci_chestplate
+- Added lc:dt_ci_leggings
+- Added lc:dt_scientist_coat
+- Added lc:dt_scientist_pants
+- Added lc:dt_classd_shirt
+- Added lc:dt_classd_pants
+- Added lc:dt_scp1074
+- Added lc:dt_scp098
+- Added lc:dt_mine
+- Changed lc:dt_mp5k_mag id to lc:dt_mp5_mag
+- Increased health of lc:dt_officer to 39 (before: 36)
+- Melee variant of officer has better attack speed now
+- Changed M16 model of Chaos Insurgency to new model
+- Optimized all gun bullets
+- Bullets will destroy glass again
+
+== v1.6.3 Early Access 3 ==
+
+- Added reload animation for SPAS-12
+- Added lc:dt_spas12_empty
+- Added lc:dt_spas12_shellbox
+- Added lc:dt_spas12_shellbox_empty
+- Added lc:dt_classd_shirt
+- Added lc:dt_classd_pants
+- Sorted armors
+
+== v1.6.3 Early Access 2 ==
+
+- Added reload animation for Glock
+- Added reload animation for P90
+- Added lc:dt_glock_empty
+- Added lc:dt_glock_mag
+- Added lc:dt_glock_mag_empty
+- Added lc:dt_p90_empty
+- Added lc:dt_p90_mag
+- Added lc:dt_p90_mag_empty
+- Changed name of lc:dt_glock to Glock Pistol (before: Glock-19 Pistol)
+- Fixed player hitting of some ammo
+
+== v1.6.3 Early Access 1 ==
+
+- Added reload animation for MP5K
+- Added lc:dt_mp5k_empty
+- Added lc:dt_mp5k_mag
+- Added lc:dt_mp5k_mag_empty
+- Added reload animation for M16
+- Added lc:dt_m16_empty
+- Added lc:dt_m16_mag
+- Added lc:dt_m16_mag_empty
+
+== v1.6.2 Pre-Release ==
+
+- Added lc:dt_wall_sign
+- Added lc:dt_gray_concrete_curve
+- Added lc:dt_light_gray_concrete_curve
+- Added lc:dt_light5
+- Added rotated variant far camera (use wrench to change variant)
+- Added ceiling variant for camera (use wrench to change variant)
+- Added "Are ya winning, son?" variant for lc:dt_poster
+- Moved facility wall curve creative category to stone
+- Changed light emission value of lc:dt_light4 to 0.9 (before: 0.85)
+- Changed Eta-10's weapon to MP5 (before: G36C)
+- Changed Epsilon-11's P90 model to new model
+- Decreased volume of MTF idling noises
+- Increased volume of SCP-789-J
+- Fixed some JP lang problems
+- Fixed collision box of curves
+
+== v1.6.2 Early Access 1 ==
+
+- Added lc:dt_poster (SCP logo, MTF, Recycle, Cafeteria)
+- Added lc:dt_recycle_bin
+- Added recipe for lc:dt_dtrifle_ammo
+- Added recipe for lc:dt_morphine_syringe
+- Added recipe for lc:dt_scp294
+- Added recipe for lc:dt_empty_cup
+- Added lc:dt_med_wall_bottom
+- Added lc:dt_med_wall_top
+- Added lc:dt_red_wall_bottom
+- Added lc:dt_red_wall_top
+- Added lc:dt_blue_wall_bottom
+- Added lc:dt_blue_wall_top
+- Added SCP-789-J variant for toilet
+- All SCP-294 cups will turn into lc:dt_empty_cup when you drink it
+- You can only have SCP-294 cups with 1 slot 1 item
+- Changed max stack size of lc:dt_empty_cup to 64 (before: 16)
+- Changed texture of morphine syringe
+- Fixed collision box of lc:dt_weapon_crate
+
+== v1.6.1 Pre-Release ==
+
+- You can craft plushes in crafting table now
+- Added lc:dt_door3
+- Added lc:dt_door3_lvl1
+- Added lc:dt_door3_lvl2
+- Added lc:dt_door3_lvl3
+- Added lc:dt_door3_lvl4
+- Added lc:dt_door3_lvl5
+- Added lc:dt_scp420j
+- Added lc:dt_morphine_syringe
+- Added lc:dt_scp294
+- Added cups for SCP-294
+
+== v1.6.1 Early Access 4 ==
+
+- Minor changes to SCP-5167 dragon
+- Added lc:dt_scp5167_dragon_spawner
+- SCP-5167 boss will drop Dystopia Rifle when you killed him
+- You can craft SCP-5167 boss and SCP-5167 dragon in Dystopia Craftbench
+- Dystopia Rifle reloading animation became more cool
+
+== v1.6.1 Early Access 3 ==
+
+- Minor changes to SCP-5167 dragon
+- Added lc:dt_dystopia_rifle
+- Added lc:dt_dystopia_rifle_ammo
+- Added lc:dt_dystopia_rifle_ammo_empty
+
+== v1.6.1 Early Access 2 ==
+
+- Added lc:dt_scp5167_dragon
+- Added lc:dt_scp5167_dragon_son
+
+== v1.6.1 Early Access 1 ==
+
+- Added lc:dt_scp914
+- Added lc:dt_scp914_gear
+- Added lc:dt_scp914_scrap
+- All gun magazines (appearance) will disappear when you have no ammo on left hand
+- Fixed blast door opening bug
+
+== v1.6.0 Public Release ==
+
+- Added facility 3 (/function scpdystopia/facility3)
+- Added lc:dt_scp5167_boss
+- Added lc:dt_scp5167_boss_dead
+- Added mad mode for SCP-5167 (Mad mode will be turned on for SCP-5167 that summoned by SCP-5167 boss)
+
+== v1.6.0 Early Access 7 ==
+
+- Added lc:dt_painkiller
+- Added running animation for SCP-096
+- Changed using duration of lc:dt_medkit to 3.4 (before: 4.0)
+- Increased inertia value of all bullets from player
+
+== v1.6.0 Early Access 6 ==
+
+- Added lc:dt_glock
+- Added lc:dt_glock_ammo
+- Added lc:dt_dystopia_pickaxe
+- Added tags for every blocks
+- Added lc:dt_dystopia_craftbench
+- You can craft building blocks in Dystopia Craftbench
+
+== v1.6.0 Early Access 5 ==
+
+- Added recipes for all 3D decorative blocks
+- Added recipes for some items
+- Added lc:dt_scpdystopia_orb
+- Added lc:dt_scpdystopia_orb_block
+- Added lc:dt_ruined_facility1 feature
+- Added lc:dt_ruined_facility2 feature
+- Added lc:dt_ruined_facility3 feature
+- Added lc:dt_ruined_facility4 feature
+- Added lc:dt_ruined_facility5 feature
+- Added lc:dt_ruined_facility6 feature
+- Added lc:dt_ruined_facility7 feature
+- Added lc:dt_ruined_facility8 feature
+- Added lc:dt_ruined_facility9 feature
+- Added lc:dt_ruined_facility10 feature
+- Added lc:dt_facility_wreckage1 feature
+- Added lc:dt_facility_wreckage2 feature
+- Added lc:dt_scpdt_orb_cluster feature
+- Added lc:dt_scpdt_orb_gen feature
+- Added lc:dt_scp4959
+- Added lc:dt_imposter_totem
+- SCP-5167 will drop imposter totem
+- Door barrier has been changed into lc:dt_door_dummy
+- Decreased SCP-939 health
+- MTF. Chaos Insurgency, TRO SCP-049 are more stronger
+
+== v1.6.0 Early Access 4 ==
+
+- Added lc:dt_mp5k
+- Added lc:dt_mp5k_ammo
+- Added lc:dt_m16
+- Added lc:dt_m16_ammo
+- Added lc:dt_spas12
+- Added lc:dt_spas12_shell
+- Added lc:dt_hcz_wall2
+- Added lc:dt_hcz_wall3
+- Added lc:dt_hcz_floor
+- Added lc:dt_panel_wall1
+- Added lc:dt_panel_wall2
+- Added gun_recoil_on function command
+- Added gun_recoil_off function command
+- Fixed durability of SCP-5167 knife
+- Fixed durability of Nightstick
+- Fixed durability of SCP-1023-ARC
+- Commander stick is not a weapon now
+
+== v1.6.0 Early Access 3 ==
+
+- Added lc:dt_delivery_box
+- Added lc:dt_warehouse_rack
+- Added lc:dt_panel_wall_blue
+- Added lc:dt_panel_wall_red
+
+== v1.6.0 Early Access 2 ==
+
+- Added lc:dt_exterior_brick
+- Added lc:dt_exterior_brick_bottom
+- Added lc:dt_exterior_brick_middle1
+- Added lc:dt_exterior_brick_middle2
+- Added lc:dt_ceiling_lamp_cover
+- Added lc:dt_ceiling_lamp2_on
+- Added lc:dt_ceiling_lamp2_off
+- Added lc:dt_wet_floor_sign
+- Added lc:dt_ceiling_pipe
+- Added lc:dt_general_floor1
+- Added lc:dt_tile_floor2
+- Added lc:dt_tile_floor3
+- Added lc:dt_tile_floor4
+
+== v1.6.0 Early Access 1 ==
+
+- Added lc:dt_blast_door_lvl1
+- Added lc:dt_blast_door_lvl1_rotated
+- Added lc:dt_blast_door_lvl2
+- Added lc:dt_blast_door_lvl2_rotated
+- Added lc:dt_blast_door_lvl3
+- Added lc:dt_blast_door_lvl3_rotated
+- Added lc:dt_blast_door_lvl4
+- Added lc:dt_blast_door_lvl4_rotated
+- Added lc:dt_blast_door_lvl5
+- Added lc:dt_blast_door_lvl5_rotated
+- Added lc:dt_door_o5
+- Added lc:dt_keycard_o5
+- Added lc:dt_medbay_sign
+- Added lc:dt_o5_wall_bottom
+- Added lc:dt_o5_wall_top
+- Added lc:dt_cushion_wall
+- minecraft:explosion_resistance added for some doors
+- Japanese lang fixes
+
+== v1.5.1 Public Release ==
+
+- Blast door is now easy to look in hand.
+- SCP-049-2 will spawn in night.
+- Small lang fixes.
+
+== v1.5.1 Pre-Release ==
+
+- Added lc:dt_ci_truck
+- Added lc:dt_door2
+- Added lc:dt_door2_lvl1
+- Added lc:dt_door2_lvl2
+- Added lc:dt_door2_lvl3
+- Added lc:dt_door2_lvl4
+- Added lc:dt_door2_lvl5
+- Added lc:dt_blast_door
+- Added lc:dt_blast_door_rotated
+- Fixed breathability of SCPs/Humans in water
+- Minor changes
+
+== v1.5.1 Early Access Release 4 ==
+
+- New variant for scientist
+- Scientist will turn into SCP-049-2 when killed by SCP-049
+- Added lc:dt_scientist_scp049_2
+- Fixed sound playing location of scream sound loader
+
+== v1.5.1 Early Access Release 3 ==
+
+- Class-D will turn into SCP-049-2 when killed by SCP-049
+- Added lc:dt_class_d_scp049_2
+- Added melee attack animation for SCP-106
+- Added spawning animation for SCP-106
+- Added melee attack animation for SCP-049
+- Changed lc:dt_scream_sound_loader entity/pick collision box
+
+== v1.5.1 Early Access Release 2 ==
+
+- Added lc:dt_medkit
+- Added lc:dt_scream_sound_loader for contain SCP-106
+- Coffee mug will convert to empty mug when you drink it
+
+== v1.5.1 Early Access Release 1 ==
+
+- Added melee attack animation for officer
+- Added melee attack animation for SCP-5167
+- Added lc:dt_scp049_plush
+- Added lc:dt_scp939_plush
+- Added lc:dt_scp106_plush
+- Added lc:dt_scp106_container
+- Added lc:dt_intercom_general
+- Added lc:dt_intercom_breach
+- Added lc:dt_intercom_report
+- Added lc:dt_intercom_report_all
+- Fixed door shadow
+
+== v1.5.0 Public Release ==
+
+- Added lc:dt_lunch_box
+- Added lc:dt_hcz_wall
+- Fixed lc:dt_wood_chair entity collision box
+- Fixed entity collision box of all doors
+- Changed lc:dt_mesh_catwalk pick collision box
+- Full built facility 2
+
+== v1.5.0 Early Access Release 11 ==
+
+- Added lc:dt_air_conditioner
+- Added lc:dt_radio_block
+- Added lc:dt_printer
+- Added lc:dt_hand_dryer
+- Added lc:dt_ceiling_lamp_on
+- Added lc:dt_ceiling_lamp_off
+- Added lc:dt_lcz_wall_bottom
+- Added lc:dt_lcz_wall_top
+- Added lc:dt_facility_wall_curve
+- Added function command for summon facility 2 (/function scpdystopia/facility2)
+- Added facility 2 structure
+- Changed lc:dt_entrance_wall to lc:dt_facility_wall
+- SPAS-12 bullet damage decreased to 11.5 (before: 12)
+- M16 bullet damage decreased to 9.5 (before: 11)
+- USP bullet damage increased to 7.5 (before: 7)
+- Changed scientist randomized component selection weight in minecraft:entity_spawned
+- Changed officer randomized component selection weight in minecraft:entity_spawned
+
+== v1.5.0 Early Access Release 10 ==
+
+- Added lc:dt_sink (block)
+- Added lc:dt_toilet (block)
+- Added lc:dt_sit_toilet (entity)
+- Added lc:dt_men_toilet (block)
+- Added creative menu compatible for some blocks
+- Changed itemGroup.name.stone lang
+- Changed itemGroup.name.sandstone lang
+- Added lc:dt_tissue_box
+- Added 2 variants for lc:dt_tissue_box
+- Added lc:dt_scp_logo
+
+== v1.5.0 Early Access Release 9 ==
+
+- Added lc:dt_alarm
+- Added 3 variants for lc:dt_rack1
+- Added more English name displaying support
+- Added more Japanese name displaying support
+- Added lc:dt_chaos_insurgency
+- Added SCP-439 Label
+- Added SCP-1025 Label
+
+== v1.5.0 Early Access Release 8 ==
+
+- Added lc:dt_rack1
+- Added lc:dt_pizza_box
+- Added lc:dt_scp458_pizza_box
+- Added lc:dt_pizza_slice

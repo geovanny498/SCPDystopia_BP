@@ -1,0 +1,43 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.epsilon11.random_announc": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "do": "query.is_sheared"
+            }
+          ]
+        },
+        "do": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            },
+            {
+              "death": "!query.is_alive"
+            }
+          ],
+          "animations": [
+            "random_announc"
+          ]
+        },
+        "death": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            },
+            {
+              "do": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.epsilon11.announc_death @a"
+          ]
+        }
+      }
+    }
+  }
+}

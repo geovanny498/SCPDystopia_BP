@@ -1,0 +1,128 @@
+{
+  "tiers": [
+    {
+      "trades": [
+        {
+          "wants": [
+            {
+              "item": "lc:dt_painkillers",
+              "quantity": {
+                "min": 5,
+                "max": 10
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 3,
+                "max": 6
+              }
+            }
+          ]
+        },
+        {
+          "wants": [
+            {
+              "item": "lc:dt_medkit",
+              "quantity": {
+                "min": 2,
+                "max": 5
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 3,
+                "max": 11
+              }
+            }
+          ]
+        },
+        {
+          "wants": [
+            {
+              "item": "lc:dt_pizza_slice",
+              "quantity": {
+                "min": 2,
+                "max": 20
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 2,
+                "max": 10
+              }
+            }
+          ]
+        },
+        {
+          "wants": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 4,
+                "max": 10
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "minecraft:bread",
+              "quantity": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
+        },
+        {
+          "wants": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 4,
+                "max": 10
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "minecraft:paper",
+              "quantity": {
+                "min": 3,
+                "max": 7
+              }
+            }
+          ]
+        },
+        {
+          "wants": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 11,
+                "max": 20
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "lc:dt_pizza_slice",
+              "quantity": {
+                "min": 3,
+                "max": 6
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

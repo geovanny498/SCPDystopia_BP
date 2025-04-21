@@ -1,0 +1,23 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "lc:dt_p90_ammo",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:display_name": {
+        "value": "P90 Ammo"
+      },
+      "minecraft:icon": {
+        "texture": "dt_p90_ammo"
+      },
+      "minecraft:stacked_by_data": true,
+      "minecraft:allow_off_hand": true,
+      "minecraft:max_stack_size": 64
+    }
+  }
+}

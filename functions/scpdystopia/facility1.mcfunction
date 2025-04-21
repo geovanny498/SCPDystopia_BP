@@ -1,0 +1,1 @@
+structure load mystructure:dt_facility1 ~ ~ ~2

@@ -1,0 +1,404 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp610",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "calm": {
+        "minecraft:on_target_acquired": {
+          "event": "scp610:become_angry",
+          "target": "self"
+        }
+      },
+      "angry": {
+        "minecraft:angry": {
+          "duration": 20,
+          "broadcast_anger": true,
+          "broadcast_range": 28,
+          "broadcast_targets": [
+            "scp610"
+          ],
+          "calm_event": {
+            "event": "scp610:on_calm",
+            "target": "self"
+          }
+        }
+      },
+      "death": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scp610_dead<minecraft:entity_spawned>"
+        }
+      },
+      "type1": {
+        "minecraft:variant": {
+          "value": 0
+        },
+        "minecraft:knockback_resistance": {
+          "value": 0.24
+        },
+        "minecraft:health": {
+          "value": 34,
+          "max": 34
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 1,
+          "speed_multiplier": 1.0,
+          "track_target": true
+        },
+        "minecraft:attack": {
+          "damage": 5
+        },
+        "minecraft:movement": {
+          "value": 0.34
+        },
+        "minecraft:collision_box": {
+          "width": 0.7,
+          "height": 1.1
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 1.0
+        },
+        "minecraft:behavior.random_look_around": {
+          "priority": 7
+        }
+      },
+      "type2": {
+        "minecraft:variant": {
+          "value": 1
+        },
+        "minecraft:knockback_resistance": {
+          "value": 0.1
+        },
+        "minecraft:health": {
+          "value": 38,
+          "max": 38
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 1,
+          "speed_multiplier": 1.1,
+          "track_target": true
+        },
+        "minecraft:attack": {
+          "damage": 6
+        },
+        "minecraft:movement": {
+          "value": 0.28
+        },
+        "minecraft:collision_box": {
+          "width": 0.6,
+          "height": 1.9
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 0.9
+        },
+        "minecraft:behavior.random_look_around": {
+          "priority": 7
+        }
+      },
+      "type3": {
+        "minecraft:variant": {
+          "value": 2
+        },
+        "minecraft:knockback_resistance": {
+          "value": 0.3
+        },
+        "minecraft:health": {
+          "value": 48,
+          "max": 48
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 1,
+          "speed_multiplier": 1.3,
+          "track_target": true
+        },
+        "minecraft:attack": {
+          "damage": 7,
+          "effect_name": "fatal_poison",
+          "effect_duration": 7
+        },
+        "minecraft:movement": {
+          "value": 0.35
+        },
+        "minecraft:mob_effect": {
+          "effect_range": 0.2,
+          "mob_effect": "poison",
+          "effect_time": 4,
+          "entity_filter": {
+            "any_of": [
+              { "test": "is_family", "subject": "other", "value": "player" },
+              { "test": "is_family", "subject": "other", "value": "human" },
+              { "test": "is_family", "subject": "other", "value": "villager" },
+              { "test": "is_family", "subject": "other", "value": "snow_golem" },
+              { "test": "is_family", "subject": "other", "value": "iron_golem" }
+            ] 
+          }
+        },
+        "minecraft:collision_box": {
+          "width": 2.1,
+          "height": 1.9
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 0.7
+        },
+        "minecraft:behavior.random_look_around": {
+          "priority": 7
+        }
+      },
+      "type4": {
+        "minecraft:variant": {
+          "value": 3
+        },
+        "minecraft:knockback_resistance": {
+          "value": 0.16
+        },
+        "minecraft:health": {
+          "value": 43,
+          "max": 43
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 1,
+          "speed_multiplier": 1.0,
+          "track_target": true
+        },
+        "minecraft:attack": {
+          "damage": 7
+        },
+        "minecraft:movement": {
+          "value": 0.29
+        },
+        "minecraft:collision_box": {
+          "width": 0.6,
+          "height": 1.9
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 0.9
+        },
+        "minecraft:behavior.random_look_around": {
+          "priority": 7
+        }
+      }
+    },
+    "components": {
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 15 : 0"
+      },
+      "minecraft:type_family": {
+        "family": [ "scp", "scp610", "mob", "monster" ]
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:follow_range": {
+        "value": 28,
+        "max": 28
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "scp610:death"
+            }
+          }
+        ]
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 7
+          }
+        ]
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2,
+        "entity_types": {
+          "filters": {
+            "test": "is_family",
+            "subject": "other",
+            "operator": "!=",
+            "value": "scp610"
+          },
+          "max_dist": 35
+        }
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 0,
+        "within_radius": 30,
+        "reselect_targets": true,
+        "entity_types": [
+          {
+            "filters": {
+              "other_with_families": [
+                "villager",
+                "human",
+                "player",
+                "illager",
+                "iron_golem",
+                "snow_golem",
+                "cow",
+                "chicken",
+                "pig",
+                "sheep",
+                "cat",
+                "ocelot",
+                "turtle",
+                "goat",
+                "axolotl",
+                "horse",
+                "donkey",
+                "llama",
+                "mule",
+                "panda",
+                "rabbit",
+                "witch"
+              ]
+            },
+            "max_dist": 30
+          }
+        ],
+        "must_see_forget_duration": 12.0,
+        "must_see": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:breathable": {
+        "total_supply": 18,
+        "suffocate_time": 0
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 1.0
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": false
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.open_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "sequence": [
+          {
+            "randomize": [
+              {
+                "weight": 2,
+                "add": {
+                  "component_groups": [
+                    "type1"
+                  ]
+                }
+              },
+              {
+                "weight": 2,
+                "add": {
+                  "component_groups": [
+                    "type2"
+                  ]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": [
+                    "type3",
+                    "calm"
+                  ]
+                }
+              },
+              {
+                "weight": 2,
+                "add": {
+                  "component_groups": [
+                    "type4"
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      },
+      "scp610:become_angry": {
+        "add": {
+          "component_groups": [
+            "angry"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "calm"
+          ]
+        }
+      },
+      "scp610:on_calm": {
+        "add": {
+          "component_groups": [
+            "calm"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "angry"
+          ]
+        }
+      },
+      "scp610:death": {
+        "add": {
+          "component_groups": [
+            "death"
+          ]
+        }
+      }
+    }
+  }
+}
+  

@@ -1,0 +1,54 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_scp5167_cannon",
+			"category": "Equipment"
+		},
+		"components": {
+			"minecraft:use_duration": 0.1,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.equipment"
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "dt_scp5167_cannon_icon"
+			},
+			"minecraft:display_name": {
+				"value": "SCP-5167 Cannon"
+			},
+			"minecraft:cooldown": {
+				"duration": 1.9,
+				"category": "scp5167_cannon_shooting"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"event": "cannon:shoot"
+				}
+			}
+		},
+		"events": {
+			"cannon:shoot": {
+				"sequence": [
+					{
+						"shoot": {
+							"projectile": "lc:dt_scp5167_cannon_ball",
+							"launch_power": 1.1
+						},
+						"run_command": {
+							"command": [
+								"execute @s ~~~ playsound mob.blaze.shoot @a[r=20] ~~~",
+								"playanimation @s animation.dt_misc.player_gun_fire",
+								"camerashake add @s 0.44 0.2 rotational",
+								"title @s actionbar §c> SUS >  §e+  §c< SUS <",
+								"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.28 ^5"
+							],
+							"target": "holder"
+						}
+					}
+				]
+			}
+		}
+	}
+}

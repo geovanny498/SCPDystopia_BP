@@ -1,0 +1,213 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp3998",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "fire"
+        ]
+      },
+      "animations": {
+        "fire": "controller.animation.scp3998.burning"
+      }
+    },
+    "component_groups": {
+      "burn_loop": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": 4,
+          "time_down_event": {
+            "event": "scp3998:burn_loop"
+          }
+        }
+      },
+      "burn_loop2": {
+        "minecraft:is_sheared": {},
+        "minecraft:timer": {
+          "looping": false,
+          "time": 4,
+          "time_down_event": {
+            "event": "scp3998:burn_loop_back"
+          }
+        }
+      },
+      "default_time": {
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "filters": {
+                "all_of": [
+                  { "test": "is_daytime", "value": true }
+                ]
+              },
+              "event": "scp3998:to_day"
+            },
+            {
+              "filters": {
+                "all_of": [
+                  { "test": "is_daytime", "value": false }
+                ]
+              },
+              "event": "scp3998:to_night"
+            }
+          ]
+        }
+      },
+      "daytime": {
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "filters": {
+                "all_of": [
+                  { "test": "is_daytime", "value": false }
+                ]
+              },
+              "event": "scp3998:to_night"
+            }
+          ]
+        }
+      },
+      "night": {
+        "minecraft:environment_sensor": {
+          "triggers": [
+            {
+              "filters": {
+                "all_of": [
+                  { "test": "is_daytime", "value": true }
+                ]
+              },
+              "event": "scp3998:to_day"
+            }
+          ]
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [
+          "inanimate",
+          "scp3998"
+        ]
+      },
+      "minecraft:health": {
+        "value": 50,
+        "max": 50
+      },
+      "minecraft:attack": {
+        "damage": 0
+      },
+      "minecraft:movement": {
+        "value": 0.0
+      },
+      "minecraft:fire_immune": true,
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:collision_box": {
+        "width": 0.5,
+        "height": 1.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {},
+      "minecraft:physics": {},
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:annotation.open_door": {},
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_sun": false,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "default_time"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+          ]
+        }
+      },
+      "scp3998:to_day": {
+        "add": {
+          "component_groups": [
+            "daytime"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "night",
+            "burn_loop",
+            "burn_loop2"
+          ]
+        }
+      },
+      "scp3998:to_night": {
+        "add": {
+          "component_groups": [
+            "night",
+            "burn_loop"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "daytime"
+          ]
+        }
+      },
+      "scp3998:burn_loop": {
+        "add": {
+          "component_groups": [
+            "burn_loop2"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "burn_loop"
+          ]
+        }
+      },
+      "scp3998:burn_loop_back": {
+        "add": {
+          "component_groups": [
+            "burn_loop"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "burn_loop2"
+          ]
+        }
+      }
+    }
+  }
+}

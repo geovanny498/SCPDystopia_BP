@@ -1,0 +1,41 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:item": {
+        "description": {
+            "identifier": "lc:dt_epsilon11_chestplate",
+            "category": "Equipment"
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.chestplate"
+            },
+            "minecraft:max_stack_size": 1,
+            "minecraft:icon": {
+                "texture": "dt_epsilon11_chestplate_icon"
+            },
+            "minecraft:durability": {
+                "max_durability": 400,
+                "damage_chance": {
+                    "min": 7,
+                    "max": 12
+                }
+            },
+            "minecraft:armor": {
+                "protection": 8
+            },
+            "minecraft:knockback_resistance": {
+                "protection": 0.2
+            },
+            "minecraft:enchantable": {
+                "slot": "armor_chest",
+                "value": 10
+            },
+            "minecraft:wearable": {
+                "slot": "slot.armor.chest"
+            },
+            "minecraft:display_name": {
+                "value": "Nine-Tailed Fox Chestplate"
+            }
+        }
+    }
+}

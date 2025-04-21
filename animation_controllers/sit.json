@@ -1,0 +1,119 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.chair.sit": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "sit": "query.has_rider"
+            }
+          ]
+        },
+        "sit": {
+          "transitions": [
+            {
+              "death": "!query.has_rider"
+            }
+          ]
+        },
+        "death": {
+          "transitions": [
+            {
+              "sit": "query.has_rider"
+            }
+          ],
+          "on_entry": [
+            "@s sit:death"
+          ]
+        }
+      }
+    },
+    "controller.animation.toilet.sit": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "sit": "query.has_rider"
+            }
+          ]
+        },
+        "sit": {
+          "transitions": [
+            {
+              "death": "!query.has_rider"
+            }
+          ]
+        },
+        "death": {
+          "transitions": [
+            {
+              "sit": "query.has_rider"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.toilet_flush @a[r=5] ~~~",
+            "@s sit:death"
+          ]
+        }
+      }
+    },
+    "controller.animation.toilet_buttghost.sit": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "sit": "query.has_rider"
+            }
+          ]
+        },
+        "sit": {
+          "transitions": [
+            {
+              "death": "!query.has_rider"
+            }
+          ],
+          "on_entry": [
+            "/effect @p wither 2 1 true"
+          ]
+        },
+        "death": {
+          "transitions": [
+            {
+              "sit": "query.has_rider"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.toilet_flush @a[r=5] ~~~",
+            "@s sit:death"
+          ]
+        }
+      }
+    },
+    "controller.animation.toilet.fart": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "poop": "query.is_sheared"
+            }
+          ]
+        },
+        "poop": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "on_entry": [
+            "/playsound scpdt.fart @a[r=5] ~~~"
+          ]
+        }
+      }
+    }
+  }
+}

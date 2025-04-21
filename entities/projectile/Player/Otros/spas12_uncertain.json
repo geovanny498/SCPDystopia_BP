@@ -1,0 +1,118 @@
+{
+    "format_version": "1.12.0",
+    "minecraft:entity": {
+        "description": {
+            "identifier": "lc:dt_spas12_bullet_player",
+            "is_spawnable": false,
+            "is_summonable": true,
+            "is_experimental": false,
+            "runtime_identifier": "minecraft:snowball"
+        },
+        "component_groups": {
+            "minecraft:exploding": {
+                "minecraft:explode": {
+                    "fuse_length": 0,
+                    "fuse_lit": true,
+                    "power": 0.1,
+                    "causes_fire": false,
+                    "fire_affected_by_griefing": true,
+                    "destroy_affected_by_griefing": true
+                }
+            },
+            "despawning": {
+                "minecraft:despawn": {}
+            } 
+        },
+        "components": {
+            "minecraft:tick_world": {
+				"distance_to_players": 128,
+				"never_despawn": false,
+				"radius": 2
+			},
+            "minecraft:type_family": {
+                "family": [ "bullet", "projectile" ]
+            },
+            "minecraft:break_blocks": {
+                "breakable_blocks": [
+                    "glass",
+                    "glass_pane",
+                    "stained_glass",
+                    "stained_glass_pane",
+                    "standing_sign",
+                    "vine",
+                    "wall_banner",
+                    "wall_sign",
+                    "web",
+                    "wheat"
+                ]
+            },
+            "minecraft:collision_box": {
+                "width": 0.2,
+                "height": 0.2
+            },
+            "minecraft:projectile": {
+                "on_hit": {
+                    "impact_damage": {
+                        "damage": 13,
+                        "knockback": true,
+                        "semi_random_diff_damage": false,
+                        "destroy_on_hit": true
+                    },
+                    "stick_in_ground": {
+                        "shake_time": 0.35
+                    },
+                    "definition_event": {
+                        "affect_projectile": true,
+                        "event_trigger": {}
+                    }
+                },
+                "liquid_inertia": 1.0,
+                "hit_sound": "gun.hit",
+                "power": 10.0,
+                "gravity": 0.0,
+                "inertia": 1.0,
+                "uncertainty_base": 20,
+                "uncertainty_multiplier": 1.6,
+                "anchor": 1,
+                "offset": [
+                    0,
+                    -0.1,
+                    0
+                ],
+                "reflect_on_hurt": false,
+                "catch_fire": false
+            },
+            "minecraft:physics": {},
+            "minecraft:timer": {
+                "looping": false,
+                "time": 0.64,
+                "time_down_event": {
+                    "event": "minecraft:start_despawn"
+                }
+            },
+            "minecraft:conditional_bandwidth_optimization": {
+                "default_values": {
+                    "max_optimized_distance": 80.0,
+                    "max_dropped_ticks": 7,
+                    "use_motion_prediction_hints": true
+                }
+            }
+        },
+        "events": {
+            "minecraft:explode": {
+                "add": {
+                    "component_groups": [
+                        "minecraft:exploding"
+                    ]
+                }
+            },
+            "minecraft:start_despawn": {
+                "add": {
+                    "component_groups": [
+                        "despawning"
+                    ]
+                }
+            }
+        }
+    }
+}

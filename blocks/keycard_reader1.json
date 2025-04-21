@@ -1,0 +1,86 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_keyreader1",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_keyreader1",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -3, 2, -8 ],
+                "size": [ 6, 8, 2 ]
+            },
+            "minecraft:entity_collision": false,
+            "minecraft:geometry": "geometry.dt_keyreader",
+            "minecraft:destroy_time": 1.0,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:on_interact": {
+                "condition": "(query.get_equipped_item_name('main_hand') == 'dt_keycard1') || (query.get_equipped_item_name('main_hand') == 'dt_keycard2') || (query.get_equipped_item_name('main_hand') == 'dt_keycard3') || (query.get_equipped_item_name('main_hand') == 'dt_keycard4') || (query.get_equipped_item_name('main_hand') == 'dt_keycard5') || (query.get_equipped_item_name('main_hand') == 'dt_keycard_omni')",
+                "event": "lc:event_read"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:flammable": {
+                "flame_odds": 0,
+                "burn_odds": 0
+            },
+            "minecraft:block_light_emission": 0.0,
+            "minecraft:block_light_absorption": 0.2,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "facing:direction": "(query.cardinal_facing_2d)"
+                }
+            },
+            "lc:event_read": {
+                "run_command": {
+                    "command": [
+                        "function scpdt_system/key_read"
+                    ],
+                  "target": "self"
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

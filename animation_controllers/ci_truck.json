@@ -1,0 +1,27 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.ci_truck.dispatch": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "blink": "query.is_sheared"
+            }
+          ]
+        },
+        "blink": {
+          "transitions": [
+            {
+              "default": "!query.is_sheared"
+            }
+          ],
+          "animations": [
+            "dispatch"
+          ]
+        }
+      }
+    }
+  }
+}

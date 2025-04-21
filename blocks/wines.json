@@ -1,0 +1,38 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_wines"
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_wines",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:entity_collision": {
+                "origin": [ -6, 0, -6 ],
+                "size": [ 0, 0, 0 ]
+            },
+            "minecraft:geometry": "geometry.dt_wines",
+            "minecraft:destroy_time": 0.1,
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:block_light_emission": 0.0,
+            "minecraft:block_light_absorption": 0.0,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+        },
+        "permutations": [
+        ]
+    }
+}

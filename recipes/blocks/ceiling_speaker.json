@@ -1,0 +1,30 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_ceiling_speaker"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "#A#",
+      " _ "
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "_": {
+        "item": "noteblock"
+      },
+      "A": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_ceiling_speaker",
+      "count": 5
+    }
+  }
+}

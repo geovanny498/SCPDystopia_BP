@@ -1,0 +1,33 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_radio_block"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "A A",
+      "CBC",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "A": {
+        "item": "minecraft:iron_nugget"
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "C": {
+        "item": "noteblock"
+      }
+    },
+    "result": {
+      "item": "lc:dt_radio_block"
+    }
+  }
+}

@@ -1,0 +1,74 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "lc:dt_combat_knife",
+      "category": "Equipment"
+    },
+    "components": {
+      "minecraft:durability": {
+        "max_durability": 10000,
+        "damage_chance": {
+          "min": 4,
+          "max": 7
+        }
+      },
+      "minecraft:mining_speed": 1.5,
+      "minecraft:weapon": {
+        "on_hurt_entity": {
+          "event": "lc:reduce_durability"
+        }
+      },
+      "minecraft:damage": 8,
+      "minecraft:enchantable": {
+        "value": 20,
+        "slot": "sword"
+      },
+      "minecraft:can_destroy_in_creative": false,
+      "minecraft:digger": {
+        "use_efficiency": true,
+        "destroy_speeds": [
+          {
+            "block": "minecraft:web",
+            "speed": 99999
+          },
+          {
+            "block": "minecraft:bamboo",
+            "speed": 99999
+          }
+        ]
+      },
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.sword"
+      },
+      "minecraft:hand_equipped": true,
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": {
+        "texture": "dt_combat_knife"
+      },
+      "minecraft:display_name": {
+        "value": "§9§lMTF Delta-1 Sword"
+      }
+    },
+    "events": {
+      "lc:reduce_durability": {
+        "randomize": [
+          {
+            "damage": {
+              "type": "durability",
+              "target": "self",
+              "amount": 4
+            }
+          },
+          {
+            "damage": {
+              "type": "durability",
+              "target": "self",
+              "amount": 5
+            }
+          }
+        ]
+      }
+    }
+  }
+}

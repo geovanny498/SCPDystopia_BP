@@ -1,0 +1,100 @@
+{
+  "tiers": [
+    {
+      "trades": [
+        {
+          "wants": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 25,
+                "max": 35
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "lc:dt_glock"
+            }
+          ]
+        },
+        {
+          "wants": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 20,
+                "max": 25
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "lc:dt_glock_mag",
+              "quantity": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "wants": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 25,
+                "max": 35
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "lc:dt_mp5a3"
+            }
+          ]
+        },
+        {
+          "wants": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 20,
+                "max": 25
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "lc:dt_mp5_mag",
+              "quantity": {
+                "min": 1,
+                "max": 2
+              }
+            }
+          ]
+        },
+        {
+          "wants": [
+            {
+              "item": "minecraft:paper",
+              "quantity": {
+                "min": 10,
+                "max": 22
+              }
+            }
+          ],
+          "gives": [
+            {
+              "item": "lc:dt_coin",
+              "quantity": {
+                "min": 15,
+                "max": 25
+              }
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

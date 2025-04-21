@@ -1,0 +1,104 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:block": {
+		"description": {
+			"identifier": "lc:dt_tesla_shock_block",
+            "properties": {
+                "tesla:state": [ 0, 1, 2 ]
+            }
+		},
+		"components": {
+			"minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+			"minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_tesla_shock_block",
+                    "render_method": "opaque"
+                }
+            },
+			"minecraft:unit_cube": {},
+			"minecraft:destroy_time": 1.6,
+			"minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+			"minecraft:explosion_resistance": 15.0,
+            "tag:lc:dystopiablock": {}
+		},
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "tesla:state": 0
+                }
+            },
+			"tesla:windup": {
+				"set_block_property": {
+                    "tesla:state": 1
+                },
+				"run_command": {
+                    "command": [
+                        "playsound scpdt.tesla.windup @a[r=13]"
+                    ],
+                  "target": "self"
+                }
+			},
+			"tesla:shock": {
+				"set_block_property": {
+                    "tesla:state": 2
+                },
+				"run_command": {
+                    "command": [
+						"effect @e[r=3] instant_damage 1 20 true",
+						"kill @e[r=2.5,type=item]",
+                        "playsound scpdt.tesla.shock @a[r=13]",
+						"summon lightning_bolt ~~1~"
+                    ],
+                  "target": "self"
+                }
+			},
+			"tesla:powerup": {
+                "set_block_property": {
+                    "tesla:state": 0
+                }
+            }
+        },
+        "permutations": [
+			{
+                "condition": "query.block_property('tesla:state') == 0",
+                "components": {
+                    "minecraft:on_step_on": {
+						"event": "tesla:windup",
+						"target": "self"
+					}
+                }
+            },
+			{
+                "condition": "query.block_property('tesla:state') == 1",
+                "components": {
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.5, 0.5],
+                        "on_tick": {
+                            "event": "tesla:shock",
+                            "target": "self"
+                        }
+                    }
+                }
+            },
+			{
+                "condition": "query.block_property('tesla:state') == 2",
+                "components": {
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [1, 1],
+                        "on_tick": {
+                            "event": "tesla:powerup",
+                            "target": "self"
+                        }
+                    }
+                }
+            }
+        ]
+	}
+}

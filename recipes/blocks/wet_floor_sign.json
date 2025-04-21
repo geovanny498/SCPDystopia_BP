@@ -1,0 +1,27 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+    "identifier": "lc:dt_wet_floor_sign"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "ingredients": [
+      {
+        "item": "minecraft:sign"
+      },
+      {
+        "item": "minecraft:dye",
+        "data":  11
+      },
+      {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    ],
+    "result": {
+      "item": "lc:dt_wet_floor_sign",
+      "count": 2
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_scp005",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:use_duration": 3600,
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:hand_equipped": true,
+      "minecraft:allow_off_hand": true,
+      "minecraft:max_stack_size": 1,
+      "minecraft:icon": {
+        "texture": "dt_scp005"
+      },
+      "minecraft:display_name": {
+        "value": "SCP-005 \"Skeleton Key\""
+      },
+      "tag:lc:can_lvl1": {},
+      "tag:lc:can_lvl2": {},
+      "tag:lc:can_lvl3": {},
+      "tag:lc:can_lvl4": {},
+      "tag:lc:can_lvl5": {},
+      "tag:lc:can_o5": {}
+    }
+  }
+}

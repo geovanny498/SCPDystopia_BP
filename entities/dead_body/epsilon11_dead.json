@@ -1,0 +1,177 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_epsilon11_dead",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "death",
+          "gun_taken"
+        ]
+      },
+      "animations": {
+        "death": "animation.scpdt.dead_body.blood",
+        "gun_taken": "controller.animation.scpdt.class_d_v2.pick_gun_p90"
+      }
+    },
+    "component_groups": {
+      "delete_timer": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": 35,
+          "randomInterval": false,
+          "time_down_event": {
+            "event": "body:delete"
+          }
+        }
+      },
+      "death": {
+        "minecraft:despawn": {
+        }
+      },
+      "gun_not_taken": {
+        "minecraft:type_family": {
+          "family": [ "dead_body", "dead_body_has_gun" ]
+        },
+        "minecraft:entity_sensor": {
+          "sensor_range": 1.5,
+          "minimum_count": 1,
+          "event_filters": {
+            "all_of": [
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "==",
+                "value": "class_d"
+              },
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "class_d_has_gun"
+              }
+            ]
+          },
+          "event": "body:gun_taken_by_class_d"
+        }
+      },
+      "gun_taken": {
+        "minecraft:type_family": {
+          "family": [ "dead_body" ]
+        },
+        "minecraft:is_sheared": {}
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 0.4
+      },
+      "minecraft:health": {
+        "value": 25,
+        "max": 25
+      },
+      "minecraft:interact": {
+        "interactions": {
+          "on_interact": {
+            "filters": {
+              "all_of": [
+                { "test": "is_family", "subject": "other", "value": "player" },
+                { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_commander" }
+              ]
+            },
+          "event": "body:stop_delete_timer",
+          "target": "self"
+          },
+          "hurt_item": 0,
+          "swing": true,
+          "interact_text": "action.interact.scpdt.stop_dead_body_timer"
+        }
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp049"
+                  }
+                ],
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "body:become_scp049_2"
+            }
+          }
+        ]
+      },
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:collision_box": {
+        "width": 0.7,
+        "height": 1.1
+      },
+      "minecraft:nameable": {},
+      "minecraft:conditional_bandwidth_optimization": {}
+    },
+    "events": {
+      "body:delete": {
+        "add": {
+          "component_groups": [
+            "death"
+          ]
+        }
+      },
+      "body:stop_delete_timer": {
+        "remove": {
+          "component_groups": [
+            "delete_timer"
+          ]
+        }
+      },
+      "epsilon11": {
+        "add": {
+          "component_groups": [
+            "delete_timer",
+            "gun_not_taken"
+          ]
+        }
+      },
+      "body:become_scp049_2": {
+        "add": {
+          "component_groups": [
+            "scp049_2"
+          ]
+        }
+      },
+      "body:gun_taken_by_class_d": {
+        "add": {
+          "component_groups": [
+            "gun_taken"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "gun_not_taken"
+          ]
+        }
+      }
+    }
+  }
+}
+  

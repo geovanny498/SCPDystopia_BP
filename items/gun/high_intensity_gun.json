@@ -1,0 +1,109 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_high_intensity_gun",
+			"category": "Equipment"
+		},
+		"components": {
+			"minecraft:use_duration": 2.6,
+			"minecraft:damage": 30,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.equipment"
+			},
+			"minecraft:durability": {
+				"max_durability": 100000,
+				"damage_chance": {
+					"min": 0,
+					"max": 0
+				}
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "dt_hig_icon"
+			},
+			"minecraft:display_name": {
+				"value": "§l§k§0:::§r§c§lHigh Intensity Gun - H.I.G. Alpha-1§l§k§0:::§r"
+			},
+			"minecraft:cooldown": {
+				"duration": 0.47,
+				"category": "hig"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"event": "hig:shoot"
+				}
+			},
+			"minecraft:weapon": {
+				"on_hurt_entity": {
+				},
+				"on_hit_block": {
+				}
+			}
+		},
+		"events": {
+			"hig:shoot": {
+				"sequence": [
+					{
+						"condition": "(query.remaining_durability == 1)",
+						"run_command": {
+							"command": [
+								"execute @s ~~~ playsound scpdt.gun.shot_dry @a[r=10] ~~~",
+								"replaceitem entity @s slot.weapon.mainhand 0 lc:dt_high_intensity_gun_empty"
+							],
+							"target": "holder"
+						}
+					},
+					{
+						"condition": "(query.remaining_durability > 1)",
+						"sequence": [
+							{
+								"condition": "!query.is_sneaking",
+								"shoot": {
+									"projectile": "lc:dt_hig_bullet_player",
+									"launch_power": 30
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.hig.shoot @a[r=10] ~~~",
+										"playanimation @s animation.dt_misc.player_gun_fire",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.08 ^1",
+										"camerashake add @s 1 0.3 rotational",
+										"title @s actionbar §c>  §f+  §c<"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							},
+							{
+								"condition": "query.is_sneaking",
+								"shoot": {
+									"projectile": "lc:dt_hig_bullet_player_sneak",
+									"launch_power": 34
+								},
+								"run_command": {
+									"command": [
+										"execute @s ~~~ playsound scpdt.hig.shoot @a[r=10] ~~~ 1.0 0.85",
+										"playanimation @s animation.dt_misc.player_gun_fire",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.08 ^1",
+										"camerashake add @s 0.8 0.17 rotational",
+										"title @s actionbar §c>§e+§c<"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

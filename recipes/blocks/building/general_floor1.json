@@ -1,0 +1,26 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_general_floor1"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "###",
+      "###",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:stained_hardened_clay",
+        "data": 9
+      }
+    },
+    "result": {
+      "item": "lc:dt_general_floor1",
+      "count": 20
+    }
+  }
+}

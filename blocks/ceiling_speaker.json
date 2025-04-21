@@ -1,0 +1,38 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_ceiling_speaker"
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_ceiling_speaker",
+                    "render_method": "alpha_test"
+                }
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -6, 15, -6 ],
+                "size": [ 12, 1, 12 ]
+            },
+            "minecraft:entity_collision": {
+                "origin": [ -6, 15, -6 ],
+                "size": [ 12, 1, 12 ]
+            },
+            "minecraft:geometry": "geometry.dt_ceiling_speaker",
+            "minecraft:destroy_time": 1.4,
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:block_light_emission": 0.0,
+            "minecraft:block_light_absorption": 0.4,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+        },
+        "permutations": [
+        ]
+    }
+}

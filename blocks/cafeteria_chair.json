@@ -1,0 +1,165 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_cafeteria_chair",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ],
+                "cafeteria_chair:color": [ 0, 1, 2, 3 ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:entity_collision": false,
+            "minecraft:geometry": "geometry.dt_cafeteria_chair",
+            "minecraft:destroy_time": 1.2,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:on_interact": {
+                "event": "cafeteria_chair:interact"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:flammable": {
+                "flame_odds": 10,
+                "burn_odds": 10
+            },
+            "minecraft:block_light_emission": 0.0,
+            "minecraft:block_light_absorption": 0.2,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "facing:direction": "(query.cardinal_facing_2d)",
+                    "cafeteria_chair:color": 0
+                }
+            },
+            "cafeteria_chair:interact": {
+                "sequence": [
+                    {
+                        "condition": "(query.get_equipped_item_name != 'dt_wrench')",
+                        "run_command": {
+                            "command": [
+                                "function scpdt_system/sit"
+                            ],
+                          "target": "self"
+                        }
+                    },
+                    {
+                        "condition": "(query.get_equipped_item_name == 'dt_wrench')",
+                        "trigger": {
+                            "event": "cafeteria_chair:change_color",
+                            "target": "self"
+                        }
+                    }
+                ]
+            },
+            "cafeteria_chair:change_color": {
+                "sequence": [
+                    {
+                        "condition": "query.block_property('cafeteria_chair:color') == 0",
+                        "set_block_property": {
+                            "cafeteria_chair:color": 1
+                        }
+                    },
+                    {
+                        "condition": "query.block_property('cafeteria_chair:color') == 1",
+                        "set_block_property": {
+                            "cafeteria_chair:color": 2
+                        }
+                    },
+                    {
+                        "condition": "query.block_property('cafeteria_chair:color') == 2",
+                        "set_block_property": {
+                            "cafeteria_chair:color": 3
+                        }
+                    },
+                    {
+                        "condition": "query.block_property('cafeteria_chair:color') == 3",
+                        "set_block_property": {
+                            "cafeteria_chair:color": 0
+                        }
+                    }
+                ]
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('cafeteria_chair:color') == 0",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_cafeteria_chair_red",
+                            "render_method": "opaque"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('cafeteria_chair:color') == 1",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_cafeteria_chair_yellow",
+                            "render_method": "opaque"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('cafeteria_chair:color') == 2",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_cafeteria_chair_lime",
+                            "render_method": "opaque"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('cafeteria_chair:color') == 3",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_cafeteria_chair_wood",
+                            "render_method": "opaque"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

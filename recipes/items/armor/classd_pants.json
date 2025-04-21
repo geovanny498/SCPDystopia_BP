@@ -1,0 +1,31 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_classd_pants"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "OXO",
+      "# #",
+      "# #"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:leather"
+      },
+      "X": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "O": {
+        "item": "minecraft:dye",
+        "data":  14
+      }
+    },
+    "result": {
+      "item": "lc:dt_classd_pants"
+    }
+  }
+}

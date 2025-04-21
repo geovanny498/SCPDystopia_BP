@@ -1,0 +1,31 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_scientist_coat"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "# #",
+      "O#O",
+      " X "
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:leather"
+      },
+      "X": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "O": {
+        "item": "minecraft:dye",
+        "data": 19
+      }
+    },
+    "result": {
+      "item": "lc:dt_scientist_coat"
+    }
+  }
+}

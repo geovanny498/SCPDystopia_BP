@@ -1,0 +1,43 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:feature_rules": {
+    "description": {
+      "identifier": "lc:dt_forest_scp143_tree_feature5",
+      "places_feature": "lc:dt_scp143_tree_feature"
+    },
+    "conditions": {
+      "placement_pass": "surface_pass",
+      "minecraft:biome_filter": {
+        "any_of": [
+          {
+            "test": "has_biome_tag",
+            "operator": "==",
+            "value": "dt_scp143"
+          }
+        ]
+      }
+    },
+    "distribution": {
+      "iterations": 64,
+      "x": {
+        "extent": [
+          0,
+          4
+        ],
+        "distribution": "uniform"
+      },
+      "y": "(query.heightmap(v.worldx, v.worldz))",
+      "z": {
+        "extent": [
+          0,
+          4
+        ],
+        "distribution": "uniform"
+      },
+      "scatter_chance": {
+        "numerator": 3,
+        "denominator": 4
+      }
+    }
+  }
+}

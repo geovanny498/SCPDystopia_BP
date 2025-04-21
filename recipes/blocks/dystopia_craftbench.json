@@ -1,0 +1,30 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_dystopia_craftbench"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "O#O",
+      "#S#",
+      "O#O"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "S": {
+        "item": "minecraft:crafting_table"
+      },
+      "O": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_dystopia_craftbench"
+    }
+  }
+}

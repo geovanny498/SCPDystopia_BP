@@ -1,0 +1,153 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_camera",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ],
+                "camera:variant": [ 0, 1, 2, 3 ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:entity_collision": false,
+            "minecraft:destroy_time": 1.25,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:block_light_emission": 0.0,
+            "minecraft:block_light_absorption": 0.4,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "facing:direction": "(query.cardinal_facing_2d)",
+                    "camera:variant": 0
+                }
+            },
+            "camera:to_var0": {
+                "set_block_property": {
+                    "camera:variant": 0
+                }
+            },
+            "camera:to_var1": {
+                "set_block_property": {
+                    "camera:variant": 1
+                }
+            },
+            "camera:to_var2": {
+                "set_block_property": {
+                    "camera:variant": 2
+                }
+            },
+            "camera:to_var3": {
+                "set_block_property": {
+                    "camera:variant": 3
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('camera:variant') == 0",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_camera",
+                            "render_method": "opaque"
+                        }
+                    },
+                    "minecraft:geometry": "geometry.dt_camera",
+                    "minecraft:on_interact": {
+                        "event": "camera:to_var1",
+                        "target": "self",
+                        "condition": "query.get_equipped_item_name('main_hand') == 'dt_wrench'"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('camera:variant') == 1",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_camera",
+                            "render_method": "opaque"
+                        }
+                    },
+                    "minecraft:geometry": "geometry.dt_camera_r",
+                    "minecraft:on_interact": {
+                        "event": "camera:to_var2",
+                        "target": "self",
+                        "condition": "query.get_equipped_item_name('main_hand') == 'dt_wrench'"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('camera:variant') == 2",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_camera_ceiling",
+                            "render_method": "opaque"
+                        }
+                    },
+                    "minecraft:geometry": "geometry.dt_camera_ceiling",
+                    "minecraft:on_interact": {
+                        "event": "camera:to_var3",
+                        "target": "self",
+                        "condition": "query.get_equipped_item_name('main_hand') == 'dt_wrench'"
+                    },
+                    "minecraft:pick_collision": {
+                        "origin": [ -4, 11, -4 ],
+                        "size": [ 8, 5, 8 ]
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('camera:variant') == 3",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_camera",
+                            "render_method": "opaque"
+                        }
+                    },
+                    "minecraft:geometry": "geometry.dt_camera_r2",
+                    "minecraft:on_interact": {
+                        "event": "camera:to_var0",
+                        "target": "self",
+                        "condition": "query.get_equipped_item_name('main_hand') == 'dt_wrench'"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

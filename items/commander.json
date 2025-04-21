@@ -1,0 +1,27 @@
+// CC-BY-SA 3.0
+{
+    "format_version": "1.16.100",
+    "minecraft:item": {
+        "description": {
+            "identifier": "lc:dt_commander",
+            "category": "Equipment"
+        },
+        "components": {
+            "minecraft:use_duration": 3600,
+            "minecraft:durability": {
+                "max_damage": 130
+            },
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.equipment"
+            },
+            "minecraft:hand_equipped": true,
+            "minecraft:max_stack_size": 1,
+            "minecraft:icon": {
+                "texture": "dt_commander"
+            },
+            "minecraft:display_name": {
+                "value": "dt.nameslot.commander"
+            }
+        }
+    }
+}

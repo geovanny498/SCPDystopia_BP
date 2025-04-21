@@ -1,0 +1,89 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.dt_scp096.angry_scream": {
+      "animation_length": 1.1,
+      "loop": true,
+      "timeline": {
+        "0.0": [ "/playsound scpdt.scp096_new.scream @a[r=30] ~~~" ]
+      }
+    },
+    "animation.dt_scp096.chasing_music": {
+      "animation_length": 11.4,
+      "loop": true,
+      "timeline": {
+        "0.0": [ "/playsound scpdt.scp096_new.chase_music @a[r=50] ~~~" ]
+      }
+    },
+    "animation.dt_scp096.triggered": {
+      "animation_length": 10,
+      "timeline": {
+        "0.0": [ "/playsound scpdt.scp096_new.triggered @a[r=40]" ],
+        "0.1": [ "/stopsound @a[r=50] scpdt.scp096_new.cry" ]
+      }
+    },
+    "animation.dt_scp096.stop_chasing": {
+      "animation_length": 3,
+      "timeline": {
+        "0.0": [ "/playsound scpdt.scp096_new.stopped_chasing @a[r=40] ~~~" ],
+        "0.3": [ "/stopsound @a[r=30] scpdt.scp096_new.scream", "/stopsound @a[r=30] scpdt.scp096_new.chase_music" ]
+      }
+    },
+    "animation.dt_scp096.calm_cry": {
+      "animation_length": 35,
+      "loop": true,
+      "timeline": {
+        "0.0": [ "/playsound scpdt.scp096_new.cry @a[r=50] ~~~" ]
+      }
+    },
+    "animation.dt_scp096.climbing": {
+      "animation_length": 0.25,
+      "loop": true,
+      "timeline": {
+        "0.0": [ "/playsound scpdt.scp096_new.climb_noise @a[r=30] ~~~ 0.8 1.2" ]
+      }
+    },
+    "animation.dt_scp096.picture_trigger": {
+      "animation_length": 25.0,
+      "timeline": {
+        "18.1": [ "/tp @e[type=lc:dt_scp096,c=1]" ]
+      }
+    },
+    "animation.dt_scp096.stuck_checker": {
+      "animation_length": 6,
+      "loop": true,
+      "timeline": {
+        "1.0": [ "/summon lc:dt_transformation_use ~~~ transformation_use:scp096_stuck_checker" ]
+      }
+    },
+    "animation.dt_scp096.prioritized_look": {
+      "animation_length": 2.2,
+      "loop": true,
+      "timeline": {
+        "2.1": [ "/event entity @s scp096:stop_prioritized_look" ]
+      }
+    },
+
+    //Stuck Checker
+    "animation.dt_scp096_stuck_checker.stucked": {
+      "animation_length": 4,
+      "timeline": {
+        "0.0": [ "/event entity @e[type=lc:dt_scp096,c=1,r=5] scp096:look_at_target_first", "/execute @e[type=lc:dt_scp096,c=1,r=5] ~~~ summon lc:dt_transformation_use ~~~ transformation_use:scp096_stuck_explosion" ],
+        "0.4": [ "/execute @e[type=lc:dt_scp096,c=1,r=5] ~~~ effect @s levitation 1 13 true" ],
+        "1.0": [ "/execute @e[type=lc:dt_scp096,c=1,r=5] ~~~ effect @s levitation 1 9 true", "/execute @e[type=lc:dt_scp096,c=1,r=5] ~~~ summon lc:dt_transformation_use ^ ^-0.5 ^-2 transformation_use:scp096_stuck_escape2" ],
+        "1.2": [ "/execute @e[type=lc:dt_scp096,c=1,r=5] ~~~ summon lc:dt_transformation_use ^ ^-0.5 ^-2 transformation_use:scp096_stuck_escape2" ],
+        "1.4": [ "/execute @e[type=lc:dt_scp096,c=1,r=5] ~~~ summon lc:dt_transformation_use ^ ^-0.5 ^-2 transformation_use:scp096_stuck_escape2" ],
+        "1.6": [ "/execute @e[type=lc:dt_scp096,c=1,r=5] ~~~ summon lc:dt_transformation_use ^ ^-0.5 ^-2 transformation_use:scp096_stuck_escape2" ],
+        "2.1": [ "/execute @e[type=lc:dt_scp096,c=1,r=5] ~~~ tp @s", "/execute @e[type=lc:dt_scp096,c=1,r=5] ~~~ summon lc:dt_transformation_use ~~~ transformation_use:scp096_stuck_explosion" ],
+        "3": [ "/event entity @s stuck_checker:despawn" ]
+      }
+    },
+    "animation.dt_scp096_stuck_checker.stick_to_scp096": {
+      "animation_length": 0.1,
+      "loop": true,
+      "timeline": {
+        "0.0": [ "/tp @s @e[type=lc:dt_scp096,c=1]" ]
+      }
+    }
+  }
+}

@@ -1,0 +1,28 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_wines"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "A",
+      "#",
+      "#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:glass"
+      },
+      "A": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_wines",
+      "count": 2
+    }
+  }
+}

@@ -1,0 +1,26 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shapeless": {
+    "description": {
+    "identifier": "lc:dt_nightstick"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "ingredients": [
+      {
+        "item": "minecraft:dye",
+        "data": 16
+      },
+      {
+        "item": "minecraft:stick"
+      },
+      {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    ],
+    "result": {
+      "item": "lc:dt_nightstick"
+    }
+  }
+}

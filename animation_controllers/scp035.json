@@ -1,0 +1,28 @@
+{
+  "format_version": "1.10.0",
+  "animation_controllers": {
+    "controller.animation.scp035.tentacle": {
+      "initial_state": "default",
+      "states": {
+        "default": {
+          "transitions": [
+            {
+              "spawn": "query.has_target"
+            }
+          ]
+        },
+        "spawn": {
+          "transitions": [
+            {
+              "default": "!query.has_target"
+            }
+          ],
+          "on_entry": [
+            "/summon lc:dt_scp035_tentacle ~ ~ ~1 scp035_tentacle:despawnable",
+            "/summon lc:dt_scp035_tentacle ~ ~ ~-1 scp035_tentacle:despawnable"
+          ]
+        }
+      }
+    }
+  }
+}

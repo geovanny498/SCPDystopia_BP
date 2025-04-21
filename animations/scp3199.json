@@ -1,0 +1,13 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.scp3199.spit_egg": {
+      "animation_length": 5.9,
+      "timeline": {
+        "0.0": [ "/playsound scpdt.scp3199.spit_egg @a[r=15] ~~~", "/event entity @s scp3199:dont_move" ],
+        "4.9": [ "/summon lc:dt_scp3199_egg ~~~", "/event entity @s scp3199:move" ],
+        "5.8": [ "/event entity @s scp3199:stop_egg_spitting" ]
+      }
+    }
+  }
+}

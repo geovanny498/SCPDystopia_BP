@@ -1,0 +1,84 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_ak_empty",
+			"category": "Command"
+		},
+		"components": {
+			"minecraft:use_duration": 2.6,
+			"minecraft:damage": 3,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.equipment"
+			},
+			"minecraft:durability": {
+				"max_durability": 2,
+				"damage_chance": {
+					"min": 0,
+					"max": 0
+				}
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "dt_ak_icon"
+			},
+			"minecraft:display_name": {
+				"value": "dt.nameslot.ak.empty"
+			},
+			"minecraft:cooldown": {
+				"duration": 4,
+				"category": "dt_ak_reloading"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"condition": "(query.remaining_durability == 1) || (query.get_equipped_item_name(1) == 'dt_ak_mag')",
+					"event": "ak:reload"
+				}
+			},
+			"minecraft:weapon": {
+				"on_hurt_entity": {
+				},
+				"on_hit_block": {
+				}
+			},
+			"tag:lc:glock_empty": {}
+		},
+		"events": {
+			"ak:reload": {
+				"sequence": [
+					{
+						"condition": "(query.remaining_durability == 1)",
+						"run_command": {
+							"command": [
+								"execute @s ~~~ playsound scpdt.gun.reload_complete @a[r=10] ~~~",
+								"replaceitem entity @s slot.weapon.mainhand 0 lc:dt_ak"
+							],
+							"target": "holder"
+						}
+					},
+					{
+						"condition": "(query.remaining_durability > 1) && (query.get_equipped_item_name(1) == 'dt_ak_mag')",
+						"sequence": [
+							{
+								"run_command": {
+									"command": [
+										"effect @s slowness 4 0 true",
+										"execute @s ~~~ playsound scpdt.ak.reload @a[r=10] ~~~",
+										"replaceitem entity @s slot.weapon.offhand 0 air",
+										"playanimation @s animation.dt_misc.gun_reload_short"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

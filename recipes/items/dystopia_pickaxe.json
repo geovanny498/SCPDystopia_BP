@@ -1,0 +1,30 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_dystopia_pickaxe"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "XOX",
+      " # ",
+      " # "
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:stick"
+      },
+      "X": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "O": {
+        "item": "lc:dt_enhanced_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_dystopia_pickaxe"
+    }
+  }
+}

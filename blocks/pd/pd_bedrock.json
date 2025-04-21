@@ -1,0 +1,25 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_pd_bedrock",
+            "properties": {
+            }
+        },
+        "components": {
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_pd_bedrock",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:destroy_time": 9999,
+            "minecraft:unit_cube": {},
+            "minecraft:map_color": "#3B3D94"
+        },
+        "events": {
+        },
+        "permutations": [
+        ]
+    }
+}

@@ -1,0 +1,21 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+    "identifier": "lc:dt_imposter_totem",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:max_stack_size": 16,
+      "minecraft:icon": {
+        "texture": "dt_imposter_totem"
+      },
+      "minecraft:display_name": {
+        "value": "Imposter Totem"
+      }
+    }
+  }
+}

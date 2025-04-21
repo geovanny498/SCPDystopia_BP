@@ -1,0 +1,18 @@
+{
+	"format_version": "1.16.0",
+	"minecraft:block": {
+		"description": {
+			"identifier": "lc:dt_storage_wall",
+			"is_experimental": false
+		},
+		"components": {
+			"minecraft:creative_category": {
+                "group": "itemGroup.name.stone",
+                "category": "Nature"
+            },
+			"minecraft:destroy_time": 1.7,
+			"minecraft:explosion_resistance": 16.0,
+            "tag:lc:dystopiablock": {}
+		}
+	}
+}

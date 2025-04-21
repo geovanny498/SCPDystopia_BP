@@ -1,0 +1,32 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_scp049_plush"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "B",
+      "A",
+      "##"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:wool",
+        "data": 8
+      },
+      "A": {
+        "item": "minecraft:dye",
+        "data": 16
+      },
+      "B": {
+        "item": "lc:dt_scpdystopia_orb"
+      }
+    },
+    "result": {
+      "item": "lc:dt_scp049_plush"
+    }
+  }
+}

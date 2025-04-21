@@ -1,0 +1,116 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp096_stuck_checker",
+      "is_spawnable": false,
+      "is_summonable": false,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          {
+            "stuck": "q.is_sheared"
+          },
+          {
+            "stick_to_scp096": "q.is_sheared"
+          }
+        ]
+      },
+      "animations": {
+        "stuck": "animation.dt_scp096_stuck_checker.stucked",
+        "stick_to_scp096": "animation.dt_scp096_stuck_checker.stick_to_scp096"
+      }
+    },
+    "component_groups": {
+      "stuck_checking": {
+        "minecraft:entity_sensor": {
+          "sensor_range": 6.5,
+          "relative_range": false,
+          "require_all": true,
+          "event_filters": {
+            "none_of": [
+              { 
+                "test": "is_family",
+                "subject": "other",
+                "value": "scp096"
+              }
+            ]
+          },
+          "event": "stuck_checker:despawn"
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": 4,
+          "time_down_event": {
+            "event": "stuck_checker:detected_stuck"
+          }
+        }
+      },
+      "stucked": {
+        "minecraft:is_sheared": {}
+      },
+      "despawn": {
+        "minecraft:despawn": {}
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "inanimate" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:health": {
+        "value": 10,
+        "max": 10
+      },
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": false
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:collision_box": {
+        "width": 0.01,
+        "height": 0.01
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "stuck_checking"
+          ]
+        }
+      },
+      "stuck_checker:detected_stuck": {
+        "remove": {
+          "component_groups": [
+            "stuck_checking"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "stucked"
+          ]
+        }
+      },
+      "stuck_checker:despawn": {
+        "add": {
+          "component_groups": [
+            "despawn"
+          ]
+        }
+      }
+    }
+  }
+}
+  

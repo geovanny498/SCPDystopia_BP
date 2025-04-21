@@ -1,0 +1,342 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp5535",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "mark_variant0": {
+        "minecraft:mark_variant": {
+          "value": 0
+        }
+      },
+      "mark_variant1": {
+        "minecraft:mark_variant": {
+          "value": 1
+        }
+      },
+      "melee": {
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 1.24
+        }
+      },
+      "default": {
+        "minecraft:type_family": {
+          "family": [
+            "human",
+            "scp5535"
+          ]
+        },
+        "minecraft:behavior.panic": {
+          "priority": 2,
+          "speed_multiplier": 1.4
+        },
+        "minecraft:behavior.avoid_mob_type": {
+          "priority": 0,
+          "entity_types": [
+            {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "monster"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "hoglin"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "zoglin"
+                  }
+                ]
+              },
+              "max_dist": 21,
+              "walk_speed_multiplier": 1.42,
+              "sprint_speed_multiplier": 1.42
+            }
+          ]
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 0.9
+        },
+        "minecraft:behavior.random_look_around": {
+          "priority": 7
+        },
+        "minecraft:behavior.look_at_player": {
+          "priority": 8,
+          "look_distance": 8,
+          "probability": 0.04
+        },
+        "minecraft:navigation.walk": {
+          "can_float": true,
+          "is_amphibious": true,
+          "can_path_over_water": true,
+          "avoid_damage_blocks": true,
+          "can_pass_doors": true,
+          "can_open_doors": true
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": [35,60],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp5535:start_leftarm_vibe",
+            "target": "self"
+          }
+        }
+      },
+      "vibe": {
+        "minecraft:type_family": {
+          "family": [
+            "human",
+            "scp5535"
+          ]
+        },
+        "minecraft:behavior.avoid_mob_type": {
+          "priority": 0,
+          "entity_types": [
+            {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "monster"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "hoglin"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "zoglin"
+                  }
+                ]
+              },
+              "max_dist": 21,
+              "walk_speed_multiplier": 1.42,
+              "sprint_speed_multiplier": 1.42
+            }
+          ]
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": [8,9],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp5535:start_attack",
+            "target": "self"
+          }
+        }
+      },
+      "vibe_attack": {
+        "minecraft:type_family": {
+          "family": [
+            "human",
+            "scp5535"
+          ]
+        },
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": 0,
+          "within_radius": 22,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+              "filters": {
+                "other_with_families": [
+                  "villager",
+                  "player",
+                  "scpfoundation",
+                  "snowgolem",
+                  "irongolem",
+                  "human"
+                ]
+              },
+              "max_dist": 22
+            },
+            {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp5535"
+                  }
+                ]
+              },
+              "max_dist": 22
+            }
+          ],
+          "must_see_forget_duration": 16.0,
+          "must_see": true
+        },
+        "minecraft:navigation.walk": {
+          "can_float": true,
+          "is_amphibious": true,
+          "can_path_over_water": true,
+          "avoid_damage_blocks": true,
+          "avoid_water": false,
+          "can_pass_doors": true,
+          "can_open_doors": true
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": [5,7],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp5535:stop_leftarm_vibe",
+            "target": "self"
+          }
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 7 : 0"
+      },
+      "minecraft:health": {
+        "value": 37,
+        "max": 37
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:attack": {
+        "damage": 6
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:jump.static": {},
+      "minecraft:follow_range": {
+        "value": 32,
+        "max": 32
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:movement": {
+        "value": 0.26
+      },
+      "minecraft:behavior.melee_attack": {
+        "priority": 1,
+        "speed_multiplier": 1.28
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {},
+      "minecraft:physics": {},
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:annotation.open_door": {}
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "default",
+            "mark_variant0"
+          ]
+        }
+      },
+      "scp5535:start_leftarm_vibe": {
+        "add": {
+          "component_groups": [
+            "vibe",
+            "mark_variant1"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "vibe_attack",
+            "mark_variant0",
+            "default"
+          ]
+        }
+      },
+      "scp5535:start_attack": {
+        "add": {
+          "component_groups": [
+            "vibe_attack"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "vibe",
+            "default"
+          ]
+        }
+      },
+      "scp5535:stop_leftarm_vibe": {
+        "add": {
+          "component_groups": [
+            "default",
+            "mark_variant0"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "vibe",
+            "vibe_attack",
+            "mark_variant1"
+          ]
+        }
+      }
+    }
+  }
+}

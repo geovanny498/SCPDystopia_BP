@@ -1,0 +1,751 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_door3_lvl4",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ],
+                "door1:states": [ 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16 ],
+                "door1:opening": [ true, false ],
+                "door1:closing": [ true, false ],
+                "door1:closed_opened": [ 1, 2 ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.door",
+                "category": "Construction"
+            },
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_door3_lvl4",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:on_player_destroyed": {
+                "event": "door1:breaking"
+            },
+            "minecraft:destroy_time": 1.5,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:flammable": {
+                "flame_odds": 0,
+                "burn_odds": 0
+            },
+            "minecraft:block_light_absorption": 2.0
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "facing:direction": "(query.cardinal_facing_2d)",
+                    "door1:states": 1,
+                    "door1:opening": false,
+                    "door1:closing": false
+                }
+            },
+            "door1:breaking": {
+                "run_command": {
+                    "command": [
+                        "setblock ~~1~ air"
+                    ]
+                }
+            },
+            "door1:to_closed": {
+                "set_block_property": {
+                    "door1:states": 1,
+                    "door1:opening": false,
+                    "door1:closing": false
+                }
+            },
+            "door1:to_opening": {
+                "set_block_property": {
+                    "door1:states": 2,
+                    "door1:opening": true,
+                    "door1:closing": false,
+                    "door1:closed_opened": 1
+                },
+                "run_command": {
+                    "command": [
+                        "function scpdt_system/door3_open_lvl"
+                    ]
+                }
+            },
+            "door1:to_closing": {
+                "set_block_property": {
+                    "door1:states": 15,
+                    "door1:opening": false,
+                    "door1:closing": true,
+                    "door1:closed_opened": 0
+                },
+                "run_command": {
+                    "command": [
+                        "function scpdt_system/door3_close_lvl"
+                    ]
+                }
+            },
+            "door1:to_state1": {
+                "set_block_property": {
+                    "door1:states": 1
+                }
+            },
+            "door1:to_state2": {
+                "set_block_property": {
+                    "door1:states": 2
+                }
+            },
+            "door1:to_state3": {
+                "set_block_property": {
+                    "door1:states": 3
+                }
+            },
+            "door1:to_state4": {
+                "set_block_property": {
+                    "door1:states": 4
+                }
+            },
+            "door1:to_state5": {
+                "set_block_property": {
+                    "door1:states": 5
+                }
+            },
+            "door1:to_state6": {
+                "set_block_property": {
+                    "door1:states": 6
+                }
+            },
+            "door1:to_state7": {
+                "set_block_property": {
+                    "door1:states": 7
+                }
+            },
+            "door1:to_state8": {
+                "set_block_property": {
+                    "door1:states": 8
+                }
+            },
+            "door1:to_state9": {
+                "set_block_property": {
+                    "door1:states": 9
+                }
+            },
+            "door1:to_state10": {
+                "set_block_property": {
+                    "door1:states": 10
+                }
+            },
+            "door1:to_state11": {
+                "set_block_property": {
+                    "door1:states": 11
+                }
+            },
+            "door1:to_state12": {
+                "set_block_property": {
+                    "door1:states": 12
+                }
+            },
+            "door1:to_state13": {
+                "set_block_property": {
+                    "door1:states": 13
+                }
+            },
+            "door1:to_state14": {
+                "set_block_property": {
+                    "door1:states": 14
+                }
+            },
+            "door1:to_state15": {
+                "set_block_property": {
+                    "door1:states": 15
+                }
+            },
+            "door1:to_state16": {
+                "set_block_property": {
+                    "door1:states": 16
+                }
+            },
+            "door1:to_state17": {
+                "set_block_property": {
+                    "door1:states": 17
+                }
+            },
+            "door1:to_state18": {
+                "set_block_property": {
+                    "door1:states": 18
+                }
+            },
+            "door1:to_state19": {
+                "set_block_property": {
+                    "door1:states": 19
+                }
+            },
+            "door1:to_state20": {
+                "set_block_property": {
+                    "door1:states": 20
+                }
+            },
+            "door1:to_state21": {
+                "set_block_property": {
+                    "door1:states": 21
+                }
+            },
+            "door1:to_state22": {
+                "set_block_property": {
+                    "door1:states": 22
+                }
+            },
+            "door1:to_state23": {
+                "set_block_property": {
+                    "door1:states": 23
+                }
+            },
+            "door1:to_state24": {
+                "set_block_property": {
+                    "door1:states": 24
+                }
+            },
+            "door1:to_state25": {
+                "set_block_property": {
+                    "door1:states": 25
+                }
+            },
+            "door1:to_state26": {
+                "set_block_property": {
+                    "door1:states": 26
+                }
+            },
+            "door1:to_state27": {
+                "set_block_property": {
+                    "door1:states": 27
+                }
+            },
+            "door1:to_state28": {
+                "set_block_property": {
+                    "door1:states": 28
+                }
+            },
+            "door1:to_state29": {
+                "set_block_property": {
+                    "door1:states": 29
+                }
+            },
+            "door1:to_state30": {
+                "set_block_property": {
+                    "door1:states": 30
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "q.block_property('door1:closed_opened') == 0",
+                "components": {
+                    "minecraft:entity_collision": {
+                        "origin": [ -8, 0, -8 ],
+                        "size": [ 16, 16, 16 ]
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:closed_opened') == 1",
+                "components": {
+                    "minecraft:entity_collision": {
+                        "origin": [ -8, 0, -8 ],
+                        "size": [ 16, 16, 16 ]
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 1",
+                "components": {
+                    "minecraft:entity_collision": {
+                        "origin": [ -8, 0, -8 ],
+                        "size": [ 16, 16, 16 ]
+                    },
+                    "minecraft:geometry": "geometry.dt_door1_closed",
+                    "minecraft:on_interact": {
+                        "event": "door1:to_opening",
+                        "target": "self",
+                        "condition": "q.equipped_item_any_tag('slot.weapon.mainhand', 'lc:can_lvl4') || q.equipped_item_any_tag('slot.weapon.offhand', 'lc:can_lvl4')"
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 2 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state1",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state3",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 3 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state2",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state4",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 4 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state3",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state5",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 5 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state4",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state6",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 6 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state5",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state7",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 7 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state6",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state8",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 8 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state7",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state9",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 9 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state8",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state10",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 10 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state9",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state11",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 11 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state10",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state12",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 12 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state11",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state13",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 13 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state12",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state14",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 14 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state13",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state15",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 15 && q.block_property('door1:opening') == true",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_state14",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state16",
+                            "target": "self",
+                            "condition": "q.block_property('door1:opening') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 16",
+                "components": {
+                    "minecraft:entity_collision": false,
+                    "minecraft:geometry": "geometry.dt_door1_opened",
+                    "minecraft:on_interact": {
+                        "event": "door1:to_closing",
+                        "target": "self",
+                        "condition": "q.equipped_item_any_tag('slot.weapon.mainhand', 'lc:can_lvl4') || q.equipped_item_any_tag('slot.weapon.offhand', 'lc:can_lvl4')"
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 15 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state14",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state14",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 14 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state13",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state13",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 13 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state12",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state12",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 12 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state11",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state11",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 11 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state10",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state10",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 10 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state9",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state9",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 9 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state8",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state8",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 8 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state7",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state7",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 7 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state6",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state6",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 6 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state5",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state5",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 5 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state4",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state4",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 4 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state3",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state3",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 3 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state2",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_state2",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "q.block_property('door1:states') == 2 && q.block_property('door1:closing') == true",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_door1_state1",
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [0.088, 0.088],
+                        "on_tick": {
+                            "event": "door1:to_closed",
+                            "target": "self",
+                            "condition": "q.block_property('door1:closing') == true"
+                        }
+                    }
+                }
+            },
+
+            //Permutations for facing directions 
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

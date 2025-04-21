@@ -1,0 +1,114 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_pizza_box",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ],
+                "pizza_box:states": [ 1, 2 ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_pizza_box",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:entity_collision": false,
+            "minecraft:destroy_time": 1.0,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:flammable": {
+                "flame_odds": 0,
+                "burn_odds": 0
+            },
+            "minecraft:block_light_emission": 0.0,
+            "minecraft:block_light_absorption": 0.0,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "facing:direction": "(query.cardinal_facing_2d)"
+                }
+            },
+            "pizza_box:open": {
+                "set_block_property": {
+                    "pizza_box:states": 2
+                },
+                "run_command": {
+                    "command": [
+                        "playsound random.pop @a[r=12] ~~~ 0.7"
+                    ]
+                }
+            },
+            "pizza_box:close": {
+                "set_block_property": {
+                    "pizza_box:states": 1
+                },
+                "run_command": {
+                    "command": [
+                        "playsound random.pop @a[r=12] ~~~ 0.7"
+                    ]
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('pizza_box:states') == 1",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_pizza_box",
+                    "minecraft:on_interact": {
+                        "event": "pizza_box:open",
+                        "target": "self"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('pizza_box:states') == 2",
+                "components": {
+                    "minecraft:geometry": "geometry.dt_pizza_box_opened",
+                    "minecraft:on_interact": {
+                        "event": "pizza_box:close",
+                        "target": "self"
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

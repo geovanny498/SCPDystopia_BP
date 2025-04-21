@@ -1,0 +1,32 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_hcz_wall"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "BBB",
+      "BIB",
+      "BBB"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:dye",
+        "data": 7
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "B": {
+        "item": "minecraft:brick"
+      }
+    },
+    "result": {
+      "item": "lc:dt_hcz_wall",
+      "count": 20
+    }
+  }
+}

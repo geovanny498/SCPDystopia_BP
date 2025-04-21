@@ -1,0 +1,19 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.scp966.effect": {
+      "animation_length": 1,
+      "loop": true,
+      "timeline": {
+        "0.1": [ "/effect @a[r=4.3,m=!c] weakness 10000 0 true", "/effect @a[r=4.3,m=!c] slowness 10000 0 true", "/effect @a[r=4.3,m=!c] blindness 5 0 true" ]
+      }
+    },
+    "animation.scp966.invisible": {
+      "animation_length": 0.5,
+      "loop": true,
+      "timeline": {
+        "0.1": [ "/effect @s invisibility 1 255 true" ]
+      }
+    }
+  }
+}

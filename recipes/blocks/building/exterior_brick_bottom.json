@@ -1,0 +1,35 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_exterior_brick_bottom"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "I#S",
+      "#I#",
+      "BBB"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:brick"
+      },
+      "I": {
+        "item": "minecraft:iron_ingot"
+      },
+      "S": {
+        "item": "minecraft:dye",
+        "data": 7
+      },
+      "B": {
+        "item": "minecraft:stone"
+      }
+    },
+    "result": {
+      "item": "lc:dt_exterior_brick_bottom",
+      "count": 20
+    }
+  }
+}

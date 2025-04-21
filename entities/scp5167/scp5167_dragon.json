@@ -1,0 +1,330 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp5167_dragon",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "strong",
+          "flap"
+        ]
+      },
+      "animations": {
+        "strong": "controller.animation.scp5167_dragon.stronger",
+        "flap": "animation.scp5167_dragon.flap"
+      }
+    },
+    "component_groups": {
+      "dead": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scp5167_dragon_dead<minecraft:entity_spawned>"
+        }
+      },
+      "normal": {
+        "minecraft:behavior.ranged_attack": {
+          "priority": 0,
+          "attack_interval_min": 4,
+          "attack_interval_max": 5,
+          "burst_shots": 15,
+          "burst_interval": 0.18,
+          "attack_radius": 65,
+          "speed_multiplier": 0.9
+        },
+        "minecraft:movement": {
+          "value": 0.02
+        },
+        "minecraft:shooter": {
+          "def": "lc:dt_scp5167_dragon_shot"
+        }
+      },
+      "stronger": {
+        "minecraft:behavior.ranged_attack": {
+          "priority": 0,
+          "attack_interval_min": 4,
+          "attack_interval_max": 5,
+          "burst_shots": 22,
+          "burst_interval": 0.17,
+          "attack_radius": 40,
+          "speed_multiplier": 0.9
+        },
+        "minecraft:movement": {
+          "value": 0.02
+        },
+        "minecraft:shooter": {
+          "def": "lc:dt_scp5167_dragon_shot_fire"
+        }
+      },
+      "angry": {
+        "minecraft:behavior.ranged_attack": {
+          "priority": 0,
+          "attack_interval_min": 2,
+          "attack_interval_max": 3,
+          "burst_shots": 32,
+          "burst_interval": 0.15,
+          "attack_radius": 40,
+          "speed_multiplier": 0.9
+        },
+        "minecraft:movement": {
+          "value": 0.02
+        },
+        "minecraft:shooter": {
+          "def": "lc:dt_scp5167_dragon_shot_fire"
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:boss": {
+        "should_darken_sky": true,
+        "name": "SCP-5167 Dragon",
+        "hud_range": 60
+      },
+      "minecraft:fire_immune": true,
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_scp5167_mask"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "scp5167_dragon:death"
+            }
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "other_with_families": [
+                  "sus"
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "cause": "fall",
+            "deals_damage": false
+          }
+        ]
+      },
+      "minecraft:area_attack" : {
+        "damage_range": 3.4,
+        "damage_per_tick": 6,
+        "cause": "contact",
+        "entity_filter": {
+          "all_of": [
+            { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp5167" },
+            { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp" }
+          ]
+        }
+      },
+      "minecraft:behavior.summon_entity": {
+        "priority": 1,
+        "summon_choices": [
+          {
+            "min_activation_range": 0.0,
+            "max_activation_range": 60.0,
+            "weight": 1,
+            "cooldown_time": 22.0,
+            "cast_duration": 6.0,
+            "particle_color": "#FFB3B3CC",
+            "sequence": [
+              {
+                "shape": "circle",
+                "target": "self",
+                "base_delay": 3.0,
+                "num_entities_spawned": 2,
+                "entity_type": "lc:dt_scp5167_dragon_son",
+                "summon_cap": 5,
+                "summon_cap_radius": 12.0,
+                "size": 1.0,
+                "sound_event": "prepare.summon"
+              }
+            ]
+          }
+        ]
+      },
+      "minecraft:health": {
+        "value": 20000,
+        "max": 20000
+      },
+      "minecraft:type_family": {
+        "family": [ "scp", "scp5167", "sus", "mob", "monster" ]
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
+      "minecraft:follow_range": {
+        "value": 128,
+        "max": 128
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2,
+        "entity_types": {
+          "filters": {
+            "test": "is_family",
+            "subject": "other",
+            "operator": "!=",
+            "value": "scp5167"
+          },
+          "max_dist": 128
+        }
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 0,
+        "within_radius": 66,
+        "reselect_targets": true,
+        "entity_types": [
+          {
+            "filters": {
+              "other_with_families": [
+                "villager",
+                "human",
+                "snowgolem",
+                "irongolem"
+              ]
+            },
+            "max_dist": 66
+          },
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "==",
+                  "value": "player"
+                },
+                {
+                  "test": "has_equipment",
+                  "subject": "other",
+                  "domain": "head",
+                  "operator": "!=",
+                  "value": "lc:dt_scp5167_mask"
+                }
+              ]
+            },
+            "max_dist": 66
+          }
+        ],
+        "must_see_forget_duration": 60.0,
+        "must_see": true
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:behavior.mount_pathing": {
+        "priority": 0,
+        "speed_multiplier": 1.0,
+        "target_dist": 80.0,
+        "track_target": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.float": {
+        "priority": 0
+      },
+      "minecraft:can_fly": {
+      },
+      "minecraft:navigation.float": {
+        "can_path_over_water": true
+      },
+      "minecraft:behavior.float_wander": {
+        "priority": 2,
+        "must_reach": true,
+        "speed_multiplier": 0.43
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:collision_box": {
+        "width": 3.5,
+        "height": 3.8
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.open_door": {
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "normal"
+          ]
+        }
+      },
+      "scp5167_dragon:to_stronger": {
+        "add": {
+          "component_groups": [
+            "stronger"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "normal",
+            "angry"
+          ]
+        }
+      },
+      "scp5167_dragon:to_angry": {
+        "add": {
+          "component_groups": [
+            "angry"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "normal",
+            "stronger"
+          ]
+        }
+      },
+      "scp5167_dragon:death": {
+        "add": {
+          "component_groups": [
+            "dead"
+          ]
+        }
+      }
+    }
+  }
+}
+  

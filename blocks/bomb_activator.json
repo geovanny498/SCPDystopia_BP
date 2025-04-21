@@ -1,0 +1,200 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_bomb_activator",
+            "properties": {
+                "facing:direction": [ 2, 3, 4, 5 ],
+                "bomb_activator:state": [ 0, 1, 2, 3 ], //0 = require permission, 1 = ready, 2 = turned on, 3 = explode
+                "bomb_activator:textures": [ 0, 1, 2, 3 ],
+                "bomb_activator:explode_countdown": [ true, false ]
+            }
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "group": "itemGroup.name.sandstone",
+                "category": "Construction"
+            },
+            "minecraft:pick_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:entity_collision": {
+                "origin": [ -8, 0, -8 ],
+                "size": [ 16, 16, 16 ]
+            },
+            "minecraft:geometry": "geometry.dt_bomb_activator",
+            "minecraft:destroy_time": 1.6,
+            "minecraft:on_player_placing": {
+                "event": "placement_state"
+            },
+            "minecraft:map_color": "#3B3D94",
+            "minecraft:on_interact": {
+                "event": "bomb_activator:interact",
+                "target": "self",
+                "condition": "query.block_property('bomb_activator:state') != 3"
+            },
+            "minecraft:block_light_absorption": 0.3,
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+            "placement_state": {
+                "set_block_property": {
+                    "facing:direction": "(query.cardinal_facing_2d)",
+                    "bomb_activator:state": 0,
+                    "bomb_activator:textures": 0,
+                    "bomb_activator:explode_countdown": false
+                }
+            },
+            "bomb_activator:interact": {
+                "sequence": [
+                    {
+                        "condition": "query.block_property('bomb_activator:state') == 0",
+                        "sequence": [
+                            {
+                                "condition": "query.get_equipped_item_name('main_hand') != 'dt_keycard_o5'",
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                        "title @a[r=8] actionbar O5 access keycard is required."
+                                    ]
+                                }
+                            },
+                            {
+                                "condition": "query.get_equipped_item_name('main_hand') == 'dt_keycard_o5'",
+                                "set_block_property": {
+                                    "bomb_activator:state": 1,
+                                    "bomb_activator:textures": 1
+                                },
+                                "run_command": {
+                                    "command": [
+                                        "playsound scpdt.push_button @a[r=10] ~~~",
+                                        "title @a[r=8] actionbar You CAN'T cancel detonation."
+                                    ]
+                                }
+                            }
+                        ]
+                    },
+                    {
+                        "condition": "query.block_property('bomb_activator:state') == 1",
+                        "set_block_property": {
+                            "bomb_activator:state": 2,
+                            "bomb_activator:textures": 2,
+                            "bomb_activator:explode_countdown": true
+                        },
+                        "run_command": {
+                            "command": [
+                                "playsound scpdt.bomb_activator.activate @a",
+                                "title @a actionbar §4/// §cFACILITY DETONATION ENGAGED §4///"
+                            ]
+                        }
+                    },
+                    {
+                        "condition": "query.block_property('bomb_activator:state') == 2",
+                        "run_command": {
+                            "command": [
+                                "title @a[r=8] actionbar §cYOU CAN'T TURN OFF DETONATION"
+                            ]
+                        }
+                    }
+                ]
+            },
+            "bomb_activator:start_explode": {
+                "set_block_property": {
+                    "bomb_activator:state": 3,
+                    "bomb_activator:textures": 3,
+                    "bomb_activator:explode_countdown": false
+                },
+                "run_command": {
+                    "command": [
+                        "playsound scpdt.bomb_activator.explode @a",
+                        "summon lc:dt_bomb_activator_explode"
+                    ]
+                }
+            }
+        },
+        "permutations": [
+            {
+                "condition": "query.block_property('bomb_activator:explode_countdown') == true",
+                "components": {
+                    "minecraft:ticking": {
+                        "looping": false,
+                        "range": [90.0, 90.0],
+                        "on_tick": {
+                            "event": "bomb_activator:start_explode",
+                            "target": "self"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('bomb_activator:textures') == 0",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_bomb_activator_unable",
+                            "render_method": "alpha_test"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('bomb_activator:textures') == 1",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_bomb_activator_able",
+                            "render_method": "alpha_test"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('bomb_activator:textures') == 2",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_bomb_activator_activated",
+                            "render_method": "alpha_test"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('bomb_activator:textures') == 3",
+                "components": {
+                    "minecraft:material_instances": {
+                        "*": {
+                            "texture": "dt_bomb_activator_off",
+                            "render_method": "alpha_test"
+                        }
+                    }
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 2",
+                "components": {
+                    "minecraft:rotation": [ 0, 0, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 3",
+                "components": {
+                    "minecraft:rotation": [ 0, 180, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 4",
+                "components": {
+                    "minecraft:rotation": [ 0, 90, 0 ]
+                }
+            },
+            {
+                "condition": "query.block_property('facing:direction') == 5",
+                "components": {
+                    "minecraft:rotation": [ 0, 270, 0 ]
+                }
+            }
+        ]
+    }
+}

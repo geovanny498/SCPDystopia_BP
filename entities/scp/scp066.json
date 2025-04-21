@@ -1,0 +1,220 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp066",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "loud"
+        ]
+      },
+      "animations": {
+        "loud": "controller.animation.scp066.loud",
+        "earrape": "animation.scp066.earrape"
+      }
+    },
+    "component_groups": {
+      "default": {
+        "minecraft:mark_variant": {
+          "value": 0
+        },
+        "minecraft:movement": {
+          "value": 0.22
+        },
+        "minecraft:type_family": {
+          "family": [ "scp066", "mob" ]
+        },
+        "minecraft:entity_sensor": {
+          "sensor_range": 5,
+          "relative_range": false,
+          "minimum_count": 1,
+          "event_filters": {
+            "any_of": [
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "==",
+                "value": "player"
+              }
+            ]
+          },
+          "event": "scp066:start_earrape_timer"
+        }
+      },
+      "earrape_timer": {
+        "minecraft:mark_variant": {
+          "value": 0
+        },
+        "minecraft:movement": {
+          "value": 0.22
+        },
+        "minecraft:type_family": {
+          "family": [ "scp066", "mob" ]
+        },
+        "minecraft:entity_sensor": {
+          "sensor_range": 5,
+          "relative_range": false,
+          "require_all": true,
+          "event_filters": {
+            "none_of": [
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "==",
+                "value": "player"
+              }
+            ],
+            "test": "distance_to_nearest_player", "operator": ">", "value": 4
+          },
+          "event": "scp066:stop_earrape_timer"
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": [7,14],
+          "randomInterval": true,
+          "time_down_event": {
+            "event": "scp066:start_earrape",
+            "target": "self"
+          }
+        }
+      },
+      "earrape": {
+        "minecraft:mark_variant": {
+          "value": 1
+        },
+        "minecraft:movement": {
+          "value": 0.0
+        },
+        "minecraft:type_family": {
+          "family": [ "scp066", "mob", "scp" ]
+        },
+        "minecraft:timer": {
+          "looping": false,
+          "time": 10,
+          "randomInterval": false,
+          "time_down_event": {
+            "event": "scp066:earrape_end"
+          }
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 6 : 0"
+      },
+      "minecraft:despawn": {
+        "despawn_from_distance": {}
+      },
+      "minecraft:health": {
+        "value": 16,
+        "max": 16
+      },
+      "minecraft:follow_range": {
+        "value": 16,
+        "max": 16
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 7,
+        "speed_multiplier": 0.9
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 7,
+        "target_distance": 6.0,
+        "probability": 0.02
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:pushable": {
+        "is_pushable": true,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:collision_box": {
+        "width": 0.5,
+        "height": 0.8
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:navigation.walk": {
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "default"
+          ]
+        }
+      },
+      "scp066:start_earrape_timer": {
+        "add": {
+          "component_groups": [
+            "earrape_timer"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "default"
+          ]
+        }
+      },
+      "scp066:stop_earrape_timer": {
+        "remove": {
+          "component_groups": [
+            "earrape_timer"
+          ]
+        },
+        "add": {
+          "component_groups": [
+            "default"
+          ]
+        }
+      },
+      "scp066:start_earrape": {
+        "add": {
+          "component_groups": [
+            "earrape"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "earrape_timer",
+            "default"
+          ]
+        }
+      },
+      "scp066:earrape_end": {
+        "add": {
+          "component_groups": [
+            "default"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "earrape"
+          ]
+        }
+      }
+    }
+  }
+}
+  

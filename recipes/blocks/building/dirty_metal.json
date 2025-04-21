@@ -1,0 +1,32 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_dirty_metal"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "C#C",
+      "#I#",
+      "C#C"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:dye",
+        "data": 8
+      },
+      "C": {
+        "item": "minecraft:copper_ingot"
+      },
+      "I": {
+        "item": "minecraft:iron_block"
+      }
+    },
+    "result": {
+      "item": "lc:dt_dirty_metal",
+      "count": 24
+    }
+  }
+}

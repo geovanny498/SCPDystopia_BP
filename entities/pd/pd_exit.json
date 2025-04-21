@@ -1,0 +1,114 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_pd_exit",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "exit"
+        ]
+      },
+      "animations": {
+        "exit": "controller.animation.scp106.pd.exit"
+      }
+    },
+    "component_groups": {
+      "waiting_escape": {
+        "minecraft:entity_sensor": {
+          "sensor_range": 1.4,
+          "relative_range": false,
+          "minimum_count": 1,
+          "event_filters": {
+            "any_of": [
+              {
+                "test": "is_family",
+                "subject": "other",
+                "operator": "!=",
+                "value": "inanimate"
+              }
+            ]
+          },
+          "event": "pd_exit:escape"
+        }
+      },
+      "escape": {
+        "minecraft:is_sheared": {},
+        "minecraft:timer": {
+          "looping": false,
+          "time": 1,
+          "randomInterval": false,
+          "time_down_event": {
+            "event": "pd_exit:escape_finish"
+          }
+        }
+      }
+    },
+    "components": {
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:type_family": {
+        "family": [ "inanimate", "pd" ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:health": {
+        "value": 10,
+        "max": 10
+      },
+      "minecraft:physics": {
+        "has_gravity": true,
+        "has_collision": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:collision_box": {
+        "width": 0.2,
+        "height": 0.2
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "waiting_escape"
+          ]
+        }
+      },
+      "pd_exit:escape": {
+        "add": {
+          "component_groups": [
+            "escape"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "waiting_escape"
+          ]
+        }
+      },
+      "pd_exit:escape_finish": {
+        "add": {
+          "component_groups": [
+            "waiting_escape"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "escape"
+          ]
+        }
+      }
+    }
+  }
+}
+  

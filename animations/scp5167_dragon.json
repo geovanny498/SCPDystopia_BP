@@ -1,0 +1,25 @@
+{
+  "format_version": "1.8.0",
+  "animations": {
+    "animation.scp5167_dragon.flap": {
+      "animation_length": 0.76,
+      "loop": true,
+      "timeline": {
+        "0": [ "/playsound scpdt.scp5167_dragon.flap @a[r=50]" ]
+      }
+    },
+    "animation.scp5167_dragon.spawning": {
+      "animation_length": 10.0,
+      "timeline": {
+        "0.7": [ "/summon lightning_bolt" ],
+        "3.0": [ "/summon lightning_bolt" ],
+        "5.4": [ "/summon lightning_bolt" ],
+        "8.1": [ "/summon lightning_bolt" ],
+        "9.2": [ "/summon lightning_bolt" ],
+        "9.8": [ "/playsound random.explode @a[r=20] ~~~" ],
+        "9.91": [ "/summon lc:dt_scp5167_dragon ~~1~" ],
+        "9.92": [ "/event entity @s scp5167_dragon_spawner:death" ]
+      }
+    }
+  }
+}

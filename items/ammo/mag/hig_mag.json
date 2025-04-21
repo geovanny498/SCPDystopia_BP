@@ -1,0 +1,32 @@
+{
+  "format_version": "1.16.100",
+  "minecraft:item": {
+    "description": {
+      "identifier": "lc:dt_hig_mag",
+      "category": "Items"
+    },
+    "components": {
+      "minecraft:creative_category": {
+        "parent": "itemGroup.name.items"
+      },
+      "minecraft:display_name": {
+        "value": "H.I.G. Magazine"
+      },
+      "minecraft:icon": {
+        "texture": "dt_hig_mag"
+      },
+      "minecraft:stacked_by_data": true,
+      "minecraft:allow_off_hand": true,
+      "minecraft:max_stack_size": 1,
+      "minecraft:render_offsets": {
+        "off_hand": {
+          "first_person": {
+            "position": [1, 1, 1],
+            "rotation": [1, 1, 1],
+            "scale": [0, 0, 0]
+          }
+        }
+      }
+    }
+  }
+}

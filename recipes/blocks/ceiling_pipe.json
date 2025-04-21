@@ -1,0 +1,40 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_ceiling_pipe"
+    },
+
+    
+    "tags": [ "crafting_table" ],
+    "pattern": [
+      "#|#",
+      "ABC",
+      "#|#"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:iron_ingot"
+      },
+      "|": {
+        "item": "lc:dt_scpdystopia_orb"
+      },
+      "A": {
+        "item": "minecraft:dye",
+        "data": 1
+      },
+      "B": {
+        "item": "minecraft:dye",
+        "data": 18
+      },
+      "C": {
+        "item": "minecraft:dye",
+        "data":  7
+      }
+    },
+    "result": {
+      "item": "lc:dt_ceiling_pipe",
+      "count": 8
+    }
+  }
+}

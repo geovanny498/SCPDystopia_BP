@@ -1,0 +1,26 @@
+{
+  "format_version": "1.12",
+  "minecraft:recipe_shaped": {
+    "description": {
+    "identifier": "lc:dt_gray_concrete"
+    },
+
+    
+    "tags": [ "dystopia_craftbench" ],
+    "pattern": [
+      "###",
+      "###",
+      "###"
+    ],
+    "key": {
+      "#": {
+        "item": "minecraft:concrete",
+        "data": 7
+      }
+    },
+    "result": {
+      "item": "lc:dt_gray_concrete",
+      "count": 20
+    }
+  }
+}

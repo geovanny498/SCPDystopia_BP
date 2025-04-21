@@ -1,0 +1,755 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_cd",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "retreat"
+        ]
+      },
+      "animations": {
+        "retreat": "controller.animation.chaos_insurgency.retreat"
+      }
+    },
+    "component_groups": {
+      "zombie": {
+        "minecraft:transformation": {
+          "into": "lc:dt_chaos_scp049_2"
+        }
+      },
+      "scp610": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scp610<minecraft:entity_spawned>"
+        }
+      },
+      "tamed": {
+        "minecraft:is_tamed": {
+        },
+		"minecraft:boss": {
+			"should_darken_sky": false,
+			"name": "§a§lChaos Delta Member",
+			"hud_range": 5
+		},
+        "minecraft:healable": {
+          "items": [
+            {
+              "item": "lc:dt_medkit",
+              "heal_amount": 1500
+            },
+            {
+              "item": "lc:dt_painkillers",
+              "heal_amount": 750
+            }
+          ]
+        },
+        "minecraft:behavior.follow_owner": {
+          "priority": -3,
+          "speed_multiplier": 1.22,
+          "start_distance": 12,
+          "stop_distance": 3
+        },
+        "minecraft:behavior.owner_hurt_by_target": {
+          "priority": 2
+        },
+        "minecraft:behavior.owner_hurt_target": {
+          "priority": 2
+        }
+      },
+	  "minecraft:mode_switcher": {
+		   "minecraft:target_nearby_sensor": {
+                "inside_range": 1.5,
+                "outside_range": 1.5,
+                "on_inside_range": {
+                    "event": "minecraft:to_melee_attack",
+                    "target": "self"
+                },
+                "on_outside_range": {
+                    "event": "minecraft:to_ranged_attack",
+                    "target": "self"
+                }
+            }
+	  },
+      "minecraft:ranged_attack": {
+        "minecraft:mark_variant": {
+          "value": 0
+        },
+        "minecraft:shooter": {
+          "def": "lc:dt_m16_bullet"
+        },
+        "minecraft:behavior.ranged_attack": {
+          "priority": 1,
+          "attack_interval_min": 1.0,
+          "attack_interval_max": 1.0,
+          "burst_shots": 50,
+          "burst_interval": 0.06,
+          "attack_radius": 64,
+          "attack_radius_min": 10,
+          "speed_multiplier": 1.22
+        },
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": -1,
+          "within_radius": 64,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp096"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp001_gg"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "enderman"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp280"
+                  },
+                  {
+                    "other_with_families": [ "monster", "warden", "scp", "mtf", "scpfoundation", "foundation", "villager" ]
+                  },
+                  {
+                    "test": "in_contact_with_water",
+                    "operator": "!=",
+                    "value": true
+                  }
+                ]
+              },
+              "max_dist": 64
+            },
+            {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "==",
+                    "value": "player"
+                  },
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "!=",
+                    "value": "lc:dt_ci_helmet"
+                  }
+                ]
+              },
+              "max_dist": 64
+            }
+          ],
+          "must_see_forget_duration": 170.0,
+          "must_see": true
+        },
+        /*
+        "minecraft:environment_sensor": {
+					"triggers": [
+						{
+							"filters": {
+								"all_of": [
+									{
+										"test": "health",
+										"subject": "self",
+										"operator": "<",
+										"value": 14
+									}
+								]
+							},
+							"event": "epsilon11:to_retreat"
+						}
+					]
+			  },*/
+        "minecraft:behavior.hurt_by_target": {
+          "priority": 2,
+          "entity_types": {
+            "filters": {
+              "test": "is_family",
+              "subject": "other",
+              "operator": "!=",
+              "value": "scpfoundation"
+            },
+            "max_dist": 70
+          }
+        }
+      },
+      "minecraft:melee_attack": {
+        "minecraft:mark_variant": {
+          "value": 0
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": -1,
+          "speed_multiplier": 1.22,
+          "track_target": true
+        },
+        "minecraft:attack": {
+           "damage": 14
+        },
+        "minecraft:behavior.nearest_attackable_target": {
+          "priority": -1,
+          "within_radius": 64,
+          "reselect_targets": true,
+          "entity_types": [
+            {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp096"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp001_gg"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "enderman"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "!=",
+                    "value": "scp280"
+                  },
+                  {
+                    "other_with_families": [ "monster", "warden", "scp", "mtf", "scpfoundation", "villager" ]
+                  },
+                  {
+                    "test": "in_contact_with_water",
+                    "operator": "!=",
+                    "value": true
+                  }
+                ]
+              },
+              "max_dist": 64
+            },
+            {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "==",
+                    "value": "player"
+                  },
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "!=",
+                    "value": "lc:dt_ci_helmet"
+                  }
+                ]
+              },
+              "max_dist": 64
+            }
+          ],
+          "must_see_forget_duration": 170.0,
+          "must_see": true
+        },
+        /*
+        "minecraft:environment_sensor": {
+					"triggers": [
+						{
+							"filters": {
+								"all_of": [
+									{
+										"test": "health",
+										"subject": "self",
+										"operator": "<",
+										"value": 14
+									}
+								]
+							},
+							"event": "epsilon11:to_retreat"
+						}
+					]
+			  },*/
+        "minecraft:behavior.hurt_by_target": {
+          "priority": 2,
+          "entity_types": {
+            "filters": {
+              "test": "is_family",
+              "subject": "other",
+              "operator": "!=",
+              "value": "scpfoundation"
+            },
+            "max_dist": 70
+          }
+        }
+      },
+      "retreat": {
+        "minecraft:mark_variant": {
+          "value": 1
+        },
+        "minecraft:behavior.avoid_mob_type": {
+          "priority": 0,
+          "entity_types": [
+            {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "monster"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "pillager"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp"
+                  },
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_tro_helmet"
+                  }
+                ]
+              },
+              "max_dist": 32,
+              "walk_speed_multiplier": 1.1,
+              "sprint_speed_multiplier": 1.1
+            }
+          ]
+        } /*,
+        "minecraft:environment_sensor": {
+					"triggers": [
+						{
+							"filters": {
+								"all_of": [
+									{
+										"test": "is_health",
+										"subject": "self",
+										"operator": ">",
+										"value": 15
+									}
+								]
+							},
+							"event": "epsilon11:to_fight"
+						}
+					]
+			  }*/
+      },
+      "calm": {
+        "minecraft:tameable": {
+          "probability": 0.37,
+          "tame_items": [ "lc:dt_ci_currency" ],
+          "tame_event": {
+            "event": "minecraft:on_tame",
+            "target": "self"
+          }
+        },
+        "minecraft:on_target_acquired": {
+          "event": "ci:become_angry",
+          "target": "self"
+        }
+      },
+      "angry": {
+        "minecraft:angry": {
+          "duration": 90,
+          "broadcast_anger": true,
+          "broadcast_anger_on_attack": true,
+          "broadcast_anger_on_being_attacked": true,
+          "broadcast_range": 128,
+          "broadcast_targets": [
+            "chaos",
+            "chaos_insurgency"
+          ],
+          "calm_event": {
+            "event": "minecraft:on_calm",
+            "target": "self"
+          }
+        }
+      },
+      "stop": {
+        "minecraft:pushable": {
+          "is_pushable": false,
+          "is_pushable_by_piston": true
+        },
+        "minecraft:movement": {
+          "value": 0.0
+        }
+      },
+      "move": {
+        "minecraft:behavior.follow_target_captain": {
+          "priority": 3,
+          "speed_multiplier": 1.22,
+          "within_radius": 128,
+          "follow_distance": 6
+        },
+        "minecraft:pushable": {
+          "is_pushable": false,
+          "is_pushable_by_piston": true
+        },
+        "minecraft:movement": {
+          "value": 0.33
+        },
+        "minecraft:underwater_movement": {
+          "value": 0.1
+        },
+        "minecraft:water_movement": {
+          "value": 0.1
+        },
+        "minecraft:lava_movement": {
+          "value": 0.1
+        },
+        "minecraft:behavior.tempt": {
+        "priority": -2,
+        "speed_multiplier": 1.22,
+        "items": [
+          "stick",
+          "lc:dt_ci_currency"
+        ]
+      },
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 0.9
+        }
+      },
+      "death_ci": {
+        "minecraft:transformation": {
+          "into": "lc:dt_ci_dead<ci>"
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {
+      },
+      "minecraft:experience_reward": {
+        "on_death": "query.last_hit_by_player ? 12 : 0"
+      },
+      "minecraft:type_family": {
+        "family": [
+          "human",
+          "chaos_insurgency",
+          "chaos",
+          "mob"
+        ]
+      },
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_ci_helmet"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "other_with_families": [
+                  "chaos"
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp049"
+                  }
+                ],
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "become_zombie"
+            }
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "not",
+                    "value": "scp049"
+                  },
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "operator": "not",
+                    "value": "scp610"
+                  },
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "human:dead_ci"
+            }
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "is_family",
+                    "subject": "other",
+                    "value": "scp610"
+                  }
+                ],
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "become_scp610"
+            }
+          }
+        ]
+      },
+      "minecraft:knockback_resistance": {
+        "value": 0.5
+      },
+      "minecraft:health": {
+        "value": 160,
+        "max": 160
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:attack": {
+         "damage": 14
+      },
+      "minecraft:movement.basic": {},
+      "minecraft:jump.static": {},
+      "minecraft:can_climb": {},
+      "minecraft:follow_range": {
+        "value": 128,
+        "max": 128
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 8,
+        "look_distance": 8,
+        "probability": 0.04
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {
+          "always_show": true
+        },
+      "minecraft:physics": {},
+      "minecraft:conditional_bandwidth_optimization": {},
+      "minecraft:annotation.open_door": {},
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true,
+        "can_open_iron_doors": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "minecraft:mode_switcher",
+            "minecraft:ranged_attack",
+            "move",
+            "calm"
+          ]
+        }
+      },
+	  "minecraft:to_melee_attack": {
+                "remove": {
+                    "component_groups": [
+                        "minecraft:ranged_attack"
+                    ]
+                },
+                "add": {
+                    "component_groups": [
+                        "minecraft:melee_attack"
+
+                    ]
+                }
+            },
+      "minecraft:to_ranged_attack": {
+                "remove": {
+                    "component_groups": [
+                        "minecraft:melee_attack"
+
+                    ]
+                },
+                "add": {
+                    "component_groups": [
+                        "minecraft:ranged_attack"
+                    ]
+                }
+            },
+      "become_zombie": {
+        "add": {
+          "component_groups": [
+            "zombie"
+          ]
+        }
+      },
+      "ci:to_retreat": {
+        "add": {
+          "component_groups": [
+            "retreat"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "fight"
+          ]
+        }
+      },
+      "ci:to_fight": {
+        "add": {
+          "component_groups": [
+            "fight"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "retreat"
+          ]
+        }
+      },
+      "ci:become_angry": {
+        "add": {
+          "component_groups": [
+            "angry"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "calm"
+          ]
+        }
+      },
+      "ci:on_calm": {
+        "add": {
+          "component_groups": [
+            "calm"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "angry"
+          ]
+        }
+      },
+      "ci:to_move": {
+        "add": {
+          "component_groups": [
+            "move"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "stop"
+          ]
+        }
+      },
+      "ci:to_stop": {
+        "add": {
+          "component_groups": [
+            "stop"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "move"
+          ]
+        }
+      },
+      "minecraft:on_tame": {
+        "add": {
+          "component_groups": [
+            "tamed"
+          ]
+        }
+      },
+      "become_scp610": {
+        "add": {
+          "component_groups": [
+            "scp610"
+          ]
+        }
+      },
+      "human:dead_ci": {
+        "add": {
+          "component_groups": [
+            "death_ci"
+          ]
+        }
+      }
+    }
+  }
+}

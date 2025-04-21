@@ -1,0 +1,105 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_environment_controller",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "anim_cont"
+        ]
+      },
+      "animations": {
+        "anim_cont": "controller.animation.dt_env_controller.command"
+      }
+    },
+    "component_groups": {
+      "delete": {
+        "minecraft:despawn": {}
+      },
+      "env_controller:nvg_effect": {
+        "minecraft:mob_effect": {
+          "effect_range": 300,
+          "mob_effect": "night_vision",
+          "effect_time": 1,
+          "entity_filter": {
+            "all_of": [
+              { "test": "is_family", "subject": "other", "value": "player" },
+              { "test": "has_equipment", "subject": "other", "domain": "head", "value": "lc:dt_nvg" }
+            ] 
+          }
+        }
+      },
+      "env_controller:scp268_effect": {
+        "minecraft:mob_effect": {
+          "effect_range": 300,
+          "mob_effect": "invisibility",
+          "effect_time": 1,
+          "entity_filter": {
+            "all_of": [
+              { "test": "is_family", "subject": "other", "value": "player" },
+              { "test": "has_equipment", "subject": "other", "domain": "head", "value": "lc:dt_scp268" }
+            ] 
+          }
+        }
+      }
+    },
+    "components": {
+      "minecraft:is_hidden_when_invisible": {},
+      "minecraft:knockback_resistance": {
+        "value": 10.0
+      },
+      "minecraft:damage_sensor": {
+        "triggers": {
+          "cause": "all",
+          "deals_damage": false
+        }
+      },
+      "minecraft:type_family": {
+        "family": [ "inanimate", "environment_controller" ]
+      },
+      "minecraft:health": {
+        "value": 10,
+        "max": 10
+      },
+      "minecraft:physics": {
+        "has_gravity": false,
+        "has_collision": false
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": false
+      },
+      "minecraft:collision_box": {
+        "width": 0.01,
+        "height": 0.01
+      }
+    },
+    "events": {
+      "env_controller:delete": {
+        "add": {
+          "component_groups": [
+            "delete"
+          ]
+        }
+      },
+      "env_controller:nvg_effect": {
+        "add": {
+          "component_groups": [
+            "env_controller:nvg_effect"
+          ]
+        }
+      },
+      "env_controller:scp268_effect": {
+        "add": {
+          "component_groups": [
+            "env_controller:scp268_effect"
+          ]
+        }
+      }
+    }
+  }
+}
+  

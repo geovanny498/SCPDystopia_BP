@@ -1,0 +1,38 @@
+{
+    "format_version": "1.16.100",
+    "minecraft:item": {
+        "description": {
+            "identifier": "lc:dt_beenie",
+            "category": "Equipment"
+        },
+        "components": {
+            "minecraft:creative_category": {
+                "parent": "itemGroup.name.helmet"
+            },
+            "minecraft:max_stack_size": 1,
+            "minecraft:icon": {
+                "texture": "dt_beenie_icon"
+            },
+            "minecraft:durability": {
+                "max_durability": 111,
+                "damage_chance": {
+                    "min": 7,
+                    "max": 13
+                }
+            },
+            "minecraft:armor": {
+                "protection": 5
+            },
+            "minecraft:enchantable": {
+                "slot": "armor_head",
+                "value": 10
+            },
+            "minecraft:wearable": {
+                "slot": "slot.armor.head"
+            },
+            "minecraft:display_name": {
+                "value": "Beenie"
+            }
+        }
+    }
+}

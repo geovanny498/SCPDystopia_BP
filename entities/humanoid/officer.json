@@ -1,0 +1,653 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_officer",
+      "is_spawnable": true,
+      "is_summonable": true,
+      "is_experimental": false
+    },
+    "component_groups": {
+      "zombie": {
+        "minecraft:transformation": {
+          "into": "lc:dt_officer_scp049_2"
+        }
+      },
+      "scp610": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scp610<minecraft:entity_spawned>"
+        }
+      },
+      "stop": {
+        "minecraft:interact": {
+          "interactions": {
+            "on_interact": {
+              "filters": {
+                "all_of": [
+                  { "test": "is_family", "subject": "other", "value": "player" },
+                  { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_commander" },
+                  { "test": "has_component", "operator": "!=", "value": "move" }
+                ]
+              },
+            "event": "officer:to_move",
+            "target": "self"
+            },
+            "hurt_item": 0,
+            "swing": true,
+            "interact_text": "action.interact.scpdt.officer.move"
+          }
+        },
+        "minecraft:pushable": {
+          "is_pushable": false,
+          "is_pushable_by_piston": true
+        },
+        "minecraft:movement": {
+          "value": 0.0
+        }
+      },
+      "move": {
+        "minecraft:interact": {
+          "interactions": {
+            "on_interact": {
+              "filters": {
+                "all_of": [
+                  { "test": "is_family", "subject": "other", "value": "player" },
+                  { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_commander" },
+                  { "test": "has_component", "operator": "!=", "value": "stop" }
+                ]
+              },
+            "event": "officer:to_stop",
+            "target": "self"
+            },
+            "hurt_item": 0,
+            "swing": true,
+            "interact_text": "action.interact.scpdt.officer.stop"
+          }
+        },
+        "minecraft:pushable": {
+          "is_pushable": true,
+          "is_pushable_by_piston": true
+        },
+        "minecraft:movement": {
+          "value": 0.26
+        },
+        "minecraft:behavior.random_stroll": {
+          "priority": 6,
+          "speed_multiplier": 1
+        }
+      },
+      "ranged": {
+        "minecraft:variant": {
+          "value": 0
+        },
+        "minecraft:shooter": {
+          "def": "lc:dt_glock_bullet"
+        },
+        "minecraft:damage_sensor": {
+          "triggers": 
+          [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_tro_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_eta10_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_epsilon11_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "other_with_families": ["scpfoundation", "officer"]
+                }
+            },
+            "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp049"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_zombie"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp049"
+                    },
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp610"
+                    },
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "human:dead_officer"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp610"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_scp610"
+              }
+            }
+          ]
+        },
+        "minecraft:behavior.ranged_attack": {
+          "priority": 0,
+          "attack_interval_min": 1.5,
+          "attack_interval_max": 1.9,
+          "burst_shots": 17,
+          "burst_interval": 0.61,
+          "attack_radius": 36,
+          "speed_multiplier": 1.0
+        }
+      },
+      "death_officer": {
+        "minecraft:transformation": {
+          "into": "lc:dt_officer_dead<officer>"
+        }
+      },
+      "combat": {
+        "minecraft:variant": {
+          "value": 1
+        },
+        "minecraft:damage_sensor": {
+          "triggers": 
+          [
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_tro_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_eta10_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "has_equipment",
+                      "subject": "other",
+                      "domain": "head",
+                      "operator": "==",
+                      "value": "lc:dt_epsilon11_helmet"
+                    }
+                  ]
+                }
+              },
+              "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "other_with_families": ["scpfoundation", "officer"]
+                }
+            },
+            "deals_damage": false
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp049"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_zombie"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "all_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp049"
+                    },
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "operator": "not",
+                      "value": "scp610"
+                    },
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "human:dead_officer_c"
+              }
+            },
+            {
+              "on_damage": {
+                "filters": {
+                  "any_of": [
+                    {
+                      "test": "is_family",
+                      "subject": "other",
+                      "value": "scp610"
+                    }
+                  ],
+                  "all_of": [
+                    {
+                      "test": "has_damage",
+                      "value": "fatal"
+                    }
+                  ]
+                },
+                "event": "become_scp610"
+              }
+            }
+          ]
+        },
+        "minecraft:behavior.delayed_attack": {
+          "priority": 0,
+          "attack_once": false,
+          "track_target": true,
+          "require_complete_path": false,
+          "random_stop_interval": 0,
+          "reach_multiplier": 3.18,
+          "speed_multiplier": 1.08,
+          "attack_duration": 0.16,
+          "hit_delay_pct": 0.13
+        }
+      },
+      "death_officer_c": {
+        "minecraft:transformation": {
+          "into": "lc:dt_officer_dead<officer_c>"
+        }
+      },
+      "from_o5": {
+        "minecraft:timer": {
+          "looping": false,
+          "time": 27.0,
+          "time_down_event": {
+            "event": "minecraft:start_despawn"
+          }
+        },
+        "minecraft:leashable": {
+          "soft_distance": 5.0,
+          "hard_distance": 8.0,
+          "max_distance": 15.0,
+          "can_be_stolen": false
+        }
+      },
+      "despawning": {
+        "minecraft:despawn": {
+        }
+      }
+    },
+    "components": {
+      "minecraft:type_family": {
+        "family": [ "human", "scpfoundation", "mob", "officer", "guard", "villager" ]
+      },
+      "minecraft:knockback_resistance": {
+        "value": 0.08
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
+      "minecraft:health": {
+        "value": 39,
+        "max": 39
+      },
+      "minecraft:healable": {
+        "items": [
+          {
+            "item": "lc:dt_medkit",
+            "heal_amount": 8
+          },
+          {
+            "item": "lc:dt_painkillers",
+            "heal_amount": 4
+          }
+        ]
+      },
+      "minecraft:breathable": {
+        "total_supply": 15,
+        "suffocate_time": 0
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:attack": {
+        "damage": 6
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2,
+        "entity_types": {
+          "filters": {
+            "test": "is_family",
+            "subject": "other",
+            "operator": "!=",
+            "value": "scpfoundation"
+          },
+          "max_dist": 70
+        }
+      },
+      "minecraft:follow_range": {
+        "value": 38,
+        "max": 38
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 0,
+        "within_radius": 32,
+        "reselect_targets": true,
+        "entity_types": [
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "!=",
+                  "value": "scp096"
+                },
+                {
+                  "other_with_families": [ "monster", "scp", "pillager", "hoglin", "piglin", "chaos_insurgency", "chaos" ]
+                },
+                {
+                  "test": "in_contact_with_water",
+                  "operator": "!=",
+                  "value": true
+                }
+              ]
+            },
+            "max_dist": 32
+          },
+          {
+            "filters": {
+              "all_of": [
+                {
+                  "test": "is_family",
+                  "subject": "other",
+                  "operator": "==",
+                  "value": "player"
+                },
+                {
+                  "test": "has_equipment",
+                  "subject": "other",
+                  "domain": "head",
+                  "operator": "==",
+                  "value": "lc:dt_ci_helmet"
+                }
+              ]
+            },
+            "max_dist": 32
+          }
+        ],
+        "must_see_forget_duration": 20.0,
+        "must_see": true
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 0.8
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:behavior.look_at_player": {
+        "priority": 8,
+        "look_distance": 8,
+        "probability": 0.03
+      },
+      "minecraft:collision_box": {
+        "width": 0.6,
+        "height": 1.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.open_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "avoid_sun": false,
+        "avoid_water": true,
+        "avoid_damage_blocks": true,
+        "can_pass_doors": true,
+        "can_open_doors": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "sequence": [
+          {
+            "randomize": [
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": [ "ranged" ]
+                }
+              },
+              {
+                "weight": 1,
+                "add": {
+                  "component_groups": [ "combat" ]
+                }
+              }
+            ]
+          },
+          {
+            "add": {
+              "component_groups": [
+                "move"
+              ]
+            }
+          }
+        ]
+      },
+      "officer:from_o5": {
+        "add": {
+          "component_groups": [
+            "ranged",
+            "move",
+            "from_o5"
+          ]
+        }
+      },
+      "become_zombie": {
+        "add": {
+          "component_groups": [
+            "zombie"
+          ]
+        }
+      },
+      "officer:to_move": {
+        "add": {
+          "component_groups": [
+            "move"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "stop"
+          ]
+        }
+      },
+      "officer:to_stop": {
+        "add": {
+          "component_groups": [
+            "stop"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "move"
+          ]
+        }
+      },
+      "minecraft:start_despawn": {
+        "add": {
+          "component_groups": [
+            "despawning"
+          ]
+        }
+      },
+      "become_scp610": {
+        "add": {
+          "component_groups": [
+            "scp610"
+          ]
+        }
+      },
+      "human:dead_officer": {
+        "add": {
+          "component_groups": [
+            "death_officer"
+          ]
+        }
+      },
+      "human:dead_officer_c": {
+        "add": {
+          "component_groups": [
+            "death_officer_c"
+          ]
+        }
+      }
+    }
+  }
+}
+  

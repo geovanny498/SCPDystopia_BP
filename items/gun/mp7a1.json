@@ -1,0 +1,112 @@
+{
+	"format_version": "1.16.100",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_mp7a1",
+			"category": "Equipment"
+		},
+		"components": {
+			"minecraft:use_duration": 0.1,
+			"minecraft:damage": 4,
+			"minecraft:creative_category": {
+				"parent": "itemGroup.name.equipment"
+			},
+			"minecraft:durability": {
+				"max_durability": 31,
+				"damage_chance": {
+					"min": 0,
+					"max": 0
+				}
+			},
+			"minecraft:hand_equipped": true,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": {
+				"texture": "dt_mp7a1_icon"
+			},
+			"minecraft:display_name": {
+				"value": "MP7A1 PDW"
+			},
+			"minecraft:cooldown": {
+				"duration": 0.1,
+				"category": "mp7a1"
+			},
+			"minecraft:on_use": {
+				"on_use": {
+					"event": "mp7a1:shoot"
+				}
+			},
+			"minecraft:weapon": {
+				"on_hurt_entity": {
+				},
+				"on_hit_block": {
+				}
+			},
+			"tag:lc:class_d_can_equip": {}
+		},
+		"events": {
+			"mp7a1:shoot": {
+				"sequence": [
+					{
+						"condition": "(query.remaining_durability == 1)",
+						"run_command": {
+							"command": [
+								"execute @s ~~~ playsound scpdt.gun.shot_dry @a[r=10] ~~~",
+								"replaceitem entity @s slot.weapon.mainhand 0 lc:dt_mp7a1_empty"
+							],
+							"target": "holder"
+						}
+					},
+					{
+						"condition": "(query.remaining_durability > 1)",
+						"sequence": [
+							{
+								"condition": "!query.is_sneaking",
+								"shoot": {
+									"projectile": "lc:dt_mp7a1_bullet_player",
+									"launch_power": 16
+								},
+								"run_command": {
+									"command": [
+										"effect @s slowness 1 1 true",
+										"execute @s ~~~ playsound scpdt.hk_mp5.shot @a[r=20] ~~~",
+										"playanimation @s animation.dt_misc.player_gun_fire",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.03 ^1",
+										"camerashake add @s 0.12 0.25 rotational",
+										"title @s actionbar §c>>    §f+    §c<<"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							},
+							{
+								"condition": "query.is_sneaking",
+								"shoot": {
+									"projectile": "lc:dt_mp7a1_bullet_player_sneak",
+									"launch_power": 23
+								},
+								"run_command": {
+									"command": [
+										"effect @s slowness 1 1 true",
+										"execute @s ~~~ playsound scpdt.hk_mp5.shot @a[r=20] ~~~",
+										"playanimation @s animation.dt_misc.player_gun_fire",
+										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.05 ^1",
+										"camerashake add @s 0.1 0.18 rotational",
+										"title @s actionbar §c>>  §e+  §c<<"
+									],
+									"target": "holder"
+								},
+								"damage": {
+									"type": "magic",
+									"amount": 1
+								}
+							}
+						]
+					}
+				]
+			}
+		}
+	}
+}

@@ -1,0 +1,26 @@
+{
+    "format_version": "1.16.0",
+    "minecraft:block": {
+        "description": {
+            "identifier": "lc:dt_pd_floor",
+            "properties": {
+            }
+        },
+        "components": {
+            "minecraft:material_instances": {
+                "*": {
+                    "texture": "dt_pd_floor",
+                    "render_method": "opaque"
+                }
+            },
+            "minecraft:destroy_time": 2,
+            "minecraft:unit_cube": {},
+            "minecraft:map_color": "#3B3D94",
+            "tag:lc:dystopiablock": {}
+        },
+        "events": {
+        },
+        "permutations": [
+        ]
+    }
+}

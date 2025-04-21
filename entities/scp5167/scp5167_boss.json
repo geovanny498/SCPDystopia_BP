@@ -1,0 +1,321 @@
+{
+  "format_version": "1.13.0",
+  "minecraft:entity": {
+    "description": {
+      "identifier": "lc:dt_scp5167_boss",
+      "is_spawnable": false,
+      "is_summonable": true,
+      "is_experimental": false,
+      "scripts": {
+        "animate": [
+          "strong"
+        ]
+      },
+      "animations": {
+        "strong": "controller.animation.scp5167_boss.stronger"
+      }
+    },
+    "component_groups": {
+      "dead": {
+        "minecraft:transformation": {
+          "into": "lc:dt_scp5167_boss_dead<minecraft:entity_spawned>"
+        }
+      },
+      "normal": {
+        "minecraft:boss": {
+          "should_darken_sky": false,
+          "name": "SCP-5167 Boss",
+          "hud_range": 35
+        },
+        "minecraft:area_attack" : {
+          "damage_range": 0.3,
+          "damage_per_tick": 5,
+          "cause": "contact",
+          "entity_filter": {
+            "all_of": [
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp5167" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp" }
+            ]
+          }
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 1,
+          "speed_multiplier": 1.11
+        },
+        "minecraft:attack": {
+          "damage": 17
+        },
+        "minecraft:knockback_resistance": {
+          "value": 0.7
+        },
+        "minecraft:movement": {
+          "value": 0.273
+        }
+      },
+      "stronger": {
+        "minecraft:boss": {
+          "should_darken_sky": false,
+          "name": "§c§klll§r §fSCP-5167 Boss §c§klll",
+          "hud_range": 35
+        },
+        "minecraft:area_attack" : {
+          "damage_range": 0.32,
+          "damage_per_tick": 10,
+          "cause": "contact",
+          "entity_filter": {
+            "all_of": [
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp5167" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp" }
+            ]
+          }
+        },
+        "minecraft:is_sheared": {},
+        "minecraft:behavior.leap_at_target": {
+          "priority": 0,
+          "yd": 0.4,
+          "must_be_on_ground": false
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 1,
+          "speed_multiplier": 1.27
+        },
+        "minecraft:attack": {
+          "damage": 26
+        },
+        "minecraft:knockback_resistance": {
+          "value": 0.78
+        },
+        "minecraft:movement": {
+          "value": 0.29
+        }
+      },
+      "angry": {
+        "minecraft:boss": {
+          "should_darken_sky": false,
+          "name": "§c§klll§r §fSCP-5167 Boss (Angry) §c§klll",
+          "hud_range": 35
+        },
+        "minecraft:area_attack" : {
+          "damage_range": 0.32,
+          "damage_per_tick": 15,
+          "cause": "contact",
+          "entity_filter": {
+            "all_of": [
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp5167" },
+              { "test": "is_family", "subject": "other", "operator": "!=", "value": "scp" }
+            ]
+          }
+        },
+        "minecraft:is_sheared": {},
+        "minecraft:behavior.leap_at_target": {
+          "priority": 0,
+          "yd": 0.62,
+          "must_be_on_ground": false
+        },
+        "minecraft:behavior.melee_attack": {
+          "priority": 1,
+          "speed_multiplier": 1.32
+        },
+        "minecraft:attack": {
+          "damage": 38
+        },
+        "minecraft:knockback_resistance": {
+          "value": 10.0
+        },
+        "minecraft:movement": {
+          "value": 0.342
+        }
+      }
+    },
+    "components": {
+      "minecraft:damage_sensor": {
+        "triggers": [
+          {
+            "on_damage": {
+              "filters": {
+                "any_of": [
+                  {
+                    "test": "has_equipment",
+                    "subject": "other",
+                    "domain": "head",
+                    "operator": "==",
+                    "value": "lc:dt_scp5167_mask"
+                  }
+                ]
+              }
+            },
+            "deals_damage": false
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "all_of": [
+                  {
+                    "test": "has_damage",
+                    "value": "fatal"
+                  }
+                ]
+              },
+              "event": "scp5167_boss:death"
+            }
+          },
+          {
+            "on_damage": {
+              "filters": {
+                "other_with_families": [
+                  "sus"
+                ]
+              }
+            },
+            "deals_damage": false
+          }
+        ]
+      },
+      "minecraft:health": {
+        "value": 5000,
+        "max": 5000
+      },
+      "minecraft:type_family": {
+        "family": [ "scp", "scp5167", "sus", "mob", "monster" ]
+      },
+      "minecraft:movement.basic": {
+      },
+      "minecraft:jump.static": {
+      },
+      "minecraft:can_climb": {
+      },
+      "minecraft:hurt_on_condition": {
+        "damage_conditions": [
+          {
+            "filters": { "test": "in_lava", "subject": "self", "operator": "==", "value": true },
+            "cause": "lava",
+            "damage_per_tick": 4
+          }
+        ]
+      },
+      "minecraft:follow_range": {
+        "value": 128,
+        "max": 128
+      },
+      "minecraft:behavior.hurt_by_target": {
+        "priority": 2,
+        "entity_types": {
+          "filters": {
+            "test": "is_family",
+            "subject": "other",
+            "operator": "!=",
+            "value": "scp5167"
+          },
+          "max_dist": 128
+        }
+      },
+      "minecraft:behavior.nearest_attackable_target": {
+        "priority": 0,
+        "within_radius": 35,
+        "reselect_targets": true,
+        "entity_types": [
+          {
+          "filters": {
+            "other_with_families": [ "villager", "human", "player" ]
+          },
+          "max_dist": 35
+          }
+        ],
+        "must_see_forget_duration": 30.0,
+        "must_see": true
+      },
+      "minecraft:pushable": {
+        "is_pushable": false,
+        "is_pushable_by_piston": true
+      },
+      "minecraft:behavior.float": {
+        "priority": 3
+      },
+      "minecraft:behavior.move_towards_restriction": {
+        "priority": 5,
+        "speed_multiplier": 1
+      },
+      "minecraft:behavior.move_indoors": {
+        "priority": 4,
+        "speed_multiplier": 1.0
+      },
+      "minecraft:behavior.random_stroll": {
+        "priority": 6,
+        "speed_multiplier": 0.85
+      },
+      "minecraft:behavior.random_look_around": {
+        "priority": 7
+      },
+      "minecraft:collision_box": {
+        "width": 0.9,
+        "height": 2.9
+      },
+      "minecraft:behavior.restrict_open_door": {
+        "priority": 5
+      },
+      "minecraft:behavior.open_door": {
+        "priority": 6,
+        "close_door_after": true
+      },
+      "minecraft:nameable": {
+      },
+      "minecraft:physics": {
+      },
+      "minecraft:conditional_bandwidth_optimization": {
+      },
+      "minecraft:annotation.open_door": {
+      },
+      "minecraft:navigation.walk": {
+        "can_float": true,
+        "is_amphibious": true,
+        "can_path_over_water": true,
+        "can_pass_doors": true,
+        "can_open_doors": true,
+        "avoid_damage_blocks": true
+      }
+    },
+    "events": {
+      "minecraft:entity_spawned": {
+        "add": {
+          "component_groups": [
+            "normal"
+          ]
+        }
+      },
+      "scp5167_boss:to_stronger": {
+        "add": {
+          "component_groups": [
+            "stronger"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "normal",
+            "angry"
+          ]
+        }
+      },
+      "scp5167_boss:to_angry": {
+        "add": {
+          "component_groups": [
+            "angry"
+          ]
+        },
+        "remove": {
+          "component_groups": [
+            "normal",
+            "stronger"
+          ]
+        }
+      },
+      "scp5167_boss:death": {
+        "add": {
+          "component_groups": [
+            "dead"
+          ]
+        }
+      }
+    }
+  }
+}
+  
