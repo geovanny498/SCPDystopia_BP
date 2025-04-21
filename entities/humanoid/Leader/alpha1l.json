@@ -352,7 +352,7 @@
                 "minecraft:tameable": {
                     "probability": 1.0,
                     "tame_items": [
-                        "gold_ingot"
+                        "minecraft:book"
                     ],
                     "tame_event": {
                         "event": "minecraft:on_tame",
@@ -706,6 +706,15 @@
                 },
                 "minecraft:movement": {
                     "value": 0.0
+                },
+                "minecraft:behavior.tempt": {
+                    "priority": -2,
+                    "within_radius": 64,
+                    "speed_multiplier": 1.25,
+                    "items": [
+                        "emerald",
+                        "blaze_powder"
+                    ]
                 }
             },
             "move": {
@@ -995,7 +1004,8 @@
                     "within_radius": 64,
                     "speed_multiplier": 1.25,
                     "items": [
-                        "iron_ingot"
+                        "emerald",
+                        "blaze_powder"
                     ]
                 },
                 "minecraft:behavior.random_stroll": {
@@ -1290,7 +1300,8 @@
                     "within_radius": 64,
                     "speed_multiplier": 1.25,
                     "items": [
-                        "iron_ingot"
+                        "emerald",
+                        "blaze_powder"
                     ]
                 },
                 "minecraft:behavior.random_stroll": {
@@ -1530,6 +1541,7 @@
             "minecraft:attack": {
                 "damage": 16
             },
+            "minecraft:fire_immune": true,
             "minecraft:variable_max_auto_step": {
                 "base_value": 1.0625,
                 "jump_prevented_value": 0.5625

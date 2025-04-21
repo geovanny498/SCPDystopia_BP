@@ -356,7 +356,7 @@
                 "minecraft:tameable": {
                     "probability": 1.0,
                     "tame_items": [
-                        "netherite_ingot"
+                        "minecraft:book"
                     ],
                     "tame_event": {
                         "event": "minecraft:on_tame",
@@ -710,6 +710,15 @@
                 },
                 "minecraft:movement": {
                     "value": 0.0
+                },
+                "minecraft:behavior.tempt": {
+                    "priority": -2,
+                    "within_radius": 64,
+                    "speed_multiplier": 1.25,
+                    "items": [
+                        "netherite_ingot",
+                        "blaze_powder"
+                    ]
                 }
             },
             "move": {

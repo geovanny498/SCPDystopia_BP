@@ -332,7 +332,7 @@
                 "minecraft:tameable": {
                     "probability": 1.0,
                     "tame_items": [
-                        "gold_ingot"
+                        "minecraft:book"
                     ],
                     "tame_event": {
                         "event": "minecraft:on_tame",
@@ -686,6 +686,14 @@
                 },
                 "minecraft:movement": {
                     "value": 0.0
+                },
+                "minecraft:behavior.tempt": {
+                    "priority": -2,
+                    "within_radius": 64,
+                    "speed_multiplier": 1.25,
+                    "items": [
+                        "gold_ingot"
+                    ]
                 }
             },
             "move": {
@@ -1278,9 +1286,9 @@
                     "speed_multiplier": 1.0
                 }
             },
-            "death_nu7": {
+            "death_ci": {
                 "minecraft:transformation": {
-                    "into": "lc:dt_nu7_dead<nu7>"
+                    "into": "lc:dt_ci_dead<ci>"
                 }
             },
             "humanoid:show_health": {
@@ -1776,10 +1784,10 @@
                     ]
                 }
             },
-            "human:dead_nu7": {
+            "human:dead_ci": {
                 "add": {
                     "component_groups": [
-                        "death_nu7"
+                        "death_ci"
                     ]
                 }
             },
