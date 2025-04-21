@@ -1366,7 +1366,7 @@
                                     "base_delay": 4.0,
                                     "delay_per_summon": 0.0,
                                     "num_entities_spawned": 6,
-                                    "entity_type": "lc:dt_alpha1",
+                                    "entity_type": "lc:dt_epsilon11",
                                     "size": 1,
                                     "summon_cap": 6,
                                     "entity_lifespan": 180

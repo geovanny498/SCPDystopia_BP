@@ -2,7 +2,7 @@
     "format_version": "1.21.70",
     "minecraft:entity": {
         "description": {
-            "identifier": "lc:dt_alpha1l",
+            "identifier": "lc:dt_beta7c",
             "is_spawnable": true,
             "is_summonable": true,
             "is_experimental": false,
@@ -123,19 +123,19 @@
             },
             "minecraft:ranged_attack": {
                 "minecraft:shooter": {
-                    "def": "lc:dt_m4a1_bullet_player"
+                    "def": "lc:dt_m16_bullet_player"
                 },
                 "minecraft:behavior.ranged_attack": {
                     "attack_radius_min": 6,
                     "priority": 1,
                     "target_in_sight_time": 0.5,
-                    "burst_shots": 50,
-                    "burst_interval": 0.08,
+                    "burst_shots": 40,
+                    "burst_interval": 0.10,
                     "charge_charged_trigger": 0.0,
                     "charge_shoot_trigger": 1.0,
                     "attack_interval_min": 1.0,
                     "attack_interval_max": 1.0,
-                    "attack_radius": 50.0,
+                    "attack_radius": 40.0,
                     "speed_multiplier": 1.15
                 },
                 "minecraft:behavior.nearest_attackable_target": {
@@ -254,7 +254,7 @@
                     "hit_delay_pct": 0.1
                 },
                 "minecraft:attack": {
-                    "damage": 16
+                    "damage": 14
                 },
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
@@ -1323,7 +1323,7 @@
             "humanoid:show_health": {
                 "minecraft:boss": {
                     "should_darken_sky": false,
-                    "name": "§lMTF Alpha-1 Leader",
+                    "name": "§e§lMTF Beta-7 Commander",
                     "hud_range": 5
                 }
             },
@@ -1366,7 +1366,7 @@
                                     "base_delay": 4.0,
                                     "delay_per_summon": 0.0,
                                     "num_entities_spawned": 6,
-                                    "entity_type": "lc:dt_alpha1",
+                                    "entity_type": "lc:dt_beta7",
                                     "size": 1,
                                     "summon_cap": 6,
                                     "entity_lifespan": 180
@@ -1545,7 +1545,7 @@
                 "priority": 0
             },
             "minecraft:attack": {
-                "damage": 16
+                "damage": 14
             },
             "minecraft:fire_immune": true,
             "minecraft:variable_max_auto_step": {
