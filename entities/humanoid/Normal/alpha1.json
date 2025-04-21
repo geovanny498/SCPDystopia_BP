@@ -1286,7 +1286,7 @@
         },
         "components": {
             "minecraft:knockback_resistance": {
-                "value": 0.7
+                "value": 0.5
             },
             "minecraft:healable": {
                 "items": [
