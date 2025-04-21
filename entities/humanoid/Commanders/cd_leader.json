@@ -1270,8 +1270,7 @@
                     "within_radius": 64,
                     "speed_multiplier": 1.25,
                     "items": [
-                        "netherite_ingot",
-                        "blaze_powder"
+                        "gold_ingot"
                     ]
                 },
                 "minecraft:behavior.random_stroll": {
