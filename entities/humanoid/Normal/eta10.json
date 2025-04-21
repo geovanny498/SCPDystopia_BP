@@ -69,14 +69,14 @@
             },
             "minecraft:ranged_attack": {
                 "minecraft:shooter": {
-                    "def": "lc:dt_p90_bullet"
+                    "def": "lc:dt_mp7_bullet"
                 },
                 "minecraft:behavior.ranged_attack": {
                     "attack_radius_min": 5,
                     "priority": 1,
                     "target_in_sight_time": 0.5,
-                    "burst_shots": 50,
-                    "burst_interval": 0.14,
+                    "burst_shots": 30,
+                    "burst_interval": 0.16,
                     "charge_charged_trigger": 0.0,
                     "charge_shoot_trigger": 1.5,
                     "attack_interval_min": 1.5,
@@ -1269,7 +1269,7 @@
             "humanoid:show_health": {
                 "minecraft:boss": {
                     "should_darken_sky": false,
-                    "name": "§1§lMTF Epsilon-11",
+                    "name": "§b§lMTF Eta-10",
                     "hud_range": 5
                 }
             },
