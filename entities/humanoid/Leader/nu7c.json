@@ -2,7 +2,7 @@
     "format_version": "1.21.70",
     "minecraft:entity": {
         "description": {
-            "identifier": "lc:dt_beta7",
+            "identifier": "lc:dt_nu7",
             "is_spawnable": true,
             "is_summonable": true,
             "is_experimental": false,
@@ -69,19 +69,19 @@
             },
             "minecraft:ranged_attack": {
                 "minecraft:shooter": {
-                    "def": "lc:dt_m16_bullet"
+                    "def": "lc:dt_scar_bullet"
                 },
                 "minecraft:behavior.ranged_attack": {
                     "attack_radius_min": 5,
                     "priority": 1,
                     "target_in_sight_time": 0.5,
-                    "burst_shots": 30,
+                    "burst_shots": 20,
                     "burst_interval": 0.20,
                     "charge_charged_trigger": 0.0,
                     "charge_shoot_trigger": 1.5,
                     "attack_interval_min": 1.5,
                     "attack_interval_max": 1.5,
-                    "attack_radius": 30.0,
+                    "attack_radius": 40.0,
                     "speed_multiplier": 1.15
                 },
                 "minecraft:behavior.nearest_attackable_target": {
@@ -1269,7 +1269,7 @@
             "humanoid:show_health": {
                 "minecraft:boss": {
                     "should_darken_sky": false,
-                    "name": "§e§lMTF Beta-7",
+                    "name": "§8§lMTF Nu-7",
                     "hud_range": 5
                 }
             },
