@@ -1384,7 +1384,7 @@
                                         "subject": "other",
                                         "domain": "head",
                                         "operator": "==",
-                                        "value": "minecraft:gold_helmet"
+                                        "value": "minecraft:golden_helmet"
                                     }
                                 ]
                             }
