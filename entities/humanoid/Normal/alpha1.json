@@ -349,18 +349,6 @@
             },
             "tamed": {
                 "minecraft:is_tamed": {},
-                "minecraft:healable": {
-                    "items": [
-                        {
-                            "item": "golden_apple",
-                            "heal_amount": 30
-                        },
-                        {
-                            "item": "golden_carrot",
-                            "heal_amount": 15
-                        }
-                    ]
-                },
                 "minecraft:behavior.follow_owner": {
                     "priority": -3,
                     "speed_multiplier": 1.25,
@@ -1299,6 +1287,18 @@
         "components": {
             "minecraft:knockback_resistance": {
                 "value": 0.7
+            },
+            "minecraft:healable": {
+                "items": [
+                    {
+                        "item": "golden_apple",
+                        "heal_amount": 30
+                    },
+                    {
+                        "item": "golden_carrot",
+                        "heal_amount": 15
+                    }
+                ]
             },
             "minecraft:type_family": {
                 "family": [
