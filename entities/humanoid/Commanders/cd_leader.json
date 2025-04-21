@@ -959,16 +959,16 @@
                     "is_pushable_by_piston": true
                 },
                 "minecraft:movement": {
-                    "value": 0.38
+                    "value": 0.34
                 },
                 "minecraft:underwater_movement": {
-                    "value": 0.2
+                    "value": 0.1
                 },
                 "minecraft:water_movement": {
-                    "value": 0.2
+                    "value": 0.1
                 },
                 "minecraft:lava_movement": {
-                    "value": 0.3
+                    "value": 0.1
                 },
                 "minecraft:behavior.tempt": {
                     "priority": -2,
@@ -1381,21 +1381,7 @@
                                         "subject": "other",
                                         "domain": "head",
                                         "operator": "==",
-                                        "value": "minecraft:netherite_helmet"
-                                    },
-                                    {
-                                        "test": "has_equipment",
-                                        "subject": "other",
-                                        "domain": "head",
-                                        "operator": "==",
-                                        "value": "minecraft:diamond_helmet"
-                                    },
-                                    {
-                                        "test": "has_equipment",
-                                        "subject": "other",
-                                        "domain": "head",
-                                        "operator": "==",
-                                        "value": "minecraft:iron_helmet"
+                                        "value": "minecraft:gold_helmet"
                                     }
                                 ]
                             }
@@ -1409,17 +1395,7 @@
                                     {
                                         "test": "is_family",
                                         "subject": "other",
-                                        "value": "foundation"
-                                    },
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "value": "scpfoundation"
-                                    },
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "value": "mtf"
+                                        "value": "chaos_insurgency"
                                     }
                                 ]
                             }

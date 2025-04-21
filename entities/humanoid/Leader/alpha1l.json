@@ -33,7 +33,7 @@
                     },
                     "name_actions": [
                         {
-                            "name_filter": "§a§lChaos Delta Squad Leader",
+                            "name_filter": "§l§lMTF Alpha-1 Leader",
                             "on_named": {
                                 "event": "start_chara1",
                                 "target": "self"
@@ -54,7 +54,7 @@
                     },
                     "name_actions": [
                         {
-                            "name_filter": "§a§lChaos Delta Squad Leader",
+                            "name_filter": "§l§lMTF Alpha-1 Leader",
                             "on_named": {
                                 "event": "start_chara2",
                                 "target": "self"
@@ -75,7 +75,7 @@
                     },
                     "name_actions": [
                         {
-                            "name_filter": "§a§lChaos Delta Squad Leader",
+                            "name_filter": "§l§lMTF Alpha-1 Leader",
                             "on_named": {
                                 "event": "start_chara3",
                                 "target": "self"
@@ -96,7 +96,7 @@
                     },
                     "name_actions": [
                         {
-                            "name_filter": "§a§lChaos Delta Squad Leader",
+                            "name_filter": "§l§lMTF Alpha-1 Leader",
                             "on_named": {
                                 "event": "start_chara",
                                 "target": "self"
@@ -140,7 +140,7 @@
                 },
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
-                    "within_radius": 128,
+                    "within_radius": 85,
                     "reselect_targets": true,
                     "entity_types": [
                         {
@@ -175,10 +175,13 @@
                                             "monster",
                                             "warden",
                                             "scp",
-                                            "mtf",
-                                            "scpfoundation",
-                                            "foundation",
-                                            "villager"
+                                            "pillager",
+                                            "hoglin",
+                                            "piglin",
+                                            "class_d",
+                                            "chaos_insurgency",
+                                            "chaos",
+                                            "scp049"
                                         ]
                                     }
                                 ]
@@ -193,6 +196,13 @@
                                         "subject": "other",
                                         "operator": "==",
                                         "value": "player"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "lc:dt_ci_helmet"
                                     }
                                 ]
                             },
@@ -238,11 +248,11 @@
                     "hit_delay_pct": 0.1
                 },
                 "minecraft:attack": {
-                    "damage": 14
+                    "damage": 16
                 },
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
-                    "within_radius": 128,
+                    "within_radius": 85,
                     "reselect_targets": true,
                     "entity_types": [
                         {
@@ -277,10 +287,13 @@
                                             "monster",
                                             "warden",
                                             "scp",
-                                            "mtf",
-                                            "scpfoundation",
-                                            "foundation",
-                                            "villager"
+                                            "pillager",
+                                            "hoglin",
+                                            "piglin",
+                                            "class_d",
+                                            "chaos_insurgency",
+                                            "chaos",
+                                            "scp049"
                                         ]
                                     }
                                 ]
@@ -295,6 +308,13 @@
                                         "subject": "other",
                                         "operator": "==",
                                         "value": "player"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "lc:dt_ci_helmet"
                                     }
                                 ]
                             },
@@ -352,7 +372,7 @@
                     "broadcast_anger_on_being_attacked": true,
                     "broadcast_range": 128,
                     "broadcast_targets": [
-                        "chaos_insurgency"
+                        "alpha1"
                     ],
                     "calm_event": {
                         "event": "humanoid:on_calm",
@@ -369,7 +389,7 @@
                                 "test": "is_family",
                                 "subject": "other",
                                 "operator": "!\u003d",
-                                "value": "chaos_insurgency"
+                                "value": "foundation"
                             }
                         ]
                     }
@@ -381,11 +401,11 @@
                     "items": [
                         {
                             "item": "golden_apple",
-                            "heal_amount": 80
+                            "heal_amount": 90
                         },
                         {
                             "item": "golden_carrot",
-                            "heal_amount": 40
+                            "heal_amount": 45
                         }
                     ]
                 },
@@ -959,16 +979,16 @@
                     "is_pushable_by_piston": true
                 },
                 "minecraft:movement": {
-                    "value": 0.38
+                    "value": 0.34
                 },
                 "minecraft:underwater_movement": {
-                    "value": 0.2
+                    "value": 0.1
                 },
                 "minecraft:water_movement": {
-                    "value": 0.2
+                    "value": 0.1
                 },
                 "minecraft:lava_movement": {
-                    "value": 0.3
+                    "value": 0.1
                 },
                 "minecraft:behavior.tempt": {
                     "priority": -2,
@@ -1286,7 +1306,7 @@
             "humanoid:show_health": {
                 "minecraft:boss": {
                     "should_darken_sky": false,
-                    "name": "§a§lChaos Delta Squad Leader",
+                    "name": "§l§lMTF Alpha-1 Leader",
                     "hud_range": 5
                 }
             },
@@ -1297,8 +1317,8 @@
                     "max_random_teleport_time": 0,
                     "min_random_teleport_time": 0,
                     "random_teleports": false,
-                    "target_distance": 30,
-                    "target_teleport_chance": 0.020
+                    "target_distance": 35,
+                    "target_teleport_chance": 0.015
                 }
             },
             "humanoid:teleport_near": {
@@ -1308,8 +1328,8 @@
                     "max_random_teleport_time": 0,
                     "min_random_teleport_time": 0,
                     "random_teleports": false,
-                    "target_distance": 15,
-                    "target_teleport_chance": 0.020
+                    "target_distance": 20,
+                    "target_teleport_chance": 0.015
                 }
             },
             "humanoid:spawn_soldiers": {
@@ -1329,7 +1349,7 @@
                                     "base_delay": 4.0,
                                     "delay_per_summon": 0.0,
                                     "num_entities_spawned": 6,
-                                    "entity_type": "lc:dt_chaos_insurgency",
+                                    "entity_type": "lc:dt_alpha1",
                                     "size": 1,
                                     "summon_cap": 6,
                                     "entity_lifespan": 180
@@ -1346,10 +1366,15 @@
             },
             "minecraft:type_family": {
                 "family": [
+                    "mob",
+                    "foundation",
+                    "scpfoundation",
+                    "player",
                     "human",
-                    "chaos_insurgency",
-                    "chaos",
-                    "mob"
+                    "mob",
+                    "alpha1",
+                    "mtf",
+                    "villager"
                 ]
             },
             "minecraft:damage_sensor": {
@@ -1490,8 +1515,8 @@
                 ]
             },
             "minecraft:health": {
-                "value": 160,
-                "max": 160
+                "value": 180,
+                "max": 180
             },
             "minecraft:breathable": {
                 "total_supply": 15,
@@ -1503,7 +1528,7 @@
                 "priority": 0
             },
             "minecraft:attack": {
-                "damage": 14
+                "damage": 16
             },
             "minecraft:variable_max_auto_step": {
                 "base_value": 1.0625,
