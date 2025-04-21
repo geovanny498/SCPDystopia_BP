@@ -14,17 +14,17 @@ event entity @e[name="§d§lMTF Delta-1 Mita"] start_variant3
 event entity @e[name="§d§lMTF Delta-1 Leader"] start_variant0
 
 
-effect @e[name="§c§lMTF Delta-1 Chara"] regeneration 1000000 255 true
-effect @e[name="§c§lMTF Delta-1 Chara"] resistance 1000000 255 true
+effect @e[name="§c§lMTF Delta-1 Chara"] regeneration infinite 255 true
+effect @e[name="§c§lMTF Delta-1 Chara"] resistance infinite 255 true
 
-effect @e[name="§d§lMTF Delta-1 Frisk"] regeneration 1000000 255 true
-effect @e[name="§d§lMTF Delta-1 Frisk"] resistance 1000000 255 true
+effect @e[name="§d§lMTF Delta-1 Frisk"] regeneration infinite 255 true
+effect @e[name="§d§lMTF Delta-1 Frisk"] resistance infinite 255 true
 
-effect @e[name="§d§lMTF Delta-1 Commander"] regeneration 1000000 255 true
-effect @e[name="§d§lMTF Delta-1 Commander"] resistance 1000000 255 true
+effect @e[name="§d§lMTF Delta-1 Commander"] regeneration infinite 255 true
+effect @e[name="§d§lMTF Delta-1 Commander"] resistance infinite 255 true
 
-effect @e[name="§d§lMTF Delta-1 Mita"] regeneration 1000000 255 true
-effect @e[name="§d§lMTF Delta-1 Mita"] resistance 1000000 255 true
+effect @e[name="§d§lMTF Delta-1 Mita"] regeneration infinite 255 true
+effect @e[name="§d§lMTF Delta-1 Mita"] resistance infinite 255 true
 
-effect @e[name="§d§lMTF Delta-1 Leader"] regeneration 1000000 255 true
-effect @e[name="§d§lMTF Delta-1 Leader"] resistance 1000000 255 true
+effect @e[name="§d§lMTF Delta-1 Leader"] regeneration infinite 255 true
+effect @e[name="§d§lMTF Delta-1 Leader"] resistance infinite 255 true

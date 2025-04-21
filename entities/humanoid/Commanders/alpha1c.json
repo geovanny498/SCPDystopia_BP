@@ -1684,7 +1684,7 @@
             },
             "humanoid:heal": {
                 "queue_command": {
-                    "command": "effect @s regeneration 600 2 false"
+                    "command": "effect @s regeneration 600 2 true"
                 }
             },
             "minecraft:become_angry": {
