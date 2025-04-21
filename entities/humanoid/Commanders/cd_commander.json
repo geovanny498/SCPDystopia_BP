@@ -1312,6 +1312,44 @@
                     "target_distance": 15,
                     "target_teleport_chance": 0.025
                 }
+            },
+            "humanoid:spawn_soldiers": {
+                "minecraft:behavior.summon_entity": {
+                    "priority": 0,
+                    "summon_choices": [
+                        {
+                            "min_activation_range": 0.0,
+                            "max_activation_range": 100.0,
+                            "cooldown_time": 600,
+                            "weight": 3,
+                            "cast_duration": 0.25,
+                            "sequence": [
+                                {
+                                    "shape": "circle",
+                                    "target": "self",
+                                    "base_delay": 4.0,
+                                    "delay_per_summon": 0.0,
+                                    "num_entities_spawned": 10,
+                                    "entity_type": "lc:dt_chaos_insurgency",
+                                    "size": 1,
+                                    "summon_cap": 6,
+                                    "entity_lifespan": 180
+                                },
+                                {
+                                    "shape": "circle",
+                                    "target": "self",
+                                    "base_delay": 6.0,
+                                    "delay_per_summon": 0.0,
+                                    "num_entities_spawned": 4,
+                                    "entity_type": "lc:dt_cd",
+                                    "size": 1,
+                                    "summon_cap": 4,
+                                    "entity_lifespan": 180
+                                }
+                            ]
+                        }
+                    ]
+                }
             }
         },
         "components": {
@@ -1466,11 +1504,6 @@
             "minecraft:health": {
                 "value": 20000,
                 "max": 20000
-            },
-            "minecraft:boss": {
-                "should_darken_sky": false,
-                "name": "§c§lMTF Delta-1 Chara",
-                "hud_range": 5
             },
             "minecraft:breathable": {
                 "total_supply": 15,
@@ -1682,6 +1715,20 @@
                 "add": {
                     "component_groups": [
                         "tamed"
+                    ]
+                }
+            },
+            "humanoid:start_spawn_soldiers": {
+                "add": {
+                    "component_groups": [
+                        "humanoid:spawn_soldiers"
+                    ]
+                }
+            },
+            "humanoid:stop_spawn_soldiers": {
+                "remove": {
+                    "component_groups": [
+                        "humanoid:spawn_soldiers"
                     ]
                 }
             },

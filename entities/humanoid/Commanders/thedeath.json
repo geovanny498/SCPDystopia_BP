@@ -1497,11 +1497,6 @@
                 "value": 20000,
                 "max": 20000
             },
-            "minecraft:boss": {
-                "should_darken_sky": false,
-                "name": "§5§lMTF Delta-1 Death",
-                "hud_range": 5
-            },
             "minecraft:breathable": {
                 "total_supply": 15,
                 "breathes_air": true,

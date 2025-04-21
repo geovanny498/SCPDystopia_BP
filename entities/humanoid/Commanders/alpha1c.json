@@ -1493,11 +1493,6 @@
                 "value": 10000,
                 "max": 10000
             },
-            "minecraft:boss": {
-                "should_darken_sky": false,
-                "name": "§d§lMTF Delta-1 Commander",
-                "hud_range": 5
-            },
             "minecraft:breathable": {
                 "total_supply": 15,
                 "breathes_air": true,

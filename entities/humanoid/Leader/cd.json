@@ -33,7 +33,7 @@
                     },
                     "name_actions": [
                         {
-                            "name_filter": "§a§lChaos Delta Leader",
+                            "name_filter": "§a§lChaos Delta Squad Leader",
                             "on_named": {
                                 "event": "start_chara1",
                                 "target": "self"
@@ -54,7 +54,7 @@
                     },
                     "name_actions": [
                         {
-                            "name_filter": "§a§lChaos Delta Leader",
+                            "name_filter": "§a§lChaos Delta Squad Leader",
                             "on_named": {
                                 "event": "start_chara2",
                                 "target": "self"
@@ -75,7 +75,7 @@
                     },
                     "name_actions": [
                         {
-                            "name_filter": "§a§lChaos Delta Leader",
+                            "name_filter": "§a§lChaos Delta Squad Leader",
                             "on_named": {
                                 "event": "start_chara3",
                                 "target": "self"
@@ -96,7 +96,7 @@
                     },
                     "name_actions": [
                         {
-                            "name_filter": "§a§lChaos Delta Leader",
+                            "name_filter": "§a§lChaos Delta Squad Leader",
                             "on_named": {
                                 "event": "start_chara",
                                 "target": "self"
@@ -123,19 +123,19 @@
             },
             "minecraft:ranged_attack": {
                 "minecraft:shooter": {
-                    "def": "lc:dt_hk416_bullet_player_c"
+                    "def": "lc:dt_m4a1_bullet_player"
                 },
                 "minecraft:behavior.ranged_attack": {
                     "attack_radius_min": 6,
                     "priority": 1,
                     "target_in_sight_time": 0.5,
-                    "burst_shots": 100,
-                    "burst_interval": 0.05,
+                    "burst_shots": 50,
+                    "burst_interval": 0.08,
                     "charge_charged_trigger": 0.0,
                     "charge_shoot_trigger": 1.0,
                     "attack_interval_min": 1.0,
                     "attack_interval_max": 1.0,
-                    "attack_radius": 60.0,
+                    "attack_radius": 50.0,
                     "speed_multiplier": 1.15
                 },
                 "minecraft:behavior.nearest_attackable_target": {
@@ -238,7 +238,7 @@
                     "hit_delay_pct": 0.1
                 },
                 "minecraft:attack": {
-                    "damage": 18
+                    "damage": 14
                 },
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
@@ -381,11 +381,11 @@
                     "items": [
                         {
                             "item": "golden_apple",
-                            "heal_amount": 1000
+                            "heal_amount": 80
                         },
                         {
                             "item": "golden_carrot",
-                            "heal_amount": 500
+                            "heal_amount": 40
                         }
                     ]
                 },
@@ -1287,7 +1287,7 @@
             "humanoid:show_health": {
                 "minecraft:boss": {
                     "should_darken_sky": false,
-                    "name": "§a§lChaos Delta Leader",
+                    "name": "§a§lChaos Delta Squad Leader",
                     "hud_range": 5
                 }
             },
@@ -1312,11 +1312,38 @@
                     "target_distance": 15,
                     "target_teleport_chance": 0.020
                 }
+            },
+            "humanoid:spawn_soldiers": {
+                "minecraft:behavior.summon_entity": {
+                    "priority": 0,
+                    "summon_choices": [
+                        {
+                            "min_activation_range": 0.0,
+                            "max_activation_range": 100.0,
+                            "cooldown_time": 600,
+                            "weight": 3,
+                            "cast_duration": 0.25,
+                            "sequence": [
+                                {
+                                    "shape": "circle",
+                                    "target": "self",
+                                    "base_delay": 4.0,
+                                    "delay_per_summon": 0.0,
+                                    "num_entities_spawned": 6,
+                                    "entity_type": "lc:dt_chaos_insurgency",
+                                    "size": 1,
+                                    "summon_cap": 6,
+                                    "entity_lifespan": 180
+                                }
+                            ]
+                        }
+                    ]
+                }
             }
         },
         "components": {
             "minecraft:knockback_resistance": {
-                "value": 0.8
+                "value": 0.7
             },
             "minecraft:type_family": {
                 "family": [
@@ -1464,13 +1491,8 @@
                 ]
             },
             "minecraft:health": {
-                "value": 20000,
-                "max": 20000
-            },
-            "minecraft:boss": {
-                "should_darken_sky": false,
-                "name": "§c§lMTF Delta-1 Chara",
-                "hud_range": 5
+                "value": 160,
+                "max": 160
             },
             "minecraft:breathable": {
                 "total_supply": 15,
@@ -1482,9 +1504,8 @@
                 "priority": 0
             },
             "minecraft:attack": {
-                "damage": 18
+                "damage": 14
             },
-            "minecraft:fire_immune": true,
             "minecraft:variable_max_auto_step": {
                 "base_value": 1.0625,
                 "jump_prevented_value": 0.5625
@@ -1682,6 +1703,20 @@
                 "add": {
                     "component_groups": [
                         "tamed"
+                    ]
+                }
+            },
+            "humanoid:start_spawn_soldiers": {
+                "add": {
+                    "component_groups": [
+                        "humanoid:spawn_soldiers"
+                    ]
+                }
+            },
+            "humanoid:stop_spawn_soldiers": {
+                "remove": {
+                    "component_groups": [
+                        "humanoid:spawn_soldiers"
                     ]
                 }
             },
