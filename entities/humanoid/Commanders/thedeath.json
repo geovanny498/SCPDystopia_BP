@@ -225,6 +225,12 @@
                                         "subject": "other",
                                         "operator": "!=",
                                         "value": "scpfoundation"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "player"
                                     }
                                 ]
                             }
@@ -1685,7 +1691,7 @@
             },
             "humanoid:heal": {
                 "queue_command": {
-                    "command": "effect @s regeneration 600 2 true"
+                    "command": "effect @s regeneration 600 2 false"
                 }
             },
             "minecraft:become_angry": {
