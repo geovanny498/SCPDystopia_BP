@@ -43,3 +43,24 @@ mc47.system.beforeEvents.startup.subscribe((event) => {
         onHitEntity: onHitEntity3
     });
 });
+
+import { world, system } from "@minecraft/server";
+
+world.afterEvents.projectileHitEntity.subscribe(event => {
+    const projectile = event.projectile;
+
+    if (projectile.typeId === "lc:dt_hk416_bullet_player_ads") {
+        const entityHit = event.getEntityHit()?.entity;
+        if (!entityHit) return;
+
+        world.sendMessage(`¡Impacto en ${entityHit.typeId}!`);
+
+        try {
+            entityHit.applyDamage(1);
+            entityHit.applyDamage(1);
+            entityHit.applyDamage(1);
+        } catch (error) {
+            world.sendMessage(`Error al aplicar daño: ${error}`);
+        }
+    }
+});
