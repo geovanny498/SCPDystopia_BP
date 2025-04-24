@@ -129,12 +129,12 @@
                     "attack_radius_min": 6,
                     "priority": 1,
                     "target_in_sight_time": 0.5,
-                    "burst_shots": 50,
-                    "burst_interval": 0.08,
+                    "burst_shots": 40,
+                    "burst_interval": 0.14,
                     "charge_charged_trigger": 0.0,
-                    "charge_shoot_trigger": 1.0,
-                    "attack_interval_min": 1.0,
-                    "attack_interval_max": 1.0,
+                    "charge_shoot_trigger": 1.2,
+                    "attack_interval_min": 1.2,
+                    "attack_interval_max": 1.2,
                     "attack_radius": 50.0,
                     "speed_multiplier": 1.15
                 },
@@ -1532,8 +1532,8 @@
                 ]
             },
             "minecraft:health": {
-                "value": 180,
-                "max": 180
+                "value": 250,
+                "max": 250
             },
             "minecraft:breathable": {
                 "total_supply": 15,

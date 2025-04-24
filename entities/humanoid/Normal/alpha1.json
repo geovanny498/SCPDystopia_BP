@@ -75,8 +75,8 @@
                     "attack_radius_min": 5,
                     "priority": 1,
                     "target_in_sight_time": 0.5,
-                    "burst_shots": 50,
-                    "burst_interval": 0.16,
+                    "burst_shots": 30,
+                    "burst_interval": 0.20,
                     "charge_charged_trigger": 0.0,
                     "charge_shoot_trigger": 1.5,
                     "attack_interval_min": 1.5,
@@ -84,6 +84,19 @@
                     "attack_radius": 40.0,
                     "speed_multiplier": 1.15
                 },
+                // "minecraft:behavior.ranged_attack": {
+                //     "attack_radius_min": 5,
+                //     "attack_radius": 15.0,
+                //     "priority": 2,
+                //     "target_in_sight_time": 1.0,
+                //     "burst_shots": 10,
+                //     "burst_interval": 0.25,
+                //     "charge_charged_trigger": 0.0,
+                //     "charge_shoot_trigger": 1.5,
+                //     "attack_interval_min": 2.0,
+                //     "attack_interval_max": 2.0,
+                //     "speed_multiplier": 1.10
+                // }
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
                     "within_radius": 64,
@@ -1451,8 +1464,8 @@
                 ]
             },
             "minecraft:health": {
-                "value": 60,
-                "max": 60
+                "value": 120,
+                "max": 120
             },
             "minecraft:breathable": {
                 "total_supply": 15,

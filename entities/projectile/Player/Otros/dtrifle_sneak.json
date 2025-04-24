@@ -66,12 +66,15 @@
             },
             "minecraft:projectile": {
                 "on_hit": {
+
+                      
                     "impact_damage": {
-                        "damage": 100,
-                        "knockback": true,
+                        "damage": 0,
+                        /*"knockback": true,*/
                         "semi_random_diff_damage": false,
                         "destroy_on_hit": false
                     },
+                      
                     "stick_in_ground": {
                         "shake_time": 0.1
                     },

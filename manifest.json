@@ -36,7 +36,7 @@
                 0,
                 0
             ],
-            "entry": "scripts/main.js"
+            "entry": "scripts/init.js"
         }
     ],
     "capabilities": [
@@ -53,11 +53,60 @@
         },
 		{
 			"module_name": "@minecraft/server",
-			"version": "2.0.0"
+			"version": "2.0.0-beta"
 		},
 		{
 			"module_name": "@minecraft/server-ui",
-			"version": "2.0.0"
+			"version": "2.0.0-beta"
 		}
+    ],
+    "subpacks": [
+        {
+            
+            "folder_name": "no_spawning",
+            "memory_tier": 0,
+            "name": "§a§lSpawn addon entities: §7False"
+        },
+        {
+            "folder_name": "spawning_foundation",
+            "memory_tier": 0,
+            "name": "§a§lSpawn SCP Foundation MTFs: §7True"
+        },
+        {
+            "folder_name": "spawning_humans",
+            "memory_tier": 0,
+            "name": "§lSpawn SCP Foundation MTFs and Chaos Insurgency: §4True"
+        },
+        {
+            "folder_name": "s_foundatAndSCPs",
+            "memory_tier": 0,
+            "name": "§lSpawn SCP Foundation MTFs and SCPS: §4True"
+        },
+        {
+            "folder_name": "spawning_scps",
+            "memory_tier": 0,
+            "name": "§lSpawn SCPs: §4True"
+        },
+        {
+            "folder_name": "spawning_scp_ci",
+            "memory_tier": 0,
+            "name": "§l§cSpawn SCPs and Chaos Insurgency: §8True"
+        },
+        {
+            "folder_name": "spawn_world_war",
+            "memory_tier": 0,
+            "name": "§l§4World War IV Mode: §6True"
+        },
+        {
+            "folder_name": "ci_spawn_world_war",
+            "memory_tier": 0,
+            "name": "§l§4World War IV Mode: §6True §4Only CI: §6True"
+        },
+        {
+            "folder_name": "spawning_all",
+            "memory_tier": 0,
+            "name": "§c§lSpawn SCPs, SCP Foundation MTFs and Chaos Insurgency: §8True"
+        }
+        
     ]
 }

@@ -5,6 +5,12 @@
 		},
 		{
 			"path": "..\\..\\..\\development_resource_packs\\SCPDystopia_RP"
+		},
+		{
+			"path": "../../SCPDY_BP"
+		},
+		{
+			"path": "../../Aplok Guns BP"
 		}
 	]
 }

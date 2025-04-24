@@ -46,12 +46,15 @@
             },
             "minecraft:projectile": {
                 "on_hit": {
+
+                      
                     "impact_damage": {
-                        "damage": 6,
-                        "knockback": false,
+                        "damage": 0,
+                        /*"knockback": false,*/
                         "catch_fire": true,
                         "semi_random_diff_damage": false
                     },
+                      
                     "catch_fire": {
                         "fire_affected_by_griefing": true
                     },

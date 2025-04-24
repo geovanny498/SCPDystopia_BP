@@ -1,0 +1,39 @@
+{
+  "format_version": "1.8.0",
+  "minecraft:spawn_rules": {
+    "description": {
+      "identifier": "lc:dt_scp131",
+      "population_control": "animal"
+    },
+    "conditions": [
+      {
+        "minecraft:spawns_on_surface": {},
+        "minecraft:spawns_on_block_filter": "minecraft:grass",
+        "minecraft:brightness_filter": {
+          "min": 7,
+          "max": 15,
+          "adjust_for_weather": false
+        },
+        "minecraft:weight": {
+          "default": 18
+        },
+        "minecraft:herd": {
+          "min_size": 2,
+          "max_size": 4
+        },
+        "minecraft:permute_type": [
+          {
+            "weight": 80
+          },
+          {
+            "weight": 3,
+            "entity_type": "lc:dt_scp131<scp131:spawn_darkside>"
+          }
+        ],
+        "minecraft:biome_filter": {
+          "test": "has_biome_tag", "operator":"==", "value": "animal"
+        }
+      }
+    ]
+  }
+}

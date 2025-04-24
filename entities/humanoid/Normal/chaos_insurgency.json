@@ -130,7 +130,7 @@
                     "priority": 1,
                     "target_in_sight_time": 0.5,
                     "burst_shots": 30,
-                    "burst_interval": 0.20,
+                    "burst_interval": 0.24,
                     "charge_charged_trigger": 0.0,
                     "charge_shoot_trigger": 1.5,
                     "attack_interval_min": 1.5,
@@ -1453,8 +1453,8 @@
                 ]
             },
             "minecraft:health": {
-                "value": 60,
-                "max": 60
+                "value": 120,
+                "max": 120
             },
             "minecraft:breathable": {
                 "total_supply": 15,
