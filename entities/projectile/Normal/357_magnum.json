@@ -72,7 +72,7 @@
                         "damage": 0,
                         /*"knockback": false,*/
                         "semi_random_diff_damage": false,
-                        "destroy_on_hit": true
+                        "destroy_on_hit": false
                     },
                       
                     "stick_in_ground": {

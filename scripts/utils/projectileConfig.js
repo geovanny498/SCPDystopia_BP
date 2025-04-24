@@ -20,6 +20,7 @@ export const projectileConfig = {
 
     //Otros
     "lc:dt_suscharger_shot_player_sneak": { damage: 5, knockback: 0.007 },
+    "lc:dt_dtrifle_bullet_player_sneak": { damage: 120, knockback: 0.007 },
     "lc:dt_mp5a3_bullet_player_uncertain": { damage: 8, knockback: 0.007 },
     "lc:dt_m4a1_bullet_player_uncertain": { damage: 6, knockback: 0.007 }
 };
