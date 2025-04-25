@@ -1608,7 +1608,7 @@
                                 }
                             },
                             {
-                                "weight": 15,
+                                "weight": 5,
                                 "add": {
                                     "component_groups": [
                                         "variant2"
@@ -1616,7 +1616,7 @@
                                 }
                             },
                             {
-                                "weight": 5,
+                                "weight": 15,
                                 "add": {
                                     "component_groups": [
                                         "variant3"
