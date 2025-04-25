@@ -1,1 +1,1 @@
-event entity @e[type=lc:dt_chara] humanoid:stop_move
+event entity @e[type=lc:dt_chara] mtf:to_stop

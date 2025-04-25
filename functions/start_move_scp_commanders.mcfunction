@@ -19,4 +19,4 @@ tag @e[name="§8§lMTF Nu-7 Commander"] add seguir
 tag @e[name="§6§lMTF Beta-7 Commander"] add seguir
 tag @e[name="§e§lMTF Epsilon-6 Commander"] add seguir
 
-event entity @e[tag=seguir] humanoid:start_move
+event entity @e[tag=seguir] mtf:to_move

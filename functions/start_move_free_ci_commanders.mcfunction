@@ -6,4 +6,4 @@ tag @e[name="§a§lChaos Delta Leader 2"] add libre
 tag @e[name="§a§lChaos Delta Leader 3"] add libre
 tag @e[name="§a§lChaos Delta Leader 4"] add libre
 
-event entity @e[tag=libre] humanoid:start_move_free
+event entity @e[tag=libre] mtf:to_move_free

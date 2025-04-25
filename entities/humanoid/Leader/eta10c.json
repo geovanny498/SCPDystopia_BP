@@ -428,7 +428,7 @@
                     "priority": 2
                 }
             },
-            "stop": {
+            "stop_move": {
                 "minecraft:interact": {
                     "interactions": [
                         {
@@ -449,7 +449,7 @@
                                         {
                                             "test": "has_component",
                                             "operator": "!=",
-                                            "value": "move_free"
+                                            "value": "start_move_free"
                                         }
                                     ]
                                 },
@@ -706,12 +706,12 @@
                     "within_radius": 64,
                     "speed_multiplier": 1.25,
                     "items": [
-                        "emerald",
+                        "iron_ingot",
                         "blaze_powder"
                     ]
                 }
             },
-            "move": {
+            "start_move": {
                 "minecraft:interact": {
                     "interactions": [
                         {
@@ -732,7 +732,7 @@
                                         {
                                             "test": "has_component",
                                             "operator": "!=",
-                                            "value": "stop"
+                                            "value": "stop_move"
                                         }
                                     ]
                                 },
@@ -998,7 +998,7 @@
                     "within_radius": 64,
                     "speed_multiplier": 1.25,
                     "items": [
-                        "emerald",
+                        "iron_ingot",
                         "blaze_powder"
                     ]
                 },
@@ -1007,7 +1007,7 @@
                     "speed_multiplier": 1.0
                 }
             },
-            "move_free": {
+            "start_move_free": {
                 "minecraft:interact": {
                     "interactions": [
                         {
@@ -1028,7 +1028,7 @@
                                         {
                                             "test": "has_component",
                                             "operator": "!=",
-                                            "value": "move"
+                                            "value": "start_move"
                                         }
                                     ]
                                 },
@@ -1294,7 +1294,7 @@
                     "within_radius": 64,
                     "speed_multiplier": 1.25,
                     "items": [
-                        "emerald",
+                        "iron_ingot",
                         "blaze_powder"
                     ]
                 },
@@ -1653,7 +1653,7 @@
                             "component_groups": [
                                 "minecraft:mode_switcher",
                                 "minecraft:ranged_attack",
-                                "move",
+                                "start_move",
                                 "calm"
                             ]
                         }
@@ -1765,14 +1765,14 @@
             "mtf:to_move": {
                 "add": {
                     "component_groups": [
-                        "move",
+                        "start_move",
                         "tamed"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "stop",
-                        "move_free"
+                        "stop_move",
+                        "start_move_free"
                     ]
                 },
                 "queue_command": {
@@ -1784,12 +1784,12 @@
             "mtf:to_stop": {
                 "add": {
                     "component_groups": [
-                        "stop"
+                        "stop_move"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "move",
+                        "start_move",
                         "tamed"
                     ]
                 },
@@ -1802,12 +1802,12 @@
             "mtf:to_move_free": {
                 "add": {
                     "component_groups": [
-                        "move_free"
+                        "start_move_free"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "stop",
+                        "stop_move",
                         "tamed"
                     ]
                 },

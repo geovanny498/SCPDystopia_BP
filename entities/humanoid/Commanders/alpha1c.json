@@ -428,7 +428,7 @@
                     "priority": 2
                 }
             },
-            "stop": {
+            "stop_move": {
                 "minecraft:interact": {
                     "interactions": [
                         {
@@ -449,7 +449,7 @@
                                         {
                                             "test": "has_component",
                                             "operator": "!=",
-                                            "value": "move_free"
+                                            "value": "start_move_free"
                                         }
                                     ]
                                 },
@@ -708,7 +708,7 @@
                     ]
                 }
             },
-            "move": {
+            "start_move": {
                 "minecraft:interact": {
                     "interactions": [
                         {
@@ -729,7 +729,7 @@
                                         {
                                             "test": "has_component",
                                             "operator": "!=",
-                                            "value": "stop"
+                                            "value": "stop_move"
                                         }
                                     ]
                                 },
@@ -1004,7 +1004,7 @@
                     "speed_multiplier": 1.0
                 }
             },
-            "move_free": {
+            "start_move_free": {
                 "minecraft:interact": {
                     "interactions": [
                         {
@@ -1025,7 +1025,7 @@
                                         {
                                             "test": "has_component",
                                             "operator": "!=",
-                                            "value": "move"
+                                            "value": "start_move"
                                         }
                                     ]
                                 },
@@ -1623,7 +1623,7 @@
                             "component_groups": [
                                 "minecraft:mode_switcher",
                                 "minecraft:ranged_attack",
-                                "move",
+                                "start_move",
                                 "calm"
                             ]
                         }
@@ -1654,28 +1654,28 @@
                     ]
                 }
             },
-            "start_chara": {
+            "start_variant0": {
                 "add": {
                     "component_groups": [
                         "variant0"
                     ]
                 }
             },
-            "start_chara1": {
+            "start_variant1": {
                 "add": {
                     "component_groups": [
                         "variant1"
                     ]
                 }
             },
-            "start_chara2": {
+            "start_variant2": {
                 "add": {
                     "component_groups": [
                         "variant2"
                     ]
                 }
             },
-            "start_chara3": {
+            "start_variant3": {
                 "add": {
                     "component_groups": [
                         "variant3"
@@ -1721,14 +1721,14 @@
             "mtf:to_move": {
                 "add": {
                     "component_groups": [
-                        "move",
+                        "start_move",
                         "tamed"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "stop",
-                        "move_free"
+                        "stop_move",
+                        "start_move_free"
                     ]
                 }
                 ,
@@ -1741,12 +1741,12 @@
             "mtf:to_stop": {
                 "add": {
                     "component_groups": [
-                        "stop"
+                        "stop_move"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "move",
+                        "start_move",
                         "tamed"
                     ]
                 },
@@ -1759,12 +1759,12 @@
             "mtf:to_move_free": {
                 "add": {
                     "component_groups": [
-                        "move_free"
+                        "start_move_free"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "stop",
+                        "stop_move",
                         "tamed"
                     ]
                 },

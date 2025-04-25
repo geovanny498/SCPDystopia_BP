@@ -19,4 +19,4 @@ tag @e[name="§8§lMTF Nu-7 Commander"] add parar
 tag @e[name="§6§lMTF Beta-7 Commander"] add parar
 tag @e[name="§e§lMTF Epsilon-6 Commander"] add parar
 
-event entity @e[tag=parar] humanoid:stop_move
+event entity @e[tag=parar] mtf:to_stop

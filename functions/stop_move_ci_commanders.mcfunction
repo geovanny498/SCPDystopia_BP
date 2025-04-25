@@ -6,4 +6,4 @@ tag @e[name="§a§lChaos Delta Leader 2"] add parar
 tag @e[name="§a§lChaos Delta Leader 3"] add parar
 tag @e[name="§a§lChaos Delta Leader 4"] add parar
 
-event entity @e[tag=parar] humanoid:stop_move
+event entity @e[tag=parar] mtf:to_stop

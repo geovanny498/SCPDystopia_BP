@@ -19,4 +19,4 @@ tag @e[name="§8§lMTF Nu-7 Commander"] add libre
 tag @e[name="§6§lMTF Beta-7 Commander"] add libre
 tag @e[name="§e§lMTF Epsilon-6 Commander"] add libre
 
-event entity @e[tag=libre] humanoid:start_move_free
+event entity @e[tag=libre] mtf:to_move_free

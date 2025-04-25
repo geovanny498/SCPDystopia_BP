@@ -1,25 +1,25 @@
-event entity @e[type=lc:dt_chaos_insurgency] humanoid:stop_move
-event entity @e[type=lc:dt_cd] humanoid:stop_move
-event entity @e[type=lc:dt_cd_leader] humanoid:stop_move
-event entity @e[type=lc:dt_cd_commander] humanoid:stop_move
+event entity @e[type=lc:dt_chaos_insurgency] mtf:to_stop
+event entity @e[type=lc:dt_cd] mtf:to_stop
+event entity @e[type=lc:dt_cd_leader] mtf:to_stop
+event entity @e[type=lc:dt_cd_commander] mtf:to_stop
 
 
-event entity @e[type=lc:dt_epsilon11] humanoid:stop_move
-event entity @e[type=lc:dt_epsilon11c] humanoid:stop_move
+event entity @e[type=lc:dt_epsilon11] mtf:to_stop
+event entity @e[type=lc:dt_epsilon11c] mtf:to_stop
 
-event entity @e[type=lc:dt_eta10] humanoid:stop_move
-event entity @e[type=lc:dt_eta10c] humanoid:stop_move
+event entity @e[type=lc:dt_eta10] mtf:to_stop
+event entity @e[type=lc:dt_eta10c] mtf:to_stop
 
-event entity @e[type=lc:dt_nu7] humanoid:stop_move
-event entity @e[type=lc:dt_nu7c] humanoid:stop_move
+event entity @e[type=lc:dt_nu7] mtf:to_stop
+event entity @e[type=lc:dt_nu7c] mtf:to_stop
 
-event entity @e[type=lc:dt_beta7] humanoid:stop_move
-event entity @e[type=lc:dt_beta7c] humanoid:stop_move
+event entity @e[type=lc:dt_beta7] mtf:to_stop
+event entity @e[type=lc:dt_beta7c] mtf:to_stop
 
-event entity @e[type=lc:dt_epsilon6] humanoid:stop_move
-event entity @e[type=lc:dt_epsilon6c] humanoid:stop_move
+event entity @e[type=lc:dt_epsilon6] mtf:to_stop
+event entity @e[type=lc:dt_epsilon6c] mtf:to_stop
 
 
-event entity @e[type=lc:dt_alpha1] humanoid:stop_move
-event entity @e[type=lc:dt_alpha1l] humanoid:stop_move
-event entity @e[type=lc:dt_alpha1c] humanoid:stop_move
+event entity @e[type=lc:dt_alpha1] mtf:to_stop
+event entity @e[type=lc:dt_alpha1l] mtf:to_stop
+event entity @e[type=lc:dt_alpha1c] mtf:to_stop
