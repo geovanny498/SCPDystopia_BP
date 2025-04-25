@@ -378,7 +378,7 @@
                     "broadcast_anger_on_being_attacked": true,
                     "broadcast_range": 128,
                     "broadcast_targets": [
-                        "alpha1"
+                        "dm"
                     ],
                     "calm_event": {
                         "event": "humanoid:on_calm",
@@ -1389,7 +1389,7 @@
                     "player",
                     "human",
                     "mob",
-                    "alpha1",
+                    "dm",
                     "mtf",
                     "villager"
                 ]
