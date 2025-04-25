@@ -1,5 +1,5 @@
 export const projectileConfig = {
-    //Soldados Normales
+    //Soldados Normales (120 de vida)
     "lc:dt_m4a1_bullet": { damage: 4, knockback: 0.007 },
     "lc:dt_m16_bullet": { damage: 3, knockback: 0.007 },
     "lc:dt_ak47_bullet": { damage: 3, knockback: 0.007 },
@@ -7,14 +7,14 @@ export const projectileConfig = {
     "lc:dt_p90_bullet": { damage: 4, knockback: 0.007 },
     "lc:dt_scar_bullet": { damage: 4, knockback: 0.007 },
 
-    //Soldados Lideres
+    //Soldados Lideres (250 de vida)
     "lc:dt_m4a1_bullet_player": { damage: 5, knockback: 0.007 },
     "lc:dt_mp7_bullet_player_normal": { damage: 4, knockback: 0.007 },
     "lc:dt_m16_bullet_player": { damage: 4, knockback: 0.007 },
     "lc:dt_p90_bullet_player_normal": { damage: 6, knockback: 0.007 },
     "lc:dt_scar_bullet_player": { damage: 5, knockback: 0.007 },
 
-    //Soldados Comandantes
+    //Soldados Comandantes (ALmenos 2000 de vida)
     "lc:dt_hk416_bullet_player_c": { damage: 6, knockback: 0.007 },
     "lc:dt_mp7_bullet_player_ads": { damage: 5, knockback: 0.007 },
     "lc:dt_p90_bullet_player_ads": { damage: 7, knockback: 0.007 },
