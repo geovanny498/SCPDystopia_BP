@@ -410,13 +410,13 @@
                     "stop_distance": 3
                 },
                 "minecraft:behavior.teleport_to_owner": {
-                    "priority": -3,
+                    "priority": -4,
                     "filters": {
                         "all_of": [
                             {
                                 "test": "owner_distance",
                                 "operator": ">",
-                                "value": 10
+                                "value": 8
                             }
                         ]
                     }
