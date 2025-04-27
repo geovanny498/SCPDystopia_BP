@@ -21,7 +21,7 @@ export const teamGroups = {
         "lc:dt_beta7c",
         "lc:dt_beta7",
         "lc:dt_epsilon6c",
-        "lc:dt_epsilon"
+        "lc:dt_epsilon6"
     ])
 };
 
