@@ -84,19 +84,6 @@
                     "attack_radius": 40.0,
                     "speed_multiplier": 1.15
                 },
-                // "minecraft:behavior.ranged_attack": {
-                //     "attack_radius_min": 5,
-                //     "attack_radius": 15.0,
-                //     "priority": 2,
-                //     "target_in_sight_time": 1.0,
-                //     "burst_shots": 10,
-                //     "burst_interval": 0.25,
-                //     "charge_charged_trigger": 0.0,
-                //     "charge_shoot_trigger": 1.5,
-                //     "attack_interval_min": 2.0,
-                //     "attack_interval_max": 2.0,
-                //     "speed_multiplier": 1.10
-                // }
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
                     "within_radius": 64,
@@ -1746,8 +1733,8 @@
             "humanoid:start_invincible": {
                 "queue_command": {
                     "command": [
-                        "effect @s regeneration infinite 255 false",
-                        "effect @s resistance infinite 255 false",
+                        "effect @s regeneration infinite 255 true",
+                        "effect @s resistance infinite 255 true",
                         "title @p actionbar §4§lActivar invencibilidad"
                     ]
                 }

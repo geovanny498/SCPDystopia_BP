@@ -1798,8 +1798,8 @@
             "humanoid:start_invincible": {
                 "queue_command": {
                     "command": [
-                        "effect @s regeneration infinite 255 false",
-                        "effect @s resistance infinite 255 false",
+                        "effect @s regeneration infinite 255 true",
+                        "effect @s resistance infinite 255 true",
                         "title @p actionbar §4§lActivar invencibilidad"
                     ]
                 }

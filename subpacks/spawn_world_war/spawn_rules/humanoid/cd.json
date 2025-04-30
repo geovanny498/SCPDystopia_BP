@@ -2,13 +2,12 @@
   "format_version": "1.8.0",
   "minecraft:spawn_rules": {
     "description": {
-      "identifier": "lc:dt_cd_leader",
+      "identifier": "lc:dt_cd",
       "population_control": "pillager"
     },
     "conditions": [
       {
         "minecraft:spawns_on_surface": {},
-        "minecraft:spawns_underground": {},
         "minecraft:brightness_filter": {
           "min": 0,
           "max": 15,
@@ -19,11 +18,11 @@
           "max": "hard"
         },
         "minecraft:weight": {
-          "default": 5
+          "default": 30
         },
         "minecraft:herd": {
-          "min_size": 1,
-          "max_size": 1,
+          "min_size": 3,
+          "max_size": 5,
           "event": "humanoid:start_spawn_soldiers"
         },
         "minecraft:biome_filter": {
@@ -39,11 +38,11 @@
           "max": "hard"
         },
         "minecraft:weight": {
-          "default": 5
+          "default": 30
         },
         "minecraft:herd": {
-          "min_size": 1,
-          "max_size": 1,
+          "min_size": 3,
+          "max_size": 5,
           "event": "humanoid:start_spawn_soldiers"
         },
         "minecraft:biome_filter": {
@@ -51,7 +50,33 @@
           "operator": "==",
           "value": "nether"
         }
+      },
+      {
+        "minecraft:spawns_underground": {},
+        "minecraft:brightness_filter": {
+          "min": 0,
+          "max": 15,
+          "adjust_for_weather": true
+        },
+        "minecraft:difficulty_filter": {
+          "min": "easy",
+          "max": "hard"
+        },
+        "minecraft:weight": {
+          "default": 5
+        },
+        "minecraft:herd": {
+          "min_size": 3,
+          "max_size": 5,
+          "event": "humanoid:start_spawn_soldiers"
+        },
+        "minecraft:biome_filter": {
+          "test": "has_biome_tag",
+          "operator": "==",
+          "value": "monster"
+        }
       }
+      
     ]
   }
 }

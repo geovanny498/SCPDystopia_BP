@@ -135,7 +135,7 @@
                     "charge_shoot_trigger": 1.5,
                     "attack_interval_min": 1.5,
                     "attack_interval_max": 1.5,
-                    "attack_radius": 30.0,
+                    "attack_radius": 40.0,
                     "speed_multiplier": 1.15
                 },
                 "minecraft:behavior.nearest_attackable_target": {
@@ -1747,8 +1747,8 @@
             "humanoid:start_invincible": {
                 "queue_command": {
                     "command": [
-                        "effect @s regeneration infinite 255 false",
-                        "effect @s resistance infinite 255 false",
+                        "effect @s regeneration infinite 255 true",
+                        "effect @s resistance infinite 255 true",
                         "title @p actionbar §4§lActivar invencibilidad"
                     ]
                 }
