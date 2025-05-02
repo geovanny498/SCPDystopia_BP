@@ -1352,7 +1352,7 @@
                                     "shape": "circle",
                                     "target": "self",
                                     "base_delay": 4.0,
-                                    "delay_per_summon": 0.0,
+                                    "delay_per_summon": 1.0,
                                     "num_entities_spawned": 4,
                                     "entity_type": "lc:dt_epsilon11",
                                     "size": 1,
@@ -1532,8 +1532,8 @@
                 ]
             },
             "minecraft:health": {
-                "value": 250,
-                "max": 250
+                "value": 120,
+                "max": 120
             },
             "minecraft:breathable": {
                 "total_supply": 15,

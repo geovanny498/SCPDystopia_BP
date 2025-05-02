@@ -42,7 +42,7 @@ export function applyKnockback(entity, projectile, kb) {
 
         // Log más limpio con debugMessage
         debugMessage(`Se aplicó knockback a ${entityName}. Ubicación del proyectil: (x: ${projectileLocation.x.toFixed(2)}, y: ${projectileLocation.y.toFixed(2)}, z: ${projectileLocation.z.toFixed(2)})`);
-        
+
     } catch (error) {
         debugWarn("Error en applyKnockback: " + error);
     }

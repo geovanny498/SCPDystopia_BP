@@ -51,7 +51,7 @@ export function getTeam(entityOrTypeId) {
         if (helmetId === "minecraft:golden_helmet") return "chaos";
         if (
             helmetId === "minecraft:netherite_helmet" ||
-            helmetId === "minecraft:diamond_helmet"   ||
+            helmetId === "minecraft:diamond_helmet" ||
             helmetId === "minecraft:iron_helmet"
         ) return "foundation";
 

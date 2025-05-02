@@ -18,11 +18,11 @@
           "max": "hard"
         },
         "minecraft:weight": {
-          "default": 30
+          "default": 24
         },
         "minecraft:herd": {
-          "min_size": 3,
-          "max_size": 5,
+          "min_size": 1,
+          "max_size": 2,
           "event": "humanoid:start_spawn_soldiers"
         },
         "minecraft:biome_filter": {
@@ -38,11 +38,11 @@
           "max": "hard"
         },
         "minecraft:weight": {
-          "default": 30
+          "default": 24
         },
         "minecraft:herd": {
-          "min_size": 3,
-          "max_size": 5,
+          "min_size": 1,
+          "max_size": 2,
           "event": "humanoid:start_spawn_soldiers"
         },
         "minecraft:biome_filter": {
@@ -66,8 +66,8 @@
           "default": 5
         },
         "minecraft:herd": {
-          "min_size": 3,
-          "max_size": 5,
+          "min_size": 1,
+          "max_size": 2,
           "event": "humanoid:start_spawn_soldiers"
         },
         "minecraft:biome_filter": {
@@ -76,7 +76,6 @@
           "value": "monster"
         }
       }
-      
     ]
   }
 }

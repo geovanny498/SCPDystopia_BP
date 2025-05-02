@@ -45,6 +45,8 @@ function removeTagSafe(projectile, tag) {
 function removeProjectileSafe(projectile) {
     try {
         if (projectile && projectile.remove) {
+            debugWarn(`Tipo de entidad del proyectil: ${projectile.typeId}`);
+            debugWarn(`Propiedades del proyectil: ${Object.getOwnPropertyNames(projectile)}`);
             projectile.remove();
         } else {
             debugWarn("El proyectil no tiene la función remove.");
@@ -66,7 +68,7 @@ world.afterEvents.projectileHitEntity.subscribe(event => {
     const projectile = event.projectile;
     const target = event.getEntityHit()?.entity;
     const shooter = event.source;
-    const projectileLocation = (function() {
+    const projectileLocation = (function () {
         try {
             return projectile?.location; // Intentamos obtener la ubicación
         } catch (e) {
@@ -74,7 +76,6 @@ world.afterEvents.projectileHitEntity.subscribe(event => {
             return null;  // Retorna null si ocurre un error
         }
     })();
-    
 
     // Validación de objetos
     if (!projectile || !target || !shooter || shooter === target) {
@@ -109,7 +110,7 @@ world.afterEvents.projectileHitEntity.subscribe(event => {
         if (cfg.pierce === 0) {
             debugMessage("Pierce es 0. Eliminando proyectil tras el primer impacto.");
             applyDamageAndKnockback(projectile, target, cfg);
-            removeProjectileSafe(projectile);  // Llamamos a la función de eliminación segura
+            removeProjectileSafe(projectile);
             return;
         }
 
@@ -121,7 +122,7 @@ world.afterEvents.projectileHitEntity.subscribe(event => {
         let pierced = piercedTag ? parseInt(piercedTag.split(":")[1]) : 0;
         const pierceLimit = cfg.pierce ?? 1;
 
-        debugMessage(`Pierce actual: ${pierced}. Límite de pierce: ${pierceLimit}`);
+        debugWarn(`Pierce actual: ${pierced}. Límite de pierce: ${pierceLimit}`);
 
         // Aplicar daño y knockback
         applyDamageAndKnockback(projectile, target, cfg);

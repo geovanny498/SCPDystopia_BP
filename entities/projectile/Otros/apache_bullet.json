@@ -1,5 +1,5 @@
 {
-    "format_version": "1.12.0",
+    "format_version": "1.21.50",
     "minecraft:entity": {
         "description": {
             "identifier": "lc:dt_apache_bullet",
@@ -9,28 +9,21 @@
             "runtime_identifier": "minecraft:snowball"
         },
         "component_groups": {
-            "minecraft:exploding": {
-                "minecraft:explode": {
-                    "fuse_length": 0,
-                    "fuse_lit": true,
-                    "power": 0.1,
-                    "causes_fire": false,
-                    "fire_affected_by_griefing": true,
-                    "destroy_affected_by_griefing": true
-                }
-            },
             "despawning": {
-                "minecraft:despawn": {}
+                "minecraft:instant_despawn": {}
             }
         },
         "components": {
             "minecraft:tick_world": {
-				"distance_to_players": 128,
-				"never_despawn": false,
-				"radius": 2
-			},
+                "distance_to_players": 128,
+                "never_despawn": false,
+                "radius": 2
+            },
             "minecraft:type_family": {
-                "family": [ "bullet", "projectile" ]
+                "family": [
+                    "bullet",
+                    "projectile"
+                ]
             },
             "minecraft:break_blocks": {
                 "breakable_blocks": [
@@ -52,15 +45,12 @@
             },
             "minecraft:projectile": {
                 "on_hit": {
-
-                      
                     "impact_damage": {
                         "damage": 0,
                         /*"knockback": true,*/
                         "semi_random_diff_damage": false,
                         "destroy_on_hit": false
                     },
-                      
                     "stick_in_ground": {
                         "shake_time": 0.35
                     },
@@ -90,26 +80,19 @@
                 "looping": false,
                 "time": 0.64,
                 "time_down_event": {
-                    "event": "minecraft:start_despawn"
+                    "event": "lc:dt_start_despawn"
                 }
             },
             "minecraft:conditional_bandwidth_optimization": {
                 "default_values": {
-                    "max_optimized_distance": 80.0,
-                    "max_dropped_ticks": 7,
-                    "use_motion_prediction_hints": true
+                    "max_optimized_distance": 60.0,
+                    "max_dropped_ticks": 1,
+                    "use_motion_prediction_hints": false
                 }
             }
         },
         "events": {
-            "minecraft:explode": {
-                "add": {
-                    "component_groups": [
-                        "minecraft:exploding"
-                    ]
-                }
-            },
-            "minecraft:start_despawn": {
+            "lc:dt_start_despawn": {
                 "add": {
                     "component_groups": [
                         "despawning"

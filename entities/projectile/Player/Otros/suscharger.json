@@ -1,5 +1,5 @@
 {
-    "format_version": "1.12.0",
+    "format_version": "1.21.50",
     "minecraft:entity": {
         "description": {
             "identifier": "lc:dt_suscharger_shot_player",
@@ -25,17 +25,23 @@
                 }
             },
             "despawning": {
-                "minecraft:despawn": {}
-            } 
+                "minecraft:instant_despawn": {}
+            }
         },
         "components": {
             "minecraft:tick_world": {
-				"distance_to_players": 128,
-				"never_despawn": false,
-				"radius": 2
-			},
+                "distance_to_players": 128,
+                "never_despawn": false,
+                "radius": 2
+            },
             "minecraft:type_family": {
-                "family": [ "bullet", "projectile", "amogus", "sus", "scp5167" ]
+                "family": [
+                    "bullet",
+                    "projectile",
+                    "amogus",
+                    "sus",
+                    "scp5167"
+                ]
             },
             "minecraft:break_blocks": {
                 "breakable_blocks": [
@@ -90,14 +96,14 @@
                 "looping": false,
                 "time": 0.3,
                 "time_down_event": {
-                    "event": "minecraft:start_despawn"
+                    "event": "lc:dt_start_despawn"
                 }
             },
             "minecraft:conditional_bandwidth_optimization": {
                 "default_values": {
-                    "max_optimized_distance": 80.0,
-                    "max_dropped_ticks": 7,
-                    "use_motion_prediction_hints": true
+                    "max_optimized_distance": 60.0,
+                    "max_dropped_ticks": 1,
+                    "use_motion_prediction_hints": false
                 }
             }
         },
@@ -109,7 +115,7 @@
                     ]
                 }
             },
-            "minecraft:start_despawn": {
+            "lc:dt_start_despawn": {
                 "add": {
                     "component_groups": [
                         "despawning"

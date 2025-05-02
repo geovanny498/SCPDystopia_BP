@@ -132,9 +132,9 @@
                     "burst_shots": 50,
                     "burst_interval": 0.12,
                     "charge_charged_trigger": 0.0,
-                    "charge_shoot_trigger": 1.0,
-                    "attack_interval_min": 1.0,
-                    "attack_interval_max": 1.0,
+                    "charge_shoot_trigger": 0.8,
+                    "attack_interval_min": 0.8,
+                    "attack_interval_max": 0.8,
                     "attack_radius": 60.0,
                     "speed_multiplier": 1.15
                 },
@@ -1329,8 +1329,8 @@
                                     "shape": "circle",
                                     "target": "self",
                                     "base_delay": 4.0,
-                                    "delay_per_summon": 0.0,
-                                    "num_entities_spawned": 8,
+                                    "delay_per_summon": 0.75,
+                                    "num_entities_spawned": 6,
                                     "entity_type": "lc:dt_chaos_insurgency",
                                     "size": 1,
                                     "summon_cap": 6,
@@ -1340,8 +1340,8 @@
                                     "shape": "circle",
                                     "target": "self",
                                     "base_delay": 6.0,
-                                    "delay_per_summon": 0.0,
-                                    "num_entities_spawned": 2,
+                                    "delay_per_summon": 0.75,
+                                    "num_entities_spawned": 4,
                                     "entity_type": "lc:dt_cd",
                                     "size": 1,
                                     "summon_cap": 4,
@@ -1491,8 +1491,8 @@
                 ]
             },
             "minecraft:health": {
-                "value": 2000,
-                "max": 2000
+                "value": 3000,
+                "max": 3000
             },
             "minecraft:breathable": {
                 "total_supply": 15,
