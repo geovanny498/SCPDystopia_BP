@@ -1334,7 +1334,7 @@
                                     "entity_type": "lc:dt_chaos_insurgency",
                                     "size": 1,
                                     "summon_cap": 6,
-                                    "entity_lifespan": 180
+                                    "entity_lifespan": 120
                                 },
                                 {
                                     "shape": "circle",
@@ -1345,7 +1345,7 @@
                                     "entity_type": "lc:dt_cd",
                                     "size": 1,
                                     "summon_cap": 4,
-                                    "entity_lifespan": 180
+                                    "entity_lifespan": 120
                                 }
                             ]
                         }

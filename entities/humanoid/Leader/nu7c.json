@@ -1357,7 +1357,7 @@
                                     "entity_type": "lc:dt_nu7",
                                     "size": 1,
                                     "summon_cap": 6,
-                                    "entity_lifespan": 180
+                                    "entity_lifespan": 120
                                 }
                             ]
                         }
