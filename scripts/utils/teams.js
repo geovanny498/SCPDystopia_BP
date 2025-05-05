@@ -1,3 +1,4 @@
+// utils/teams.js
 import * as mc from "@minecraft/server";
 
 export const teamGroups = {
@@ -37,7 +38,7 @@ export function getTeam(entityOrTypeId) {
 
     // Si es una entidad (posiblemente jugador)
     const entity = entityOrTypeId;
-
+    if (!entity || !entity.typeId) return null;
     if (entity.typeId === "minecraft:player") {
         const equippable = entity.getComponent("equippable");
         if (!equippable) return null;
@@ -52,7 +53,8 @@ export function getTeam(entityOrTypeId) {
         if (
             helmetId === "minecraft:netherite_helmet" ||
             helmetId === "minecraft:diamond_helmet" ||
-            helmetId === "minecraft:iron_helmet"
+            helmetId === "minecraft:iron_helmet" ||
+            helmetId === "gabrielaplok:nv_goggles"
         ) return "foundation";
 
         return null;

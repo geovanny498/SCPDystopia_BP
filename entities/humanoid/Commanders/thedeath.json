@@ -1404,6 +1404,20 @@
                                         "domain": "head",
                                         "operator": "==",
                                         "value": "minecraft:iron_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "gabrielaplok:nv_goggles"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "gabrielaplok:nv_goggles"
                                     }
                                 ]
                             }

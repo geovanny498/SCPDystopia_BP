@@ -1,16 +1,13 @@
 {
-    // Use IntelliSense para saber los atributos posibles.
-    // Mantenga el puntero para ver las descripciones de los existentes atributos.
-    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
+    "version": "0.3.0",
     "configurations": [
         {
             "type": "minecraft-js",
             "request": "attach",
-            "name": "Attach to Minecraft",
+            "name": "Debug with Minecraft",
             "mode": "listen",
+            "targetModuleUuid": "7c7e693f-99f4-41a9-95e0-1f57b37e1e12",
             "localRoot": "${workspaceFolder}/scripts",
-            "host": "localhost",
             "port": 19144
         }
     ]

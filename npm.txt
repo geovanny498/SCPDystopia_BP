@@ -1,0 +1,2 @@
+npm i @minecraft/server@beta
+npm i @minecraft/server-ui@beta

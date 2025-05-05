@@ -1,0 +1,1 @@
+script debugger connect localhost 19144

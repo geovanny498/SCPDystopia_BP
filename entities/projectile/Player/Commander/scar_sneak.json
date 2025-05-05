@@ -56,12 +56,12 @@
             },
             "minecraft:projectile": {
                 "on_hit": {
-                    "impact_damage": {
-                        "damage": 0,
-                        /*"knockback": true,*/
-                        "semi_random_diff_damage": false,
-                        "destroy_on_hit": false
-                    },
+                    // "impact_damage": {
+                    //     "damage": 0,
+                    //     /*"knockback": false,*/
+                    //     "semi_random_diff_damage": false,
+                    //     "destroy_on_hit": false
+                    // },
                     "stick_in_ground": {
                         "shake_time": 0.1
                     },
@@ -108,11 +108,6 @@
                 "add": {
                     "component_groups": [
                         "despawning"
-                    ]
-                },
-                "queue_command": {
-                    "command": [
-                        "say Bullet despawning now"
                     ]
                 }
             }

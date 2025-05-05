@@ -1,6 +1,18 @@
+// utils/damage.js
 import * as mc from "@minecraft/server";
+import { applyKnockback } from "./knockback";
+import { debugMessage, debugWarn } from "./debug.js";
 
-const DEBUG_MODE = false; // Cambia a false para desactivar mensajes en el chat
+export function applyDamageAndKnockback(projectile, target, cfg, shooter) {
+    debugWarn(`Proyectil disparado por: ${shooter.typeId}, impacta objetivo: ${target.typeId}, proyectil: ${projectile.typeId}`);
+    const dmg = getModifiedDamageNumber(cfg.damage, target);
+    target.applyDamage(dmg, {
+        cause: "override",
+        damagingEntity: shooter,
+        damagingProjectile: projectile
+    });
+    applyKnockback(target, projectile, cfg.knockback);
+}
 
 export function getModifiedDamageNumber(damage, entity) {
     if (damage <= 0) {
@@ -22,14 +34,14 @@ export function getModifiedDamageNumber(damage, entity) {
         }
 
         if (damage <= 0) {
-            debugMessage("Daño final: 0 (anulado por resistencia)");
+            debugWarn("Daño final: 0 (anulado por resistencia)");
             return 0;
         }
 
         // 2) Reducción por Armadura y Encantamientos
         const equippable = entity.getComponent("equippable");
         if (!equippable) {
-            debugMessage(`Daño final sin armadura: ${damage}`);
+            debugWarn(`Daño final sin armadura: ${damage}`);
             return damage;
         }
 
@@ -75,19 +87,5 @@ export function getModifiedDamageNumber(damage, entity) {
     } catch (error) {
         debugWarn(`Error al calcular el daño: ${error.message}`);
         return damage; // Devolver el daño sin cambios en caso de error
-    }
-}
-
-// Función para manejar mensajes de debug
-function debugMessage(message) {
-    if (DEBUG_MODE) {
-        mc.world.sendMessage(`DEBUG: ${message}`);
-    }
-}
-
-// Función para manejar warnings de debug
-function debugWarn(message) {
-    if (DEBUG_MODE) {
-        console.warn(`DEBUG: ${message}`);
     }
 }

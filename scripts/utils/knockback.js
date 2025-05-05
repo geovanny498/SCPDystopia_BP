@@ -1,3 +1,4 @@
+// utils/knockback.js
 import { debugMessage, debugWarn } from "../utils/debug.js";
 
 export function applyKnockback(entity, projectile, kb) {
@@ -30,7 +31,9 @@ export function applyKnockback(entity, projectile, kb) {
         }
 
         const factor = Math.max(0, 1 - knockbackRes);
-
+        
+        entity.clearVelocity();
+        
         entity.applyImpulse({
             x: dir.x * kb * factor,
             y: 0,

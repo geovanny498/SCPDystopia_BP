@@ -1,9 +1,10 @@
-import { world } from "@minecraft/server";
+// main.js
+import { world, system } from "@minecraft/server";
 import { getTeam } from "./utils/teams.js";
 import { projectileConfig } from "./utils/projectileConfig.js";
-import { getModifiedDamageNumber } from "./utils/damage.js";
-import { applyKnockback } from "./utils/knockback.js";
+import { applyDamageAndKnockback } from "./utils/damage.js";
 import { debugMessage, debugWarn } from "./utils/debug.js";
+import { projectileShooterMap } from "./utils/weapons.js";
 
 // Función para obtener las tags de manera segura
 function getTagsSafe(projectile) {
@@ -47,7 +48,7 @@ function removeProjectileSafe(projectile) {
         if (projectile && projectile.remove) {
             debugWarn(`Tipo de entidad del proyectil: ${projectile.typeId}`);
             debugWarn(`Propiedades del proyectil: ${Object.getOwnPropertyNames(projectile)}`);
-            projectile.remove();
+            // projectile.remove();
         } else {
             debugWarn("El proyectil no tiene la función remove.");
         }
@@ -56,101 +57,81 @@ function removeProjectileSafe(projectile) {
     }
 }
 
-// Función para aplicar daño y knockback
-function applyDamageAndKnockback(projectile, target, cfg) {
-    const dmg = getModifiedDamageNumber(cfg.damage, target);
-    target.applyDamage(dmg, { cause: "override" });
-    applyKnockback(target, projectile, cfg.knockback);
-}
-
 // Evento cuando un proyectil impacta a una entidad
 world.afterEvents.projectileHitEntity.subscribe(event => {
     const projectile = event.projectile;
     const target = event.getEntityHit()?.entity;
-    const shooter = event.source;
+    const shooter = event.source ? event.source : projectileShooterMap.get(projectile.id);
+    const teamShooter = getTeam(shooter);
+    const teamTarget = getTeam(target);
     const projectileLocation = (function () {
         try {
             return projectile?.location; // Intentamos obtener la ubicación
         } catch (e) {
-            debugWarn(`Error al acceder a la ubicación del proyectil: ${e}`);  // Esto registrará el error si ocurre
+            debugWarn(`Error al acceder a la ubicación del proyectil: ${e}`);
             return null;  // Retorna null si ocurre un error
         }
     })();
 
     // Validación de objetos
-    if (!projectile || !target || !shooter || shooter === target) {
-        debugMessage("Falta objeto necesario o es fuego amigo.");
+    if (!projectile || !target) {
+        debugWarn("Falta objeto necesario o es fuego amigo.");
         return;
     }
 
     // Verificación de equipo para evitar fuego amigo
-    const teamShooter = getTeam(shooter);
-    const teamTarget = getTeam(target);
-
     if (teamShooter && teamTarget && teamShooter === teamTarget) {
-        debugMessage("Fuego amigo detectado.");
+        try {
+            debugWarn(`Fuego amigo detectado. Disparador: ${teamShooter}, Objetivo: ${teamTarget}`);
+            // projectile.remove();
+        } catch (error) {
+            debugWarn(`Error al eliminar el proyectil: ${error}`);
+        }
         return;
     }
-
     const cfg = projectileConfig[projectile.typeId];
     if (!cfg) {
-        debugMessage("No se encontró configuración para el proyectil.");
+        debugWarn("No se encontró configuración para el proyectil.");
         return;
     }
-
     try {
         // Caso especial: Pierce infinito
         if (cfg.pierce === Infinity) {
-            debugMessage("Pierce es Infinity. Solo aplicamos daño y knockback.");
-            applyDamageAndKnockback(projectile, target, cfg);
+            debugWarn("Pierce es Infinity. Solo aplicamos daño y knockback.");
+            applyDamageAndKnockback(projectile, target, cfg, shooter);
             return;
         }
-
-        // Caso especial: Pierce 0
-        if (cfg.pierce === 0) {
-            debugMessage("Pierce es 0. Eliminando proyectil tras el primer impacto.");
-            applyDamageAndKnockback(projectile, target, cfg);
-            removeProjectileSafe(projectile);
-            return;
-        }
-
         // Obtener tags de manera segura
         let tags = getTagsSafe(projectile);
-
         // Leer el contador de pierce
         const piercedTag = tags.find(tag => tag.startsWith("pierced:"));
         let pierced = piercedTag ? parseInt(piercedTag.split(":")[1]) : 0;
         const pierceLimit = cfg.pierce ?? 1;
-
+        if (pierced >= pierceLimit) {
+            debugWarn(`Pierce actual: ${pierced}. Límite de pierce: ${pierceLimit}`);
+            debugWarn("Límite de pierce alcanzado. Eliminando proyectil.");
+            removeProjectileSafe(projectile)
+            projectileShooterMap.delete(projectile.id); // Vaciar map
+            return
+        }
         debugWarn(`Pierce actual: ${pierced}. Límite de pierce: ${pierceLimit}`);
-
         // Aplicar daño y knockback
-        applyDamageAndKnockback(projectile, target, cfg);
-
+        applyDamageAndKnockback(projectile, target, cfg, shooter);
         // Aumentar contador de impactos
         pierced++;
-
         // Actualizar el tag de pierce de manera segura
         if (piercedTag) {
             removeTagSafe(projectile, piercedTag);  // Eliminamos la tag existente
         }
         addTagSafe(projectile, `pierced:${pierced}`);  // Añadimos la nueva tag
-
         // Mostrar ubicación si la guardamos
         if (projectileLocation) {
-            debugMessage(`El proyectil estaba en: (x: ${projectileLocation.x.toFixed(2)}, y: ${projectileLocation.y.toFixed(2)}, z: ${projectileLocation.z.toFixed(2)})`);
+            debugWarn(`El proyectil estaba en: (x: ${projectileLocation.x.toFixed(2)}, y: ${projectileLocation.y.toFixed(2)}, z: ${projectileLocation.z.toFixed(2)})`);
         } else {
-            debugMessage("No se pudo obtener la ubicación inicial del proyectil.");
+            debugWarn("No se pudo obtener la ubicación inicial del proyectil.");
         }
-
         // Si alcanza el límite de pierces, eliminar el proyectil
-        if (pierced >= pierceLimit) {
-            debugMessage("Límite de pierce alcanzado. Eliminando proyectil.");
-            removeProjectileSafe(projectile);  // Llamamos a la función de eliminación segura
-        }
-
     } catch (e) {
         debugWarn(`Error general al aplicar daño: ${e}`);
-        debugMessage(`Error general al aplicar daño: ${e}`);
     }
 });
