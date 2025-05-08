@@ -4,7 +4,7 @@ import { applyKnockback } from "./knockback";
 import { debugMessage, debugWarn } from "./debug.js";
 
 export function applyDamageAndKnockback(projectile, target, cfg, shooter) {
-    debugWarn(`Proyectil disparado por: ${shooter.typeId}, impacta objetivo: ${target.typeId}, proyectil: ${projectile.typeId}`);
+    debugWarn(`Proyectil disparado por: ${shooter.typeId}, impacta objetivo: ${target.typeId}, proyectil: ${projectile.typeId}`, "blue");
     const dmg = getModifiedDamageNumber(cfg.damage, target);
     target.applyDamage(dmg, {
         cause: "override",
@@ -34,14 +34,14 @@ export function getModifiedDamageNumber(damage, entity) {
         }
 
         if (damage <= 0) {
-            debugWarn("Daño final: 0 (anulado por resistencia)");
+            debugWarn("Daño final: 0 (anulado por resistencia)", "green");
             return 0;
         }
 
         // 2) Reducción por Armadura y Encantamientos
         const equippable = entity.getComponent("equippable");
         if (!equippable) {
-            debugWarn(`Daño final sin armadura: ${damage}`);
+            debugWarn(`Daño final sin armadura: ${damage}`, "green");
             return damage;
         }
 
@@ -85,7 +85,7 @@ export function getModifiedDamageNumber(damage, entity) {
         debugMessage(`Daño final tras armadura/encantamientos: ${damage}`);
         return damage;
     } catch (error) {
-        debugWarn(`Error al calcular el daño: ${error.message}`);
+        debugWarn(`Error al calcular el daño: ${error.message}`, "red");
         return damage; // Devolver el daño sin cambios en caso de error
     }
 }

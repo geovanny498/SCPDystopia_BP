@@ -10,8 +10,31 @@ export function debugMessage(message) {
     }
 }
 
-export function debugWarn(message) {
+export function debugWarn(message, color = "yellow") {
     if (DEBUG_CONSOLE) {
-        console.warn(`DEBUG: ${message}`);
+        let colorCode;
+
+        switch (color.toLowerCase()) {
+            case "red":
+                colorCode = 31; // Rojo
+                break;
+            case "green":
+                colorCode = 32; // Verde
+                break;
+            case "blue":
+                colorCode = 34; // Azul
+                break;
+            case "cyan":
+                colorCode = 36; // Cian
+                break;
+            case "magenta":
+                colorCode = 35; // Magenta
+                break;
+            default:
+                colorCode = 33; // Amarillo por defecto
+        }
+
+        // Usamos la secuencia de escape ANSI para cambiar el color
+        console.warn(`\x1b[${colorCode}mDEBUG: ${message}\x1b[0m`);
     }
 }

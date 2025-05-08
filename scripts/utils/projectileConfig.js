@@ -1,6 +1,6 @@
 // utils/projectileConfig.js
 
-// Ignorar cosas raras en las id como player_sneak o player_ads, player_uncertain, etc.
+// Ignorar cosas raras en las ids como player_sneak o player_ads, player_uncertain, etc.
 // solo guiarse por los comentarios para saber quien los dispara
 export const projectileConfig = {
     // Soldados Normales (60 de vida)

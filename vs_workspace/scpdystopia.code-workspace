@@ -9,14 +9,6 @@
 			"path": "../../../development_resource_packs/SCPDystopia_RP"
 		},
 		{
-			"name": "SCPDY_BP",
-			"path": "../../SCPDY_BP"
-		},
-		{
-			"name": "Aplok Guns BP",
-			"path": "../../Aplok Guns BP"
-		},
-		{
 			"name": "ActualGuns3D_BP",
 			"path": "../../ActualGuns3D_BP"
 		},
@@ -25,8 +17,16 @@
 			"path": "../../../../../../../../../Roaming/.minecraft_bedrock/installations/geovanny498/Latest Release/packageData/development_resource_packs/ActualGuns3D_RP"
 		},
 		{
+			"name": "Aplok Guns BP",
+			"path": "../../Aplok Guns BP"
+		},
+		{
 			"name": "Aplok Guns RP",
 			"path": "../../../../../../../../../Roaming/.minecraft_bedrock/installations/geovanny498/Latest Release/packageData/development_resource_packs/Aplok Guns RP"
+		},
+		{
+			"name": "SCPDY_BP",
+			"path": "../../SCPDY_BP"
 		},
 		{
 			"name": "SCPDY_RP",
