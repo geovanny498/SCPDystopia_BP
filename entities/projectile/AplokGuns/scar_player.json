@@ -1,8 +1,9 @@
+// CC-BY-SA 3.0
 {
     "format_version": "1.21.50",
     "minecraft:entity": {
         "description": {
-            "identifier": "lc:dt_ak_bullet_player_uncertain",
+            "identifier": "lc:dt_scar_player_bullet",
             "is_spawnable": false,
             "is_summonable": true,
             "is_experimental": false,
@@ -30,20 +31,39 @@
                     "glass",
                     "glass_pane",
                     "stained_glass",
-                    "stained_glass_pane"
+                    "stained_glass_pane",
+                    "standing_sign",
+                    "vine",
+                    "wall_banner",
+                    "wall_sign",
+                    "web",
+                    "wheat"
                 ]
             },
+            // "minecraft:spawn_entity": {
+            //     "entities": {
+            //         "min_wait_time": 0,
+            //         "max_wait_time": 0,
+            //         "single_use": true,
+            //         "spawn_entity": "lc:dt_none",
+            //         "spawn_sound": "purr",
+            //         "num_to_spawn": 1
+            //     }
+            // },
             "minecraft:collision_box": {
                 "width": 0.25,
                 "height": 0.25
             },
             "minecraft:projectile": {
                 "on_hit": {
-                    "impact_damage": {
-                        "damage": 0,
-                        /*"knockback": false,*/
-                        "semi_random_diff_damage": false,
-                        "destroy_on_hit": false
+                    // "impact_damage": {
+                    //     "damage": 0,
+                    //     /*"knockback": false,*/
+                    //     "semi_random_diff_damage": false,
+                    //     "destroy_on_hit": false
+                    // },
+                    "stick_in_ground": {
+                        "shake_time": 0.1
                     },
                     "definition_event": {
                         "affect_projectile": true,
@@ -52,24 +72,25 @@
                 },
                 "liquid_inertia": 1.0,
                 "hit_sound": "gun.hit",
-                "power": 10.0,
+                "power": 15.0,
                 "gravity": 0.0,
                 "inertia": 1.0,
-                "uncertainty_base": 45.0,
-                "uncertainty_multiplier": 2.0,
+                "uncertainty_base": 2.2,
+                "uncertainty_multiplier": 1.6,
                 "anchor": 1,
                 "offset": [
                     0,
                     -0.1,
                     0
                 ],
+                "on_fire_time": 30,
                 "reflect_on_hurt": false,
                 "catch_fire": false
             },
             "minecraft:physics": {},
             "minecraft:timer": {
                 "looping": false,
-                "time": 0.64,
+                "time": 0.427,
                 "time_down_event": {
                     "event": "lc:dt_start_despawn"
                 }

@@ -2,7 +2,7 @@
   "format_version": "1.8.0",
   "minecraft:spawn_rules": {
     "description": {
-      "identifier": "lc:dt_nu7",
+      "identifier": "lc:dt_eta10",
       "population_control": "monster"
     },
     "conditions": [
@@ -14,22 +14,31 @@
           "adjust_for_weather": true
         },
         "minecraft:weight": {
-          "default": 12
+          "default": 11
         },
         "minecraft:herd": {
           "min_size": 5,
           "max_size": 8
         },
         "minecraft:biome_filter": {
-          "test": "has_biome_tag",
-          "operator": "==",
-          "value": "monster"
+          "any_of": [
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "monster"
+            },
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "frozen"
+            }
+          ]
         }
       },
       {
         "minecraft:spawns_underground": {},
         "minecraft:weight": {
-          "default": 12
+          "default": 11
         },
         "minecraft:herd": {
           "min_size": 5,
@@ -49,16 +58,28 @@
           "adjust_for_weather": true
         },
         "minecraft:weight": {
-          "default": 3
+          "default": 11
         },
         "minecraft:herd": {
           "min_size": 5,
           "max_size": 8
         },
+        "minecraft:height_filter": {
+          "min": 64
+        },
         "minecraft:biome_filter": {
-          "test": "has_biome_tag",
-          "operator": "==",
-          "value": "monster"
+          "any_of": [
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "monster"
+            },
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "frozen"
+            }
+          ]
         }
       }
     ]

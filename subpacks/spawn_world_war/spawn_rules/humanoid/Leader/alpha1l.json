@@ -2,7 +2,7 @@
   "format_version": "1.8.0",
   "minecraft:spawn_rules": {
     "description": {
-      "identifier": "lc:dt_epsilon11c",
+      "identifier": "lc:dt_alpha1l",
       "population_control": "monster"
     },
     "conditions": [
@@ -22,9 +22,18 @@
           "event": "humanoid:start_spawn_soldiers"
         },
         "minecraft:biome_filter": {
-          "test": "has_biome_tag",
-          "operator": "==",
-          "value": "monster"
+          "any_of": [
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "monster"
+            },
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "frozen"
+            }
+          ]
         }
       },
       {
@@ -51,16 +60,29 @@
           "adjust_for_weather": true
         },
         "minecraft:weight": {
-          "default": 2
+          "default": 4
         },
         "minecraft:herd": {
           "min_size": 1,
-          "max_size": 2
+          "max_size": 2,
+          "event": "humanoid:start_spawn_soldiers"
+        },
+        "minecraft:height_filter": {
+          "min": 64
         },
         "minecraft:biome_filter": {
-          "test": "has_biome_tag",
-          "operator": "==",
-          "value": "monster"
+          "any_of": [
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "monster"
+            },
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "frozen"
+            }
+          ]
         }
       }
     ]

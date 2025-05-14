@@ -128,7 +128,7 @@
                 "minecraft:behavior.ranged_attack": {
                     "attack_radius_min": 6,
                     "priority": 1,
-                    "target_in_sight_time": 0.5,
+                    "target_in_sight_time": 0.3,
                     "burst_shots": 50,
                     "burst_interval": 0.08,
                     "charge_charged_trigger": 0.0,
@@ -375,8 +375,12 @@
                 }
             },
             "angry": {
+                "minecraft:on_target_escape": {
+                    "event": "minecraft:on_calm",
+                    "target": "self"
+                },
                 "minecraft:angry": {
-                    "duration": 25,
+                    "duration": 15,
                     "broadcast_anger": false,
                     "broadcast_anger_on_attack": true,
                     "broadcast_anger_on_being_attacked": true,
@@ -1358,6 +1362,9 @@
                     }
                 ]
             },
+            "minecraft:despawn": {
+                "despawn_from_distance": {}
+            },
             "minecraft:type_family": {
                 "family": [
                     "mob",
@@ -1365,7 +1372,6 @@
                     "scpfoundation",
                     "player",
                     "human",
-                    "mob",
                     "alpha1",
                     "mtf",
                     "villager"

@@ -2,8 +2,8 @@
   "format_version": "1.8.0",
   "minecraft:spawn_rules": {
     "description": {
-      "identifier": "lc:dt_chaos_insurgency",
-      "population_control": "pillager"
+      "identifier": "lc:dt_alpha1",
+      "population_control": "monster"
     },
     "conditions": [
       {
@@ -13,31 +13,32 @@
           "max": 15,
           "adjust_for_weather": true
         },
-        "minecraft:difficulty_filter": {
-          "min": "easy",
-          "max": "hard"
-        },
         "minecraft:weight": {
-          "default": 70
+          "default": 11
         },
         "minecraft:herd": {
           "min_size": 5,
           "max_size": 8
         },
         "minecraft:biome_filter": {
-          "test": "has_biome_tag",
-          "operator": "==",
-          "value": "monster"
+          "any_of": [
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "monster"
+            },
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "frozen"
+            }
+          ]
         }
       },
       {
         "minecraft:spawns_underground": {},
-        "minecraft:difficulty_filter": {
-          "min": "easy",
-          "max": "hard"
-        },
         "minecraft:weight": {
-          "default": 70
+          "default": 11
         },
         "minecraft:herd": {
           "min_size": 5,
@@ -56,21 +57,29 @@
           "max": 15,
           "adjust_for_weather": true
         },
-        "minecraft:difficulty_filter": {
-          "min": "easy",
-          "max": "hard"
-        },
         "minecraft:weight": {
-          "default": 10
+          "default": 11
         },
         "minecraft:herd": {
           "min_size": 5,
           "max_size": 8
         },
+        "minecraft:height_filter": {
+          "min": 64
+        },
         "minecraft:biome_filter": {
-          "test": "has_biome_tag",
-          "operator": "==",
-          "value": "monster"
+          "any_of": [
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "monster"
+            },
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "frozen"
+            }
+          ]
         }
       }
     ]

@@ -2,7 +2,7 @@
   "format_version": "1.8.0",
   "minecraft:spawn_rules": {
     "description": {
-      "identifier": "lc:dt_eta10c",
+      "identifier": "lc:dt_epsilon11",
       "population_control": "monster"
     },
     "conditions": [
@@ -14,28 +14,35 @@
           "adjust_for_weather": true
         },
         "minecraft:weight": {
-          "default": 4
+          "default": 11
         },
         "minecraft:herd": {
-          "min_size": 1,
-          "max_size": 2,
-          "event": "humanoid:start_spawn_soldiers"
+          "min_size": 5,
+          "max_size": 8
         },
         "minecraft:biome_filter": {
-          "test": "has_biome_tag",
-          "operator": "==",
-          "value": "monster"
+          "any_of": [
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "monster"
+            },
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "frozen"
+            }
+          ]
         }
       },
       {
         "minecraft:spawns_underground": {},
         "minecraft:weight": {
-          "default": 4
+          "default": 11
         },
         "minecraft:herd": {
-          "min_size": 1,
-          "max_size": 2,
-          "event": "humanoid:start_spawn_soldiers"
+          "min_size": 5,
+          "max_size": 8
         },
         "minecraft:biome_filter": {
           "test": "has_biome_tag",
@@ -51,16 +58,28 @@
           "adjust_for_weather": true
         },
         "minecraft:weight": {
-          "default": 2
+          "default": 11
         },
         "minecraft:herd": {
-          "min_size": 1,
-          "max_size": 2
+          "min_size": 5,
+          "max_size": 8
+        },
+        "minecraft:height_filter": {
+          "min": 64
         },
         "minecraft:biome_filter": {
-          "test": "has_biome_tag",
-          "operator": "==",
-          "value": "monster"
+          "any_of": [
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "monster"
+            },
+            {
+              "test": "has_biome_tag",
+              "operator": "==",
+              "value": "frozen"
+            }
+          ]
         }
       }
     ]
