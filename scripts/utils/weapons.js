@@ -71,6 +71,11 @@ function shoot(player, itemId) {
         z: z + direction.z,
     };
 
+    if (spawnPos.y > 321) {
+        debugWarn(`[Disparo] Posición demasiado alta para generar proyectil: Y=${spawnPos.y}`, "red");
+        return;
+    }
+
     try {
         const projectile = player.dimension.spawnEntity(data.projectile, spawnPos);
         if (!projectile) {

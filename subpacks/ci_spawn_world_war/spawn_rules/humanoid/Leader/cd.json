@@ -21,6 +21,10 @@
           "max_size": 2,
           "event": "humanoid:start_spawn_soldiers"
         },
+        "minecraft:height_filter": {
+          "min": -64,
+          "max": 318
+        },
         "minecraft:biome_filter": {
           "any_of": [
             {
@@ -68,7 +72,8 @@
           "event": "humanoid:start_spawn_soldiers"
         },
         "minecraft:height_filter": {
-          "min": 64
+          "min": 64,
+          "max": 318
         },
         "minecraft:biome_filter": {
           "any_of": [
