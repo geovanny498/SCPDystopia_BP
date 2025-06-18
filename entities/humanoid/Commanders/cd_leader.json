@@ -1,5 +1,5 @@
 {
-    "format_version": "1.16.0",
+    "format_version": "1.21.70",
     "minecraft:entity": {
         "description": {
             "identifier": "lc:dt_cd_leader",
@@ -1407,7 +1407,7 @@
                                 ]
                             }
                         },
-                        "deals_damage": false
+                        "deals_damage": "no"
                     },
                     {
                         "on_damage": {
@@ -1421,7 +1421,7 @@
                                 ]
                             }
                         },
-                        "deals_damage": false
+                        "deals_damage": "no"
                     },
                     {
                         "on_damage": {
@@ -1493,7 +1493,7 @@
                         "on_damage": {
                             "event": "humanoid:heal"
                         },
-                        "deals_damage": "true"
+                        "deals_damage": "yes"
                     }
                 ]
             },
