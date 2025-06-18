@@ -1,5 +1,5 @@
 {
-    "format_version": "1.16.0",
+    "format_version": "1.16.5",
     "minecraft:entity": {
         "description": {
             "identifier": "lc:dt_cd_leader",
