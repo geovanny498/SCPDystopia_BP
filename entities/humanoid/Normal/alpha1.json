@@ -1479,10 +1479,6 @@
             "minecraft:attack": {
                 "damage": 12
             },
-            "minecraft:variable_max_auto_step": {
-                "base_value": 1.0625,
-                "jump_prevented_value": 0.5625
-            },
             "minecraft:movement.basic": {},
             "minecraft:jump.static": {},
             "minecraft:can_climb": {},

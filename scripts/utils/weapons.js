@@ -6,7 +6,7 @@ import { debugMessage, debugWarn } from "../utils/debug.js";
 const weaponData = {
     "gabrielaplok:m4a1": {
         projectile: "lc:dt_hk416_player_bullet",
-        speed: 15.0,
+        speed: 25.0,
         fireRate: 2,
         isAutomatic: true,
         onEntryCommands: [
@@ -15,7 +15,7 @@ const weaponData = {
     },
     "gabrielaplok:m249": {
         projectile: "lc:dt_scar_player_bullet",
-        speed: 15.0,
+        speed: 25.0,
         fireRate: 1,
         isAutomatic: true,
         onEntryCommands: [
@@ -24,7 +24,7 @@ const weaponData = {
     },
     "gabrielaplok:mp5a5": {
         projectile: "lc:dt_p90_player_bullet",
-        speed: 15.0,
+        speed: 25.0,
         fireRate: 2,
         isAutomatic: true,
         onEntryCommands: [
@@ -33,7 +33,7 @@ const weaponData = {
     },
     "gabrielaplok:ak47": {
         projectile: "lc:dt_ak47_player_bullet",
-        speed: 15.0,
+        speed: 25.0,
         fireRate: 3,
         isAutomatic: true,
         onEntryCommands: [
@@ -42,7 +42,7 @@ const weaponData = {
     },
     "gabrielaplok:awp": {
         projectile: "lc:dt_dtrifle_player_bullet",
-        speed: 15.0,
+        speed: 25.0,
         fireRate: 30,
         isAutomatic: false,
         onEntryCommands: [
