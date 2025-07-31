@@ -37,7 +37,7 @@ export function applyKnockback(entity, projectile, kb) {
 
         entity.applyImpulse({
             x: dir.x * kb * factor,
-            y: -0.4,
+            y: 0,
             z: dir.z * kb * factor
         });
 

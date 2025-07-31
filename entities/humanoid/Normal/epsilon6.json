@@ -1484,9 +1484,7 @@
                 "jump_prevented_value": 0.5625
             },
             "minecraft:movement.basic": {},
-            "minecraft:jump.static": {
-                "jump_power": 0.6
-            },
+            "minecraft:jump.static": {},
             "minecraft:can_climb": {},
             "minecraft:follow_range": {
                 "value": 128,

@@ -23,5 +23,15 @@
 		{
 			"path": "../../../development_resource_packs/Aplok Guns RP"
 		}
-	]
+	],
+	"extensions": {
+		"recommendations": [
+			"destruc7i0n.vscode-bedrock-definitions",
+			"blockceptionltd.blockceptionvscodeminecraftbedrockdevelopmentextension",
+			"mojang-studios.minecraft-debugger",
+			"usernamehw.errorlens",
+			"pkief.material-icon-theme",
+			"enkia.tokyo-night"
+		]
+	}
 }
