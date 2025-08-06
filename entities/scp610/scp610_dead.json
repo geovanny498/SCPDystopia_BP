@@ -52,8 +52,8 @@
         ]
       },
       "minecraft:health": {
-        "value": 13,
-        "max": 13
+        "value": 73,
+        "max": 73
       },
       "minecraft:type_family": {
         "family": [ "monster", "scp610", "scp", "mob", "dead" ]

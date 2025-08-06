@@ -136,7 +136,7 @@
                     "attack_interval_min": 1.5,
                     "attack_interval_max": 1.5,
                     "attack_radius": 40.0,
-                    "speed_multiplier": 1.15
+                    "speed_multiplier": 1.0
                 },
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
@@ -239,7 +239,7 @@
                     "require_complete_path": false,
                     "random_stop_interval": 0,
                     "reach_multiplier": 3.4,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "attack_duration": 0.15,
                     "hit_delay_pct": 0.1
                 },
@@ -389,7 +389,7 @@
                 "minecraft:is_tamed": {},
                 "minecraft:behavior.follow_owner": {
                     "priority": -3,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "start_distance": 10,
                     "stop_distance": 7
                 },
@@ -688,7 +688,7 @@
                 "minecraft:behavior.tempt": {
                     "priority": -2,
                     "within_radius": 64,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "items": [
                         "gold_ingot"
                     ]
@@ -965,7 +965,7 @@
                     "is_pushable_by_piston": true
                 },
                 "minecraft:movement": {
-                    "value": 0.33
+                    "value": 0.26
                 },
                 "minecraft:underwater_movement": {
                     "value": 0.1
@@ -979,14 +979,14 @@
                 "minecraft:behavior.tempt": {
                     "priority": -2,
                     "within_radius": 64,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "items": [
                         "gold_ingot"
                     ]
                 },
                 "minecraft:behavior.random_stroll": {
                     "priority": 10,
-                    "speed_multiplier": 0.9
+                    "speed_multiplier": 0.86
                 }
             },
             "start_move_free": {
@@ -1260,7 +1260,7 @@
                     "is_pushable_by_piston": true
                 },
                 "minecraft:movement": {
-                    "value": 0.33
+                    "value": 0.26
                 },
                 "minecraft:underwater_movement": {
                     "value": 0.1
@@ -1274,14 +1274,14 @@
                 "minecraft:behavior.tempt": {
                     "priority": -2,
                     "within_radius": 64,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "items": [
                         "gold_ingot"
                     ]
                 },
                 "minecraft:behavior.random_stroll": {
                     "priority": 10,
-                    "speed_multiplier": 0.9
+                    "speed_multiplier": 0.86
                 }
             },
             "death_ci": {
@@ -1455,7 +1455,7 @@
                         "on_damage": {
                             "event": "humanoid:heal"
                         },
-                        "deals_damage": "true"
+                        "deals_damage": true
                     }
                 ]
             },

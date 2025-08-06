@@ -84,12 +84,6 @@
       "minecraft:trail": {
         "block_type": "minecraft:fire"
       },
-      "breakable_blocks": [
-        "tallgrass",
-        "red_flower",
-        "yellow_flower",
-        "double_plant"
-      ],
       "minecraft:behavior.melee_attack": {
         "priority": 0,
         "speed_multiplier": 1.06,

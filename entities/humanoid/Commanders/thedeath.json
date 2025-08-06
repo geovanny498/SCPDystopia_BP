@@ -129,14 +129,14 @@
                     "attack_radius_min": 6,
                     "priority": 1,
                     "target_in_sight_time": 0.3,
-                    "burst_shots": 50,
-                    "burst_interval": 0.08,
+                    "burst_shots": 100,
+                    "burst_interval": 0.1,
                     "charge_charged_trigger": 0.0,
-                    "charge_shoot_trigger": 0.5,
-                    "attack_interval_min": 0.5,
-                    "attack_interval_max": 0.5,
+                    "charge_shoot_trigger": 0.05,
+                    "attack_interval_min": 0.05,
+                    "attack_interval_max": 0.05,
                     "attack_radius": 60.0,
-                    "speed_multiplier": 1.15
+                    "speed_multiplier": 1.0
                 },
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
@@ -251,7 +251,7 @@
                     "require_complete_path": false,
                     "random_stop_interval": 0,
                     "reach_multiplier": 5,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "attack_duration": 0.05,
                     "hit_delay_pct": 0.1
                 },
@@ -413,7 +413,7 @@
                 "minecraft:is_tamed": {},
                 "minecraft:behavior.follow_owner": {
                     "priority": -3,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "start_distance": 6,
                     "stop_distance": 3
                 },
@@ -712,7 +712,7 @@
                 "minecraft:behavior.tempt": {
                     "priority": -2,
                     "within_radius": 64,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "items": [
                         "netherite_ingot",
                         "blaze_powder"
@@ -990,7 +990,7 @@
                     "is_pushable_by_piston": true
                 },
                 "minecraft:movement": {
-                    "value": 0.35
+                    "value": 0.30
                 },
                 "minecraft:underwater_movement": {
                     "value": 0.1
@@ -1004,7 +1004,7 @@
                 "minecraft:behavior.tempt": {
                     "priority": -2,
                     "within_radius": 64,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "items": [
                         "netherite_ingot",
                         "blaze_powder"
@@ -1012,7 +1012,7 @@
                 },
                 "minecraft:behavior.random_stroll": {
                     "priority": 10,
-                    "speed_multiplier": 1.0
+                    "speed_multiplier": 0.86
                 }
             },
             "start_move_free": {
@@ -1286,7 +1286,7 @@
                     "is_pushable_by_piston": true
                 },
                 "minecraft:movement": {
-                    "value": 0.35
+                    "value": 0.30
                 },
                 "minecraft:underwater_movement": {
                     "value": 0.1
@@ -1300,7 +1300,7 @@
                 "minecraft:behavior.tempt": {
                     "priority": -2,
                     "within_radius": 64,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "items": [
                         "netherite_ingot",
                         "blaze_powder"
@@ -1308,7 +1308,7 @@
                 },
                 "minecraft:behavior.random_stroll": {
                     "priority": 10,
-                    "speed_multiplier": 1.0
+                    "speed_multiplier": 0.86
                 }
             },
             "death_nu7": {
@@ -1524,7 +1524,7 @@
                         "on_damage": {
                             "event": "humanoid:heal"
                         },
-                        "deals_damage": "true"
+                        "deals_damage": true
                     }
                 ]
             },

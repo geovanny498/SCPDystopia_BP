@@ -1,4 +1,3 @@
-// utils/knockback.js
 import { debugMessage, debugWarn } from "../utils/debug.js";
 
 export function applyKnockback(entity, projectile, kb) {
@@ -33,18 +32,25 @@ export function applyKnockback(entity, projectile, kb) {
 
         const factor = Math.max(0, 1 - knockbackRes);
 
+        // Verificar si está en agua
+        const blockAtFeet = entity.dimension.getBlock({ 
+            x: Math.floor(entityLocation.x), 
+            y: Math.floor(entityLocation.y), 
+            z: Math.floor(entityLocation.z) 
+        });
+
+        const isInWater = blockAtFeet?.typeId === "minecraft:water";
+
         entity.clearVelocity();
 
         entity.applyImpulse({
             x: dir.x * kb * factor,
-            y: 0,
+            y: isInWater ? 0 : -0.4,
             z: dir.z * kb * factor
         });
 
-        // Nombre amigable de la entidad
         const entityName = entity.nameTag || entity.typeId || "Entidad desconocida";
 
-        // Log más limpio con debugMessage
         debugMessage(`Se aplicó knockback a ${entityName}. Ubicación del proyectil: (x: ${projectileLocation.x.toFixed(2)}, y: ${projectileLocation.y.toFixed(2)}, z: ${projectileLocation.z.toFixed(2)})`);
 
     } catch (error) {

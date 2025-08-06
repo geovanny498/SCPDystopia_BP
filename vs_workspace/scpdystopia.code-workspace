@@ -22,6 +22,9 @@
 		},
 		{
 			"path": "../../../development_resource_packs/Aplok Guns RP"
+		},
+		{
+			"path": "../../../behavior_packs/TrueZAP(B)/entities"
 		}
 	],
 	"extensions": {

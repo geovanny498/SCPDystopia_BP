@@ -94,10 +94,14 @@ function shoot(player, itemId) {
         projectile.applyImpulse(velocity);
         debugWarn(`Disparando ${itemId} → ${data.projectile}`, "green");
 
-        // Ejecutar los comandos definidos en onEntryCommands
         if (data.onEntryCommands) {
             for (const cmd of data.onEntryCommands) {
-                player.runCommand(cmd);
+                try {
+                    const result = player.runCommand(cmd);
+                    debugWarn(`Ejecutando "${cmd}" → éxito=${result.successCount}`, "cyan");
+                } catch (err) {
+                    debugWarn(`Error ejecutando comando "${cmd}": ${err}`, "red");
+                }
             }
         }
     } catch (e) {

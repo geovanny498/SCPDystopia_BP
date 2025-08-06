@@ -129,14 +129,14 @@
                     "attack_radius_min": 6,
                     "priority": 1,
                     "target_in_sight_time": 0.3,
-                    "burst_shots": 40,
-                    "burst_interval": 0.14,
+                    "burst_shots": 50,
+                    "burst_interval": 0.15,
                     "charge_charged_trigger": 0.0,
                     "charge_shoot_trigger": 1.2,
                     "attack_interval_min": 1.2,
                     "attack_interval_max": 1.2,
                     "attack_radius": 50.0,
-                    "speed_multiplier": 1.15
+                    "speed_multiplier": 1.0
                 },
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
@@ -249,7 +249,7 @@
                     "require_complete_path": false,
                     "random_stop_interval": 0,
                     "reach_multiplier": 5,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "attack_duration": 0.05,
                     "hit_delay_pct": 0.1
                 },
@@ -409,7 +409,7 @@
                 "minecraft:is_tamed": {},
                 "minecraft:behavior.follow_owner": {
                     "priority": -3,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "start_distance": 8,
                     "stop_distance": 5
                 },
@@ -708,7 +708,7 @@
                 "minecraft:behavior.tempt": {
                     "priority": -2,
                     "within_radius": 64,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "items": [
                         "emerald",
                         "blaze_powder"
@@ -986,7 +986,7 @@
                     "is_pushable_by_piston": true
                 },
                 "minecraft:movement": {
-                    "value": 0.34
+                    "value": 0.275
                 },
                 "minecraft:underwater_movement": {
                     "value": 0.1
@@ -1000,7 +1000,7 @@
                 "minecraft:behavior.tempt": {
                     "priority": -2,
                     "within_radius": 64,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "items": [
                         "emerald",
                         "blaze_powder"
@@ -1008,7 +1008,7 @@
                 },
                 "minecraft:behavior.random_stroll": {
                     "priority": 10,
-                    "speed_multiplier": 1.0
+                    "speed_multiplier": 0.86
                 }
             },
             "start_move_free": {
@@ -1282,7 +1282,7 @@
                     "is_pushable_by_piston": true
                 },
                 "minecraft:movement": {
-                    "value": 0.34
+                    "value": 0.275
                 },
                 "minecraft:underwater_movement": {
                     "value": 0.1
@@ -1296,7 +1296,7 @@
                 "minecraft:behavior.tempt": {
                     "priority": -2,
                     "within_radius": 64,
-                    "speed_multiplier": 1.25,
+                    "speed_multiplier": 1.16,
                     "items": [
                         "emerald",
                         "blaze_powder"
@@ -1304,7 +1304,7 @@
                 },
                 "minecraft:behavior.random_stroll": {
                     "priority": 10,
-                    "speed_multiplier": 1.0
+                    "speed_multiplier": 0.86
                 }
             },
             "death_nu7": {
@@ -1540,7 +1540,7 @@
                         "on_damage": {
                             "event": "humanoid:heal"
                         },
-                        "deals_damage": "true"
+                        "deals_damage": true
                     }
                 ]
             },
