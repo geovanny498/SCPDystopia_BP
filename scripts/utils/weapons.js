@@ -166,3 +166,14 @@ function stopShooting(playerId) {
         debugWarn(`Jugador ${playerId} dejó de disparar.`, "cyan");
     }
 }
+
+world.beforeEvents.playerLeave.subscribe(event => {
+    const playerId = event.player.id;
+
+    // Borrar cooldownMap
+    cooldownMap.delete(playerId);
+    debugWarn(`Borrando a Jugador ${playerId} del cooldownMap`, "cyan");
+
+    // Borrar firingPlayers y limpiar interval si existía
+    stopShooting(playerId);
+});

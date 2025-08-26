@@ -105,7 +105,5 @@ world.afterEvents.entityRemove.subscribe(event => {
         // Elimina el proyectil del mapa
         projectileShooterMap.delete(removedEntityId);
         debugWarn(`El proyectil ${removedEntityId} ha sido eliminado del mapa.`, "green");
-    } else {
-        debugWarn(`No se encontró el proyectil con ID ${removedEntityId} en el mapa.`, "magenta");
     }
 });

@@ -10,6 +10,7 @@ export const teamGroups = {
     ]),
     foundation: new Set([
         "lc:dt_chara",
+        "lc:dt_thedeath",
         "lc:dt_alpha1c",
         "lc:dt_alpha1l",
         "lc:dt_alpha1",
@@ -26,43 +27,31 @@ export const teamGroups = {
     ])
 };
 
-// Asigna jugadores a equipos según el casco que usen
+const helmetTeams = {
+    "minecraft:golden_helmet": "chaos",
+    "minecraft:netherite_helmet": "foundation",
+    "minecraft:diamond_helmet": "foundation",
+    "minecraft:iron_helmet": "foundation",
+    "gabrielaplok:nv_goggles": "foundation"
+};
+
 export function getTeam(entityOrTypeId) {
-    if (typeof entityOrTypeId === "string") {
-        // Si es un typeId normal (entidad no jugador)
-        for (const team in teamGroups) {
-            if (teamGroups[team].has(entityOrTypeId)) return team;
-        }
+    if (!entityOrTypeId) return null;
+
+    let typeId;
+
+    if (entityOrTypeId.typeId === "minecraft:player") {
+        const equippable = entityOrTypeId.getComponent("equippable");
+        const helmet = equippable?.getEquipment(mc.EquipmentSlot.Head);
+        if (helmet) return helmetTeams[helmet.typeId] || null;
         return null;
     }
 
-    // Si es una entidad (posiblemente jugador)
-    const entity = entityOrTypeId;
-    if (!entity || !entity.typeId) return null;
-    if (entity.typeId === "minecraft:player") {
-        const equippable = entity.getComponent("equippable");
-        if (!equippable) return null;
+    typeId = typeof entityOrTypeId === "string" ? entityOrTypeId : entityOrTypeId.typeId;
+    if (!typeId) return null;
 
-        const helmet = equippable.getEquipment(mc.EquipmentSlot.Head);
-        if (!helmet) return null;
-
-        const helmetId = helmet.typeId;
-
-        // Puedes modificar esto como quieras
-        if (helmetId === "minecraft:golden_helmet") return "chaos";
-        if (
-            helmetId === "minecraft:netherite_helmet" ||
-            helmetId === "minecraft:diamond_helmet" ||
-            helmetId === "minecraft:iron_helmet" ||
-            helmetId === "gabrielaplok:nv_goggles"
-        ) return "foundation";
-
-        return null;
-    }
-
-    // Para otras entidades (no jugadores)
     for (const team in teamGroups) {
-        if (teamGroups[team].has(entityOrTypeId.typeId)) return team;
+        if (teamGroups[team].has(typeId)) return team;
     }
 
     return null;
