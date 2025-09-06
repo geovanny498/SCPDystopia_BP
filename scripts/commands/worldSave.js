@@ -36,15 +36,23 @@ export function loadSystemState(systemName) {
  * Resetea todos los sistemas guardados
  * @param {Object} systemStates Referencia a los estados internos
  */
+
 export function resetAllSystems(systemStates) {
     try {
         world.clearDynamicProperties();
-        // Reiniciar estados internos
+
         for (const key in systemStates) {
-            systemStates[key] = {
-                foundation: { enable: false, includeSpecial: false },
-                chaos: { enable: false, includeSpecial: false }
-            };
+            if (key === "teleport") {
+                systemStates[key] = {
+                    foundation: { mode: "false", includeSpecial: "false" },
+                    chaos: { mode: "false", includeSpecial: "false" }
+                };
+            } else {
+                systemStates[key] = {
+                    foundation: { enable: false, includeSpecial: false },
+                    chaos: { enable: false, includeSpecial: false }
+                };
+            }
         }
         console.log("[SCPDystopia] Todos los sistemas reseteados");
     } catch (err) {
