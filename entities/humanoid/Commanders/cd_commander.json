@@ -191,8 +191,37 @@
                                     {
                                         "test": "is_family",
                                         "subject": "other",
-                                        "operator": "==",
                                         "value": "player"
+                                    }
+                                ],
+                                "any_of": [
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:netherite_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:diamond_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:iron_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "gabrielaplok:nv_goggles"
                                     }
                                 ]
                             },
@@ -299,8 +328,37 @@
                                     {
                                         "test": "is_family",
                                         "subject": "other",
-                                        "operator": "==",
                                         "value": "player"
+                                    }
+                                ],
+                                "any_of": [
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:netherite_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:diamond_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:iron_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "gabrielaplok:nv_goggles"
                                     }
                                 ]
                             },
@@ -1337,7 +1395,7 @@
                                     "num_entities_spawned": 10,
                                     "entity_type": "lc:dt_chaos_insurgency",
                                     "size": 1,
-                                    "summon_cap": 6,
+                                    "summon_cap": 8,
                                     "entity_lifespan": 120
                                 },
                                 {
@@ -1379,6 +1437,7 @@
             "minecraft:type_family": {
                 "family": [
                     "human",
+                    "player",
                     "chaos_insurgency",
                     "chaos",
                     "mob"
@@ -1820,11 +1879,6 @@
                     "component_groups": [
                         "humanoid:show_health"
                     ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar Activar barra de vida"
-                    ]
                 }
             },
             "humanoid:dont_show_boss_bar": {
@@ -1844,11 +1898,6 @@
                     "component_groups": [
                         "humanoid:teleport"
                     ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar Usar Ender Pearls"
-                    ]
                 }
             },
             "humanoid:stop_teleport": {
@@ -1867,11 +1916,6 @@
                 "add": {
                     "component_groups": [
                         "humanoid:teleport_near"
-                    ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar §cUsar Ender Pearls"
                     ]
                 }
             },

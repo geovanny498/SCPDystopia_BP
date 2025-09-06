@@ -6,6 +6,7 @@ import { applyDamageAndKnockback } from "./utils/damage.js";
 import { debugMessage, debugWarn } from "./utils/debug.js";
 import { projectileShooterMap } from "./utils/weapons.js";
 
+
 // Función para eliminar el proyectil de manera segura
 function removeProjectileSafe(projectile) {
     try {
@@ -97,12 +98,11 @@ world.afterEvents.projectileHitEntity.subscribe(event => {
 
 world.afterEvents.entityRemove.subscribe(event => {
     const removedEntityId = event.removedEntityId;
-    const entity = event.typeId;
-    debugWarn(`Entidad eliminada: ${entity} Id: ${removedEntityId}`, "magenta");
+    const entityType = event.typeId;
+    debugWarn(`Entidad eliminada: ${entityType} Id: ${removedEntityId}`, "magenta");
 
-    // Verifica si el proyectil aún está en el mapa antes de eliminarlo
+    // Eliminar proyectiles del mapa si existe
     if (projectileShooterMap.has(removedEntityId)) {
-        // Elimina el proyectil del mapa
         projectileShooterMap.delete(removedEntityId);
         debugWarn(`El proyectil ${removedEntityId} ha sido eliminado del mapa.`, "green");
     }

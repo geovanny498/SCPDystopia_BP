@@ -25,6 +25,9 @@
 		},
 		{
 			"path": "../../../behavior_packs/TrueZAP(B)/entities"
+		},
+		{
+			"path": "../../../../../../../../../../Downloads/bedrock-samples-1.21.100.6 (1)/bedrock-samples-1.21.100.6"
 		}
 	],
 	"extensions": {

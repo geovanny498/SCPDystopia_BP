@@ -1,0 +1,222 @@
+// scripts/commands/toggle_system.js
+import { system, world, CustomCommandParamType, CustomCommandStatus, CommandPermissionLevel } from "@minecraft/server";
+import { saveSystemState, loadSystemState, resetAllSystems } from "./worldSave.js";
+
+// Soldados especiales
+export const specialSoldiers = {
+    foundation: [
+        "§c§lMTF Delta-1 Chara", "§d§lMTF Delta-1 Frisk", "§d§lMTF Delta-1 Commander",
+        "§d§lMTF Delta-1 Mita", "§d§lMTF Delta-1 Leader", "§lMTF Alpha-1 Commander",
+        "§lMTF Alpha-1 Commander 2", "§lMTF Alpha-1 Commander 3", "§1§lMTF Epsilon-11 Commander",
+        "§b§lMTF Eta-10 Commander", "§8§lMTF Nu-7 Commander", "§6§lMTF Beta-7 Commander",
+        "§e§lMTF Epsilon-6 Commander",
+    ],
+    chaos: [
+        "§2§lChaos Delta Commander", "§a§lChaos Delta Leader 1", "§a§lChaos Delta Leader 2",
+        "§a§lChaos Delta Leader 3", "§a§lChaos Delta Leader 4",
+    ],
+};
+
+// Lista global de soldados
+export const allSoldiers = [];
+
+// Estados internos globales de los sistemas
+export const systemStates = {
+    health: { foundation: { enable: false, includeSpecial: false }, chaos: { enable: false, includeSpecial: false } },
+    spawn: { foundation: { enable: false, includeSpecial: false }, chaos: { enable: false, includeSpecial: false } }
+};
+
+// Registrar enum de facciones
+system.beforeEvents.startup.subscribe((init) => {
+    try { init.customCommandRegistry.registerEnum("scpd:faction", ["foundation", "chaos", "both"]); }
+    catch { }
+});
+
+/**
+ * Registrar sistema genérico
+ * @param {Object} cfg
+ */
+export function registerSoldierSystem(cfg) {
+    // Asegurar que exista el estado global
+    if (!systemStates[cfg.command]) {
+        systemStates[cfg.command] = {
+            foundation: { enable: false, includeSpecial: false },
+            chaos: { enable: false, includeSpecial: false }
+        };
+    }
+
+    // --- Cargar estado después de que el mundo esté listo ---
+    system.run(() => {
+        const loaded = loadSystemState(cfg.command);
+        if (loaded) systemStates[cfg.command] = loaded;
+    });
+
+    function applyToEntity(ent) {
+        if (!ent) return;
+
+        const isSpecialFoundation = specialSoldiers.foundation.includes(ent.nameTag);
+        const isSpecialChaos = specialSoldiers.chaos.includes(ent.nameTag);
+        let isFoundation = false, isChaos = false;
+
+        try {
+            const familyComp = ent.getComponent("minecraft:type_family");
+            if (familyComp) {
+                isFoundation = familyComp.hasTypeFamily("foundation");
+                isChaos = familyComp.hasTypeFamily("chaos_insurgency");
+            }
+        } catch { }
+
+        const state = systemStates[cfg.command];
+
+        const factions = [
+            { config: state.foundation, active: isFoundation, name: "foundation", isSpecial: isSpecialFoundation },
+            { config: state.chaos, active: isChaos, name: "chaos", isSpecial: isSpecialChaos },
+        ];
+
+        for (const { config, active, name, isSpecial } of factions) {
+            let eventName;
+            if (isSpecial && config.includeSpecial) eventName = cfg.startEvent;
+            else if (!isSpecial && active) eventName = config.enable ? cfg.startEvent : cfg.stopEvent;
+            else continue;
+
+            try { ent.triggerEvent(eventName); } catch { }
+        }
+    }
+
+    // --- Comando toggle ---
+    system.beforeEvents.startup.subscribe((init) => {
+        const toggleCommand = {
+            name: `scpd:toggle_${cfg.command}`,
+            description: cfg.desc,
+            permissionLevel: CommandPermissionLevel.Any,
+            cheatsRequired: false,
+            optionalParameters: [
+                { name: "scpd:faction", type: CustomCommandParamType.Enum },
+                { name: "enable", type: CustomCommandParamType.Boolean },
+                { name: "includeSpecial", type: CustomCommandParamType.Boolean },
+            ],
+        };
+
+        init.customCommandRegistry.registerCommand(toggleCommand, (origin, faction, enable, includeSpecial) => {
+            faction = faction ?? "both"; enable = enable ?? true; includeSpecial = includeSpecial ?? false;
+            const state = systemStates[cfg.command];
+
+            if (faction === "foundation" || faction === "both") {
+                state.foundation.enable = enable;
+                state.foundation.includeSpecial = includeSpecial;
+            }
+            if (faction === "chaos" || faction === "both") {
+                state.chaos.enable = enable;
+                state.chaos.includeSpecial = includeSpecial;
+            }
+
+            saveSystemState(cfg.command, state);
+
+            allSoldiers.forEach(id => {
+                const ent = world.getEntity(id);
+                if (ent) applyToEntity(ent);
+            });
+
+            return {
+                status: CustomCommandStatus.Success,
+                message: enable
+                    ? `${cfg.labelOn} para ${faction} (especiales: ${includeSpecial})`
+                    : `${cfg.labelOff} para ${faction} (especiales: ${includeSpecial})`,
+            };
+        });
+
+        // --- Comando status ---
+        const statusCommand = {
+            name: `scpd:${cfg.statusCommand}`,
+            description: `Muestra la configuración actual de ${cfg.command}`,
+            permissionLevel: CommandPermissionLevel.Any,
+            cheatsRequired: false,
+            optionalParameters: [{ name: "scpd:faction", type: CustomCommandParamType.Enum }],
+        };
+
+        init.customCommandRegistry.registerCommand(statusCommand, (origin, faction) => {
+            faction = faction ?? "both";
+            const state = systemStates[cfg.command];
+
+            function formatState(name, state, specials) {
+                const enabled = state.enable ? "§a[ON]§r" : "§c[OFF]§r";
+                const specialText = state.includeSpecial
+                    ? `§aEspeciales [ON]§r\n   ${specials.join("§r\n   ")}`
+                    : "§cEspeciales [OFF]§r";
+                return `§r§l${name.toUpperCase()}§r\n Estado: ${enabled}\n ${specialText}`;
+            }
+
+            const parts = [];
+            if (faction === "foundation" || faction === "both") parts.push(formatState("Foundation", state.foundation, specialSoldiers.foundation));
+            if (faction === "chaos" || faction === "both") parts.push(formatState("Chaos", state.chaos, specialSoldiers.chaos));
+
+            return { status: CustomCommandStatus.Success, message: `§6${cfg.desc} - Estado Actual§r\n\n${parts.join("\n\n")}` };
+        });
+
+        // --- Comando reset ---
+        try {
+            init.customCommandRegistry.registerCommand({
+                name: "scpd:reset_system",
+                description: "Resetea un sistema específico o todos",
+                permissionLevel: CommandPermissionLevel.Any,
+                cheatsRequired: false
+            }, (origin, system_name) => {
+                resetAllSystems(systemStates);
+                return { status: CustomCommandStatus.Success, message: system_name ? `${system_name} reseteado` : "Todos los sistemas reseteados" };
+            });
+        } catch { }
+    });
+
+    // --- Comando check (mostrar propiedades legibles) ---
+    system.beforeEvents.startup.subscribe((init) => {
+    const checkCmd = {
+        name: "scpd:check_world_props",
+        description: "Muestra las propiedades dinámicas del mundo de forma legible",
+        permissionLevel: CommandPermissionLevel.Any,
+        cheatsRequired: false,
+    };
+    try {
+        init.customCommandRegistry.registerCommand(checkCmd, (origin) => {
+            const healthState = JSON.parse(world.getDynamicProperty("scpd_system_show_health") ?? "{}");
+            const spawnState = JSON.parse(world.getDynamicProperty("scpd_system_spawn_soldiers") ?? "{}");
+
+            function formatSystem(name, state) {
+                if (!state || !state.foundation || !state.chaos) {
+                    return `§7${name}: No definido§r`;
+                }
+
+                function formatFaction(factionName, data) {
+                    const enabled = data.enable ? "§a[ON]§r" : "§c[OFF]§r";
+                    const specials = data.includeSpecial ? "§a[ON]§r" : "§c[OFF]§r";
+                    return `§l${factionName.toUpperCase()}§r\n Estado: ${enabled}\n Especiales: ${specials}`;
+                }
+
+                return `§6§l${name}§r\n${formatFaction("Foundation", state.foundation)}\n\n${formatFaction("Chaos", state.chaos)}`;
+            }
+
+            const message = `§e§l[SCPDystopia] Propiedades del mundo§r\n\n${formatSystem("Health", healthState)}\n\n${formatSystem("Spawn", spawnState)}`;
+
+            console.log(message);
+            world.sendMessage(message);
+
+            return { status: CustomCommandStatus.Success, message: "Propiedades mostradas en consola y chat" };
+        });
+    } catch { }
+});
+
+
+    // --- Listeners para aplicar automáticamente ---
+    function handleEntity(ent) {
+        const state = systemStates[cfg.command];
+        if (!state.foundation.enable && !state.chaos.enable) return;
+        if (!allSoldiers.includes(ent.id)) allSoldiers.push(ent.id);
+        applyToEntity(ent);
+    }
+
+    world.afterEvents.entitySpawn.subscribe(ev => handleEntity(ev.entity));
+    world.afterEvents.entityLoad.subscribe(ev => handleEntity(ev.entity));
+    world.afterEvents.entityRemove.subscribe(ev => {
+        const idx = allSoldiers.indexOf(ev.removedEntityId);
+        if (idx !== -1) allSoldiers.splice(idx, 1);
+    });
+}

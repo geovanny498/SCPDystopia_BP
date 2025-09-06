@@ -11,7 +11,7 @@ export const entityDamageConfig = {
             const health = entity.getComponent("health");
             if (!health) return false;
             const maxHealth = health.effectiveMax;
-                console.warn(`Wither salud actual: ${health.currentValue}, máxima: ${maxHealth}`);
+                // console.warn(`Wither salud actual: ${health.currentValue}, máxima: ${maxHealth}`);
 
             return health.currentValue > maxHealth / 2; // solo recibe daño si >50%
         },

@@ -18,8 +18,7 @@
         },
         "minecraft:herd": {
           "min_size": 1,
-          "max_size": 2,
-          "event": "humanoid:start_spawn_soldiers"
+          "max_size": 2
         },
         "minecraft:height_filter": {
           "min": -64,
@@ -47,8 +46,7 @@
         },
         "minecraft:herd": {
           "min_size": 1,
-          "max_size": 2,
-          "event": "humanoid:start_spawn_soldiers"
+          "max_size": 2
         },
         "minecraft:biome_filter": {
           "test": "has_biome_tag",
@@ -68,8 +66,7 @@
         },
         "minecraft:herd": {
           "min_size": 1,
-          "max_size": 2,
-          "event": "humanoid:start_spawn_soldiers"
+          "max_size": 2
         },
         "minecraft:height_filter": {
           "min": 64,
