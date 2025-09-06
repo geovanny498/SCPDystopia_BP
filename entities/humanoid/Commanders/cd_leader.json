@@ -1423,6 +1423,7 @@
             "minecraft:despawn": {
                 "despawn_from_distance": {}
             },
+            "minecraft:ignore_cannot_be_attacked": {},
             "minecraft:type_family": {
                 "family": [
                     "human",
@@ -1875,17 +1876,17 @@
                     "component_groups": [
                         "humanoid:show_health"
                     ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar Desactivar barra de vida"
-                    ]
                 }
             },
             "humanoid:start_teleport": {
                 "add": {
                     "component_groups": [
                         "humanoid:teleport"
+                    ]
+                },
+                "queue_command": {
+                    "command": [
+                        "title @p actionbar Usar Ender Pearls"
                     ]
                 }
             },
@@ -1905,6 +1906,11 @@
                 "add": {
                     "component_groups": [
                         "humanoid:teleport_near"
+                    ]
+                },
+                "queue_command": {
+                    "command": [
+                        "title @p actionbar §cUsar Ender Pearls"
                     ]
                 }
             },

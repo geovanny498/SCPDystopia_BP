@@ -148,7 +148,7 @@
                                         "subject": "other",
                                         "domain": "head",
                                         "operator": "==",
-                                        "value": "lc:dt_ci_helmet"
+                                        "value": "minecraft:golden_helmet"
                                     }
                                 ]
                             },
@@ -266,7 +266,7 @@
                                         "subject": "other",
                                         "domain": "head",
                                         "operator": "==",
-                                        "value": "lc:dt_ci_helmet"
+                                        "value": "minecraft:golden_helmet"
                                     }
                                 ]
                             },
@@ -1307,6 +1307,7 @@
             "minecraft:despawn": {
                 "despawn_from_distance": {}
             },
+            "minecraft:ignore_cannot_be_attacked": {},
             "minecraft:type_family": {
                 "family": [
                     "mob",
@@ -1759,22 +1760,12 @@
                     "component_groups": [
                         "humanoid:show_health"
                     ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar Activar barra de vida"
-                    ]
                 }
             },
             "humanoid:dont_show_boss_bar": {
                 "remove": {
                     "component_groups": [
                         "humanoid:show_health"
-                    ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar Desactivar barra de vida"
                     ]
                 }
             },

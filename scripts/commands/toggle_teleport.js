@@ -3,26 +3,42 @@ import { system, world, CustomCommandParamType, CustomCommandStatus, CommandPerm
 import { saveSystemState, loadSystemState } from "./worldSave.js";
 import { allSoldiers, specialSoldiers, systemStates } from "./toggle_system.js";
 
-// Registrar enums para modo de teleport
+
 system.beforeEvents.startup.subscribe((init) => {
     try {
-        init.customCommandRegistry.registerEnum("normalMode", ["normal", "near", "false"]);
-        init.customCommandRegistry.registerEnum("specialMode", ["normal", "near", "false"]);
-    } catch {}
+        // Enum para mode
+        init.customCommandRegistry.registerEnum("scpd:mode", ["normal", "near", "false"]);
+
+        // Enum para includeSpecialT
+        init.customCommandRegistry.registerEnum("scpd:includeSpecialT", ["normal", "near", "false"]);
+    } catch { }
 });
 
-/**
- * Registrar sistema de teleport
- */
+
 export function registerTeleportSystem(cfg) {
-    // Cargar estado
+    // Asegurar estado
+    if (!systemStates.teleport) {
+        systemStates.teleport = {
+            foundation: { mode: "false", includeSpecial: "false" },
+            chaos: { mode: "false", includeSpecial: "false" },
+        };
+    }
+
+    // Cargar estado guardado
     system.run(() => {
-        const loaded = loadSystemState(cfg.name);
-        if (loaded) systemStates[cfg.name] = loaded;
+        const loaded = loadSystemState("teleport");
+        if (loaded) systemStates.teleport = loaded;
     });
 
-    // Aplica teleport a un soldado
-    function applyToEntity(ent) {
+    function safeTriggerEvent(ent, eventName) {
+        if (!ent || !eventName) return;
+        try { ent.triggerEvent(eventName); }
+        catch (err) {
+            // console.warn(`[SCPDystopia] No se pudo aplicar evento "${eventName}" a ${ent.nameTag}: ${err}`);
+        }
+    }
+
+    function applyTeleport(ent) {
         if (!ent) return;
 
         const isSpecialFoundation = specialSoldiers.foundation.includes(ent.nameTag);
@@ -35,31 +51,50 @@ export function registerTeleportSystem(cfg) {
                 isFoundation = familyComp.hasTypeFamily("foundation");
                 isChaos = familyComp.hasTypeFamily("chaos_insurgency");
             }
-        } catch {}
+        } catch { }
 
-        const state = systemStates[cfg.name];
+        // No aplicar si no es especial ni pertenece a la facción
+        if (!isFoundation && !isChaos && !isSpecialFoundation && !isSpecialChaos) return;
+
+        const state = systemStates.teleport;
         const factions = [
             { config: state.foundation, active: isFoundation, isSpecial: isSpecialFoundation },
             { config: state.chaos, active: isChaos, isSpecial: isSpecialChaos },
         ];
 
         for (const { config, active, isSpecial } of factions) {
-            let modeToUse = isSpecial ? config.includeSpecial : config.mode;
-            if (modeToUse === "false") continue;
-
-            const eventName = modeToUse === "normal"
-                ? cfg.normalEvent
-                : modeToUse === "near"
-                ? cfg.nearEvent
-                : null;
-
-            if (eventName) {
-                try { ent.triggerEvent(eventName); } catch {}
+            if (isSpecial) {
+                const specialsEnabled = !(config.includeSpecial === "false" || config.includeSpecial === false);
+                if (specialsEnabled) {
+                    if (config.includeSpecial === "near") {
+                        safeTriggerEvent(ent, cfg.events.stop);
+                        safeTriggerEvent(ent, cfg.events.start_near);
+                    } else {
+                        safeTriggerEvent(ent, cfg.events.stop_near);
+                        safeTriggerEvent(ent, cfg.events.start);
+                    }
+                } else {
+                    safeTriggerEvent(ent, cfg.events.stop_near);
+                    safeTriggerEvent(ent, cfg.events.stop);
+                }
+            } else if (active) {
+                const mode = config.mode ?? "false";
+                if (mode === "near") {
+                    safeTriggerEvent(ent, cfg.events.stop);
+                    safeTriggerEvent(ent, cfg.events.start_near);
+                } else if (mode === "normal") {
+                    safeTriggerEvent(ent, cfg.events.stop_near);
+                    safeTriggerEvent(ent, cfg.events.start);
+                } else {
+                    safeTriggerEvent(ent, cfg.events.stop_near);
+                    safeTriggerEvent(ent, cfg.events.stop);
+                }
             }
         }
     }
 
-    // --- Comando toggle ---
+
+    // Registrar comandos
     system.beforeEvents.startup.subscribe((init) => {
         const toggleCommand = {
             name: `scpd:toggle_${cfg.command}`,
@@ -67,19 +102,24 @@ export function registerTeleportSystem(cfg) {
             permissionLevel: CommandPermissionLevel.Any,
             cheatsRequired: false,
             optionalParameters: [
-                { name: "scpd:faction", type: CustomCommandParamType.Enum },
-                { name: "normalMode", type: CustomCommandParamType.Enum },
-                { name: "specialMode", type: CustomCommandParamType.Enum },
+                { name: "scpd:faction", type: CustomCommandParamType.Enum }, // foundation | chaos | both
+                {
+                    name: "scpd:mode",
+                    type: CustomCommandParamType.Enum,
+                },
+                {
+                    name: "scpd:includeSpecialT",
+                    type: CustomCommandParamType.Enum,
+                },
             ],
         };
 
-        init.customCommandRegistry.registerCommand(toggleCommand, (origin, faction, mode, includeSpecial) => {
+        init.customCommandRegistry.registerCommand(toggleCommand, (origin, faction, mode, includeSpecialT) => {
             faction = faction ?? "both";
             mode = mode ?? "normal";
-            includeSpecial = includeSpecial ?? "false";
+            const includeSpecial = includeSpecialT ?? "false";
 
-            const state = systemStates[cfg.name];
-
+            const state = systemStates.teleport;
             if (faction === "foundation" || faction === "both") {
                 state.foundation.mode = mode;
                 state.foundation.includeSpecial = includeSpecial;
@@ -89,91 +129,52 @@ export function registerTeleportSystem(cfg) {
                 state.chaos.includeSpecial = includeSpecial;
             }
 
-            saveSystemState(cfg.name, state);
+            saveSystemState("teleport", state);
 
             allSoldiers.forEach(id => {
                 const ent = world.getEntity(id);
-                if (ent) applyToEntity(ent);
+                if (ent) applyTeleport(ent);
             });
 
-            const msg = `[SCPDystopia] Teleport actualizado:\nFoundation: mode=${state.foundation.mode}, includeSpecial=${state.foundation.includeSpecial}\nChaos: mode=${state.chaos.mode}, includeSpecial=${state.chaos.includeSpecial}`;
-            world.sendMessage(msg);
-            return { status: CustomCommandStatus.Success, message: msg };
+            return {
+                status: CustomCommandStatus.Success,
+                message: `Teleport para ${faction} actualizado: mode=${mode}, especiales=${includeSpecial}`
+            };
         });
 
-        // --- Comando status ---
+        // Status
         const statusCommand = {
-            name: `scpd:status_${cfg.command}`,
-            description: `Muestra la configuración actual de ${cfg.command}`,
+            name: `scpd:${cfg.statusCommand}`,
+            description: `Muestra estado actual del teleport`,
             permissionLevel: CommandPermissionLevel.Any,
             cheatsRequired: false,
-            optionalParameters: [{ name: "scpd:faction", type: CustomCommandParamType.Enum }],
+            optionalParameters: [{ name: "scpd:faction", type: CustomCommandParamType.Enum }]
         };
 
         init.customCommandRegistry.registerCommand(statusCommand, (origin, faction) => {
             faction = faction ?? "both";
-            const state = systemStates[cfg.name];
+            const state = systemStates.teleport;
 
-            function formatState(name, data) {
-                const mode = data.mode === "false" ? "§c[OFF]§r" : `§a[${data.mode.toUpperCase()}]§r`;
-                const special = data.includeSpecial === "false" ? "§c[OFF]§r" : `§a[${data.includeSpecial.toUpperCase()}]§r`;
-                return `§l${name.toUpperCase()}§r\n Modo: ${mode}\n Especiales: ${special}`;
+            function formatFaction(name, data) {
+                const modeText = data.mode === "false" ? "§c[OFF]§r" : `§a[${data.mode}]§r`;
+                const specialText = data.includeSpecial === "false" ? "§c[OFF]§r" : `§a[${data.includeSpecial}]§r`;
+                return `§l${name.toUpperCase()}§r\n Modo: ${modeText}\n Especiales: ${specialText}`;
             }
 
             const parts = [];
-            if (faction === "foundation" || faction === "both") parts.push(formatState("Foundation", state.foundation));
-            if (faction === "chaos" || faction === "both") parts.push(formatState("Chaos", state.chaos));
+            if (faction === "foundation" || faction === "both") parts.push(formatFaction("Foundation", state.foundation));
+            if (faction === "chaos" || faction === "both") parts.push(formatFaction("Chaos", state.chaos));
 
-            return {
-                status: CustomCommandStatus.Success,
-                message: `§6${cfg.desc} - Estado Actual§r\n\n${parts.join("\n\n")}`
-            };
+            return { status: CustomCommandStatus.Success, message: `§6Teleport - Estado Actual§r\n\n${parts.join("\n\n")}` };
         });
-
-        // --- Comando check_world_props ---
-        try {
-            init.customCommandRegistry.registerCommand({
-                name: "scpd:check_world_props",
-                description: "Muestra las propiedades dinámicas del mundo de forma legible",
-                permissionLevel: CommandPermissionLevel.Any,
-                cheatsRequired: false,
-            }, (origin) => {
-                const healthState = JSON.parse(world.getDynamicProperty("scpd_system_show_health") ?? "{}");
-                const spawnState = JSON.parse(world.getDynamicProperty("scpd_system_spawn_soldiers") ?? "{}");
-                const teleportState = JSON.parse(world.getDynamicProperty("scpd_system_teleport") ?? "{}");
-
-                function formatSystem(name, state) {
-                    if (!state || !state.foundation || !state.chaos) return `§7${name}: No definido§r`;
-
-                    function formatFaction(factionName, data) {
-                        if (name === "Teleport") {
-                            const mode = data.mode === "false" ? "§c[OFF]§r" : `§a[${data.mode.toUpperCase()}]§r`;
-                            const special = data.includeSpecial === "false" ? "§c[OFF]§r" : `§a[${data.includeSpecial.toUpperCase()}]§r`;
-                            return `§l${factionName.toUpperCase()}§r\n Modo: ${mode}\n Especiales: ${special}`;
-                        } else {
-                            const enabled = data.enable ? "§a[ON]§r" : "§c[OFF]§r";
-                            const special = data.includeSpecial ? "§a[ON]§r" : "§c[OFF]§r";
-                            return `§l${factionName.toUpperCase()}§r\n Estado: ${enabled}\n Especiales: ${special}`;
-                        }
-                    }
-
-                    return `§6§l${name}§r\n${formatFaction("Foundation", state.foundation)}\n\n${formatFaction("Chaos", state.chaos)}`;
-                }
-
-                const message = `§e§l[SCPDystopia] Propiedades del mundo§r\n\n${formatSystem("Health", healthState)}\n\n${formatSystem("Spawn", spawnState)}\n\n${formatSystem("Teleport", teleportState)}`;
-                console.log(message);
-                world.sendMessage(message);
-
-                return { status: CustomCommandStatus.Success, message: "Propiedades mostradas en consola y chat" };
-            });
-        } catch {}
     });
 
-    // Listeners para aplicar a nuevos soldados
+
+    // Listeners
     function handleEntity(ent) {
-        const state = systemStates[cfg.name];
+        if (!ent) return;
         if (!allSoldiers.includes(ent.id)) allSoldiers.push(ent.id);
-        applyToEntity(ent);
+        applyTeleport(ent);
     }
 
     world.afterEvents.entitySpawn.subscribe(ev => handleEntity(ev.entity));
