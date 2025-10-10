@@ -2,7 +2,7 @@
 import { registerSoldierSystem } from "./toggle_system.js";
 import { registerTeleportSystem } from "./toggle_teleport.js";
 import { system, world, CustomCommandParamType, CustomCommandStatus, CommandPermissionLevel } from "@minecraft/server";
-import { systemStates } from "./toggle_system.js";
+import { systemStates, autoUpdateFlags } from "./toggle_system.js";
 
 // Sistema de spawn
 registerSoldierSystem({
@@ -10,6 +10,7 @@ registerSoldierSystem({
     command: "spawn",
     statusCommand: "status_spawn",
     desc: "Activa o desactiva el spawn de soldados",
+    component: "minecraft:behavior.summon_entity",
     startEvent: "humanoid:start_spawn_soldiers",
     stopEvent: "humanoid:stop_spawn_soldiers",
     labelOn: "Spawn activado",
@@ -22,6 +23,7 @@ registerSoldierSystem({
     command: "health",
     statusCommand: "status_health",
     desc: "Activa o desactiva la barra de vida de los soldados",
+    component: "minecraft:boss",
     startEvent: "humanoid:show_boss_bar",
     stopEvent: "humanoid:dont_show_boss_bar",
     labelOn: "Barra de vida activada",
@@ -34,6 +36,7 @@ registerTeleportSystem({
     command: "teleport",
     statusCommand: "status_teleport",
     desc: "Controla el teleport de soldados",
+    component: "minecraft:teleport",
     events: {
         start: "humanoid:start_teleport",
         stop: "humanoid:stop_teleport",
@@ -41,6 +44,40 @@ registerTeleportSystem({
         stop_near: "humanoid:stop_teleport_near",
     }
 });
+
+system.beforeEvents.startup.subscribe((init) => {
+    const toggleAllAutoUpdate = {
+        name: "scpd:toggle_all_auto_update",
+        description: "Activa o desactiva la actualización automática de soldados y teleport",
+        permissionLevel: CommandPermissionLevel.Any,
+        cheatsRequired: false,
+        optionalParameters: [
+            { name: "enable", type: CustomCommandParamType.Boolean }
+        ],
+    };
+
+    init.customCommandRegistry.registerCommand(toggleAllAutoUpdate, (origin, enable) => {
+        // Por defecto false si no se pasa nada
+        const state = enable ?? false;
+
+        autoUpdateFlags.system = state;
+        autoUpdateFlags.teleport = state;
+        if (enable) {
+            console.log("Actualización automática de soldados y teleport activada")
+        } else {
+            console.log("Actualización automática de soldados y teleport desactivada")
+        }
+
+        return {
+            status: CustomCommandStatus.Success,
+            message: state
+                ? "Actualización automática de soldados y teleport activada"
+                : "Actualización automática de soldados y teleport desactivada"
+        };
+    });
+});
+
+
 
 system.beforeEvents.startup.subscribe((init) => {
     const setCmd = {

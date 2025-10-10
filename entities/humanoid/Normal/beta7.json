@@ -1774,22 +1774,12 @@
                     "component_groups": [
                         "humanoid:teleport"
                     ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar Usar Ender Pearls"
-                    ]
                 }
             },
             "humanoid:stop_teleport": {
                 "remove": {
                     "component_groups": [
                         "humanoid:teleport"
-                    ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar Dejar de usar Ender Pearls"
                     ]
                 }
             },
@@ -1798,22 +1788,12 @@
                     "component_groups": [
                         "humanoid:teleport_near"
                     ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar §cUsar Ender Pearls"
-                    ]
                 }
             },
             "humanoid:stop_teleport_near": {
                 "remove": {
                     "component_groups": [
                         "humanoid:teleport_near"
-                    ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar §cDejar de usar Ender Pearls"
                     ]
                 }
             }

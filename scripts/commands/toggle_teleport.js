@@ -1,8 +1,9 @@
 // scripts/commands/toggle_teleport.js
 import { system, world, CustomCommandParamType, CustomCommandStatus, CommandPermissionLevel } from "@minecraft/server";
 import { saveSystemState, loadSystemState } from "./worldSave.js";
-import { allSoldiers, specialSoldiers, systemStates } from "./toggle_system.js";
-
+import { allSoldiers, specialSoldiers, systemStates, autoUpdateFlags } from "./toggle_system.js";
+import { getTeam } from "../utils/teams.js";
+import { debugMessage, debugWarn } from "../utils/debug.js";
 
 system.beforeEvents.startup.subscribe((init) => {
     try {
@@ -13,7 +14,6 @@ system.beforeEvents.startup.subscribe((init) => {
         init.customCommandRegistry.registerEnum("scpd:includeSpecialT", ["normal", "near", "false"]);
     } catch { }
 });
-
 
 export function registerTeleportSystem(cfg) {
     // Asegurar estado
@@ -28,6 +28,17 @@ export function registerTeleportSystem(cfg) {
     system.run(() => {
         const loaded = loadSystemState("teleport");
         if (loaded) systemStates.teleport = loaded;
+        // Reaplicar temporalmente para todas las entidades existentes
+        system.runInterval(() => {
+            if (!autoUpdateFlags.teleport) return; // solo si está habilitado
+            allSoldiers.forEach(id => {
+                const ent = world.getEntity(id);
+                if (ent) {
+                    handleEntity(ent);
+                }
+            });
+            debugWarn(`toggle_${cfg.command}`, `runInterval Se volvió a ejecutar`, "green");
+        }, 20 * 30); // cada 600 ticks
     });
 
     function safeTriggerEvent(ent, eventName) {
@@ -38,61 +49,108 @@ export function registerTeleportSystem(cfg) {
         }
     }
 
+
     function applyTeleport(ent) {
         if (!ent) return;
 
         const isSpecialFoundation = specialSoldiers.foundation.includes(ent.nameTag);
         const isSpecialChaos = specialSoldiers.chaos.includes(ent.nameTag);
-
-        let isFoundation = false, isChaos = false;
-        try {
-            const familyComp = ent.getComponent("minecraft:type_family");
-            if (familyComp) {
-                isFoundation = familyComp.hasTypeFamily("foundation");
-                isChaos = familyComp.hasTypeFamily("chaos_insurgency");
-            }
-        } catch { }
-
-        // No aplicar si no es especial ni pertenece a la facción
-        if (!isFoundation && !isChaos && !isSpecialFoundation && !isSpecialChaos) return;
-
         const state = systemStates.teleport;
-        const factions = [
-            { config: state.foundation, active: isFoundation, isSpecial: isSpecialFoundation },
-            { config: state.chaos, active: isChaos, isSpecial: isSpecialChaos },
-        ];
 
-        for (const { config, active, isSpecial } of factions) {
-            if (isSpecial) {
-                const specialsEnabled = !(config.includeSpecial === "false" || config.includeSpecial === false);
-                if (specialsEnabled) {
-                    if (config.includeSpecial === "near") {
-                        safeTriggerEvent(ent, cfg.events.stop);
-                        safeTriggerEvent(ent, cfg.events.start_near);
-                    } else {
-                        safeTriggerEvent(ent, cfg.events.stop_near);
-                        safeTriggerEvent(ent, cfg.events.start);
-                    }
+        debugMessage("toggle_teleport", `Revisando entidad: ${ent.typeId}, nameTag="${ent.nameTag}"`);
+
+        // Si ya tiene el componente de teleport, no repetir
+        if (cfg.component) {
+            debugMessage("toggle_teleport", `Componente esperado: ${cfg.component}`);
+            try {
+                if (ent.hasComponent(cfg.component)) {
+                    debugMessage("toggle_teleport", `Ya tiene el componente ${cfg.component}, no se reaplica evento`);
+                    return;
                 } else {
-                    safeTriggerEvent(ent, cfg.events.stop_near);
-                    safeTriggerEvent(ent, cfg.events.stop);
+                    debugMessage("toggle_teleport", `No tiene el componente ${cfg.component}, se aplicará evento`);
                 }
-            } else if (active) {
-                const mode = config.mode ?? "false";
-                if (mode === "near") {
-                    safeTriggerEvent(ent, cfg.events.stop);
-                    safeTriggerEvent(ent, cfg.events.start_near);
-                } else if (mode === "normal") {
-                    safeTriggerEvent(ent, cfg.events.stop_near);
-                    safeTriggerEvent(ent, cfg.events.start);
-                } else {
-                    safeTriggerEvent(ent, cfg.events.stop_near);
-                    safeTriggerEvent(ent, cfg.events.stop);
+            } catch (e) {
+                debugWarn("toggle_teleport", `Error al verificar componente ${cfg.component}: ${e}`);
+            }
+        }
+
+        // Si es especial, prioridad sobre equipo/familia
+        if (isSpecialFoundation || isSpecialChaos) {
+            const factions = [
+                { config: state.foundation, isSpecial: isSpecialFoundation, label: "Foundation especial" },
+                { config: state.chaos, isSpecial: isSpecialChaos, label: "Chaos especial" },
+            ];
+
+            for (const { config, isSpecial, label } of factions) {
+                if (isSpecial) {
+                    const specialsEnabled = !(config.includeSpecial === "false" || config.includeSpecial === false);
+                    if (specialsEnabled) {
+                        if (config.includeSpecial === "near") {
+                            debugMessage("toggle_teleport", `${label} → modo NEAR`);
+                            safeTriggerEvent(ent, cfg.events.stop);
+                            safeTriggerEvent(ent, cfg.events.start_near);
+                        } else {
+                            debugMessage("toggle_teleport", `${label} → modo NORMAL`);
+                            safeTriggerEvent(ent, cfg.events.stop_near);
+                            safeTriggerEvent(ent, cfg.events.start);
+                        }
+                    } else {
+                        debugMessage("toggle_teleport", `${label} → deshabilitado`);
+                        safeTriggerEvent(ent, cfg.events.stop_near);
+                        safeTriggerEvent(ent, cfg.events.stop);
+                    }
                 }
             }
+            return;
+        }
+
+        // No es especial → usar getTeam
+        const team = getTeam(ent);
+        if (!team) {
+            debugMessage("toggle_teleport", `No se detectó team en entidad ${ent.nameTag}`);
+            return;
+        }
+
+        const config = state[team];
+        const mode = config.mode ?? "false";
+
+        if (mode === "near") {
+            debugMessage("toggle_teleport", `${team} normal → modo NEAR`);
+            safeTriggerEvent(ent, cfg.events.stop);
+            safeTriggerEvent(ent, cfg.events.start_near);
+        } else if (mode === "normal") {
+            debugMessage("toggle_teleport", `${team} normal → modo NORMAL`);
+            safeTriggerEvent(ent, cfg.events.stop_near);
+            safeTriggerEvent(ent, cfg.events.start);
+        } else {
+            debugMessage("toggle_teleport", `${team} normal → deshabilitado`);
+            safeTriggerEvent(ent, cfg.events.stop_near);
+            safeTriggerEvent(ent, cfg.events.stop);
         }
     }
 
+
+    function handleEntity(ent) {
+        if (!ent) return;
+
+        const isSpecialFoundation = specialSoldiers.foundation.includes(ent.nameTag);
+        const isSpecialChaos = specialSoldiers.chaos.includes(ent.nameTag);
+
+        // Determinar equipo usando getTeam si no es especial
+        const team = isSpecialFoundation
+            ? "foundation"
+            : isSpecialChaos
+                ? "chaos"
+                : getTeam(ent);
+
+        // Si no es especial ni pertenece a ningún equipo, no aplicar
+        if (!team && !isSpecialFoundation && !isSpecialChaos) return;
+
+        if (!allSoldiers.includes(ent.id)) allSoldiers.push(ent.id);
+
+        applyTeleport(ent); // aplicar teleport con la lógica nueva
+        debugWarn(`toggle_entity`, `Entidad existente actualizada: ${ent.typeId}`);
+    }
 
     // Registrar comandos
     system.beforeEvents.startup.subscribe((init) => {
@@ -168,14 +226,6 @@ export function registerTeleportSystem(cfg) {
             return { status: CustomCommandStatus.Success, message: `§6Teleport - Estado Actual§r\n\n${parts.join("\n\n")}` };
         });
     });
-
-
-    // Listeners
-    function handleEntity(ent) {
-        if (!ent) return;
-        if (!allSoldiers.includes(ent.id)) allSoldiers.push(ent.id);
-        applyTeleport(ent);
-    }
 
     world.afterEvents.entitySpawn.subscribe(ev => handleEntity(ev.entity));
     world.afterEvents.entityLoad.subscribe(ev => handleEntity(ev.entity));

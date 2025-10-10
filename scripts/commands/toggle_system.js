@@ -1,7 +1,8 @@
 // scripts/commands/toggle_system.js
 import { system, world, CustomCommandParamType, CustomCommandStatus, CommandPermissionLevel } from "@minecraft/server";
 import { saveSystemState, loadSystemState, resetAllSystems } from "./worldSave.js";
-
+import { getTeam } from "../utils/teams.js";
+import { debugMessage, debugWarn } from "../utils/debug.js";
 // Soldados especiales
 export const specialSoldiers = {
     foundation: [
@@ -33,6 +34,12 @@ system.beforeEvents.startup.subscribe((init) => {
     catch { }
 });
 
+// flags globales para controlar actualización automática
+export const autoUpdateFlags = {
+    system: false,   // para toggle_system
+    teleport: false,   // para toggle_teleport
+};
+
 /**
  * Registrar sistema genérico
  * @param {Object} cfg
@@ -48,6 +55,18 @@ export function registerSoldierSystem(cfg) {
     system.run(() => {
         const loaded = loadSystemState(cfg.command);
         if (loaded) systemStates[cfg.command] = loaded;
+        // Reaplicar en tiempo real
+
+        system.runInterval(() => {
+            if (!autoUpdateFlags.system) return; // solo si está habilitado
+            allSoldiers.forEach(id => {
+                const ent = world.getEntity(id);
+                if (ent) {
+                    handleEntity(ent);
+                }
+            });
+            debugWarn(`toggle_${cfg.command}`, `runInterval Se volvió a ejecutar`, "green");
+        }, 20 * 30); // cada 600 ticks
     });
 
     function safeTriggerEvent(ent, eventName) {
@@ -58,42 +77,101 @@ export function registerSoldierSystem(cfg) {
         }
     }
 
+
     function applyToEntity(ent) {
         if (!ent) return;
 
         const isSpecialFoundation = specialSoldiers.foundation.includes(ent.nameTag);
         const isSpecialChaos = specialSoldiers.chaos.includes(ent.nameTag);
-        let isFoundation = false, isChaos = false;
-
-        try {
-            const familyComp = ent.getComponent("minecraft:type_family");
-            if (familyComp) {
-                isFoundation = familyComp.hasTypeFamily("foundation");
-                isChaos = familyComp.hasTypeFamily("chaos_insurgency");
-            }
-        } catch { }
-
-        // Solo aplicar si pertenece a facción o es especial
-        if (!isFoundation && !isChaos && !isSpecialFoundation && !isSpecialChaos) return;
-
         const state = systemStates[cfg.command];
-        const factions = [
-            { config: state.foundation, active: isFoundation, name: "foundation", isSpecial: isSpecialFoundation },
-            { config: state.chaos, active: isChaos, name: "chaos", isSpecial: isSpecialChaos },
-        ];
 
-        for (const { config, active, isSpecial } of factions) {
-            if (isSpecial) {
-                if (config.includeSpecial) safeTriggerEvent(ent, cfg.startEvent);
-                else safeTriggerEvent(ent, cfg.stopEvent);
-            } else if (active) {
-                if (config.enable) safeTriggerEvent(ent, cfg.startEvent);
-                else safeTriggerEvent(ent, cfg.stopEvent);
+        // Depuración: mostrar entidad y componente
+        debugMessage("toggle_system", `Revisando entidad: ${ent.typeId}, nameTag="${ent.nameTag}", comando=${cfg.command}`);
+        if (cfg.component) {
+            debugMessage("toggle_system", `Componente esperado: ${cfg.component}`);
+            try {
+                if (ent.hasComponent("cfg.component")) {
+                    debugMessage("toggle_system", `Ya tiene el componente ${cfg.component}, no se reaplica evento`);
+                    return;
+                } else {
+                    debugMessage("toggle_system", `No tiene el componente ${cfg.component}, se aplicará evento`);
+                }
+            } catch (e) {
+                debugWarn("toggle_system", `Error al verificar componente ${cfg.component}: ${e}`);
+            }
+        }
+
+        // Si es especial
+        if (isSpecialFoundation || isSpecialChaos) {
+            if (isSpecialFoundation) {
+                if (state.foundation.includeSpecial) {
+                    debugMessage("toggle_system", `Fundación especial detectada → startEvent`);
+                    safeTriggerEvent(ent, cfg.startEvent);
+                } else {
+                    debugMessage("toggle_system", `Fundación especial detectada → stopEvent`);
+                    safeTriggerEvent(ent, cfg.stopEvent);
+                }
+            }
+            if (isSpecialChaos) {
+                if (state.chaos.includeSpecial) {
+                    debugMessage("toggle_system", `Caos especial detectado → startEvent`);
+                    safeTriggerEvent(ent, cfg.startEvent);
+                } else {
+                    debugMessage("toggle_system", `Caos especial detectado → stopEvent`);
+                    safeTriggerEvent(ent, cfg.stopEvent);
+                }
+            }
+            return;
+        }
+
+        // Si no es especial → usar getTeam
+        const team = getTeam(ent);
+        if (!team) {
+            debugMessage("toggle_system", `No se detectó team en entidad ${ent.nameTag}`);
+            return;
+        }
+
+        if (team === "foundation") {
+            if (state.foundation.enable) {
+                debugMessage("toggle_system", `Fundación normal → startEvent`);
+                safeTriggerEvent(ent, cfg.startEvent);
+            } else {
+                debugMessage("toggle_system", `Fundación normal → stopEvent`);
+                safeTriggerEvent(ent, cfg.stopEvent);
+            }
+        } else if (team === "chaos") {
+            if (state.chaos.enable) {
+                debugMessage("toggle_system", `Caos normal → startEvent`);
+                safeTriggerEvent(ent, cfg.startEvent);
+            } else {
+                debugMessage("toggle_system", `Caos normal → stopEvent`);
+                safeTriggerEvent(ent, cfg.stopEvent);
             }
         }
     }
 
 
+    function handleEntity(ent) {
+        if (!ent) return;
+
+        const isSpecialFoundation = specialSoldiers.foundation.includes(ent.nameTag);
+        const isSpecialChaos = specialSoldiers.chaos.includes(ent.nameTag);
+
+        // Determinar equipo usando getTeam si no es especial
+        const team = isSpecialFoundation
+            ? "foundation"
+            : isSpecialChaos
+                ? "chaos"
+                : getTeam(ent);
+
+        // Si no es especial ni pertenece a ningún equipo, no aplicar
+        if (!team && !isSpecialFoundation && !isSpecialChaos) return;
+
+        if (!allSoldiers.includes(ent.id)) allSoldiers.push(ent.id);
+
+        applyToEntity(ent); // aplicar system con la lógica nueva
+        debugWarn(`toggle_entity`, `Entidad existente actualizada: ${ent.typeId}`);
+    }
 
     // --- Comando toggle ---
     system.beforeEvents.startup.subscribe((init) => {
@@ -182,14 +260,6 @@ export function registerSoldierSystem(cfg) {
             });
         } catch { }
     });
-
-    // --- Listeners para aplicar automáticamente ---
-    function handleEntity(ent) {
-        if (!ent) return;
-
-        if (!allSoldiers.includes(ent.id)) allSoldiers.push(ent.id);
-        applyToEntity(ent);
-    }
 
     world.afterEvents.entitySpawn.subscribe(ev => handleEntity(ev.entity));
     world.afterEvents.entityLoad.subscribe(ev => handleEntity(ev.entity));

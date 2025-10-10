@@ -1,40 +1,62 @@
 // utils/debug.js
 import { world } from "@minecraft/server";
 
-export const DEBUG = false; // Cambia a true para activar mensajes en el chat
-export const DEBUG_CONSOLE = false;
+// Configuración global
+export const DEBUG = false;         // Mostrar mensajes en el chat
+export const DEBUG_CONSOLE = false; // Mostrar mensajes en consola
 
-export function debugMessage(message) {
-    if (DEBUG) {
-        world.sendMessage(`DEBUG: ${message}`);
+/* 
+Filtros por archivo/módulo
+- Si está vacío [], no se muestra nada.
+- Si contiene ["*"], se muestran todos.
+- Si contiene ["toggle_system"], solo se muestran los de ese módulo.
+Ejemplo:
+[
+    "toggle_spawn",
+    "toggle_health",
+    "toggle_entity",
+    "toggle_system",
+    "toggle_teleport"
+]
+*/
+export const DEBUG_MODULES = [
+    "toggle_spawn",
+    "toggle_health",
+    "toggle_teleport"
+];
+
+function isModuleEnabled(module) {
+    return DEBUG_MODULES.includes("*") || DEBUG_MODULES.includes(module);
+}
+
+/**
+ * Mensajes de depuración para el chat
+ * @param {string} module - nombre del módulo (ej: "toggle_system")
+ * @param {string} message - mensaje a mostrar
+ */
+export function debugMessage(module, message) {
+    if (DEBUG && isModuleEnabled(module)) {
+        world.sendMessage(`§7[DEBUG:${module}]§r ${message}`);
     }
 }
 
-export function debugWarn(message, color = "yellow") {
-    if (DEBUG_CONSOLE) {
+/**
+ * Mensajes de advertencia para consola
+ * @param {string} module - nombre del módulo
+ * @param {string} message - mensaje a mostrar
+ * @param {string} color - color opcional ("red", "green", etc.)
+ */
+export function debugWarn(module, message, color = "yellow") {
+    if (DEBUG_CONSOLE && isModuleEnabled(module)) {
         let colorCode;
-
         switch (color.toLowerCase()) {
-            case "red":
-                colorCode = 31; // Rojo
-                break;
-            case "green":
-                colorCode = 32; // Verde
-                break;
-            case "blue":
-                colorCode = 34; // Azul
-                break;
-            case "cyan":
-                colorCode = 36; // Cian
-                break;
-            case "magenta":
-                colorCode = 35; // Magenta
-                break;
-            default:
-                colorCode = 33; // Amarillo por defecto
+            case "red": colorCode = 31; break;
+            case "green": colorCode = 32; break;
+            case "blue": colorCode = 34; break;
+            case "cyan": colorCode = 36; break;
+            case "magenta": colorCode = 35; break;
+            default: colorCode = 33; // Amarillo
         }
-
-        // Usamos la secuencia de escape ANSI para cambiar el color
-        console.warn(`\x1b[${colorCode}mDEBUG: ${message}\x1b[0m`);
+        console.warn(`\x1b[${colorCode}m[DEBUG:${module}] ${message}\x1b[0m`);
     }
 }
