@@ -1,6 +1,7 @@
 // utils/weapons.js
 import { world, system } from "@minecraft/server";
 import { debugMessage, debugWarn } from "../utils/debug.js";
+import * as mc from "@minecraft/server";
 
 // Mapeo de armas con propiedades (Sólo Aplok Guns)
 const weaponData = {
@@ -53,13 +54,15 @@ const weaponData = {
 
 const firingPlayers = new Map(); // Para automáticas: player.id -> intervalId
 const cooldownMap = new Map(); // Para semiautomáticas: player.id -> tick
-export const projectileShooterMap = new Map(); // Proyectil -> jugador
+
+// Como respaldo de proyectil -> jugador
+// export const projectileShooterMap = new Map();
 
 
 function shoot(player, itemId) {
     const data = weaponData[itemId];
     if (!data) {
-        debugWarn(`No se encontró la configuración del arma: ${itemId}`, "yellow");
+        debugWarn("player", `No se encontró la configuración del arma: ${itemId}`, "yellow");
         return;
     }
 
@@ -72,18 +75,25 @@ function shoot(player, itemId) {
     };
 
     if (spawnPos.y > 321) {
-        debugWarn(`[Disparo] Posición demasiado alta para generar proyectil: Y=${spawnPos.y}`, "red");
+        debugWarn("player", `[Disparo] Posición demasiado alta para generar proyectil: Y=${spawnPos.y}`, "red");
         return;
     }
 
     try {
         const projectile = player.dimension.spawnEntity(data.projectile, spawnPos);
         if (!projectile) {
-            debugWarn(`No se pudo crear el proyectil: ${data.projectile}`, "red");
+            debugWarn("player", `No se pudo crear el proyectil: ${data.projectile}`, "red");
             return;
         }
 
-        projectileShooterMap.set(projectile.id, player);
+        // Mantener el map por compatibilidad
+        // projectileShooterMap.set(projectile.id, player);
+
+        // Asignar propietario nativo
+        const projComp = projectile.getComponent("minecraft:projectile");
+        if (projComp) {
+            projComp.owner = player;
+        }
 
         const velocity = {
             x: direction.x * data.speed,
@@ -91,21 +101,53 @@ function shoot(player, itemId) {
             z: direction.z * data.speed,
         };
 
-        projectile.applyImpulse(velocity);
-        debugWarn(`Disparando ${itemId} → ${data.projectile}`, "green");
+        // if (projComp && projComp.shoot) {
+        projComp.shoot(velocity);
+        // } else {
+        //     projectile.applyImpulse(velocity);
+        // }
+
+        // Depuración del player
+        debugWarn(
+            "player",
+            `[DEBUG] Player id=${player.id}, typeId=${player.typeId}, location=(${player.location.x.toFixed(2)}, ${player.location.y.toFixed(2)}, ${player.location.z.toFixed(2)}), properties=${Object.getOwnPropertyNames(player).join(", ")}`,
+            "blue"
+        );
+
+        // Depuración de armadura usando el componente equippable
+        if (player.typeId === "minecraft:player") {
+            const equippable = player.getComponent("equippable");
+            if (equippable) {
+                const helmet = equippable.getEquipment(mc.EquipmentSlot.Head);
+                const chest = equippable.getEquipment(mc.EquipmentSlot.Chest);
+                const legs = equippable.getEquipment(mc.EquipmentSlot.Legs);
+                const boots = equippable.getEquipment(mc.EquipmentSlot.Feet);
+
+                debugWarn(
+                    "player",
+                    `[DEBUG] Player armadura: Head=${helmet?.typeId || "Ninguno"}, Chest=${chest?.typeId || "Ninguno"}, Legs=${legs?.typeId || "Ninguno"}, Feet=${boots?.typeId || "Ninguno"}`,
+                    "cyan"
+                );
+            } else {
+                debugWarn("player", `[DEBUG] Player armadura: Ninguna (equippable no disponible)`, "cyan");
+            }
+        }
+
+
+        debugWarn("player", `Disparando ${itemId} → ${data.projectile}`, "green");
 
         if (data.onEntryCommands) {
             for (const cmd of data.onEntryCommands) {
                 try {
                     const result = player.runCommand(cmd);
-                    debugWarn(`Ejecutando "${cmd}" → éxito=${result.successCount}`, "cyan");
+                    debugWarn("player", `Ejecutando "${cmd}" → éxito=${result.successCount}`, "cyan");
                 } catch (err) {
-                    debugWarn(`Error ejecutando comando "${cmd}": ${err}`, "red");
+                    debugWarn("player", `Error ejecutando comando "${cmd}": ${err}`, "red");
                 }
             }
         }
     } catch (e) {
-        debugWarn(`[Disparo] Error al crear proyectil: ${e}`, "red");
+        debugWarn("player", `[Disparo] Error al crear proyectil: ${e}`, "red");
     }
 }
 

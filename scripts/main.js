@@ -4,7 +4,7 @@ import { getTeam } from "./utils/teams.js";
 import { projectileConfig } from "./utils/projectileConfig.js";
 import { applyDamageAndKnockback } from "./utils/damage.js";
 import { debugMessage, debugWarn } from "./utils/debug.js";
-import { projectileShooterMap } from "./utils/weapons.js";
+// import { projectileShooterMap } from "./utils/weapons.js";
 
 
 // Función para eliminar el proyectil de manera segura
@@ -31,7 +31,8 @@ world.afterEvents.projectileHitEntity.subscribe(event => {
         debugWarn("projectileHitEntity","Falta objeto necesario o es fuego amigo.", "yellow");
         return;
     }
-    const shooter = event.source ? event.source : projectileShooterMap.get(projectile.id);
+    // const shooter = event.source ? event.source : projectileShooterMap.get(projectile.id);
+    const shooter = event.source ? event.source : null;
     const teamShooter = getTeam(shooter);
     const teamTarget = getTeam(target);
     let projectileLocation = null;
@@ -75,7 +76,7 @@ world.afterEvents.projectileHitEntity.subscribe(event => {
             debugWarn("projectileHitEntity",`Pierce actual: ${pierced}. Límite de pierce: ${pierceLimit}`, "cyan");
             debugWarn("projectileHitEntity","Límite de pierce alcanzado. Eliminando proyectil.", "cyan");
             // removeProjectileSafe(projectile);
-            projectileShooterMap.delete(projectile.id);
+            // projectileShooterMap.delete(projectile.id);
             return;
         }
 
@@ -101,9 +102,9 @@ world.afterEvents.entityRemove.subscribe(event => {
     const entityType = event.typeId;
     debugWarn("projectileHitEntity",`Entidad eliminada: ${entityType} Id: ${removedEntityId}`, "magenta");
 
-    // Eliminar proyectiles del mapa si existe
-    if (projectileShooterMap.has(removedEntityId)) {
-        projectileShooterMap.delete(removedEntityId);
-        debugWarn("projectileHitEntity",`El proyectil ${removedEntityId} ha sido eliminado del mapa.`, "green");
-    }
+    // // Eliminar proyectiles del mapa si existe
+    // if (projectileShooterMap.has(removedEntityId)) {
+    //     projectileShooterMap.delete(removedEntityId);
+    //     debugWarn("projectileHitEntity",`El proyectil ${removedEntityId} ha sido eliminado del mapa.`, "green");
+    // }
 });

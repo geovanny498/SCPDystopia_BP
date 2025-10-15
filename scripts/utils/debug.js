@@ -20,9 +20,7 @@ Ejemplo:
 ]
 */
 export const DEBUG_MODULES = [
-    "toggle_spawn",
-    "toggle_health",
-    "toggle_teleport"
+    "player",
 ];
 
 function isModuleEnabled(module) {
