@@ -11,14 +11,14 @@ import { debugMessage, debugWarn } from "./utils/debug.js";
 function removeProjectileSafe(projectile) {
     try {
         if (projectile && projectile.remove) {
-            debugWarn("projectileHitEntity",`Tipo de entidad del proyectil: ${projectile.typeId}`, "blue");
-            debugWarn("projectileHitEntity",`Propiedades del proyectil: ${Object.getOwnPropertyNames(projectile)}`, "blue");
+            debugWarn("removeProjectileSafe",`Tipo de entidad del proyectil: ${projectile.typeId}`, "blue");
+            debugWarn("removeProjectileSafe",`Propiedades del proyectil: ${Object.getOwnPropertyNames(projectile)}`, "blue");
             // projectile.remove();
         } else {
-            debugWarn("projectileHitEntity","El proyectil no tiene la función remove.", "red");
+            debugWarn("removeProjectileSafe","El proyectil no tiene la función remove.", "red");
         }
     } catch (e) {
-        debugWarn("projectileHitEntity",`Error al eliminar el proyectil: ${e}`, "red");
+        debugWarn("removeProjectileSafe",`Error al eliminar el proyectil: ${e}`, "red");
     }
 }
 const projectilePierceMap = new WeakMap();

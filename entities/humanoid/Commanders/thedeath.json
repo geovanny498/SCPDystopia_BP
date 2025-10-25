@@ -137,105 +137,6 @@
                     "attack_interval_max": 0.05,
                     "attack_radius": 60.0,
                     "speed_multiplier": 1.0
-                },
-                "minecraft:behavior.nearest_attackable_target": {
-                    "priority": -1,
-                    "within_radius": 128,
-                    "reselect_targets": true,
-                    "attack_interval": 0,
-                    "scan_interval": 10,
-                    "entity_types": [
-                        {
-                            "filters": {
-                                "all_of": [
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "operator": "!=",
-                                        "value": "scp096"
-                                    },
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "operator": "!=",
-                                        "value": "scp001_gg"
-                                    },
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "operator": "!=",
-                                        "value": "enderman"
-                                    },
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "operator": "!=",
-                                        "value": "scp280"
-                                    },
-                                    {
-                                        "other_with_families": [
-                                            "monster",
-                                            "warden",
-                                            "scp",
-                                            "pillager",
-                                            "hoglin",
-                                            "piglin",
-                                            "class_d",
-                                            "chaos_insurgency",
-                                            "chaos",
-                                            "scp049"
-                                        ]
-                                    }
-                                ]
-                            },
-                            "max_dist": 128
-                        },
-                        {
-                            "filters": {
-                                "all_of": [
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "operator": "==",
-                                        "value": "player"
-                                    },
-                                    {
-                                        "test": "has_equipment",
-                                        "subject": "other",
-                                        "domain": "head",
-                                        "operator": "==",
-                                        "value": "minecraft:golden_helmet"
-                                    }
-                                ]
-                            },
-                            "max_dist": 128
-                        }
-                    ],
-                    "must_see_forget_duration": 6.0,
-                    "must_see": true
-                },
-                "minecraft:behavior.hurt_by_target": {
-                    "priority": 2,
-                    "entity_types": [
-                        {
-                            "filters": {
-                                "all_of": [
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "operator": "!=",
-                                        "value": "scpfoundation"
-                                    },
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "operator": "!=",
-                                        "value": "player"
-                                    }
-                                ]
-                            }
-                        }
-                    ]
                 }
             },
             "minecraft:melee_attack": {
@@ -251,13 +152,15 @@
                     "require_complete_path": false,
                     "random_stop_interval": 0,
                     "reach_multiplier": 5,
-                    "speed_multiplier": 1.16,
+                    "speed_multiplier": 1.0,
                     "attack_duration": 0.05,
-                    "hit_delay_pct": 0.1
+                    "hit_delay_pct": 0.16
                 },
                 "minecraft:attack": {
                     "damage": 21
-                },
+                }
+            },
+            "search_target": {
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
                     "within_radius": 128,
@@ -698,7 +601,7 @@
                             },
                             "hurt_item": 0,
                             "swing": true,
-                            "interact_text": "scpdt_de.action_hint.stop_teleport"
+                            "interact_text": "scpdt_de.action_hint.stop_teleport_near"
                         }
                     ]
                 },
@@ -1248,7 +1151,7 @@
                             },
                             "hurt_item": 0,
                             "swing": true,
-                            "interact_text": "scpdt_de.action_hint.start_teleport"
+                            "interact_text": "scpdt_de.action_hint.start_teleport_near"
                         },
                         {
                             "on_interact": {
@@ -1418,13 +1321,6 @@
                                         "domain": "head",
                                         "operator": "==",
                                         "value": "gabrielaplok:nv_goggles"
-                                    },
-                                    {
-                                        "test": "has_equipment",
-                                        "subject": "other",
-                                        "domain": "head",
-                                        "operator": "==",
-                                        "value": "gabrielaplok:nv_goggles"
                                     }
                                 ]
                             }
@@ -1546,6 +1442,10 @@
                 "damage": 21
             },
             "minecraft:fire_immune": true,
+            "minecraft:variable_max_auto_step": {
+                "base_value": 1.0625,
+                "jump_prevented_value": 0.5625
+            },
             "minecraft:movement.basic": {},
             "minecraft:jump.static": {},
             "minecraft:can_climb": {},
@@ -1646,7 +1546,8 @@
                                 "minecraft:mode_switcher",
                                 "minecraft:ranged_attack",
                                 "start_move",
-                                "calm"
+                                "calm",
+                                "search_target"
                             ]
                         }
                     }

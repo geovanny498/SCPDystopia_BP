@@ -11,21 +11,31 @@ export function applyDamageAndKnockback(projectile, target, cfg, shooter) {
     );
 
     const entityCfg = entityDamageConfig[target.typeId];
+    const hasEntityCfg = !!entityCfg;
 
-    const canDamage = entityCfg?.damage
-        ? typeof entityCfg.damage === "function"
-            ? entityCfg.damage(target)
-            : entityCfg.damage
-        : true;
+    const canDamage = hasEntityCfg && Object.prototype.hasOwnProperty.call(entityCfg, "damage")
+        ? (typeof entityCfg.damage === "function"
+            ? Boolean(entityCfg.damage(target))
+            : Boolean(entityCfg.damage))
+        : true; // por defecto true si no existe la propiedad
 
-    const canKnockback = entityCfg?.knockback
-        ? typeof entityCfg.knockback === "function"
-            ? entityCfg.knockback(target)
-            : entityCfg.knockback
-        : true;
+    const canKnockback = hasEntityCfg && Object.prototype.hasOwnProperty.call(entityCfg, "knockback")
+        ? (typeof entityCfg.knockback === "function"
+            ? Boolean(entityCfg.knockback(target))
+            : Boolean(entityCfg.knockback))
+        : true; // por defecto true si no existe la propiedad
+
+    // DEBUG: mostrar información útil para verificar por qué una entidad recibe knockback
+    try {
+        debugWarn(`damage`, `entityCfg existe: ${hasEntityCfg}; tiene damage: ${hasEntityCfg && Object.prototype.hasOwnProperty.call(entityCfg, 'damage')}; tipo(damage): ${hasEntityCfg && typeof entityCfg.damage}; valor calculado canDamage: ${canDamage}`);
+        debugWarn(`damage`, `tiene knockback: ${hasEntityCfg && Object.prototype.hasOwnProperty.call(entityCfg, 'knockback')}; tipo(knockback): ${hasEntityCfg && typeof entityCfg.knockback}; valor calculado canKnockback: ${canKnockback}`);
+    } catch (e) {
+        // no bloquear ejecución si falla el stringify o algo raro
+        debugWarn(`Error al loggear entityCfg: ${e?.message ?? e}`);
+    }
 
     if (!canDamage) {
-        debugWarn(`Daño bloqueado para ${target.typeId}`, "purple");
+        debugWarn(`damage`, `Daño bloqueado para ${target.typeId}`, "purple");
     } else if ((cfg.damage ?? 0) > 0) {
         const dmg = getModifiedDamageNumber(cfg.damage, target);
         if (dmg > 0) {
@@ -39,9 +49,8 @@ export function applyDamageAndKnockback(projectile, target, cfg, shooter) {
 
     if (!canKnockback) {
         debugWarn(`Knockback bloqueado para ${target.typeId}`, "purple");
-    } else {
-        applyKnockback(target, projectile, cfg.knockback);
     }
+    applyKnockback(target, projectile, cfg.knockback);
 }
 
 // Función de cálculo de daño, la dejé igual

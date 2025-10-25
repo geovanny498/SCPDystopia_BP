@@ -1,4 +1,5 @@
 import { debugMessage, debugWarn } from "../utils/debug.js";
+import { entityDamageConfig } from "./entityConfig.js";
 
 export function applyKnockback(entity, projectile, kb) {
     try {
@@ -16,7 +17,25 @@ export function applyKnockback(entity, projectile, kb) {
             return;
         }
 
-        const knockbackRes = entity.getComponent("minecraft:knockback_resistance")?.value ?? 0;
+        // Actualmente no obtenible
+        const compKbRes = entity.getComponent("minecraft:knockback_resistance")?.value;
+        
+        if (compKbRes == undefined) {
+            debugWarn("applyKnockback", `Entidad ${entity.typeId} no se encontró knockback_resistance=${compKbRes}`, "purple");
+        }
+
+        // Valor por defecto desde componente (o 0). Si en entityDamageConfig está knockback: false, forzar 1.
+        const config = entityDamageConfig?.[entity.typeId];
+        let knockbackRes = compKbRes ?? 0;
+        if (config && config.knockback === false) {
+            knockbackRes = 1;
+            debugWarn("applyKnockback", `Entidad ${entity.typeId} está configurada como inmune a knockback en entityDamageConfig — forzando knockback_resistance=1`, "purple");
+        }
+
+        if (knockbackRes >= 1) {
+            debugWarn("applyKnockback", `Entidad ${entity.typeId} tiene knockback_resistance = ${knockbackRes}(inmune) — no se aplicará knockback.`, "purple");
+            // return;
+        }
 
         const dir = {
             x: projectileLocation.x - entityLocation.x,
@@ -33,10 +52,10 @@ export function applyKnockback(entity, projectile, kb) {
         const factor = Math.max(0, 1 - knockbackRes);
 
         // Verificar si está en agua
-        const blockAtFeet = entity.dimension.getBlock({ 
-            x: Math.floor(entityLocation.x), 
-            y: Math.floor(entityLocation.y), 
-            z: Math.floor(entityLocation.z) 
+        const blockAtFeet = entity.dimension.getBlock({
+            x: Math.floor(entityLocation.x),
+            y: Math.floor(entityLocation.y),
+            z: Math.floor(entityLocation.z)
         });
 
         const isInWater = blockAtFeet?.typeId === "minecraft:water";
@@ -51,7 +70,7 @@ export function applyKnockback(entity, projectile, kb) {
 
         const entityName = entity.nameTag || entity.typeId || "Entidad desconocida";
 
-        debugMessage(`Se aplicó knockback a ${entityName}. Ubicación del proyectil: (x: ${projectileLocation.x.toFixed(2)}, y: ${projectileLocation.y.toFixed(2)}, z: ${projectileLocation.z.toFixed(2)})`);
+        debugMessage(`Se aplicó knockback a ${entityName}.Ubicación del proyectil: (x: ${projectileLocation.x.toFixed(2)}, y: ${projectileLocation.y.toFixed(2)}, z: ${projectileLocation.z.toFixed(2)})`);
 
     } catch (error) {
         debugWarn("Error en applyKnockback: " + error, "red");

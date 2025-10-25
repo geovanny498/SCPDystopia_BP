@@ -20,7 +20,7 @@ Ejemplo:
 ]
 */
 export const DEBUG_MODULES = [
-    "player",
+    "entityDamageConfig",
 ];
 
 function isModuleEnabled(module) {

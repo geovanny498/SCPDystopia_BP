@@ -13,29 +13,29 @@ export const projectileConfig = {
     "lc:dt_scar_bullet": { damage: 5, knockback: 0.02, pierce: 1 },
 
     // Soldados Líderes (90-110 de vida)
-    "lc:dt_m4a1_bullet_player": { damage: 6, knockback: 0.02, pierce: 1 },
-    "lc:dt_mp7_bullet_player_normal": { damage: 5, knockback: 0.02, pierce: 1 },
-    "lc:dt_m16_bullet_player": { damage: 5, knockback: 0.02, pierce: 1 },
-    "lc:dt_p90_bullet_player_normal": { damage: 6, knockback: 0.02, pierce: 1 },
-    "lc:dt_scar_bullet_player": { damage: 6, knockback: 0.02, pierce: 1 },
+    "lc:dt_m4a1_bullet_player": { damage: 6, knockback: 0.04, pierce: 2 },
+    "lc:dt_mp7_bullet_player_normal": { damage: 5, knockback: 0.04, pierce: 2 },
+    "lc:dt_m16_bullet_player": { damage: 5, knockback: 0.04, pierce: 2 },
+    "lc:dt_p90_bullet_player_normal": { damage: 6, knockback: 0.04, pierce: 2 },
+    "lc:dt_scar_bullet_player": { damage: 6, knockback: 0.04, pierce: 2 },
 
     // Soldados Comandantes (3000+ de vida)
-    "lc:dt_hk416_bullet_player_c": { damage: 7, knockback: 0.02, pierce: 1 },
-    "lc:dt_mp7_bullet_player_ads": { damage: 6, knockback: 0.02, pierce: 1 },
-    "lc:dt_ak47_bullet_player_ads": { damage: 6, knockback: 0.02, pierce: 1 },
-    "lc:dt_p90_bullet_player_ads": { damage: 8, knockback: 0.02, pierce: 1 },
-    "lc:dt_scar_bullet_player_sneak": { damage: 7, knockback: 0.02, pierce: 1 },
-    "lc:dt_m4a1_bullet_player_sneak": { damage: 7, knockback: 0.02, pierce: 1 },
-    "lc:dt_hk416_bullet_player_ads": { damage: 8, knockback: 0.02, pierce: 1 },
+    "lc:dt_hk416_bullet_player_c": { damage: 7, knockback: 0.04, pierce: 2 },
+    "lc:dt_mp7_bullet_player_ads": { damage: 6, knockback: 0.04, pierce: 2 },
+    "lc:dt_ak47_bullet_player_ads": { damage: 6, knockback: 0.04, pierce: 2 },
+    "lc:dt_p90_bullet_player_ads": { damage: 8, knockback: 0.04, pierce: 2 },
+    "lc:dt_scar_bullet_player_sneak": { damage: 7, knockback: 0.04, pierce: 2 },
+    "lc:dt_m4a1_bullet_player_sneak": { damage: 7, knockback: 0.04, pierce: 2 },
+    "lc:dt_hk416_bullet_player_ads": { damage: 8, knockback: 0.04, pierce: 2 },
 
     // Jugador (20 de vida) Aplok Guns
-    "lc:dt_mp7_player_bullet": { damage: 6, knockback: 0.02, pierce: 1 },
-    "lc:dt_ak47_player_bullet": { damage: 6, knockback: 0.02, pierce: 1 },
-    "lc:dt_p90_player_bullet": { damage: 8, knockback: 0.02, pierce: 1 },
-    "lc:dt_dtrifle_player_bullet": { damage: 60, knockback: 0.02, pierce: 1 },
-    "lc:dt_scar_player_bullet": { damage: 7, knockback: 0.02, pierce: 1 }, // m249
-    "lc:dt_m4a1_player_bullet": { damage: 7, knockback: 0.02, pierce: 1 },
-    "lc:dt_hk416_player_bullet": { damage: 8, knockback: 0.02, pierce: 1 }, // m4a1
+    "lc:dt_mp7_player_bullet": { damage: 6, knockback: 0.04, pierce: 2 },
+    "lc:dt_ak47_player_bullet": { damage: 6, knockback: 0.04, pierce: 2 },
+    "lc:dt_p90_player_bullet": { damage: 8, knockback: 0.04, pierce: 2 },
+    "lc:dt_dtrifle_player_bullet": { damage: 60, knockback: 0.04, pierce: 2 }, // awp
+    "lc:dt_scar_player_bullet": { damage: 7, knockback: 0.04, pierce: 2 }, // m249
+    "lc:dt_m4a1_player_bullet": { damage: 7, knockback: 0.04, pierce: 2 },
+    "lc:dt_hk416_player_bullet": { damage: 8, knockback: 0.04, pierce: 2 }, // m4a1
 
     // Sin usar
     "lc:dt_suscharger_shot_player_sneak": { damage: 5, knockback: 0.02, pierce: 1 },

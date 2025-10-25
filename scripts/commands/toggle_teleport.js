@@ -131,25 +131,28 @@ export function registerTeleportSystem(cfg) {
 
 
     function handleEntity(ent) {
-        if (!ent) return;
+        try {
+            if (!ent) return;
 
-        const isSpecialFoundation = specialSoldiers.foundation.includes(ent.nameTag);
-        const isSpecialChaos = specialSoldiers.chaos.includes(ent.nameTag);
+            const isSpecialFoundation = specialSoldiers.foundation.includes(ent.nameTag);
+            const isSpecialChaos = specialSoldiers.chaos.includes(ent.nameTag);
 
-        // Determinar equipo usando getTeam si no es especial
-        const team = isSpecialFoundation
-            ? "foundation"
-            : isSpecialChaos
-                ? "chaos"
-                : getTeam(ent);
+            // Determinar equipo usando getTeam si no es especial
+            const team = isSpecialFoundation
+                ? "foundation"
+                : isSpecialChaos
+                    ? "chaos"
+                    : getTeam(ent);
 
-        // Si no es especial ni pertenece a ningún equipo, no aplicar
-        if (!team && !isSpecialFoundation && !isSpecialChaos) return;
+            // Si no es especial ni pertenece a ningún equipo, no aplicar
+            if (!team && !isSpecialFoundation && !isSpecialChaos) return;
 
-        if (!allSoldiers.includes(ent.id)) allSoldiers.push(ent.id);
+            if (!allSoldiers.includes(ent.id)) allSoldiers.push(ent.id);
 
-        applyTeleport(ent); // aplicar teleport con la lógica nueva
-        debugWarn(`toggle_entity`, `Entidad existente actualizada: ${ent.typeId}`);
+            applyTeleport(ent); // aplicar teleport con la lógica nueva
+            debugWarn(`toggle_entity`, `Entidad existente actualizada: ${ent.typeId}`);
+        } catch (error) {
+        }
     }
 
     // Registrar comandos
