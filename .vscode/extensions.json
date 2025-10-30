@@ -5,6 +5,9 @@
         "mojang-studios.minecraft-debugger",
         "usernamehw.errorlens",
         "pkief.material-icon-theme",
-        "enkia.tokyo-night"
+        "enkia.tokyo-night",
+        "oderwat.indent-rainbow",
+        "ms-ceintl.vscode-language-pack-es",
+        "github.copilot"
     ]
 }

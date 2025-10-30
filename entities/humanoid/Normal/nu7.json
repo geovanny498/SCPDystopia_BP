@@ -72,7 +72,7 @@
                     "def": "lc:dt_scar_bullet"
                 },
                 "minecraft:behavior.ranged_attack": {
-                    "attack_radius_min": 5,
+                    "attack_radius_min": 3,
                     "priority": 1,
                     "target_in_sight_time": 0.3,
                     "burst_shots": 30,
