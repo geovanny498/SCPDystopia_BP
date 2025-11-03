@@ -24,10 +24,10 @@
 			"path": "../../../development_resource_packs/Aplok Guns RP"
 		},
 		{
-			"path": "../../../behavior_packs/TrueZAP(B)/entities"
+			"path": "../../../resource_packs/pack.name"
 		},
 		{
-			"path": "../../../../../../../../../../Downloads/bedrock-samples-1.21.100.6 (1)/bedrock-samples-1.21.100.6"
+			"path": "../../../resource_packs/pack(2)"
 		}
 	],
 	"extensions": {

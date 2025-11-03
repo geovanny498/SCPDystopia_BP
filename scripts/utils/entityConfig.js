@@ -28,6 +28,10 @@ export const entityDamageConfig = {
         damage: true,
         knockback: false
     },
+    "minecraft:iron_golem": {
+        damage: true,
+        knockback: false
+    },
     "lc:dt_scp682": {
         damage: (entity) => {
             const health = entity.getComponent("health");
@@ -35,7 +39,7 @@ export const entityDamageConfig = {
             const maxHealth = health.effectiveMax;
             // debugWarn("entityDamageConfig",`scp682 salud actual: ${health.currentValue}, máxima: ${maxHealth}`);
 
-            return health.currentValue > 10000; // solo recibe daño si >1000
+            return health.currentValue > 10000; // solo recibe daño si > 10000
         },
         knockback: false
     },
@@ -46,7 +50,7 @@ export const entityDamageConfig = {
             const maxHealth = health.effectiveMax;
             // debugWarn("entityDamageConfig",`scp096 salud actual: ${health.currentValue}, máxima: ${maxHealth}`);
 
-            return health.currentValue > 10000; // solo recibe daño si >1000
+            return health.currentValue > 10000; // solo recibe daño si > 10000
         },
         knockback: true
     }
