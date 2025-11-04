@@ -1,30 +1,26 @@
 {
-  "format_version": "1.10.0",
-  "animation_controllers": {
-    "controller.animation.scp191.stay": {
-      "initial_state": "default",
-      "states": {
-        "default": {
-          "transitions": [
-            {
-              "stay": "query.is_sitting"
-            }
-          ],
-          "on_entry": [
-            "/event entity @s scp191:stay_r"
-          ]
-        },
-        "stay": {
-          "transitions": [
-            {
-              "default": "!query.is_sitting"
-            }
-          ],
-          "on_entry": [
-            "/event entity @s scp191:stay"
-          ]
-        }
-      }
-    }
-  }
+	"format_version": "1.10.0",
+	"animation_controllers": {
+		"controller.animation.scp191.stay": {
+			"initial_state": "default",
+			"states": {
+				"default": {
+					"transitions": [
+						{
+							"stay": "query.is_sitting"
+						}
+					],
+					"on_entry": ["/event entity @s scp191:stay_r"]
+				},
+				"stay": {
+					"transitions": [
+						{
+							"default": "!query.is_sitting"
+						}
+					],
+					"on_entry": ["/event entity @s scp191:stay"]
+				}
+			}
+		}
+	}
 }

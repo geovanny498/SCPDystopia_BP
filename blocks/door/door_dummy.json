@@ -1,40 +1,41 @@
 {
-    "format_version": "1.16.0",
-    "minecraft:block": {
-        "description": {
-            "identifier": "lc:dt_door_dummy",
-            "properties": {
-            }
-        },
-        "components": {
-            "minecraft:material_instances": {
-                "*": {
-                    "texture": "dt_dummy",
-                    "render_method": "blend"
-                }
-            },
+	"format_version": "1.21.120",
+	"minecraft:block": {
+		"description": {
+			"identifier": "lc:dt_door_dummy",
+			"menu_category": {
+				"category": "none",
+				"is_hidden_in_commands": false
+			}
+		},
+		"components": {
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "dt_dummy",
+					"render_method": "alpha_test"
+				}
+			},
+			"minecraft:geometry": "geometry.dt_dummy",
+			"minecraft:item_visual": {
+				"geometry": "minecraft:geometry.full_block",
+				"material_instances": {
+					"*": {
+						"texture": "dt_outdated",
+						"render_method": "opaque"
+					}
+				}
+			},
+			"minecraft:destruction_particles": {
+				"texture": "dt_gray_concrete",
+				"particle_count": 200
+			},
+			"minecraft:collision_box": true,
+			"minecraft:selection_box": true,
 			"minecraft:loot": "loot_tables/empty.json",
-            "minecraft:pick_collision": {
-                "origin": [ -8, 0, -8 ],
-                "size": [ 16, 16, 16 ]
-            },
-            "minecraft:entity_collision": {
-                "origin": [ -8, 0, -8 ],
-                "size": [ 16, 16, 16 ]
-            },
-            "minecraft:geometry": "geometry.dt_dummy",
-            "minecraft:destroy_time": 0.8,
-            "minecraft:map_color": "#3B3D94",
-            "minecraft:flammable": {
-                "flame_odds": 0,
-                "burn_odds": 0
-            },
-            "minecraft:block_light_absorption": 0.0,
-            "tag:lc:dummy": {}
-        },
-        "events": {
-        },
-        "permutations": [
-        ]
-    }
+			"minecraft:destructible_by_explosion": false,
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 10
+			}
+		}
+	}
 }

@@ -1,0 +1,36 @@
+{
+	"format_version": "1.21.110",
+	"minecraft:block": {
+		"description": {
+			"identifier": "lc:dt_door4_lvl1",
+			"menu_category": {
+				"category": "none",
+				"is_hidden_in_commands": true
+			},
+			"states": {
+				"facing:direction": [2, 3, 4, 5]
+			}
+		},
+		"components": {
+			"scpdt:old_door_conversion": {
+				"newType": "lc:dt_door4_lvl1_v2"
+			},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "dt_outdated",
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:geometry": {
+				"identifier": "minecraft:geometry.full_block"
+			},
+			"minecraft:light_dampening": 15,
+			"minecraft:tick": {
+				"interval_range": [6, 9],
+				"looping": true
+			},
+			"minecraft:destructible_by_explosion": false,
+			"minecraft:destructible_by_mining": false
+		}
+	}
+}

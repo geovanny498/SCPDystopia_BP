@@ -1,41 +1,33 @@
 {
-    "format_version": "1.16.100",
-    "minecraft:item": {
-        "description": {
-            "identifier": "lc:dt_ci_leggings",
-            "category": "Equipment"
-        },
-        "components": {
-            "minecraft:creative_category": {
-                "parent": "itemGroup.name.leggings"
-            },
-            "minecraft:max_stack_size": 1,
-            "minecraft:icon": {
-                "texture": "dt_ci_leggings_icon"
-            },
-            "minecraft:durability": {
-                "max_durability": 410,
-                "damage_chance": {
-                    "min": 7,
-                    "max": 12
-                }
-            },
-            "minecraft:armor": {
-                "protection": 6
-            },
-            "minecraft:knockback_resistance": {
-                "protection": 0.2
-            },
-            "minecraft:enchantable": {
-                "slot": "armor_legs",
-                "value": 10
-            },
-            "minecraft:wearable": {
-                "slot": "slot.armor.legs"
-            },
-            "minecraft:display_name": {
-                "value": "Chaos Insurgency Leggings"
-            }
-        }
-    }
+	"format_version": "1.21.120",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_ci_leggings",
+			"menu_category": {
+				"category": "equipment"
+			}
+		},
+		"components": {
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": "dt_ci_leggings_icon",
+			"minecraft:durability": {
+				"max_durability": 410,
+				"damage_chance": {
+					"min": 0,
+					"max": 100
+				}
+			},
+			"minecraft:enchantable": {
+				"slot": "armor_legs",
+				"value": 10
+			},
+			"minecraft:wearable": {
+				"slot": "slot.armor.legs",
+				"protection": 6
+			},
+			"minecraft:display_name": {
+				"value": "Chaos Insurgency Leggings"
+			}
+		}
+	}
 }

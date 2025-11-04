@@ -1,140 +1,93 @@
 {
-    "format_version": "1.17.20",
-    "minecraft:block": {
-        "description": {
-            "identifier": "lc:dt_air_conditioner",
-            "is_experimental": false,
-            "properties": {
-                "facing:direction": [ 2, 3, 4, 5 ],
-                "air_conditioner:on": [ true, false ]
-            }
-        },
-        "components": {
-            "minecraft:creative_category": {
-                "group": "itemGroup.name.sandstone",
-                "category": "Construction"
-            },
-            "minecraft:pick_collision": {
-                "origin": [ -8, 0, -8 ],
-                "size": [ 16, 16, 13 ]
-            },
-            "minecraft:block_collision": {
-                "origin": [ -8, 0, -8 ],
-                "size": [ 16, 16, 13 ]
-            },
-            "minecraft:geometry": "geometry.dt_air_conditioner",
-            "minecraft:destroy_time": 1.5,
-            "minecraft:on_player_placing": {
-                "event": "placement_state"
-            },
-            "minecraft:map_color": "#3B3D94",
-            "minecraft:flammable": {
-                "flame_odds": 0,
-                "burn_odds": 0
-            },
-            "minecraft:block_light_absorption": 0.7,
-            "tag:lc:dystopiablock": {}
-        },
-        "events": {
-            "placement_state": {
-                "set_block_property": {
-                    "facing:direction": "(query.cardinal_facing_2d)",
-                    "air_conditioner:on": false
-                }
-            },
-            "air_conditioner:to_true": {
-                "set_block_property": {
-                    "air_conditioner:on": true
-                },
-                "run_command": {
-                    "command": [
-                        "playsound scpdt.air_conditioner @a[r=16] ~~~"
-                    ]
-                }
-            },
-            "air_conditioner:to_false": {
-                "set_block_property": {
-                    "air_conditioner:on": false
-                },
-                "run_command": {
-                    "command": [
-                        "stopsound @a[r=16] scpdt.air_conditioner"
-                    ]
-                }
-            },
-            "air_conditioner:sound": {
-                "run_command": {
-                    "command": [
-                        "playsound scpdt.air_conditioner @a[r=16] ~~~"
-                    ]
-                }
-            }
-        },
-        "permutations": [
-            {
-                "condition": "query.block_property('air_conditioner:on') == false",
-                "components": {
-                    "minecraft:block_light_emission": 0.0,
-                    "minecraft:material_instances": {
-                        "*": {
-                            "texture": "dt_air_conditioner_off",
-                            "render_method": "opaque"
-                        }
-                    },
-                    "minecraft:on_interact": {
-                        "event": "air_conditioner:to_true",
-                        "target": "self"
-                    }
-                }
-            },
-            {
-                "condition": "query.block_property('air_conditioner:on') == true",
-                "components": {
-                    "minecraft:block_light_emission": 0.4,
-                    "minecraft:material_instances": {
-                        "*": {
-                            "texture": "dt_air_conditioner_on",
-                            "render_method": "opaque"
-                        }
-                    },
-                    "minecraft:ticking": {
-                        "looping": true,
-                        "range": [4.3, 4.3],
-                        "on_tick": {
-                            "event": "air_conditioner:sound",
-                            "target": "self"
-                        }
-                    },
-                    "minecraft:on_interact": {
-                        "event": "air_conditioner:to_false",
-                        "target": "self"
-                    }
-                }
-            },
-            {
-                "condition": "query.block_property('facing:direction') == 2",
-                "components": {
-                    "minecraft:rotation": [ 0, 0, 0 ]
-                }
-            },
-            {
-                "condition": "query.block_property('facing:direction') == 3",
-                "components": {
-                    "minecraft:rotation": [ 0, 180, 0 ]
-                }
-            },
-            {
-                "condition": "query.block_property('facing:direction') == 4",
-                "components": {
-                    "minecraft:rotation": [ 0, 90, 0 ]
-                }
-            },
-            {
-                "condition": "query.block_property('facing:direction') == 5",
-                "components": {
-                    "minecraft:rotation": [ 0, 270, 0 ]
-                }
-            }
-        ]
-    }
+	"format_version": "1.21.120",
+	"minecraft:block": {
+		"description": {
+			"identifier": "lc:dt_air_conditioner",
+			"menu_category": {
+				"category": "construction"
+			},
+			"states": {
+				"facing:direction": [2, 3, 4, 5],
+				"air_conditioner:on": [false, true]
+			}
+		},
+		"components": {
+			"scpdt:legacy_placement_state": {
+				"facingDirectionState": "facing:direction",
+				"facingDirectionReverse": true
+			},
+			"scpdt:air_conditioner": {},
+			"minecraft:collision_box": {
+				"origin": [-8, 0, -8],
+				"size": [16, 16, 13]
+			},
+			"minecraft:selection_box": {
+				"origin": [-8, 0, -8],
+				"size": [16, 16, 13]
+			},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "dt_air_conditioner_off",
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:geometry": {
+				"identifier": "geometry.dt_air_conditioner"
+			},
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 1.5
+			},
+			"minecraft:map_color": "#3B3D94",
+			"minecraft:light_dampening": 0.7,
+			"tag:lc:dystopiablock": {}
+		},
+		"permutations": [
+			{
+				"condition": "q.block_state('air_conditioner:on') == false",
+				"components": {
+					"minecraft:light_emission": 0
+				}
+			},
+			{
+				"condition": "q.block_state('air_conditioner:on') == true",
+				"components": {
+					"minecraft:light_emission": 1,
+					"minecraft:material_instances": {
+						"*": {
+							"texture": "dt_air_conditioner_on",
+							"render_method": "opaque"
+						}
+					},
+					"minecraft:tick": {
+						"looping": true,
+						"interval_range": [80, 80]
+					}
+				}
+			},
+			{
+				"condition": "q.block_state('facing:direction') == 2",
+				"components": {
+					"minecraft:transformation": { "rotation": [0, 0, 0] }
+				}
+			},
+			{
+				"condition": "q.block_state('facing:direction') == 3",
+				"components": {
+					"minecraft:transformation": { "rotation": [0, 180, 0] }
+				}
+			},
+			{
+				"condition": "q.block_state('facing:direction') == 4",
+				"components": {
+					"minecraft:transformation": { "rotation": [0, 90, 0] }
+				}
+			},
+			{
+				"condition": "q.block_state('facing:direction') == 5",
+				"components": {
+					"minecraft:transformation": { "rotation": [0, 270, 0] }
+				}
+			}
+		]
+	}
 }

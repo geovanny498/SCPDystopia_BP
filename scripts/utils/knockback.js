@@ -19,7 +19,7 @@ export function applyKnockback(entity, projectile, kb) {
 
         // Actualmente no obtenible
         const compKbRes = entity.getComponent("minecraft:knockback_resistance")?.value;
-        
+
         if (compKbRes == undefined) {
             debugWarn("applyKnockback", `Entidad ${entity.typeId} no se encontró knockback_resistance=${compKbRes}`, "purple");
         }
@@ -34,7 +34,7 @@ export function applyKnockback(entity, projectile, kb) {
 
         if (knockbackRes >= 1) {
             debugWarn("applyKnockback", `Entidad ${entity.typeId} tiene knockback_resistance = ${knockbackRes}(inmune) — no se aplicará knockback.`, "purple");
-            // return;
+            return;
         }
 
         const dir = {

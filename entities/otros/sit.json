@@ -1,96 +1,122 @@
 {
-    "format_version": "1.13.0",
-    "minecraft:entity": {
-        "description": {
-            "identifier": "lc:dt_sit",
-            "is_spawnable": false,
-            "is_summonable": true,
-            "is_experimental": false,
-            "scripts": {
-                "animate": [
-                  "sit"
-                ]
-            },
-              "animations": {
-                "sit": "controller.animation.chair.sit"
-            }
-        },
-        "component_groups": {
-            "minecraft:death": {
-                "minecraft:despawn": {}
-            }
-        },
-        "components": {
-            "minecraft:type_family": {
-                "family": [ "inanimate" ]
-            },
-            "minecraft:collision_box": {
-                "width": 0.1,
-                "height": 0.1
-            },
-            "minecraft:rideable": {
-                "seat_count": 1,
-                "family_types": [
-                    "player"
-                ],
-                "interact_text": "Sit to the chair",
-                "pull_in_entities": true,
-                "seats": {
-                    "position": [
-                        0.0,
-                        0.5,
-                        0.0
-                    ]
-                }
-            },
-            "minecraft:interact": {
-                "interactions": [{
-                        "on_interact": {
-                            "filters": {
-                                "all_of": [{
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "value": "player"
-                                    }, {
-                                        "test": "has_equipment",
-                                        "subject": "other",
-                                        "domain": "hand",
-                                        "value": "lc:dt_scp1023_arc"
-                                    }
-                                ]
-                            },
-                            "event": "sit:death",
-                            "interact_text": "Remove"
-                        },
-                        "swing": true,
-                        "use_item": false
-                    }
-                ]
-            },
-            "minecraft:health": {
-                "value": 1
-            },
-            "minecraft:damage_sensor": {
-                "triggers": {
-                    "cause": "all",
-                    "deals_damage": false
-                }
-            },
-            "minecraft:pushable": {
-                "is_pushable": false,
-                "is_pushable_by_piston": false
-            },
-            "minecraft:physics": {
-                "has_gravity": false,
-                "has_collision": false
-            }
-        },
-        "events": {
-            "sit:death": {
-                "add": {
-                    "component_groups": ["minecraft:death"]
-                }
-            }
-        }
-    }
+	"format_version": "1.21.120",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "lc:dt_sit",
+			"is_spawnable": false,
+			"is_summonable": true,
+			"scripts": {
+				"animate": [
+					"ctrl.despawn_if_outside_sittable",
+					{ "ctrl.toilet": "q.property('sit:type') == 'toilet'" },
+					{ "ctrl.toilet_buttghost": "q.property('sit:type') == 'toilet_buttghost'" }
+				]
+			},
+			"animations": {
+				"ctrl.despawn_if_outside_sittable": "controller.animation.sit.despawn_if_outside_sittable",
+				"ctrl.toilet": "controller.animation.sit.toilet",
+				"ctrl.toilet_buttghost": "controller.animation.sit.toilet_buttghost"
+			},
+			"properties": {
+				"sit:type": {
+					"type": "enum",
+					"values": ["standard", "toilet", "toilet_buttghost"],
+					"default": "standard"
+				}
+			}
+		},
+
+		"components": {
+			"minecraft:type_family": {
+				"family": ["inanimate"]
+			},
+			"minecraft:health": {
+				"value": 1
+			},
+			"minecraft:damage_sensor": {
+				"triggers": {
+					"cause": "all",
+					"deals_damage": "no"
+				}
+			},
+			"minecraft:rideable": {
+				"family_types": ["player"],
+				"interact_text": "Sit to the chair",
+				"seat_count": 1,
+				"seats": [{ "position": [0.0, 0.0, 0.0] }]
+			},
+			"minecraft:collision_box": {
+				"width": 0.1,
+				"height": 0.1
+			},
+			"minecraft:pushable": {
+				"is_pushable": false,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:physics": {
+				"has_gravity": false,
+				"has_collision": false
+			},
+			"minecraft:rotation_axis_aligned": {},
+			"minecraft:dimension_bound": {},
+			"minecraft:transient": {}
+		},
+
+		"component_groups": {
+			"initial_no_rider": {
+				"minecraft:environment_sensor": {
+					"triggers": [
+						{
+							"filters": {
+								"test": "rider_count",
+								"operator": ">",
+								"value": 0
+							},
+							"event": "sit:on_get_ridden"
+						}
+					]
+				},
+				"minecraft:timer": {
+					"looping": false,
+					"time": 1,
+					"time_down_event": {
+						"event": "sit:death" // Could not get a rider in time
+					}
+				}
+			},
+			"being_ridden": {
+				"minecraft:environment_sensor": {
+					"triggers": [
+						{
+							"filters": {
+								"test": "rider_count",
+								"operator": "<=",
+								"value": 0
+							},
+							"event": "sit:death"
+						}
+					]
+				}
+			},
+			"despawn": {
+				"minecraft:instant_despawn": {}
+			}
+		},
+
+		"events": {
+			"sit:on_get_ridden": {
+				"add": {
+					"component_groups": ["being_ridden"]
+				},
+				"remove": {
+					"component_groups": ["initial_no_rider"]
+				}
+			},
+			"sit:death": {
+				"add": {
+					"component_groups": ["despawn"]
+				}
+			}
+		}
+	}
 }

@@ -1,38 +1,33 @@
 {
-    "format_version": "1.16.100",
-    "minecraft:item": {
-        "description": {
-            "identifier": "lc:dt_classd_shirt",
-            "category": "Equipment"
-        },
-        "components": {
-            "minecraft:creative_category": {
-                "parent": "itemGroup.name.chestplate"
-            },
-            "minecraft:max_stack_size": 1,
-            "minecraft:icon": {
-                "texture": "dt_classd_shirt_icon"
-            },
-            "minecraft:durability": {
-                "max_durability": 90,
-                "damage_chance": {
-                    "min": 8,
-                    "max": 13
-                }
-            },
-            "minecraft:armor": {
-                "protection": 3
-            },
-            "minecraft:enchantable": {
-                "slot": "armor_chest",
-                "value": 10
-            },
-            "minecraft:wearable": {
-                "slot": "slot.armor.chest"
-            },
-            "minecraft:display_name": {
-                "value": "Class-D Shirt"
-            }
-        }
-    }
+	"format_version": "1.21.120",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_classd_shirt",
+			"menu_category": {
+				"category": "equipment"
+			}
+		},
+		"components": {
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": "dt_classd_shirt_icon",
+			"minecraft:durability": {
+				"max_durability": 190,
+				"damage_chance": {
+					"min": 0,
+					"max": 100
+				}
+			},
+			"minecraft:enchantable": {
+				"slot": "armor_torso",
+				"value": 10
+			},
+			"minecraft:wearable": {
+				"slot": "slot.armor.chest",
+				"protection": 3
+			},
+			"minecraft:display_name": {
+				"value": "Class-D Shirt"
+			}
+		}
+	}
 }

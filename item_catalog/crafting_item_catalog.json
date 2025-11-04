@@ -1,0 +1,577 @@
+{
+  "format_version": "1.21.60",
+  "minecraft:crafting_items_catalog": {
+    "categories": [
+      {
+        "category_name": "construction",
+        "groups": [
+          {
+            "group_identifier": {
+              "icon": "lc:dt_label001_gg",
+              "name": "lc:dt_item_group_label_blocks"
+            },
+            "items": [
+              "lc:dt_label001_gg",
+              "lc:dt_label001_sp",
+              "lc:dt_label005",
+              "lc:dt_label007",
+              "lc:dt_label012",
+              "lc:dt_label029",
+              "lc:dt_label035",
+              "lc:dt_label049",
+              "lc:dt_label058",
+              "lc:dt_label063",
+              "lc:dt_label066",
+              "lc:dt_label079",
+              "lc:dt_label087",
+              "lc:dt_label096",
+              "lc:dt_label098",
+              "lc:dt_label106",
+              "lc:dt_label131",
+              "lc:dt_label173",
+              "lc:dt_label191",
+              "lc:dt_label207",
+              "lc:dt_label268",
+              "lc:dt_label280",
+              "lc:dt_label294",
+              "lc:dt_label330",
+              "lc:dt_label439",
+              "lc:dt_label457",
+              "lc:dt_label458",
+              "lc:dt_label500",
+              "lc:dt_label577",
+              "lc:dt_label610",
+              "lc:dt_label682",
+              "lc:dt_label714",
+              "lc:dt_label734",
+              "lc:dt_label914",
+              "lc:dt_label939",
+              "lc:dt_label966",
+              "lc:dt_label999",
+              "lc:dt_label1000",
+              "lc:dt_label1023_arc",
+              "lc:dt_label1025",
+              "lc:dt_label1074",
+              "lc:dt_label3199",
+              "lc:dt_label3998",
+              "lc:dt_label4959",
+              "lc:dt_label5167",
+              "lc:dt_label5535"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_ceiling1",
+              "name": "lc:dt_item_group_construction_blocks"
+            },
+            "items": [
+              "lc:dt_ceiling1",
+              "lc:dt_ceiling2",
+              "lc:dt_cushion_wall",
+              "lc:dt_dirty_metal",
+              "lc:dt_exterior_brick",
+              "lc:dt_exterior_brick_bottom",
+              "lc:dt_exterior_brick_middle1",
+              "lc:dt_exterior_brick_middle2",
+              "lc:dt_general_floor1",
+              "lc:dt_general_floor2",
+              "lc:dt_gray_concrete",
+              "lc:dt_hcz_floor",
+              "lc:dt_light_gray_concrete",
+              "lc:dt_metal_wall",
+              "lc:dt_panel_wall_blue",
+              "lc:dt_panel_wall_red",
+              "lc:dt_panel_wall_white1",
+              "lc:dt_panel_wall_white2",
+              "lc:dt_rusted_metal_panel",
+              "lc:dt_sewer_brick",
+              "lc:dt_storage_wall",
+              "lc:dt_tesla_caution_block",
+              "lc:dt_tesla_outside_block",
+              "lc:dt_tile_floor",
+              "lc:dt_tile_floor2",
+              "lc:dt_tile_floor3",
+              "lc:dt_tile_floor4",
+              "lc:dt_gray_concrete_slab",
+              "lc:dt_light_gray_concrete_slab",
+              "lc:dt_scpdystopia_orb_block",
+              "lc:dt_ceiling_lamp2_off",
+              "lc:dt_ceiling_lamp2_on",
+              "lc:dt_ceiling_lamp_off",
+              "lc:dt_ceiling_lamp_on",
+              "lc:dt_facility_wall",
+              "lc:dt_facility_wall_middle",
+              "lc:dt_facility_wall_middle2",
+              "lc:dt_facility_wall_slab",
+              "lc:dt_lcz_wall_bottom",
+              "lc:dt_lcz_wall_top",
+              "lc:dt_red_wall_bottom",
+              "lc:dt_red_wall_top",
+              "lc:dt_med_wall_bottom",
+              "lc:dt_med_wall_top",
+              "lc:dt_blue_wall_bottom",
+              "lc:dt_blue_wall_top",
+              "lc:dt_o5_wall_bottom",
+              "lc:dt_o5_wall_top",
+              "lc:dt_entrance_wall_bottom",
+              "lc:dt_entrance_wall_top",
+              "lc:dt_hcz_wall",
+              "lc:dt_hcz_wall2",
+              "lc:dt_hcz_wall3",
+              "lc:dt_pd_bedrock",
+              "lc:dt_pd_block",
+              "lc:dt_pd_block2",
+              "lc:dt_pd_block3",
+              "lc:dt_pd_floor",
+              "lc:dt_scp610_clod",
+              "lc:dt_scp610_pond"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_facility_wall_curve",
+              "name": "lc:dt_item_group_curve_blocks"
+            },
+            "items": [
+              "lc:dt_facility_wall_curve",
+              "lc:dt_gray_concrete_curve",
+              "lc:dt_light_gray_concrete_curve"
+            ]
+          },
+          {
+            "items": [
+              "lc:dt_button"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_keyreader1",
+              "name": "lc:dt_item_group_keycard_readers"
+            },
+            "items": [
+              "lc:dt_keyreader1",
+              "lc:dt_keyreader2",
+              "lc:dt_keyreader3",
+              "lc:dt_keyreader4",
+              "lc:dt_keyreader5"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_door1_v2",
+              "name": "lc:dt_item_group_doors"
+            },
+            "items": [
+              "lc:dt_door1_v2",
+              "lc:dt_door1_lvl1_v2",
+              "lc:dt_door1_lvl2_v2",
+              "lc:dt_door1_lvl3_v2",
+              "lc:dt_door1_lvl4_v2",
+              "lc:dt_door1_lvl5_v2",
+              "lc:dt_door2_v2",
+              "lc:dt_door2_lvl1_v2",
+              "lc:dt_door2_lvl2_v2",
+              "lc:dt_door2_lvl3_v2",
+              "lc:dt_door2_lvl4_v2",
+              "lc:dt_door2_lvl5_v2",
+              "lc:dt_door3_v2",
+              "lc:dt_door3_lvl1_v2",
+              "lc:dt_door3_lvl2_v2",
+              "lc:dt_door3_lvl3_v2",
+              "lc:dt_door3_lvl4_v2",
+              "lc:dt_door3_lvl5_v2",
+              "lc:dt_door4_v2",
+              "lc:dt_door4_lvl1_v2",
+              "lc:dt_door4_lvl2_v2",
+              "lc:dt_door4_lvl3_v2",
+              "lc:dt_door4_lvl4_v2",
+              "lc:dt_door4_lvl5_v2",
+              "lc:dt_door_o5_v2"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_blast_door_v2",
+              "name": "lc:dt_item_group_blast_doors"
+            },
+            "items": [
+              "lc:dt_blast_door_v2",
+              "lc:dt_blast_door_lvl1_v2",
+              "lc:dt_blast_door_lvl2_v2",
+              "lc:dt_blast_door_lvl3_v2",
+              "lc:dt_blast_door_lvl4_v2",
+              "lc:dt_blast_door_lvl5_v2"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_air_conditioner",
+              "name": "lc:dt_item_group_furni_decor"
+            },
+            "items": [
+              "lc:dt_air_conditioner",
+              "lc:dt_alarm",
+              "lc:dt_barbed_wire",
+              "lc:dt_big_number_sign",
+              "lc:dt_big_plant",
+              "lc:dt_blastproof_glass",
+              "lc:dt_blood_stain",
+              "lc:dt_bomb_activator",
+              "lc:dt_bulletin_board",
+              "lc:dt_cafeteria_chair",
+              "lc:dt_camera",
+              "lc:dt_catwalk_fence",
+              "lc:dt_catwalk_root",
+              "lc:dt_ceiling_monitor",
+              "lc:dt_ceiling_pipe",
+              "lc:dt_ceiling_speaker",
+              "lc:dt_cleaning_tools",
+              "lc:dt_coffee_machine",
+              "lc:dt_coffee_mug_block",
+              "lc:dt_control_panel",
+              "lc:dt_coolant",
+              "lc:dt_data_bank",
+              "lc:dt_delivery_box",
+              "lc:dt_desktop_display",
+              "lc:dt_electrical_panel",
+              "lc:dt_experiment_tools",
+              "lc:dt_fire_extinguisher",
+              "lc:dt_floor_vent",
+              "lc:dt_hand_dryer",
+              "lc:dt_hang_lamp",
+              "lc:dt_heating",
+              "lc:dt_lab_monitor",
+              "lc:dt_ceiling_lamp_cover",
+              "lc:dt_laptop",
+              "lc:dt_light1_root",
+              "lc:dt_light1",
+              "lc:dt_light2",
+              "lc:dt_light3",
+              "lc:dt_light4",
+              "lc:dt_light5",
+              "lc:dt_living_bench",
+              "lc:dt_low_wood_bench",
+              "lc:dt_lunch_plate",
+              "lc:dt_memo_book",
+              "lc:dt_men_toilet",
+              "lc:dt_mesh_catwalk",
+              "lc:dt_metal_crate",
+              "lc:dt_mine",
+              "lc:dt_mirror",
+              "lc:dt_nuclear_box",
+              "lc:dt_office_chair",
+              "lc:dt_office_desk",
+              "lc:dt_office_lamp",
+              "lc:dt_pc",
+              "lc:dt_pipe",
+              "lc:dt_pizza_box",
+              "lc:dt_plant",
+              "lc:dt_printer",
+              "lc:dt_rack1",
+              "lc:dt_radio_block",
+              "lc:dt_recycle_bin",
+              "lc:dt_restroom_sign",
+              "lc:dt_scattered_documents",
+              "lc:dt_server_rack",
+              "lc:dt_sink",
+              "lc:dt_speaker",
+              "lc:dt_stand_light",
+              "lc:dt_steel_fence",
+              "lc:dt_supply_box",
+              "lc:dt_table",
+              "lc:dt_table2",
+              "lc:dt_telephone",
+              "lc:dt_tesla_shock_block",
+              "lc:dt_tissue_box",
+              "lc:dt_toilet",
+              "lc:dt_towel",
+              "lc:dt_valve",
+              "lc:dt_warehouse_rack",
+              "lc:dt_water_dispenser",
+              "lc:dt_weapon_crate",
+              "lc:dt_weapon_crate_openable",
+              "lc:dt_wet_floor_sign",
+              "lc:dt_wines",
+              "lc:dt_wood_chair",
+              "lc:dt_wood_crate",
+              "lc:dt_wood_table"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_poster",
+              "name": "lc:dt_item_group_posters_and_wall_signs"
+            },
+            "items": [
+              "lc:dt_poster",
+              "lc:dt_wall_image",
+              "lc:dt_wall_sign",
+              "lc:dt_scp_logo",
+              "lc:dt_medbay_sign"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_intercom_general",
+              "name": "lc:dt_item_group_intercom"
+            },
+            "items": [
+              "lc:dt_intercom_general",
+              "lc:dt_intercom_report",
+              "lc:dt_intercom_report_all",
+              "lc:dt_intercom_breach",
+              "lc:dt_scream_sound_loader"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_scp049_plush",
+              "name": "lc:dt_item_group_plushes"
+            },
+            "items": [
+              "lc:dt_scp049_plush",
+              "lc:dt_scp106_plush",
+              "lc:dt_scp173_plush",
+              "lc:dt_scp939_plush"
+            ]
+          }
+        ]
+      },
+      {
+        "category_name": "equipment",
+        "groups": [
+          {
+            "group_identifier": {
+              "name": "minecraft:itemGroup.name.miscFood"
+            },
+            "items": [
+              "lc:dt_candy1",
+              "lc:dt_candy2",
+              "lc:dt_candy3",
+              "lc:dt_pizza_slice"
+            ]
+          },
+          {
+            "group_identifier": {
+              "name": "minecraft:itemGroup.name.pickaxe"
+            },
+            "items": [
+              "lc:dt_dystopia_pickaxe"
+            ]
+          },
+          {
+            "group_identifier": {
+              "name": "minecraft:itemGroup.name.helmet"
+            },
+            "items": [
+              "lc:dt_ci_helmet",
+              "lc:dt_epsilon11_helmet",
+              "lc:dt_eta10_helmet",
+              "lc:dt_tro_helmet",
+              "lc:dt_gasmask",
+              "lc:dt_beenie",
+              "lc:dt_nvg",
+              "lc:dt_scramble"
+            ]
+          },
+          {
+            "group_identifier": {
+              "name": "minecraft:itemGroup.name.chestplate"
+            },
+            "items": [
+              "lc:dt_ci_chestplate",
+              "lc:dt_epsilon11_chestplate",
+              "lc:dt_eta10_chestplate",
+              "lc:dt_classd_shirt",
+              "lc:dt_scientist_coat",
+              "lc:dt_ballistic_vest"
+            ]
+          },
+          {
+            "group_identifier": {
+              "name": "minecraft:itemGroup.name.leggings"
+            },
+            "items": [
+              "lc:dt_ci_leggings",
+              "lc:dt_mtf_leggings",
+              "lc:dt_scientist_pants",
+              "lc:dt_classd_pants",
+              "lc:dt_japanese_schoolgirl_skirt"
+            ]
+          },
+          {
+            "group_identifier": {
+              "name": "minecraft:itemGroup.name.boots"
+            },
+            "items": [
+              "lc:dt_tro_boots"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_ak",
+              "name": "lc:dt_item_group_guns_and_mags"
+            },
+            "items": [
+              "lc:dt_ak",
+              "lc:dt_ak_mag",
+              "lc:dt_dystopia_rifle",
+              "lc:dt_glock",
+              "lc:dt_glock_mag",
+              "lc:dt_m4a1",
+              "lc:dt_m16",
+              "lc:dt_m16_mag",
+              "lc:dt_mp5a3",
+              "lc:dt_mp5k",
+              "lc:dt_mp5_mag",
+              "lc:dt_mp7a1",
+              "lc:dt_mp7a1_mag",
+              "lc:dt_p90",
+              "lc:dt_p90_mag",
+              "lc:dt_scar",
+              "lc:dt_scar_mag",
+              "lc:dt_spas12",
+              "lc:dt_spas12_shellbox",
+              "lc:dt_high_intensity_gun",
+              "lc:dt_hig_mag",
+              "lc:dt_rocket_launcher",
+              "lc:dt_rpg_rocket",
+              "lc:dt_flamethrower",
+              "lc:dt_flamethrower_fuel",
+              "lc:dt_suscharger",
+              "lc:dt_suscharger_battery"
+            ]
+          },
+          {
+            "items": [
+              "lc:dt_painkillers",
+              "lc:dt_medkit",
+              "lc:dt_morphine_syringe",
+              "lc:dt_mystery_syringe",
+              "lc:dt_commander",
+              "lc:dt_scp1023_arc",
+              "lc:dt_combat_knife",
+              "lc:dt_crowbar",
+              "lc:dt_fire_axe",
+              "lc:dt_nightstick"
+            ]
+          }
+        ]
+      },
+      {
+        "category_name": "items",
+        "groups": [
+          {
+            "items": [
+              "lc:dt_keycard1",
+              "lc:dt_keycard2",
+              "lc:dt_keycard3",
+              "lc:dt_keycard4",
+              "lc:dt_keycard5",
+              "lc:dt_keycard_omni",
+              "lc:dt_keycard_o5"
+            ]
+          },
+          {
+            "items": [
+              "lc:dt_coin",
+              "lc:dt_ci_currency",
+              "lc:dt_confidential_file",
+              "lc:dt_empty_cup",
+              "lc:dt_empty_mug",
+              "lc:dt_coffee_mug",
+              "lc:dt_imposter_totem"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_scp005",
+              "name": "lc:dt_item_group_scp"
+            },
+            "items": [
+              "lc:dt_scp005",
+              "lc:dt_scp006",
+              "lc:dt_scp012",
+              "lc:dt_scp058_body_scrap",
+              "lc:dt_scp063",
+              "lc:dt_scp079",
+              "lc:dt_scp096_bag",
+              "lc:dt_scp096_picture",
+              "lc:dt_scp106_corrosion",
+              "lc:dt_scp207",
+              "lc:dt_scp268",
+              "lc:dt_scp294",
+              "lc:dt_scp330",
+              "lc:dt_scp420j",
+              "lc:dt_scp458_pizza_box",
+              "lc:dt_scp500",
+              "lc:dt_scp714",
+              "lc:dt_scp914",
+              "lc:dt_scp914_gear",
+              "lc:dt_scp914_scrap",
+              "lc:dt_scp939_flesh",
+              "lc:dt_scp939_flesh_cooked",
+              "lc:dt_scp939_tooth",
+              "lc:dt_scp1025",
+              "lc:dt_scp1074",
+              "lc:dt_scp5167_statue",
+              "lc:dt_scp5167_cannon",
+              "lc:dt_scp5167_mask",
+              "lc:dt_scp3199_egg_item",
+              "lc:dt_sheaf_of_papers"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_scp049_doc",
+              "name": "lc:dt_item_group_scp_docs"
+            },
+            "items": [
+              "lc:dt_scp049_doc",
+              "lc:dt_scp096_doc",
+              "lc:dt_scp173_doc",
+              "lc:dt_scp939_doc"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_glock_ammo",
+              "name": "lc:dt_item_group_ammo"
+            },
+            "items": [
+              "lc:dt_glock_ammo",
+              "lc:dt_m16_ammo",
+              "lc:dt_mp5k_ammo",
+              "lc:dt_p90_ammo",
+              "lc:dt_spas12_shell",
+              "lc:dt_dtrifle_ammo"
+            ]
+          }
+        ]
+      },
+      {
+        "category_name": "nature",
+        "groups": [
+          {
+            "items": [
+              "lc:dt_scpdystopia_orb",
+              "lc:dt_enhanced_scpdystopia_orb"
+            ]
+          },
+          {
+            "group_identifier": {
+              "icon": "lc:dt_scp143_sapling_placer",
+              "name": "lc:dt_item_group_scp143"
+            },
+            "items": [
+              "lc:dt_scp143_sapling_placer",
+              "lc:dt_scp143_log",
+              "lc:dt_scp143_stripped_log",
+              "lc:dt_scp143_leaves"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

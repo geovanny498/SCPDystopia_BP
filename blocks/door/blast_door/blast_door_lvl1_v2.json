@@ -1,0 +1,71 @@
+{
+	"format_version": "1.21.120",
+	"minecraft:block": {
+		"description": {
+			"identifier": "lc:dt_blast_door_lvl1_v2",
+			"menu_category": {
+				"category": "construction"
+			},
+			"states": {
+				"lc:has_collision": [true, false]
+			},
+			"traits": {
+				"minecraft:placement_direction": {
+					"enabled_states": ["minecraft:cardinal_direction"],
+					"y_rotation_offset": 0
+				}
+			}
+		},
+		"components": {
+			"scpdt:blast_door": {
+				"clearanceLevel": 1
+			},
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "dt_dummy",
+					"render_method": "alpha_test"
+				}
+			},
+			"minecraft:geometry": "geometry.dt_dummy",
+			"minecraft:item_visual": {
+				"geometry": "geometry.dt_blast_door_item_visual",
+				"material_instances": {
+					"*": {
+						"texture": "dt_blast_door_lvl1",
+						"face_dimming": false
+					}
+				}
+			},
+			"minecraft:destruction_particles": {
+				"texture": "dt_blast_door",
+				"particle_count": 200
+			},
+			"minecraft:selection_box": {
+				"origin": [-8, 0, -8],
+				"size": [16, 16, 16]
+			},
+			"minecraft:loot": "loot_tables/empty.json",
+			"minecraft:destructible_by_explosion": false,
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 10
+			}
+		},
+		"permutations": [
+			{
+				"condition": "q.block_state('lc:has_collision')",
+				"components": {
+					"minecraft:collision_box": {
+						"origin": [-8, 0, -8],
+						"size": [16, 16, 16]
+					}
+				}
+			},
+			{
+				"condition": "!q.block_state('lc:has_collision')",
+				"components": {
+					"minecraft:collision_box": false
+				}
+			}
+		]
+	}
+}

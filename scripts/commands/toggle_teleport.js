@@ -91,12 +91,11 @@ export function registerTeleportSystem(cfg) {
                             safeTriggerEvent(ent, cfg.events.start_near);
                         } else {
                             debugMessage("toggle_teleport", `${label} → modo NORMAL`);
-                            safeTriggerEvent(ent, cfg.events.stop_near);
+                            safeTriggerEvent(ent, cfg.events.stop);
                             safeTriggerEvent(ent, cfg.events.start);
                         }
                     } else {
                         debugMessage("toggle_teleport", `${label} → deshabilitado`);
-                        safeTriggerEvent(ent, cfg.events.stop_near);
                         safeTriggerEvent(ent, cfg.events.stop);
                     }
                 }
@@ -120,11 +119,10 @@ export function registerTeleportSystem(cfg) {
             safeTriggerEvent(ent, cfg.events.start_near);
         } else if (mode === "normal") {
             debugMessage("toggle_teleport", `${team} normal → modo NORMAL`);
-            safeTriggerEvent(ent, cfg.events.stop_near);
+            safeTriggerEvent(ent, cfg.events.stop);
             safeTriggerEvent(ent, cfg.events.start);
         } else {
             debugMessage("toggle_teleport", `${team} normal → deshabilitado`);
-            safeTriggerEvent(ent, cfg.events.stop_near);
             safeTriggerEvent(ent, cfg.events.stop);
         }
     }

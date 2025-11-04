@@ -8,6 +8,7 @@
         "enkia.tokyo-night",
         "oderwat.indent-rainbow",
         "ms-ceintl.vscode-language-pack-es",
-        "github.copilot"
+        "github.copilot",
+        "github.copilot-chat"
     ]
 }

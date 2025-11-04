@@ -1,46 +1,31 @@
 {
-  "format_version": "1.16.100",
-  "minecraft:item": {
-    "description": {
-    "identifier": "lc:dt_cup_me",
-      "category": "Command"
-    },
-    "components": {
-      "minecraft:use_duration": 1.6,
-      "minecraft:creative_category": {
-        "parent": "itemGroup.name.items"
-      },
-      "minecraft:hand_equipped": false,
-      "minecraft:max_stack_size": 1,
-      "minecraft:icon": {
-        "texture": "dt_cup_dark_red"
-      },
-      "minecraft:display_name": {
-        "value": "Cup of me"
-      },
-      "minecraft:cooldown": {
-				"duration": 5.5,
-				"category": "drink"
+	"format_version": "1.21.120",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_cup_me",
+			"menu_category": {
+				"category": "none"
+			}
+		},
+		"components": {
+			"scpdt:cup_me": {},
+			"minecraft:use_modifiers": {
+				"movement_modifier": 0.5,
+				"use_duration": 1.6
 			},
-      "minecraft:on_use": {
-        "on_use": {
-          "event": "cup:drink"
-        }
-      }
-    },
-    "events": {
-			"cup:drink": {
-        "run_command": {
-          "command": [
-            "kill @s",
-            "playsound scpdt.scp294.drink.vomit @a[r=13] ~~~"
-          ],
-          "target": "holder"
-        },
-        "transform_item": {
-          "transform": "lc:dt_empty_cup"
-        }
+			"minecraft:use_animation": "drink",
+			"minecraft:hand_equipped": false,
+			"minecraft:max_stack_size": 1,
+			"minecraft:icon": "dt_cup_dark_red",
+			"minecraft:display_name": {
+				"value": "Cup of me"
+			},
+			"minecraft:food": {
+				"nutrition": 1,
+				"saturation_modifier": 0.1,
+				"can_always_eat": true,
+				"using_converts_to": "lc:dt_empty_cup"
 			}
 		}
-  }
+	}
 }

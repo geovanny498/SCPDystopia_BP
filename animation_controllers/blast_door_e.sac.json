@@ -1,0 +1,56 @@
+{
+	"format_version": "1.10.0",
+	"animation_controllers": {
+		"controller.animation.scpdt.blast_door_e": {
+			"initial_state": "default",
+			"states": {
+				"default": {
+					"transitions": [
+						{ "closed": "q.property('scpdt:door_state') == 'closed'" },
+						{ "closing": "q.property('scpdt:door_state') == 'closing'" },
+						{ "opened": "q.property('scpdt:door_state') == 'opened'" },
+						{ "opening": "q.property('scpdt:door_state') == 'opening'" }
+					]
+				},
+				"closed": {
+					"on_entry": [
+						"/fill ^-2 ^2 ^ ^2 ^0 ^ lc:dt_door_dummy keep",
+						"@s scpdt:enable_block_collision"
+					],
+					"transitions": [
+						{ "closing": "q.property('scpdt:door_state') == 'closing'" },
+						{ "opened": "q.property('scpdt:door_state') == 'opened'" },
+						{ "opening": "q.property('scpdt:door_state') == 'opening'" }
+					]
+				},
+				"closing": {
+					"animations": ["anim.closing"],
+					"transitions": [
+						{ "closed": "q.property('scpdt:door_state') == 'closed'" },
+						{ "opened": "q.property('scpdt:door_state') == 'opened'" },
+						{ "opening": "q.property('scpdt:door_state') == 'opening'" }
+					]
+				},
+				"opened": {
+					"on_entry": [
+						"/fill ^-1 ^2 ^ ^1 ^0 ^ air replace lc:dt_door_dummy",
+						"@s scpdt:disable_block_collision"
+					],
+					"transitions": [
+						{ "closed": "q.property('scpdt:door_state') == 'closed'" },
+						{ "closing": "q.property('scpdt:door_state') == 'closing'" },
+						{ "opening": "q.property('scpdt:door_state') == 'opening'" }
+					]
+				},
+				"opening": {
+					"animations": ["anim.opening"],
+					"transitions": [
+						{ "closed": "q.property('scpdt:door_state') == 'closed'" },
+						{ "closing": "q.property('scpdt:door_state') == 'closing'" },
+						{ "opened": "q.property('scpdt:door_state') == 'opened'" }
+					]
+				}
+			}
+		}
+	}
+}

@@ -1,35 +1,33 @@
 {
-    "format_version": "1.16.0",
-    "minecraft:block": {
-        "description": {
-            "identifier": "lc:dt_scp610_clod",
-            "properties": {
-            }
-        },
-        "components": {
-            "minecraft:creative_category": {
-                "group": "itemGroup.name.sandstone",
-                "category": "Construction"
-            },
-            "minecraft:material_instances": {
-                "*": {
-                    "texture": "dt_scp610_clod",
-                    "render_method": "opaque"
-                }
-            },
-            "minecraft:destroy_time": 1.0,
-            "minecraft:unit_cube": {},
-            "minecraft:map_color": "#3B3D94",
-            "minecraft:flammable": {
-                "flame_odds": 19,
-                "burn_odds": 19
-            },
-            "tag:lc:dystopiablock": {},
-            "tag:dirt": {}
-        },
-        "events": {
-        },
-        "permutations": [
-        ]
-    }
+	"format_version": "1.21.120",
+	"minecraft:block": {
+		"description": {
+			"identifier": "lc:dt_scp610_clod",
+			"menu_category": {
+				"category": "construction"
+			}
+		},
+		"components": {
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "dt_scp610_clod",
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:geometry": "minecraft:geometry.full_block",
+			"minecraft:destructible_by_explosion": {
+				"explosion_resistance": 10
+			},
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 1
+			},
+			"minecraft:map_color": "#7a1713",
+			"minecraft:flammable": {
+				"catch_chance_modifier": 5,
+				"destroy_chance_modifier": 20
+			},
+			"tag:lc:dystopiablock": {},
+			"tag:dirt": {}
+		}
+	}
 }

@@ -49,8 +49,10 @@ export function applyDamageAndKnockback(projectile, target, cfg, shooter) {
 
     if (!canKnockback) {
         debugWarn(`Knockback bloqueado para ${target.typeId}`, "purple");
+    } else {
+        applyKnockback(target, projectile, cfg.knockback);
     }
-    applyKnockback(target, projectile, cfg.knockback);
+
 }
 
 // Función de cálculo de daño, la dejé igual

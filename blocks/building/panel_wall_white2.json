@@ -6,13 +6,9 @@
 			"is_experimental": false
 		},
 		"components": {
-			"minecraft:creative_category": {
-                "group": "itemGroup.name.stone",
-                "category": "Nature"
-            },
 			"minecraft:destroy_time": 1.6,
 			"minecraft:explosion_resistance": 14.0,
-            "tag:lc:dystopiablock": {}
+			"tag:lc:dystopiablock": {}
 		}
 	}
 }

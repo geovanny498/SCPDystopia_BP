@@ -154,7 +154,7 @@
                     "reach_multiplier": 5,
                     "speed_multiplier": 1.16,
                     "attack_duration": 0.05,
-                    "hit_delay_pct": 0.1
+                    "hit_delay_pct": 0.45
                 },
                 "minecraft:attack": {
                     "damage": 14
@@ -263,7 +263,9 @@
                 "minecraft:tameable": {
                     "probability": 1.0,
                     "tame_items": [
-                        "minecraft:book"
+                        "lc:dt_keycard5",
+                        "lc:dt_keycard_omni",
+                        "lc:dt_keycard_o5"
                     ],
                     "tame_event": {
                         "event": "minecraft:on_tame",
@@ -337,272 +339,34 @@
                     "priority": 2
                 }
             },
-            "stop_move": {
-                "minecraft:interact": {
-                    "interactions": [
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "stick"
-                                        },
-                                        {
-                                            "test": "has_component",
-                                            "operator": "!=",
-                                            "value": "start_move_free"
-                                        }
-                                    ]
-                                },
-                                "event": "mtf:to_move_free",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "action.interact.scpdt.officer.move_free"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "nether_star"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:start_invincible",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.start_invincible"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "nether_star"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:stop_invincible",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.stop_invincible"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "blaze_rod"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:show_boss_bar",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.show_boss_bar"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "blaze_rod"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:dont_show_boss_bar",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.dont_show_boss_bar"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_pearl"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:start_teleport",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.start_teleport"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_pearl"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:stop_teleport",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.stop_teleport"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_eye"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:start_teleport_near",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.start_teleport"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_eye"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:stop_teleport_near",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.stop_teleport"
-                        }
-                    ]
+            "tamed_war": {
+                "minecraft:is_tamed": {},
+                "minecraft:behavior.follow_owner": {
+                    "priority": -3,
+                    "speed_multiplier": 1.16,
+                    "start_distance": 20,
+                    "stop_distance": 16
                 },
+                "minecraft:behavior.teleport_to_owner": {
+                    "priority": -4,
+                    "filters": {
+                        "all_of": [
+                            {
+                                "test": "owner_distance",
+                                "operator": ">",
+                                "value": 22
+                            }
+                        ]
+                    }
+                },
+                "minecraft:behavior.owner_hurt_by_target": {
+                    "priority": 2
+                },
+                "minecraft:behavior.owner_hurt_target": {
+                    "priority": 2
+                }
+            },
+            "stop_move": {
                 "minecraft:pushable": {
                     "is_pushable": false,
                     "is_pushable_by_piston": true
@@ -621,271 +385,6 @@
                 }
             },
             "start_move": {
-                "minecraft:interact": {
-                    "interactions": [
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "stick"
-                                        },
-                                        {
-                                            "test": "has_component",
-                                            "operator": "!=",
-                                            "value": "stop_move"
-                                        }
-                                    ]
-                                },
-                                "event": "mtf:to_stop",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "action.interact.scpdt.officer.stop"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "nether_star"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:start_invincible",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.start_invincible"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "nether_star"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:stop_invincible",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.stop_invincible"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "blaze_rod"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:show_boss_bar",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.show_boss_bar"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "blaze_rod"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:dont_show_boss_bar",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.dont_show_boss_bar"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_pearl"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:start_teleport",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.start_teleport"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_pearl"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:stop_teleport",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.stop_teleport"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_eye"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:start_teleport_near",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.start_teleport_near"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_eye"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:stop_teleport_near",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.stop_teleport_near"
-                        }
-                    ]
-                },
                 "minecraft:pushable": {
                     "is_pushable": false,
                     "is_pushable_by_piston": true
@@ -917,271 +416,6 @@
                 }
             },
             "start_move_free": {
-                "minecraft:interact": {
-                    "interactions": [
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "stick"
-                                        },
-                                        {
-                                            "test": "has_component",
-                                            "operator": "!=",
-                                            "value": "start_move"
-                                        }
-                                    ]
-                                },
-                                "event": "mtf:to_move",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "action.interact.scpdt.officer.move"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "nether_star"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:start_invincible",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.start_invincible"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "nether_star"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:stop_invincible",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.stop_invincible"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "blaze_rod"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:show_boss_bar",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.show_boss_bar"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "blaze_rod"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:dont_show_boss_bar",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.dont_show_boss_bar"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_pearl"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:start_teleport",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.start_teleport"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_pearl"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:stop_teleport",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.stop_teleport"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_eye"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": true
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:start_teleport_near",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.start_teleport"
-                        },
-                        {
-                            "on_interact": {
-                                "filters": {
-                                    "all_of": [
-                                        {
-                                            "test": "is_family",
-                                            "subject": "other",
-                                            "value": "player"
-                                        },
-                                        {
-                                            "test": "has_equipment",
-                                            "domain": "hand",
-                                            "subject": "other",
-                                            "value": "ender_eye"
-                                        },
-                                        {
-                                            "test": "is_sneaking",
-                                            "subject": "other",
-                                            "value": false
-                                        }
-                                    ]
-                                },
-                                "event": "humanoid:stop_teleport_near",
-                                "target": "self"
-                            },
-                            "hurt_item": 0,
-                            "swing": true,
-                            "interact_text": "scpdt_de.action_hint.stop_teleport"
-                        }
-                    ]
-                },
                 "minecraft:pushable": {
                     "is_pushable": false,
                     "is_pushable_by_piston": true
@@ -1664,19 +898,44 @@
                     "component_groups": [
                         "tamed"
                     ]
-                }
-            },
-            "humanoid:start_spawn_soldiers": {
-                "add": {
+                },
+                "remove": {
                     "component_groups": [
-                        "humanoid:spawn_soldiers"
+                        "tamed_war"
                     ]
                 }
             },
-            "humanoid:stop_spawn_soldiers": {
+            "humanoid:set_tamed_war": {
+                "add": {
+                    "component_groups": [
+                        "tamed_war"
+                    ]
+                },
                 "remove": {
                     "component_groups": [
-                        "humanoid:spawn_soldiers"
+                        "tamed"
+                    ]
+                },
+                "queue_command": {
+                    "command": [
+                        "title @p actionbar §4§lModo guerra activado"
+                    ]
+                }
+            },
+            "humanoid:set_tamed_normal": {
+                "add": {
+                    "component_groups": [
+                        "tamed"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "tamed_war"
+                    ]
+                },
+                "queue_command": {
+                    "command": [
+                        "title @p actionbar §2§lModo normal activado"
                     ]
                 }
             },
@@ -1690,7 +949,8 @@
                 "remove": {
                     "component_groups": [
                         "stop_move",
-                        "start_move_free"
+                        "start_move_free",
+                        "tamed_war"
                     ]
                 },
                 "queue_command": {
@@ -1708,7 +968,8 @@
                 "remove": {
                     "component_groups": [
                         "start_move",
-                        "tamed"
+                        "tamed",
+                        "tamed_war"
                     ]
                 },
                 "queue_command": {
@@ -1726,12 +987,27 @@
                 "remove": {
                     "component_groups": [
                         "stop_move",
-                        "tamed"
+                        "tamed",
+                        "tamed_war"
                     ]
                 },
                 "queue_command": {
                     "command": [
                         "title @p actionbar Caminar libremente"
+                    ]
+                }
+            },
+            "humanoid:start_spawn_soldiers": {
+                "add": {
+                    "component_groups": [
+                        "humanoid:spawn_soldiers"
+                    ]
+                }
+            },
+            "humanoid:stop_spawn_soldiers": {
+                "remove": {
+                    "component_groups": [
+                        "humanoid:spawn_soldiers"
                     ]
                 }
             },
@@ -1792,12 +1068,18 @@
                     "component_groups": [
                         "humanoid:teleport"
                     ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "humanoid:teleport_near"
+                    ]
                 }
             },
             "humanoid:stop_teleport": {
                 "remove": {
                     "component_groups": [
-                        "humanoid:teleport"
+                        "humanoid:teleport",
+                        "humanoid:teleport_near"
                     ]
                 }
             },
@@ -1806,12 +1088,10 @@
                     "component_groups": [
                         "humanoid:teleport_near"
                     ]
-                }
-            },
-            "humanoid:stop_teleport_near": {
+                },
                 "remove": {
                     "component_groups": [
-                        "humanoid:teleport_near"
+                        "humanoid:teleport"
                     ]
                 }
             }

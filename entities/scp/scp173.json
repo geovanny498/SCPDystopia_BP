@@ -1,321 +1,388 @@
 {
-  "format_version": "1.13.0",
-  "minecraft:entity": {
-    "description": {
-      "identifier": "lc:dt_scp173",
-      "is_spawnable": true,
-      "is_summonable": true,
-      "is_experimental": false,
-      "scripts": {
-        "animate": [
-          "move",
-          "cage",
-          "scp131"
-        ]
-      },
-      "animations": {
-        "move": "controller.animation.scp173.blink",
-        "cage": "controller.animation.scp173.cage",
-        "blinking": "animation.scp173.blink",
-        "scp131": "animation.scp173.stopped"
-      }
-    },
-    "component_groups": {
-      "scp173_poopable": {
-        "minecraft:spawn_entity": {
-          "filters": {
-            "test": "is_underwater",
-            "subject": "self",
-            "operator": "!=",
-            "value": true
-          },
-          "max_wait_time": 40,
-          "min_wait_time": 7,
-          "num_to_spawn": 1,
-          "spawn_entity": "lc:dt_scp173_excrement",
-          "spawn_event": "shit:scp173_dropped",
-          "spawn_sound": "plop"
-        }
-      },
-      "death": {
-        "minecraft:despawn": {
-        }
-      },
-      "on_blink": {
-        "minecraft:is_sheared": {
-        }
-      },
-      "move": {
-        "minecraft:attack": {
-          "damage": 200
-        }
-      },
-      "stop": {
-        "minecraft:attack": {
-          "damage": 200
-        }
-      },
-      "attackable": {
-        "minecraft:mark_variant": {
-          "value": 0
-        },
-        "minecraft:type_family": {
-          "family": [ "scp173", "monster", "scp", "scp173_uncaged" ]
-        },
-        "minecraft:behavior.random_look_around": {
-          "priority": 7
-        },
-        "minecraft:entity_sensor": {
-          "sensor_range": 1.3,
-          "relative_range": false,
-          "minimum_count": 1,
-          "event_filters": {
-            "all_of": [
-              {
-                "test": "is_family",
-                "subject": "other",
-                "value": "scp173_cage"
-              },
-              {
-                "test": "has_rider",
-                "subject": "other",
-                "operator": "!="
-              }
-            ]
-          },
-          "event": "scp173:unable_to_attack"
-        },
-        "minecraft:behavior.melee_attack": {
-          "priority": 1.0
-        }
-      },
-      "no_attackable": {
-        "minecraft:mark_variant": {
-          "value": 1
-        },
-        "minecraft:type_family": {
-          "family": [ "scp173", "scp173_caged" ]
-        },
-        "minecraft:entity_sensor": {
-          "sensor_range": 1.3,
-          "relative_range": false,
-          "require_all": true,
-          "event_filters": {
-            "none_of": [
-              {
-                "test": "is_family",
-                "subject": "other",
-                "value": "scp173_cage"
-              }
-            ]
-          },
-          "event": "scp173:able_to_attack"
-        }
-      }
-    },
-    "components": {
-      "minecraft:is_hidden_when_invisible": {
-      },
-      "minecraft:experience_reward": {
-        "on_death": "query.last_hit_by_player ? Math.Random(90,100) : 0"
-      },
-      "minecraft:knockback_resistance": {
-        "value": 10.0
-      },
-      "minecraft:fire_immune": {
-      },
-      "minecraft:health": {
-        "value": 10000,
-        "max": 10000
-      },
-      "minecraft:movement.basic": {
-      },
-      "minecraft:jump.static": {
-      },
-      "minecraft:can_climb": {
-      },
-      "minecraft:movement": {
-        "value": 0.47
-      },
-      "minecraft:behavior.nearest_attackable_target": {
-        "priority": 0,
-        "within_radius": 20,
-        "reselect_targets": true,
-        "attack_interval": 1,
-        "entity_types": [
-          {
-          "filters": {
-            "other_with_families": [ "villager", "human", "player", "irongolem", "snowgolem" ]
-          },
-          "max_dist": 20
-          }
-        ],
-        "must_see_forget_duration": 16.0,
-        "must_see": true
-      },
-      "minecraft:interact": {
-        "interactions": [
-          {
-            "on_interact": {
-              "filters": {
-                "all_of": [
-                  { "test": "is_family", "subject": "other", "value": "player" },
-                  { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_scp1023_arc" }
-                ]
-              },
-            "event": "scp173:death",
-            "target": "self"
-            },
-            "hurt_item": 1,
-            "swing": true,
-            "interact_text": "action.interact.scpdt.remove1"
-          },
-          {
-            "on_interact": {
-              "filters": {
-                "all_of": [
-                  { "test": "is_family", "subject": "other", "value": "player" },
-                  { "test": "has_equipment", "domain": "hand", "subject": "other", "value": "lc:dt_scp1023_arc" }
-                ]
-              },
-            "event": "scp173:stop_pooping",
-            "target": "self"
-            },
-            "hurt_item": 0,
-            "swing": true,
-            "interact_text": "action.interact.scpdt.scp173_poop.freeze"
-          }
-        ]
-      },
-      "minecraft:pushable": {
-        "is_pushable": false,
-        "is_pushable_by_piston": true
-      },
-      "minecraft:behavior.hurt_by_target": {
-        "priority": 2
-      },
-      "minecraft:underwater_movement": {
-        "value": 0.1
-      },
-      "minecraft:behavior.move_towards_restriction": {
-        "priority": 5,
-        "speed_multiplier": 1
-      },
-      "minecraft:behavior.move_indoors": {
-        "priority": 4,
-        "speed_multiplier": 0.8
-      },
-      "minecraft:behavior.random_stroll": {
-        "priority": 6,
-        "speed_multiplier": 1
-      },
-      "minecraft:behavior.random_look_around": {
-        "priority": 7
-      },
-      "minecraft:collision_box": {
-        "width": 0.6,
-        "height": 1.9
-      },
-      "minecraft:behavior.restrict_open_door": {
-        "priority": 5
-      },
-      "minecraft:behavior.open_door": {
-        "priority": 6,
-        "close_door_after": true
-      },
-      "minecraft:nameable": {
-      },
-      "minecraft:physics": {
-      },
-      "minecraft:conditional_bandwidth_optimization": {
-      },
-      "minecraft:annotation.open_door": {
-      },
-      "minecraft:navigation.walk": {
-        "can_float": true,
-        "is_amphibious": true,
-        "can_path_over_water": true,
-        "avoid_sun": false,
-        "avoid_water": true,
-        "avoid_damage_blocks": false,
-        "can_pass_doors": true,
-        "can_open_doors": true
-      }
-    },
-    "events": {
-      "minecraft:entity_spawned": {
-        "add": {
-          "component_groups": [
-            "stop",
-            "on_blink",
-            "attackable",
-            "scp173_poopable"
-          ]
-        }
-      },
-      "scp173:to_move": {
-        "add": {
-          "component_groups": [
-            "move"
-          ]
-        },
-        "remove": {
-          "component_groups": [
-            "stop"
-          ]
-        }
-      },
-      "scp173:to_stop": {
-        "add": {
-          "component_groups": [
-            "stop"
-          ]
-        },
-        "remove": {
-          "component_groups": [
-            "move"
-          ]
-        }
-      },
-      "scp173:death": {
-        "add": {
-          "component_groups": [
-            "death"
-          ]
-        }
-      },
-      "scp173:able_to_attack": {
-        "add": {
-          "component_groups": [
-            "attackable"
-          ]
-        },
-        "remove": {
-          "component_groups": [
-            "no_attackable"
-          ]
-        }
-      },
-      "scp173:unable_to_attack": {
-        "add": {
-          "component_groups": [
-            "no_attackable"
-          ]
-        },
-        "remove": {
-          "component_groups": [
-            "attackable"
-          ]
-        }
-      },
-      "scp173:stop_pooping": {
-        "remove": {
-          "component_groups": [
-            "scp173_poopable"
-          ]
-        }
-      }
-    }
-  }
+	"format_version": "1.21.130",
+	"minecraft:entity": {
+		"description": {
+			"identifier": "lc:dt_scp173",
+			"is_spawnable": true,
+			"is_summonable": true,
+			"scripts": {
+				"animate": ["ctrl.blink"]
+			},
+			"animations": {
+				"ctrl.blink": "controller.animation.scp173.blink",
+				"anim.blink_timer.enter": "animation.scp173.blink_timer.enter",
+				"anim.blink_timer.exit": "animation.scp173.blink_timer.exit"
+			},
+			"properties": {
+				"scpdt:is_looked_at": {
+					"type": "bool",
+					"default": false
+				},
+				"scpdt:is_caged": {
+					"type": "bool",
+					"default": false
+				},
+				"scpdt:is_blink_phase": {
+					"type": "bool",
+					"default": false
+				},
+				"scpdt:is_scp131_nearby": {
+					"type": "bool",
+					"default": false
+				}
+			}
+		},
+
+		"components": {
+			"minecraft:is_hidden_when_invisible": {},
+			"minecraft:experience_reward": {
+				"on_death": "query.last_hit_by_player ? Math.Random(90,100) : 0"
+			},
+			"minecraft:knockback_resistance": {
+				"value": 1.0
+			},
+			"minecraft:fire_immune": {},
+			"minecraft:health": {
+				"value": 10000,
+				"max": 10000
+			},
+			"minecraft:looked_at": {
+				"search_radius": 32.0,
+				"look_at_locations": [{ "location": "head" }, { "location": "body" }],
+				"set_target": "never",
+				"find_players_only": false,
+				"looked_at_cooldown": 0.1,
+				"field_of_view": 120,
+				"scale_fov_by_distance": false,
+				"line_of_sight_obstruction_type": "collision_for_camera",
+				"looked_at_event": {
+					"event": "scp173:on_looked_at",
+					"filter": "self"
+				},
+				"not_looked_at_event": {
+					"event": "scp173:on_not_looked_at",
+					"filter": "self"
+				},
+				"filters": {
+					"all_of": [
+						{
+							"other_with_families": ["villager", "human", "player", "irongolem", "snowgolem"]
+						},
+						{
+							"none_of": [
+								{ "test": "bool_property", "domain": "scpdt:is_blink_phase" },
+								{ "test": "bool_property", "domain": "scpdt:is_scp131_nearby" },
+								{
+									"all_of": [
+										{ "test": "is_riding" },
+										{ "test": "is_vehicle_family", "value": "scp173_cage" }
+									]
+								}
+							]
+						}
+					]
+				}
+			},
+			"minecraft:entity_sensor": {
+				"subsensors": [
+					{
+						"event": "scp173:on_scp131_not_nearby",
+						"cooldown": 0.2,
+						"range": [7.0, 2.0],
+						"minimum_count": 0,
+						"maximum_count": 0,
+						// This filter must be exactly the same as the one for scp173:on_scp131_nearby.
+						"event_filters": {
+							"all_of": [{ "test": "is_family", "subject": "other", "value": "scp131" }]
+						}
+					},
+					{
+						"event": "scp173:on_scp131_nearby",
+						"cooldown": 0.2,
+						"range": [7.0, 2.0],
+						"minimum_count": 1,
+						// This filter must be exactly the same as the one for scp173:on_scp131_not_nearby.
+						"event_filters": {
+							"all_of": [{ "test": "is_family", "subject": "other", "value": "scp131" }]
+						}
+					}
+				]
+			},
+			"minecraft:environment_sensor": {
+				"triggers": [
+					{
+						"filters": {
+							"any_of": [
+								{ "test": "bool_property", "domain": "scpdt:is_blink_phase" },
+								{
+									"none_of": [
+										{ "test": "bool_property", "domain": "scpdt:is_looked_at" },
+										{ "test": "bool_property", "domain": "scpdt:is_caged" },
+										{ "test": "bool_property", "domain": "scpdt:is_scp131_nearby" }
+									]
+								}
+							]
+						},
+						"event": "scp173:become_mobile"
+					},
+					{
+						"filters": {
+							"any_of": [
+								{ "test": "bool_property", "domain": "scpdt:is_caged" },
+								{ "test": "bool_property", "domain": "scpdt:is_scp131_nearby" },
+								{
+									"all_of": [
+										{ "test": "bool_property", "domain": "scpdt:is_blink_phase", "operator": "!=" },
+										{ "test": "bool_property", "domain": "scpdt:is_looked_at" }
+									]
+								}
+							]
+						},
+						"event": "scp173:become_immobile"
+					},
+					{
+						"filters": {
+							"all_of": [
+								{ "test": "is_riding" },
+								{ "test": "is_vehicle_family", "value": "scp173_cage" }
+							]
+						},
+						"event": "scp173:on_caged"
+					},
+					{
+						"filters": {
+							"none_of": [
+								{ "test": "is_riding" },
+								{ "test": "is_vehicle_family", "value": "scp173_cage" }
+							]
+						},
+						"event": "scp173:on_uncaged"
+					}
+				]
+			},
+			"minecraft:behavior.melee_box_attack": {
+				"priority": 0,
+				"speed_multiplier": 1.3
+			},
+			"minecraft:behavior.hurt_by_target": {
+				"priority": 2
+			},
+			"minecraft:behavior.nearest_attackable_target": {
+				"priority": 1,
+				"within_radius": 20,
+				"reselect_targets": true,
+				"attack_interval": 1,
+				"entity_types": [
+					{
+						"filters": {
+							"other_with_families": ["villager", "human", "player", "irongolem", "snowgolem"]
+						},
+						"max_dist": 20
+					}
+				],
+				"must_see_forget_duration": 16.0,
+				"must_see": true
+			},
+			"minecraft:interact": {
+				"interactions": [
+					{
+						"on_interact": {
+							"filters": {
+								"all_of": [
+									{ "test": "is_family", "subject": "other", "value": "player" },
+									{
+										"test": "has_equipment",
+										"domain": "hand",
+										"subject": "other",
+										"value": "lc:dt_scp1023_arc"
+									}
+								]
+							},
+							"event": "scp173:stop_pooping",
+							"target": "self"
+						},
+						"hurt_item": 0,
+						"swing": true,
+						"interact_text": "action.interact.scpdt.scp173_poop.freeze"
+					}
+				]
+			},
+			"minecraft:behavior.random_stroll": {
+				"priority": 10,
+				"speed_multiplier": 0.8
+			},
+			"minecraft:movement.basic": {},
+			"minecraft:can_climb": {},
+			"minecraft:movement": {
+				"value": 0.3
+			},
+			"minecraft:underwater_movement": {
+				"value": 0.1
+			},
+			"minecraft:collision_box": {
+				"width": 0.6,
+				"height": 1.9
+			},
+			"minecraft:nameable": {},
+			"minecraft:physics": {},
+			"minecraft:pushable": {
+				"is_pushable": false,
+				"is_pushable_by_piston": true
+			},
+			"minecraft:conditional_bandwidth_optimization": {},
+			"minecraft:navigation.walk": {
+				"can_float": false,
+				"avoid_water": true,
+				"avoid_damage_blocks": false,
+				"can_pass_doors": true,
+				"can_open_doors": false
+			},
+			"minecraft:variable_max_auto_step": {
+				"base_value": 1.0625, // 1 block + 1 pixel
+				"jump_prevented_value": 0.5625 // 0.5 blocks + 1 pixel
+			}
+		},
+
+		"component_groups": {
+			"mobile": {
+				"minecraft:movement": {
+					"value": 0.5
+				},
+				"minecraft:attack": {
+					"damage": [200, 200]
+				}
+			},
+			"immobile": {
+				"minecraft:movement": {
+					"value": 0.0
+				},
+				"minecraft:attack": {
+					"damage": [0, 0]
+				},
+				"minecraft:body_rotation_blocked": {}
+			},
+			"uncaged": {
+				"minecraft:type_family": {
+					"family": ["mob", "scp173", "monster", "scp", "scp173_uncaged"]
+				},
+				"minecraft:scale": {
+					"value": 1.0
+				}
+			},
+			"caged": {
+				"minecraft:type_family": {
+					"family": ["mob"]
+				},
+				"minecraft:scale": {
+					"value": 0.82
+				}
+			},
+			"blink_start_timer": {},
+			"blink_stop_timer": {},
+			"pooper": {
+				"minecraft:spawn_entity": {
+					"entities": {
+						"filters": {
+							"all_of": [{ "test": "is_underwater", "operator": "!=" }]
+						},
+						"max_wait_time": 60,
+						"min_wait_time": 20,
+						"num_to_spawn": 1,
+						"spawn_entity": "lc:dt_scp173_excrement",
+						"spawn_event": "shit:scp173_dropped",
+						"spawn_sound": "plop"
+					}
+				}
+			}
+		},
+
+		"events": {
+			"minecraft:entity_spawned": {
+				"add": {
+					"component_groups": ["pooper", "uncaged", "mobile", "blink_start_timer"]
+				}
+			},
+			"scp173:become_mobile": {
+				"add": {
+					"component_groups": ["mobile"]
+				},
+				"remove": {
+					"component_groups": ["immobile"]
+				}
+			},
+			"scp173:become_immobile": {
+				"add": {
+					"component_groups": ["immobile"]
+				},
+				"remove": {
+					"component_groups": ["mobile"]
+				}
+			},
+			"scp173:on_looked_at": {
+				"set_property": {
+					"scpdt:is_looked_at": true
+				}
+			},
+			"scp173:on_not_looked_at": {
+				"set_property": {
+					"scpdt:is_looked_at": false
+				}
+			},
+			"scp173:on_caged": {
+				"add": {
+					"component_groups": ["caged"]
+				},
+				"remove": {
+					"component_groups": ["uncaged", "pooper", "blink_stop_timer", "blink_start_timer"]
+				},
+				"set_property": {
+					"scpdt:is_blink_phase": false,
+					"scpdt:is_caged": true
+				}
+			},
+			"scp173:on_uncaged": {
+				"add": {
+					"component_groups": ["uncaged", "pooper", "blink_start_timer"]
+				},
+				"remove": {
+					"component_groups": ["caged"]
+				},
+				"set_property": {
+					"scpdt:is_caged": false
+				}
+			},
+			"scp173:enter_blink_phase": {
+				"add": {
+					"component_groups": ["blink_stop_timer"]
+				},
+				"remove": {
+					"component_groups": ["blink_start_timer"]
+				},
+				"set_property": {
+					"scpdt:is_blink_phase": true
+				}
+			},
+			"scp173:exit_blink_phase": {
+				"add": {
+					"component_groups": ["blink_start_timer"]
+				},
+				"remove": {
+					"component_groups": ["blink_stop_timer"]
+				},
+				"set_property": {
+					"scpdt:is_blink_phase": false
+				}
+			},
+			"scp173:on_scp131_nearby": {
+				"set_property": {
+					"scpdt:is_scp131_nearby": true
+				}
+			},
+			"scp173:on_scp131_not_nearby": {
+				"set_property": {
+					"scpdt:is_scp131_nearby": false
+				}
+			}
+		}
+	}
 }
-  

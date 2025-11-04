@@ -16,11 +16,10 @@
 				]
 			},
 			"animations": {
-				"spawning": "animation.scp106.spawn",
 				"spawn": "controller.animation.scp106.spawn",
 				"send_to_pd": "controller.animation.scp106.send_to_pd",
-				"sending_to_pd": "animation.scp106.send_to_pd",
-				"move_another": "animation.scp106.move_another"
+				"spawning": "animation.scp106.spawn",
+				"sending_to_pd": "animation.scp106.send_to_pd"
 			}
 		},
 		"component_groups": {
@@ -39,7 +38,7 @@
 			},
 			"melee": {
 				"minecraft:movement": {
-					"value": 0.9
+					"value": 0.24
 				},
 				"minecraft:behavior.delayed_attack": {
 					"priority": 0,
@@ -47,10 +46,10 @@
 					"track_target": true,
 					"require_complete_path": false,
 					"random_stop_interval": 0,
-					"reach_multiplier": 2.5,
+					"reach_multiplier": 2.7,
 					"speed_multiplier": 1.1,
-					"attack_duration": 0.83,
-					"hit_delay_pct": 0.56
+					"attack_duration": 0.2,
+					"hit_delay_pct": 1.0
 				}
 			},
 			"can_send_pd": {
@@ -84,10 +83,9 @@
 			}
 		},
 		"components": {
-			"minecraft:is_hidden_when_invisible": {
-			},
+			"minecraft:is_hidden_when_invisible": {},
 			"minecraft:pushable": {
-				"is_pushable": true,
+				"is_pushable": false,
 				"is_pushable_by_piston": true
 			},
 			"minecraft:breathable": {
@@ -100,39 +98,34 @@
 				"height": 1.9
 			},
 			"minecraft:nameable": {},
-			"minecraft:navigation.float": {
-                "is_amphibious": true,
-                "can_pass_doors": true,
-                "can_break_doors": true,
-                "can_breach": true,
-                "can_path_from_air": true,
-                "can_path_over_lava": true,
-                "can_path_over_water": true,
-                "avoid_water": false,
-                "avoid_portals": true
+			"minecraft:behavior.float": {
+				"priority": 3
 			},
-			"minecraft:movement.fly": {},
-			"minecraft:flying_speed": {
-				"value": 0.9
+			"minecraft:navigation.walk": {
+				"avoid_damage_blocks": true,
+				"can_float": true,
+				"can_pass_doors": true,
+				"can_break_doors": true,
+				"can_path_from_air": true,
+				"can_path_over_lava": true,
+				"can_path_over_water": true,
+				"avoid_water": true
 			},
+			"minecraft:movement.basic": {},
 			"minecraft:jump.static": {},
-			"minecraft:knockback_resistance": {
-				"value": 5.0
-			},
 			"minecraft:can_climb": {},
+			"minecraft:knockback_resistance": {
+				"value": 1.0
+			},
 			"minecraft:follow_range": {
-				"value": 30,
-				"max": 30
+				"value": 64,
+				"max": 64
 			},
 			"minecraft:fall_damage": {
 				"value": 0.0
 			},
 			"minecraft:type_family": {
-				"family": [
-					"monster",
-					"scp",
-					"scp106"
-				]
+				"family": ["mob", "monster", "scp", "scp106"]
 			},
 			"minecraft:health": {
 				"value": 50000,
@@ -146,15 +139,6 @@
 			},
 			"minecraft:attack": {
 				"damage": 200
-			},
-			"minecraft:behavior.mount_pathing": {
-				"priority": 2,
-				"speed_multiplier": 2,
-				"target_dist": 30,
-				"track_target": true
-			},
-			"minecraft:behavior.move_towards_restriction": {
-				"priority": 5
 			},
 			"minecraft:behavior.random_stroll": {
 				"priority": 7,
@@ -183,11 +167,7 @@
 				"entity_types": [
 					{
 						"filters": {
-							"other_with_families": [
-								"human",
-								"villager",
-								"player"
-							]
+							"other_with_families": ["human", "villager", "player"]
 						},
 						"max_dist": 30
 					}
@@ -215,52 +195,38 @@
 			],
 			"minecraft:physics": {
 				"has_gravity": true,
-				"has_collision": false
+				"has_collision": true
 			},
 			"minecraft:conditional_bandwidth_optimization": {}
 		},
 		"events": {
 			"minecraft:entity_spawned": {
 				"add": {
-					"component_groups": [
-						"spawning"
-					]
+					"component_groups": ["spawning"]
 				}
 			},
 			"scp106:spawned": {
 				"add": {
-					"component_groups": [
-						"melee"
-					]
+					"component_groups": ["melee"]
 				},
 				"remove": {
-					"component_groups": [
-						"spawning"
-					]
+					"component_groups": ["spawning"]
 				}
 			},
 			"scp106:can_send_pd": {
 				"add": {
-					"component_groups": [
-						"can_send_pd"
-					]
+					"component_groups": ["can_send_pd"]
 				},
 				"remove": {
-					"component_groups": [
-						"send_pd"
-					]
+					"component_groups": ["send_pd"]
 				}
 			},
 			"scp106:send_pd": {
 				"remove": {
-					"component_groups": [
-						"can_send_pd"
-					]
+					"component_groups": ["can_send_pd"]
 				},
 				"add": {
-					"component_groups": [
-						"send_pd"
-					]
+					"component_groups": ["send_pd"]
 				}
 			}
 		}

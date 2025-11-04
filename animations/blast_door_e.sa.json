@@ -1,0 +1,33 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.scpdt.blast_door_e.opening": {
+			"animation_length": 5,
+			"timeline": {
+				"0.00": ["/playsound scpdt.blast_door.open @a ~~~ 1.4"],
+				"0.50": [
+					"/fill ^ ^2 ^ ^ ^0 ^ air replace lc:dt_door_dummy",
+					"@s scpdt:disable_block_collision"
+				],
+				"2.25": ["/fill ^-1 ^2 ^ ^1 ^0 ^ air replace lc:dt_door_dummy"],
+				"3.26": ["@s scpdt:on_opening_complete"]
+			}
+		},
+		"animation.scpdt.blast_door_e.closing": {
+			"animation_length": 5,
+			"timeline": {
+				"0.00": [
+					"/playsound scpdt.blast_door.close @a ~~~ 1.4",
+					"/fill ^-2 ^2 ^ ^-2 ^0 ^ lc:dt_door_dummy keep",
+					"/fill ^2 ^2 ^ ^2 ^0 ^ lc:dt_door_dummy keep"
+				],
+				"1.00": [
+					"/fill ^-1 ^2 ^ ^-1 ^0 ^ lc:dt_door_dummy keep",
+					"/fill ^1 ^2 ^ ^1 ^0 ^ lc:dt_door_dummy keep"
+				],
+				"2.25": ["/fill ^ ^2 ^ ^ ^0 ^ lc:dt_door_dummy keep", "@s scpdt:enable_block_collision"],
+				"2.84": ["@s scpdt:on_closing_complete"]
+			}
+		}
+	}
+}

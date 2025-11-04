@@ -1,26 +1,28 @@
 {
-    "format_version": "1.16.0",
-    "minecraft:block": {
-        "description": {
-            "identifier": "lc:dt_pd_floor",
-            "properties": {
-            }
-        },
-        "components": {
-            "minecraft:material_instances": {
-                "*": {
-                    "texture": "dt_pd_floor",
-                    "render_method": "opaque"
-                }
-            },
-            "minecraft:destroy_time": 2,
-            "minecraft:unit_cube": {},
-            "minecraft:map_color": "#3B3D94",
-            "tag:lc:dystopiablock": {}
-        },
-        "events": {
-        },
-        "permutations": [
-        ]
-    }
+	"format_version": "1.21.120",
+	"minecraft:block": {
+		"description": {
+			"identifier": "lc:dt_pd_floor",
+			"menu_category": {
+				"category": "construction"
+			}
+		},
+		"components": {
+			"minecraft:material_instances": {
+				"*": {
+					"texture": "dt_pd_floor",
+					"render_method": "opaque"
+				}
+			},
+			"minecraft:geometry": "minecraft:geometry.full_block",
+			"minecraft:map_color": "#353f3d",
+			"minecraft:destructible_by_explosion": {
+				"explosion_resistance": 30
+			},
+			"minecraft:destructible_by_mining": {
+				"seconds_to_destroy": 3
+			},
+			"tag:lc:dystopiablock": {}
+		}
+	}
 }

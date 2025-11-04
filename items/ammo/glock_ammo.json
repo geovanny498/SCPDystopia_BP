@@ -1,22 +1,19 @@
 {
-  "format_version": "1.16.100",
-  "minecraft:item": {
-    "description": {
-      "identifier": "lc:dt_glock_ammo",
-      "category": "Items"
-    },
-    "components": {
-      "minecraft:creative_category": {
-        "parent": "itemGroup.name.items"
-      },
-      "minecraft:display_name": {
-        "value": "Glock Ammo"
-      },
-      "minecraft:icon": {
-        "texture": "dt_glock_ammo"
-      },
-      "minecraft:stacked_by_data": true,
-      "minecraft:max_stack_size": 64
-    }
-  }
+	"format_version": "1.21.120",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_glock_ammo",
+			"menu_category": {
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:display_name": {
+				"value": "Glock Ammo"
+			},
+			"minecraft:icon": "dt_glock_ammo",
+			"minecraft:allow_off_hand": true,
+			"minecraft:max_stack_size": 64
+		}
+	}
 }

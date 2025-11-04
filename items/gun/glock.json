@@ -1,16 +1,21 @@
 {
-	"format_version": "1.16.100",
+	"format_version": "1.21.120",
 	"minecraft:item": {
 		"description": {
 			"identifier": "lc:dt_glock",
-			"category": "Equipment"
+			"menu_category": {
+				"category": "equipment"
+			}
 		},
 		"components": {
-			"minecraft:use_duration": 2.6,
-			"minecraft:damage": 3,
-			"minecraft:creative_category": {
-				"parent": "itemGroup.name.equipment"
+			"scpdt:dont_damage_durability_on_hit": {},
+			"scpdt:glock": {},
+			"minecraft:use_modifiers": {
+				"movement_modifier": 0.5,
+				"use_duration": 0.01
 			},
+			"minecraft:damage": 3,
+			"minecraft:can_destroy_in_creative": false,
 			"minecraft:durability": {
 				"max_durability": 18,
 				"damage_chance": {
@@ -20,9 +25,7 @@
 			},
 			"minecraft:hand_equipped": true,
 			"minecraft:max_stack_size": 1,
-			"minecraft:icon": {
-				"texture": "dt_glock_icon"
-			},
+			"minecraft:icon": "dt_glock_icon",
 			"minecraft:display_name": {
 				"value": "dt.nameslot.glock"
 			},
@@ -30,102 +33,8 @@
 				"duration": 0.3,
 				"category": "dt_glock_shooting"
 			},
-			"minecraft:on_use": {
-				"on_use": {
-					"event": "glock:shoot"
-				}
-			},
-			"minecraft:weapon": {
-				"on_hurt_entity": {
-				},
-				"on_hit_block": {
-				}
-			},
-			"tag:lc:class_d_can_equip": {},
-			"tag:lc:glock": {}
-		},
-		"events": {
-			"glock:shoot": {
-				"sequence": [
-					{
-						"condition": "(query.remaining_durability == 1)",
-						"run_command": {
-							"command": [
-								"execute @s ~~~ playsound scpdt.gun.shot_dry @a[r=10] ~~~",
-								"replaceitem entity @s slot.weapon.mainhand 0 lc:dt_glock_empty"
-							],
-							"target": "holder"
-						}
-					},
-					{
-						"condition": "(query.remaining_durability > 1)",
-						"sequence": [
-							{
-								"condition": "!q.is_on_ground",
-								"shoot": {
-									"projectile": "lc:dt_glock_bullet_player_uncertain",
-									"launch_power": 5
-								},
-								"run_command": {
-									"command": [
-										"execute @s ~~~ playsound scpdt.glock.shot @a[r=10] ~~~",
-										"playanimation @s animation.dt_misc.player_gun_fire",
-										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.03 ^1",
-										"camerashake add @s 0.8 0.16 rotational",
-										"title @s actionbar §c-      §f+      §c-"
-									],
-									"target": "holder"
-								},
-								"damage": {
-									"type": "magic",
-									"amount": 1
-								}
-							},
-							{
-								"condition": "!q.is_sneaking && q.is_on_ground",
-								"shoot": {
-									"projectile": "lc:dt_glock_bullet_player",
-									"launch_power": 5
-								},
-								"run_command": {
-									"command": [
-										"execute @s ~~~ playsound scpdt.glock.shot @a[r=10] ~~~",
-										"playanimation @s animation.dt_misc.player_gun_fire",
-										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.03 ^1",
-										"camerashake add @s 0.4 0.16 rotational",
-										"title @s actionbar §c- §f+ §c-"
-									],
-									"target": "holder"
-								},
-								"damage": {
-									"type": "magic",
-									"amount": 1
-								}
-							},
-							{
-								"condition": "q.is_sneaking && q.is_on_ground",
-								"shoot": {
-									"projectile": "lc:dt_glock_bullet_player_sneak",
-									"launch_power": 5
-								},
-								"run_command": {
-									"command": [
-										"execute @s ~~~ playsound scpdt.glock.shot @a[r=10] ~~~",
-										"playanimation @s animation.dt_misc.player_gun_fire",
-										"tp @s[tag=gun_recoil_on] ~~~ facing ^ ^0.04 ^1",
-										"camerashake add @s 0.4 0.22 rotational",
-										"title @s actionbar §c-§f+§c-"
-									],
-									"target": "holder"
-								},
-								"damage": {
-									"type": "magic",
-									"amount": 1
-								}
-							}
-						]
-					}
-				]
+			"minecraft:tags": {
+				"tags": ["lc:class_d_can_equip", "lc:glock"]
 			}
 		}
 	}

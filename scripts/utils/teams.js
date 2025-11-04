@@ -6,7 +6,7 @@ export const teamGroups = {
         "lc:dt_cd_commander",
         "lc:dt_cd_leader",
         "lc:dt_cd",
-        "lc:dt_chaos_insurgency"
+        "lc:dt_chaos_insurgency",
     ]),
     foundation: new Set([
         "lc:dt_chara",
@@ -23,8 +23,9 @@ export const teamGroups = {
         "lc:dt_beta7c",
         "lc:dt_beta7",
         "lc:dt_epsilon6c",
-        "lc:dt_epsilon6"
-    ])
+        "lc:dt_epsilon6",
+        "lc:dt_epsilon11_apache_combat",
+    ]),
 };
 
 const helmetTeams = {
@@ -32,7 +33,7 @@ const helmetTeams = {
     "minecraft:netherite_helmet": "foundation",
     "minecraft:diamond_helmet": "foundation",
     "minecraft:iron_helmet": "foundation",
-    "gabrielaplok:nv_goggles": "foundation"
+    "gabrielaplok:nv_goggles": "foundation",
 };
 
 export function getTeam(entityOrTypeId) {
@@ -47,7 +48,10 @@ export function getTeam(entityOrTypeId) {
         return null;
     }
 
-    typeId = typeof entityOrTypeId === "string" ? entityOrTypeId : entityOrTypeId.typeId;
+    typeId =
+        typeof entityOrTypeId === "string"
+            ? entityOrTypeId
+            : entityOrTypeId.typeId;
     if (!typeId) return null;
 
     for (const team in teamGroups) {
