@@ -100,7 +100,7 @@
                     "reach_multiplier": 3.4,
                     "speed_multiplier": 1.16,
                     "attack_duration": 0.15,
-                    "hit_delay_pct": 0.1
+                    "hit_delay_pct": 0.45
                 },
                 "minecraft:attack": {
                     "damage": 12
