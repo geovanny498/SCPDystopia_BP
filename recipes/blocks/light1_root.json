@@ -1,28 +1,23 @@
 {
-  "format_version": "1.12",
-  "minecraft:recipe_shaped": {
-    "description": {
-    "identifier": "lc:dt_light1_root"
-    },
+	"format_version": "1.12",
+	"minecraft:recipe_shaped": {
+		"description": {
+			"identifier": "lc:dt_light1_root"
+		},
 
-    
-    "tags": [ "crafting_table" ],
-    "pattern": [
-      "# #",
-      "A A",
-      "# #"
-    ],
-    "key": {
-      "#": {
-        "item": "minecraft:iron_ingot"
-      },
-      "A": {
-        "item": "lc:dt_scpdystopia_orb"
-      }
-    },
-    "result": {
-      "item": "lc:dt_light1_root",
-      "count": 4
-    }
-  }
+		"tags": ["crafting_table"],
+		"pattern": ["# #", "A A", "# #"],
+		"key": {
+			"#": {
+				"item": "minecraft:iron_ingot"
+			},
+			"A": {
+				"item": "lc:dt_scpdystopia_orb"
+			}
+		},
+		"result": {
+			"item": "lc:dt_light1_root",
+			"count": 4
+		}
+	}
 }

@@ -1,41 +1,28 @@
 {
-  "format_version": "1.16.100",
-  "minecraft:item": {
-    "description": {
-    "identifier": "lc:dt_painkillers",
-      "category": "Items"
-    },
-    "components": {
-      "minecraft:icon": {
-        "texture": "dt_painkillers"
-      },
-      "minecraft:creative_category": {
-        "parent": "itemGroup.name.items"
-      },
-      "minecraft:use_duration": 1.6,
-      "minecraft:display_name": {
-        "value": "Painkillers"
-      },
-      "minecraft:food": {
+	"format_version": "1.21.120",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_painkillers",
+			"menu_category": {
+				"category": "equipment"
+			}
+		},
+		"components": {
+			"scpdt:painkillers": {},
+			"minecraft:icon": "dt_painkillers",
+			"minecraft:use_modifiers": {
+				"movement_modifier": 1.0,
+				"use_duration": 0.8
+			},
+			"minecraft:display_name": {
+				"value": "Painkillers"
+			},
+			"minecraft:food": {
 				"nutrition": 1,
-				"saturation_modifier": "low",
-				"can_always_eat": true,
-				"on_consume": {
-					"event": "on_consume",
-					"target": "self"
-				}
+				"saturation_modifier": 0.5,
+				"can_always_eat": true
 			},
 			"minecraft:use_animation": "eat"
-    },
-    "events": {
-      "on_consume": {
-        "add_mob_effect": {
-          "effect": "regeneration",
-          "target": "holder",
-          "duration": 35,
-          "amplifier": 0
-        }
-      }
-    }
-  }
+		}
+	}
 }

@@ -1,69 +1,28 @@
 {
-  "format_version": "1.16.100",
-  "minecraft:item": {
-    "description": {
-    "identifier": "lc:dt_scp420j",
-      "category": "Items"
-    },
-    "components": {
-      "minecraft:use_duration": 2.6,
-      "minecraft:creative_category": {
-        "parent": "itemGroup.name.items"
-      },
-      "minecraft:hand_equipped": true,
-      "minecraft:max_stack_size": 16,
-      "minecraft:icon": {
-        "texture": "dt_scp420j"
-      },
-      "minecraft:display_name": {
-        "value": "SCP-420-J"
-      },
-      "minecraft:on_use": {
-        "on_use": {
-          "event": "scp420j:use"
-        }
-      }
-    },
-    "events": {
-			"scp420j:use": {
-        "randomize": [
-          {
-            "weight": 20,
-            "add_mob_effect": {
-              "effect": "nausea",
-              "target": "holder",
-              "duration": 12,
-              "amplifier": 1
-            },
-            "run_command": {
-              "command": [
-                "playsound scpdt.scp420j.use @a[r=5] ~~~",
-                "title @s actionbar Aghhh... feeling good..."
-              ],
-              "target": "holder"
-            },
-            "decrement_stack": {}
-          },
-          {
-            "weight": 5,
-            "add_mob_effect": {
-              "effect": "nausea",
-              "target": "holder",
-              "duration": 24,
-              "amplifier": 1
-            },
-            "run_command": {
-              "command": [
-                "playsound scpdt.scp420j.use @a[r=5] ~~~",
-                "playsound scpdt.fart @a[r=15] ~~~",
-                "title @s actionbar HAHAHA FUCKIN ASSSS LETS GOOOOO"
-              ],
-              "target": "holder"
-            },
-            "decrement_stack": {}
-          }
-        ]
-      }
+	"format_version": "1.21.120",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_scp420j",
+			"menu_category": {
+				"category": "items"
+			}
+		},
+		"components": {
+			"scpdt:scp420j": {},
+			"minecraft:use_modifiers": {
+				"movement_modifier": 1.0,
+				"use_duration": 0.01
+			},
+			"minecraft:hand_equipped": false,
+			"minecraft:max_stack_size": 16,
+			"minecraft:icon": "dt_scp420j",
+			"minecraft:display_name": {
+				"value": "SCP-420-J"
+			},
+			"minecraft:cooldown": {
+				"duration": 8.0,
+				"category": "scp420j"
+			}
 		}
-  }
+	}
 }

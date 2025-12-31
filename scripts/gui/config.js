@@ -10,11 +10,11 @@ export default {
                 entries: [
                     {
                         label: "Cerca",
-                        event: "humanoid:set_tamed_normal",
+                        event: "humanoid:set_tamed_close",
                     },
                     {
                         label: "Lejos",
-                        event: "humanoid:set_tamed_war",
+                        event: "humanoid:set_tamed_far",
                     },
                 ],
             },
@@ -30,6 +30,23 @@ export default {
                         event: "mtf:to_move_free",
                     },
                     { label: "Detenerse", event: "mtf:to_stop" },
+                ],
+            },
+            {
+                category: "Reglas de fuego",
+                entries: [
+                    {
+                        label: "Solo enemigos",
+                        event: "humanoid:fire_enemies_only"
+                    },
+                    {
+                        label: "Defensivo (alcance reducido)",
+                        event: "humanoid:fire_defensive"
+                    },
+                    {
+                        label: "Solo al recibir daño",
+                        event: "humanoid:fire_mode_hit"
+                    },
                 ],
             },
             {
@@ -131,7 +148,7 @@ export default {
                             event: "start_chara",
                         },
                         {
-                            label: "con máscara",
+                            label: "Con máscara",
                             event: "start_chara1",
                         },
                         {
@@ -139,7 +156,7 @@ export default {
                             event: "start_chara2",
                         },
                         {
-                            label: "con máscara (Sangre)",
+                            label: "Con máscara (Sangre)",
                             event: "start_chara3",
                         },
                     ],
@@ -168,6 +185,33 @@ export default {
                         {
                             label: "Hazmat (Sangre)",
                             event: "start_death3",
+                        },
+                    ],
+                },
+            ],
+        },
+        "lc:dt_alpha1c": {
+            replace: false,
+            insertAt: "start",
+            categories: [
+                {
+                    category: "Variante",
+                    entries: [
+                        {
+                            label: "MTF Delta-1 Commander",
+                            event: "start_variant1",
+                        },
+                        {
+                            label: "MTF Delta-1 Mita",
+                            event: "start_variant3",
+                        },
+                        {
+                            label: "MTF Delta-1 Leader",
+                            event: "start_variant0",
+                        },
+                        {
+                            label: "MTF Delta-1 Frisk",
+                            event: "start_variant2",
                         },
                     ],
                 },

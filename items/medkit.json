@@ -1,41 +1,28 @@
 {
-  "format_version": "1.16.100",
-  "minecraft:item": {
-    "description": {
-    "identifier": "lc:dt_medkit",
-      "category": "Items"
-    },
-    "components": {
-      "minecraft:icon": {
-        "texture": "dt_medkit"
-      },
-      "minecraft:creative_category": {
-        "parent": "itemGroup.name.items"
-      },
-      "minecraft:use_duration": 3.4,
-      "minecraft:display_name": {
-        "value": "Medkit"
-      },
-      "minecraft:food": {
+	"format_version": "1.21.120",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_medkit",
+			"menu_category": {
+				"category": "equipment"
+			}
+		},
+		"components": {
+			"scpdt:medkit": {},
+			"minecraft:icon": "dt_medkit",
+			"minecraft:use_modifiers": {
+				"movement_modifier": 0.5,
+				"use_duration": 2.4
+			},
+			"minecraft:display_name": {
+				"value": "Medkit"
+			},
+			"minecraft:food": {
 				"nutrition": 1,
-				"saturation_modifier": "low",
-				"can_always_eat": true,
-				"on_consume": {
-					"event": "on_consume",
-					"target": "self"
-				}
+				"saturation_modifier": 0.5,
+				"can_always_eat": true
 			},
 			"minecraft:use_animation": "eat"
-    },
-    "events": {
-      "on_consume": {
-        "add_mob_effect": {
-          "effect": "regeneration",
-          "target": "holder",
-          "duration": 12,
-          "amplifier": 2
-        }
-      }
-    }
-  }
+		}
+	}
 }

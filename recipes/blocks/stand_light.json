@@ -1,31 +1,26 @@
 {
-  "format_version": "1.12",
-  "minecraft:recipe_shaped": {
-    "description": {
-    "identifier": "lc:dt_stand_light"
-    },
+	"format_version": "1.12",
+	"minecraft:recipe_shaped": {
+		"description": {
+			"identifier": "lc:dt_stand_light"
+		},
 
-    
-    "tags": [ "crafting_table" ],
-    "pattern": [
-      " #",
-      " A",
-      "B B"
-    ],
-    "key": {
-      "#": {
-        "item": "minecraft:redstone_lamp"
-      },
-      "A": {
-        "item": "lc:dt_scpdystopia_orb"
-      },
-      "B": {
-        "item": "minecraft:iron_ingot"
-      }
-    },
-    "result": {
-      "item": "lc:dt_stand_light",
-      "count": 4
-    }
-  }
+		"tags": ["crafting_table"],
+		"pattern": [" #", " A", "B B"],
+		"key": {
+			"#": {
+				"item": "minecraft:redstone_lamp"
+			},
+			"A": {
+				"item": "lc:dt_scpdystopia_orb"
+			},
+			"B": {
+				"item": "minecraft:iron_ingot"
+			}
+		},
+		"result": {
+			"item": "lc:dt_stand_light",
+			"count": 4
+		}
+	}
 }

@@ -1,26 +1,35 @@
 {
-  "format_version": "1.12",
-  "minecraft:recipe_shapeless": {
-    "description": {
-    "identifier": "lc:dt_light4"
-    },
-
-    
-    "tags": [ "crafting_table" ],
-    "ingredients": [
-      {
-        "item": "minecraft:redstone_lamp"
-      },
-      {
-        "item": "minecraft:iron_ingot"
-      },
-      {
-        "item": "lc:dt_scpdystopia_orb"
-      }
-    ],
-    "result": {
-      "item": "lc:dt_light4",
-      "count": 4
-    }
-  }
+	"format_version": "1.20.10",
+	"minecraft:recipe_shaped": {
+		"description": {
+			"identifier": "lc:dt_light4"
+		},
+		"tags": ["crafting_table"],
+		// prettier-ignore
+		"pattern": [
+			"I",
+			"D",
+			"L"
+		],
+		"key": {
+			"D": {
+				"item": "lc:dt_scpdystopia_orb"
+			},
+			"L": {
+				"item": "minecraft:redstone_lamp"
+			},
+			"I": {
+				"item": "minecraft:iron_ingot"
+			}
+		},
+		"unlock": [
+			{
+				"item": "lc:dt_scpdystopia_orb"
+			}
+		],
+		"result": {
+			"item": "lc:dt_light4",
+			"count": 4
+		}
+	}
 }

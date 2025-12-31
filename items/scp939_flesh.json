@@ -1,28 +1,28 @@
 {
-  "format_version": "1.16.100",
-  "minecraft:item": {
-    "description": {
-    "identifier": "lc:dt_scp939_flesh",
-      "category": "Nature"
-    },
-    "components": {
-      "minecraft:use_duration": 1.6,
-      "minecraft:creative_category": {
-        "parent": "itemGroup.name.rawFood"
-      },
-      "minecraft:max_stack_size": 64,
-      "minecraft:icon": {
-        "texture": "dt_scp939_flesh"
-      },
-      "minecraft:display_name": {
-        "value": "SCP-939 Flesh"
-      },
-      "minecraft:use_animation": "eat",
-      "minecraft:food": {
+	"format_version": "1.21.120",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_scp939_flesh",
+			"menu_category": {
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:use_modifiers": {
+				"movement_modifier": 0.5,
+				"use_duration": 1.6
+			},
+			"minecraft:max_stack_size": 64,
+			"minecraft:icon": "dt_scp939_flesh",
+			"minecraft:display_name": {
+				"value": "SCP-939 Flesh"
+			},
+			"minecraft:use_animation": "eat",
+			"minecraft:food": {
 				"nutrition": 2,
-				"saturation_modifier": "low",
+				"saturation_modifier": 0.4,
 				"can_always_eat": false
 			}
-    }
-  }
+		}
+	}
 }

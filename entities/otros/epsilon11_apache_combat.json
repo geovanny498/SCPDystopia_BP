@@ -1,5 +1,5 @@
 {
-	"format_version": "1.18.10",
+	"format_version": "1.21.80",
 	"minecraft:entity": {
 		"description": {
 			"identifier": "lc:dt_epsilon11_apache_combat",
@@ -80,10 +80,10 @@
 					]
 				},
 				"minecraft:shooter": {
-					"def": "lc:dt_apache_bullet"
+					"def": "lc:dt_scar_player_bullet"
 				},
 				"minecraft:behavior.avoid_mob_type": {
-					"priority": 0,
+					"priority": 2,
 					"entity_types": [
 						{
 							"filters": {
@@ -103,97 +103,96 @@
 				},
 				"minecraft:behavior.ranged_attack": {
 					"priority": 1,
-					"attack_interval_min": 2,
-					"attack_interval_max": 4,
+					"charge_charged_trigger": 0.0,
+                    "charge_shoot_trigger": 1.2,
+                    "attack_interval_min": 1.2,
+                    "attack_interval_max": 1.2,
 					"burst_shots": 100,
-					"burst_interval": 0.11,
-					"attack_radius": 64,
+					"burst_interval": 0.1,
+					"attack_radius": 128,
 					"speed_multiplier": 1.0
 				},
 				"minecraft:behavior.nearest_attackable_target": {
-					"priority": 2,
-					"within_radius": 64,
+					"priority": -1,
+					"within_radius": 276,
 					"reselect_targets": true,
 					"entity_types": [
-						{
-							"filters": {
-								"all_of": [
-									{
-										"test": "is_family",
-										"subject": "other",
-										"operator": "!=",
-										"value": "scp096"
-									},
-									{
-										"test": "is_family",
-										"subject": "other",
-										"operator": "!=",
-										"value": "scp001_gg"
-									},
-									{
-										"test": "is_family",
-										"subject": "other",
-										"operator": "!=",
-										"value": "enderman"
-									},
-									{
-										"test": "is_family",
-										"subject": "other",
-										"operator": "!=",
-										"value": "scp280"
-									},
-									{
-										"other_with_families": [
-											"monster",
-											"scp",
-											"pillager",
-											"hoglin",
-											"piglin",
-											"class_d",
-											"chaos_insurgency",
-											"chaos"
-										]
-									},
-									{
-										"test": "in_contact_with_water",
-										"operator": "!=",
-										"value": true
-									}
-								]
-							},
-							"max_dist": 64
-						},
-						{
-							"filters": {
-								"all_of": [
-									{
-										"test": "is_family",
-										"subject": "other",
-										"operator": "==",
-										"value": "player"
-									},
-									{
-										"test": "has_equipment",
-										"subject": "other",
-										"domain": "head",
-										"operator": "==",
-										"value": "lc:dt_ci_helmet"
-									}
-								]
-							},
-							"max_dist": 64
-						}
-					],
-					"must_see_forget_duration": 40.0,
-					"must_see": true
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "scp096"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "scp001_gg"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "enderman"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "scp280"
+                                    },
+                                    {
+                                        "other_with_families": [
+                                            "monster",
+                                            "warden",
+                                            "scp",
+                                            "pillager",
+                                            "hoglin",
+                                            "piglin",
+                                            "class_d",
+                                            "chaos_insurgency",
+                                            "chaos",
+                                            "scp049"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "max_dist": 276
+                        },
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "==",
+                                        "value": "player"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:golden_helmet"
+                                    }
+                                ]
+                            },
+                            "max_dist": 276
+                        }
+                    ],
+                    "must_see_forget_duration": 6.0,
+                    "must_see": true
 				},
 				"minecraft:behavior.random_hover": {
-					"priority": 4,
-					"hover_height": [20, 28],
+					"priority": 2,
+					"hover_height": [32, 40],
 					"interval": 5,
 					"speed_multiplier": 1.4,
-					"xz_dist": 15,
-					"y_dist": 15,
+					"xz_dist": 28,
+					"y_dist": 28,
 					"y_offset": 0.0
 				}
 			},
@@ -289,15 +288,87 @@
 			}
 		},
 		"components": {
+			"minecraft:despawn": {
+                "despawn_from_distance": {}
+            },
 			"minecraft:is_hidden_when_invisible": {},
 			"minecraft:knockback_resistance": {
 				"value": 10.0
 			},
 			"minecraft:type_family": {
-				"family": ["scpfoundation", "helicopter", "epsilon11", "mob", "apache", "apache_combat"]
+				"family": ["foundation", "scpfoundation", "mtf", "helicopter", "epsilon11", "mob", "apache", "apache_combat"]
 			},
+			"minecraft:ignore_cannot_be_attacked": {},
 			"minecraft:damage_sensor": {
 				"triggers": [
+					{
+                        "on_damage": {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    }
+                                ],
+                                "any_of": [
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:netherite_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:diamond_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:iron_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "gabrielaplok:nv_goggles"
+                                    }
+                                ]
+                            }
+                        },
+                        "deals_damage": "no"
+                    },
+                    {
+                        "on_damage": {
+                            "filters": {
+                                "any_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "foundation"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "scpfoundation"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "mtf"
+                                    }
+                                ]
+                            }
+                        },
+                        "deals_damage": "no"
+                    },
 					{
 						"on_damage": {
 							"filters": {
@@ -343,9 +414,14 @@
 				"value": 0.23
 			},
 			"minecraft:health": {
-				"value": 360,
-				"max": 360
+				"value": 3000,
+				"max": 3000
 			},
+			"minecraft:boss": {
+                "should_darken_sky": false,
+                "name": "Epsilon 11 - Apache Combat",
+                "hud_range": 20
+            },
 			"minecraft:nameable": {},
 			"minecraft:physics": {
 				"has_gravity": true,

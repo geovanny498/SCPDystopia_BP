@@ -1,31 +1,26 @@
 {
-  "format_version": "1.12",
-  "minecraft:recipe_shaped": {
-    "description": {
-    "identifier": "lc:dt_server_rack"
-    },
+	"format_version": "1.12",
+	"minecraft:recipe_shaped": {
+		"description": {
+			"identifier": "lc:dt_server_rack"
+		},
 
-    
-    "tags": [ "crafting_table" ],
-    "pattern": [
-      "###",
-      "ABA",
-      "###"
-    ],
-    "key": {
-      "#": {
-        "item": "minecraft:iron_ingot"
-      },
-      "A": {
-        "item": "lc:dt_scpdystopia_orb"
-      },
-      "B": {
-        "item": "minecraft:redstone"
-      }
-    },
-    "result": {
-      "item": "lc:dt_server_rack",
-      "count": 4
-    }
-  }
+		"tags": ["crafting_table"],
+		"pattern": ["###", "ABA", "###"],
+		"key": {
+			"#": {
+				"item": "minecraft:iron_ingot"
+			},
+			"A": {
+				"item": "lc:dt_scpdystopia_orb"
+			},
+			"B": {
+				"item": "minecraft:redstone"
+			}
+		},
+		"result": {
+			"item": "lc:dt_server_rack",
+			"count": 4
+		}
+	}
 }

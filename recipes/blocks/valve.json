@@ -1,27 +1,26 @@
 {
-  "format_version": "1.12",
-  "minecraft:recipe_shaped": {
-    "description": {
-    "identifier": "lc:dt_valve"
-    },
+	"format_version": "1.12",
+	"minecraft:recipe_shaped": {
+		"description": {
+			"identifier": "lc:dt_valve"
+		},
 
-    
-    "tags": [ "crafting_table" ],
-    "ingredients": [
-      {
-        "item": "minecraft:iron_block"
-      },
-      {
-        "item": "minecraft:concrete",
-        "data": 14
-      },
-      {
-        "item": "lc:dt_scpdystopia_orb"
-      }
-    ],
-    "result": {
-      "item": "lc:dt_valve",
-      "count": 4
-    }
-  }
+		"tags": ["crafting_table"],
+		"ingredients": [
+			{
+				"item": "minecraft:iron_block"
+			},
+			{
+				"item": "minecraft:concrete",
+				"data": 14
+			},
+			{
+				"item": "lc:dt_scpdystopia_orb"
+			}
+		],
+		"result": {
+			"item": "lc:dt_valve",
+			"count": 4
+		}
+	}
 }

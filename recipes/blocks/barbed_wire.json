@@ -1,31 +1,26 @@
 {
-  "format_version": "1.12",
-  "minecraft:recipe_shaped": {
-    "description": {
-    "identifier": "lc:dt_barbed_wire"
-    },
+	"format_version": "1.12",
+	"minecraft:recipe_shaped": {
+		"description": {
+			"identifier": "lc:dt_barbed_wire"
+		},
 
-    
-    "tags": [ "crafting_table" ],
-    "pattern": [
-      "A##",
-      "# #",
-      "#BA"
-    ],
-    "key": {
-      "#": {
-        "item": "minecraft:iron_nugget"
-      },
-      "A": {
-        "item": "minecraft:iron_nugget"
-      },
-      "B": {
-        "item": "lc:dt_scpdystopia_orb"
-      }
-    },
-    "result": {
-      "item": "lc:dt_hand_dryer",
-      "count": 3
-    }
-  }
+		"tags": ["crafting_table"],
+		"pattern": ["A##", "# #", "#BA"],
+		"key": {
+			"#": {
+				"item": "minecraft:iron_nugget"
+			},
+			"A": {
+				"item": "minecraft:iron_nugget"
+			},
+			"B": {
+				"item": "lc:dt_scpdystopia_orb"
+			}
+		},
+		"result": {
+			"item": "lc:dt_hand_dryer",
+			"count": 3
+		}
+	}
 }

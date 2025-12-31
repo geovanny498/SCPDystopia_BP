@@ -1,21 +1,18 @@
 {
-  "format_version": "1.16.100",
-  "minecraft:item": {
-    "description": {
-    "identifier": "lc:dt_scp914_gear",
-      "category": "Items"
-    },
-    "components": {
-      "minecraft:creative_category": {
-        "parent": "itemGroup.name.items"
-      },
-      "minecraft:max_stack_size": 64,
-      "minecraft:icon": {
-        "texture": "dt_scp914_gear"
-      },
-      "minecraft:display_name": {
-        "value": "SCP-914 Gear"
-      }
-    }
-  }
+	"format_version": "1.21.120",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_scp914_gear",
+			"menu_category": {
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:max_stack_size": 64,
+			"minecraft:icon": "dt_scp914_gear",
+			"minecraft:display_name": {
+				"value": "SCP-914 Gear"
+			}
+		}
+	}
 }

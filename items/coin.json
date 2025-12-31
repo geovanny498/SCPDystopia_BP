@@ -1,23 +1,19 @@
 {
-  "format_version": "1.16.100",
-  "minecraft:item": {
-    "description": {
-    "identifier": "lc:dt_coin",
-      "category": "Items"
-    },
-    "components": {
-      "minecraft:use_duration": 1.6,
-      "minecraft:creative_category": {
-        "parent": "itemGroup.name.items"
-      },
-      "minecraft:hand_equipped": false,
-      "minecraft:max_stack_size": 64,
-      "minecraft:icon": {
-        "texture": "dt_coin"
-      },
-      "minecraft:display_name": {
-        "value": "Coin"
-      }
-    }
-  }
+	"format_version": "1.21.120",
+	"minecraft:item": {
+		"description": {
+			"identifier": "lc:dt_coin",
+			"menu_category": {
+				"category": "items"
+			}
+		},
+		"components": {
+			"minecraft:hand_equipped": false,
+			"minecraft:max_stack_size": 64,
+			"minecraft:icon": "dt_coin",
+			"minecraft:display_name": {
+				"value": "Coin"
+			}
+		}
+	}
 }

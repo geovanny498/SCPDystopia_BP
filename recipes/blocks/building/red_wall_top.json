@@ -1,30 +1,25 @@
 {
-  "format_version": "1.12",
-  "minecraft:recipe_shaped": {
-    "description": {
-    "identifier": "lc:dt_red_wall_top"
-    },
+	"format_version": "1.12",
+	"minecraft:recipe_shaped": {
+		"description": {
+			"identifier": "lc:dt_red_wall_top"
+		},
 
-    
-    "tags": [ "dystopia_craftbench" ],
-    "pattern": [
-      "SSS",
-      "###",
-      "SSS"
-    ],
-    "key": {
-      "#": {
-        "item": "minecraft:concrete",
-        "data": 0
-      },
-      "S": {
-        "item": "minecraft:dye",
-        "data": 1
-      }
-    },
-    "result": {
-      "item": "lc:dt_red_wall_top",
-      "count": 20
-    }
-  }
+		"tags": ["dystopia_craftbench"],
+		"pattern": ["SSS", "###", "SSS"],
+		"key": {
+			"#": {
+				"item": "minecraft:concrete",
+				"data": 0
+			},
+			"S": {
+				"item": "minecraft:dye",
+				"data": 1
+			}
+		},
+		"result": {
+			"item": "lc:dt_red_wall_top",
+			"count": 20
+		}
+	}
 }

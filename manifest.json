@@ -2,12 +2,12 @@
     "format_version": 2,
     "header": {
         "description": "§l§bMade by LC Studios MC. Helped by Kaiboi39 and RianDewa45.\n§cYou have to enable Holiday Creator Features and Molang Features in experiments.\n§7Thank you for download!",
-        "name": "§g[DEV] §d§lSCP: Dystopia BP §7v1.8.1§f",
+        "name": "§g[DEV] §d§lSCP: Dystopia BP §7v1.9.0§f",
         "uuid": "0b342e6a-74d1-4f0e-9ec1-44848741705c",
         "version": [
             1,
-            8,
-            1
+            9,
+            0
         ],
         "min_engine_version": [
             1,
@@ -45,7 +45,7 @@
     "dependencies": [
 		{
 			"module_name": "@minecraft/server",
-			"version": "2.1.0"
+			"version": "2.3.0"
 		},
 		{
 			"module_name": "@minecraft/server-ui",

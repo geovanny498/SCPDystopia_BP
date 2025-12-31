@@ -160,7 +160,7 @@
                     "damage": 14
                 }
             },
-            "search_target": {
+            "fire_enemies_only": {
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
                     "within_radius": 85,
@@ -209,7 +209,7 @@
                                     }
                                 ]
                             },
-                            "max_dist": 128
+                            "max_dist": 85
                         },
                         {
                             "filters": {
@@ -229,7 +229,7 @@
                                     }
                                 ]
                             },
-                            "max_dist": 128
+                            "max_dist": 85
                         }
                     ],
                     "must_see_forget_duration": 6.0,
@@ -246,15 +246,244 @@
                                         "subject": "other",
                                         "operator": "!=",
                                         "value": "scpfoundation"
+                                    }
+                                ]
+                            },
+                            "max_dist": 85
+                        },
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "minecraft:netherite_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "minecraft:diamond_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "minecraft:iron_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "gabrielaplok:nv_goggles"
+                                    }
+                                ]
+                            },
+                            "max_dist": 85
+                        }
+                    ]
+                }
+            },
+            "defensive": {
+                "minecraft:behavior.nearest_attackable_target": {
+                    "priority": -1,
+                    "within_radius": 15,
+                    "reselect_targets": true,
+                    "entity_types": [
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "scp096"
                                     },
                                     {
                                         "test": "is_family",
                                         "subject": "other",
                                         "operator": "!=",
-                                        "value": "player"
+                                        "value": "scp001_gg"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "enderman"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "scp280"
+                                    },
+                                    {
+                                        "other_with_families": [
+                                            "monster",
+                                            "warden",
+                                            "scp",
+                                            "pillager",
+                                            "hoglin",
+                                            "piglin",
+                                            "class_d",
+                                            "chaos_insurgency",
+                                            "chaos",
+                                            "scp049"
+                                        ]
                                     }
                                 ]
-                            }
+                            },
+                            "max_dist": 15
+                        },
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "==",
+                                        "value": "player"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:golden_helmet"
+                                    }
+                                ]
+                            },
+                            "max_dist": 15
+                        }
+                    ],
+                    "must_see_forget_duration": 6.0,
+                    "must_see": true
+                },
+                "minecraft:behavior.hurt_by_target": {
+                    "priority": 2,
+                    "entity_types": [
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "scpfoundation"
+                                    }
+                                ]
+                            },
+                            "max_dist": 55
+                        },
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "minecraft:netherite_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "minecraft:diamond_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "minecraft:iron_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "gabrielaplok:nv_goggles"
+                                    }
+                                ]
+                            },
+                            "max_dist": 55
+                        }
+                    ]
+                }
+            },
+            "fire_mode_hit": {
+                "minecraft:behavior.hurt_by_target": {
+                    "priority": 2,
+                    "entity_types": [
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "scpfoundation"
+                                    }
+                                ]
+                            },
+                            "max_dist": 55
+                        },
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "minecraft:netherite_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "minecraft:diamond_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "minecraft:iron_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "!=",
+                                        "value": "gabrielaplok:nv_goggles"
+                                    }
+                                ]
+                            },
+                            "max_dist": 55
                         }
                     ]
                 }
@@ -339,7 +568,7 @@
                     "priority": 2
                 }
             },
-            "tamed_war": {
+            "tamed_far": {
                 "minecraft:is_tamed": {},
                 "minecraft:behavior.follow_owner": {
                     "priority": -3,
@@ -806,7 +1035,7 @@
                                 "minecraft:ranged_attack",
                                 "start_move",
                                 "calm",
-                                "search_target"
+                                "fire_enemies_only"
                             ]
                         }
                     }
@@ -901,19 +1130,22 @@
                 },
                 "remove": {
                     "component_groups": [
-                        "tamed_war"
+                        "tamed_far"
                     ]
                 }
             },
-            "humanoid:set_tamed_war": {
+            "humanoid:set_tamed_far": {
                 "add": {
                     "component_groups": [
-                        "tamed_war"
+                        "tamed_far",
+                        "start_move"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "tamed"
+                        "tamed",
+                        "stop_move",
+                        "start_move_free"
                     ]
                 },
                 "queue_command": {
@@ -922,15 +1154,18 @@
                     ]
                 }
             },
-            "humanoid:set_tamed_normal": {
+            "humanoid:set_tamed_close": {
                 "add": {
                     "component_groups": [
-                        "tamed"
+                        "tamed",
+                        "start_move"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "tamed_war"
+                        "tamed_far",
+                        "stop_move",
+                        "start_move_free"
                     ]
                 },
                 "queue_command": {
@@ -950,7 +1185,7 @@
                     "component_groups": [
                         "stop_move",
                         "start_move_free",
-                        "tamed_war"
+                        "tamed_far"
                     ]
                 },
                 "queue_command": {
@@ -968,8 +1203,9 @@
                 "remove": {
                     "component_groups": [
                         "start_move",
+                        "start_move_free",
                         "tamed",
-                        "tamed_war"
+                        "tamed_far"
                     ]
                 },
                 "queue_command": {
@@ -986,14 +1222,69 @@
                 },
                 "remove": {
                     "component_groups": [
+                        "start_move",
                         "stop_move",
                         "tamed",
-                        "tamed_war"
+                        "tamed_far"
                     ]
                 },
                 "queue_command": {
                     "command": [
                         "title @p actionbar Caminar libremente"
+                    ]
+                }
+            },
+            "humanoid:fire_enemies_only": {
+                "add": {
+                    "component_groups": [
+                        "fire_enemies_only"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "defensive",
+                        "fire_mode_hit"
+                    ]
+                },
+                "queue_command": {
+                    "command": [
+                        "title @p actionbar §cSolo hostiles"
+                    ]
+                }
+            },
+            "humanoid:fire_defensive": {
+                "add": {
+                    "component_groups": [
+                        "defensive"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "fire_enemies_only",
+                        "fire_mode_hit"
+                    ]
+                },
+                "queue_command": {
+                    "command": [
+                        "title @p actionbar §eDefensivo (alcance reducido)"
+                    ]
+                }
+            },
+            "humanoid:fire_mode_hit": {
+                "add": {
+                    "component_groups": [
+                        "fire_mode_hit"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "fire_enemies_only",
+                        "defensive"
+                    ]
+                },
+                "queue_command": {
+                    "command": [
+                        "title @p actionbar §7Solo al recibir daño"
                     ]
                 }
             },
