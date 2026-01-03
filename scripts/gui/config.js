@@ -1,98 +1,14 @@
+// scripts\gui\config.js
 // Configuración de GUI para entidades
 // - `global` contiene categorías/entradas que estarán disponibles por defecto
 // - `entities` lista las entidades que aceptan abrir el GUI (referenciando `global`)
 // - `specific` permite añadir o sobrescribir configuraciones por entidad
 export default {
-    global: {
-        categories: [
-            {
-                category: "Distancia al jugador (tamed)",
-                entries: [
-                    {
-                        label: "Cerca",
-                        event: "humanoid:set_tamed_close",
-                    },
-                    {
-                        label: "Lejos",
-                        event: "humanoid:set_tamed_far",
-                    },
-                ],
-            },
-            {
-                category: "Movimiento",
-                entries: [
-                    {
-                        label: "Seguir jugador",
-                        event: "mtf:to_move",
-                    },
-                    {
-                        label: "Caminar libremente",
-                        event: "mtf:to_move_free",
-                    },
-                    { label: "Detenerse", event: "mtf:to_stop" },
-                ],
-            },
-            {
-                category: "Reglas de fuego",
-                entries: [
-                    {
-                        label: "Solo enemigos",
-                        event: "humanoid:fire_enemies_only"
-                    },
-                    {
-                        label: "Defensivo (alcance reducido)",
-                        event: "humanoid:fire_defensive"
-                    },
-                    {
-                        label: "Solo al recibir daño",
-                        event: "humanoid:fire_mode_hit"
-                    },
-                ],
-            },
-            {
-                category: "Invencibilidad",
-                entries: [
-                    {
-                        label: "Activar invencibilidad",
-                        event: "humanoid:start_invincible",
-                    },
-                    {
-                        label: "Desactivar invencibilidad",
-                        event: "humanoid:stop_invincible",
-                    },
-                ],
-            },
-            {
-                category: "Barra de vida",
-                entries: [
-                    {
-                        label: "Ocultar barra de vida",
-                        event: "humanoid:dont_show_boss_bar",
-                    },
-                    {
-                        label: "Mostrar barra de vida",
-                        event: "humanoid:show_boss_bar",
-                    },
-                ],
-            },
-            {
-                category: "Teletransporte",
-                entries: [
-                    {
-                        label: "Iniciar teletransporte",
-                        event: "humanoid:start_teleport",
-                    },
-                    {
-                        label: "Iniciar teletransporte cercano",
-                        event: "humanoid:start_teleport_near",
-                    },
-                    {
-                        label: "Detener teletransporte",
-                        event: "humanoid:stop_teleport",
-                    },
-                ],
-            },
-        ],
+    // Qué ítem debe tener el jugador en mano para abrir el menú según la facción
+    // key = grupo en `entities`
+    openItem: {
+        foundation: "lc:dt_commander",
+        chaos: "breeze_rod",
     },
 
     // Lista de entidades que abrirán el GUI.
@@ -122,14 +38,104 @@ export default {
             "lc:dt_chaos_insurgency": true,
         },
     },
-
-    // Qué ítem debe tener el jugador en mano para abrir el menú según la facción
-    // key = grupo en `entities`
-    openItem: {
-        foundation: "lc:dt_commander",
-        chaos: "breeze_rod",
+    global: {
+        categories: [
+            {
+                category: "Movimiento / Patrulla",
+                entries: [
+                    {
+                        label: "Seguir jugador",
+                        event: "mtf:to_move",
+                    },
+                    {
+                        label: "Caminar libremente",
+                        event: "mtf:to_move_free",
+                    },
+                    { label: "Detenerse", event: "mtf:to_stop" },
+                ],
+            },
+            {
+                category: "Ataque / Reglas de disparo",
+                entries: [
+                    {
+                        label: "Solo enemigos",
+                        event: "humanoid:fire_enemies_only",
+                    },
+                    {
+                        label: "Defensivo (alcance reducido)",
+                        event: "humanoid:fire_defensive",
+                    },
+                    {
+                        label: "Solo al recibir daño",
+                        event: "humanoid:fire_mode_hit",
+                    },
+                ],
+            },
+            {
+                category: "Distancia al jugador",
+                entries: [
+                    { label: "Cerca", event: "humanoid:set_tamed_close" },
+                    { label: "Lejos", event: "humanoid:set_tamed_far" },
+                ],
+            },
+            {
+                category: "Configuración avanzada",
+                submenu: "advanced",
+            },
+        ],
     },
 
+    // Submenus — permite definir conjuntos de categorías reutilizables
+    submenus: {
+        // submenu id: "advanced"
+        advanced: {
+            categories: [
+                {
+                    category: "Teletransportación",
+                    entries: [
+                        {
+                            label: "Iniciar teletransporte",
+                            event: "humanoid:start_teleport",
+                        },
+                        {
+                            label: "Iniciar teletransporte cercano",
+                            event: "humanoid:start_teleport_near",
+                        },
+                        {
+                            label: "Detener teletransporte",
+                            event: "humanoid:stop_teleport",
+                        },
+                    ],
+                },
+                {
+                    category: "Barra de vida",
+                    entries: [
+                        {
+                            label: "Mostrar barra de vida",
+                            event: "humanoid:show_boss_bar",
+                        },
+                        {
+                            label: "Ocultar barra de vida",
+                            event: "humanoid:dont_show_boss_bar",
+                        },
+                    ],
+                },
+                {
+                    category: "Invencibilidad",
+                    entries: [
+                        {
+                            label: "Activar invencibilidad",
+                            event: "humanoid:start_invincible",
+                        },
+                        {
+                            label: "Desactivar invencibilidad",
+                            event: "humanoid:stop_invincible",
+                        },
+                    ],
+                },
+            ],
+        },
+    },
     // Configuraciones específicas por entidad. Cada entrada puede tener:
     // - `replace: true` para reemplazar las categorías globales
     // - `categories: [...]` para añadir o reemplazar
@@ -138,7 +144,7 @@ export default {
         "lc:dt_chara": {
             replace: false,
             // `insertAt`: "start" | "end" — dónde insertar las categorías específicas respecto a las globales
-            insertAt: "start",
+            insertAt: "end",
             categories: [
                 {
                     category: "Variante",
@@ -165,7 +171,7 @@ export default {
         },
         "lc:dt_thedeath": {
             replace: false,
-            insertAt: "start",
+            insertAt: "end",
             categories: [
                 {
                     category: "Variante",
@@ -192,7 +198,7 @@ export default {
         },
         "lc:dt_alpha1c": {
             replace: false,
-            insertAt: "start",
+            insertAt: "end",
             categories: [
                 {
                     category: "Variante",

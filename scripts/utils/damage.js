@@ -1,11 +1,11 @@
-// utils/damage.js
+// scripts\utils\damage.js
 import * as mc from "@minecraft/server";
 import { applyKnockback } from "./knockback";
 import { debugMessage, debugWarn } from "./debug.js";
 import { entityDamageConfig } from "./entityConfig.js";
 
 export function applyDamageAndKnockback(projectile, target, cfg, shooter) {
-    debugWarn(
+    debugWarn(`damage`,
         `Proyectil disparado por: ${shooter.typeId}, impacta objetivo: ${target.typeId}, proyectil: ${projectile.typeId}`,
         "blue"
     );
@@ -28,10 +28,10 @@ export function applyDamageAndKnockback(projectile, target, cfg, shooter) {
     // DEBUG: mostrar información útil para verificar por qué una entidad recibe knockback
     try {
         debugWarn(`damage`, `entityCfg existe: ${hasEntityCfg}; tiene damage: ${hasEntityCfg && Object.prototype.hasOwnProperty.call(entityCfg, 'damage')}; tipo(damage): ${hasEntityCfg && typeof entityCfg.damage}; valor calculado canDamage: ${canDamage}`);
-        debugWarn(`damage`, `tiene knockback: ${hasEntityCfg && Object.prototype.hasOwnProperty.call(entityCfg, 'knockback')}; tipo(knockback): ${hasEntityCfg && typeof entityCfg.knockback}; valor calculado canKnockback: ${canKnockback}`);
+        debugWarn(`applyKnockback`, `tiene knockback: ${hasEntityCfg && Object.prototype.hasOwnProperty.call(entityCfg, 'knockback')}; tipo(knockback): ${hasEntityCfg && typeof entityCfg.knockback}; valor calculado canKnockback: ${canKnockback}`);
     } catch (e) {
         // no bloquear ejecución si falla el stringify o algo raro
-        debugWarn(`Error al loggear entityCfg: ${e?.message ?? e}`);
+        debugWarn(`damage`, `Error al loggear entityCfg: ${e?.message ?? e}`, "red");
     }
 
     if (!canDamage) {
@@ -40,7 +40,7 @@ export function applyDamageAndKnockback(projectile, target, cfg, shooter) {
         const dmg = getModifiedDamageNumber(cfg.damage, target);
         if (dmg > 0) {
             target.applyDamage(dmg, {
-                cause: "override",
+                cause: mc.EntityDamageCause.override,
                 damagingEntity: shooter,
                 damagingProjectile: projectile
             });
@@ -48,7 +48,7 @@ export function applyDamageAndKnockback(projectile, target, cfg, shooter) {
     }
 
     if (!canKnockback) {
-        debugWarn(`Knockback bloqueado para ${target.typeId}`, "purple");
+        debugWarn(`applyKnockback`, `Knockback bloqueado para ${target.typeId}`, "purple");
     } else {
         applyKnockback(target, projectile, cfg.knockback);
     }
@@ -58,7 +58,7 @@ export function applyDamageAndKnockback(projectile, target, cfg, shooter) {
 // Función de cálculo de daño, la dejé igual
 export function getModifiedDamageNumber(damage, entity) {
     if (damage <= 0) {
-        debugMessage("Daño negativo o nulo, no se aplicará.");
+        debugMessage("modifiedDamageNumber", "Daño negativo o nulo, no se aplicará.");
         return 0;
     }
 
@@ -70,18 +70,18 @@ export function getModifiedDamageNumber(damage, entity) {
         if (res) {
             const reduction = (res.amplifier + 1) * 0.2;
             damage = Math.floor(damage * (1 - reduction));
-            debugMessage(`Daño original: ${originalDamage} | Resistencia nivel ${res.amplifier + 1} (-${Math.round(reduction * 100)}%) => ${damage}`);
+            debugMessage("modifiedDamageNumber",`Daño original: ${originalDamage} | Resistencia nivel ${res.amplifier + 1} (-${Math.round(reduction * 100)}%) => ${damage}`);
         }
 
         if (damage <= 0) {
-            debugWarn("Daño final: 0 (anulado por resistencia)", "green");
+            debugWarn("modifiedDamageNumber","Daño final: 0 (anulado por resistencia)", "green");
             return 0;
         }
 
         // 2) Reducción por Armadura y Encantamientos
         const equippable = entity.getComponent("equippable");
         if (!equippable) {
-            debugWarn(`Daño final sin armadura: ${damage}`, "green");
+            debugWarn("modifiedDamageNumber",`Daño final sin armadura: ${damage}`, "green");
             return damage;
         }
 
@@ -102,14 +102,14 @@ export function getModifiedDamageNumber(damage, entity) {
         damage = Math.floor(damage * (1 - armorReduction) - Math.min(20, epf) / 25);
 
         if (damage <= 0) {
-            debugMessage("Daño final: 0 (anulado por armadura/encantamientos)");
+            debugMessage("modifiedDamageNumber","Daño final: 0 (anulado por armadura/encantamientos)");
             return 0;
         }
 
-        debugMessage(`Daño final tras armadura/encantamientos: ${damage}`);
+        debugMessage("modifiedDamageNumber",`Daño final tras armadura/encantamientos: ${damage}`);
         return damage;
     } catch (error) {
-        debugWarn(`Error al calcular el daño: ${error.message}`, "red");
+        debugWarn("modifiedDamageNumber",`Error al calcular el daño: ${error.message}`, "red");
         return damage; // Devolver el daño sin cambios en caso de error
     }
 }

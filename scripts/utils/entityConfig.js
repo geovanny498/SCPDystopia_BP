@@ -1,4 +1,4 @@
-// utils/entityConfig.js
+// scripts\utils\entityConfig.js
 
 // Aquí defines entidades y si reciben daño/knockback
 // La configuración definida aquí no cambia el daño o knockback definido en los json de las entidades

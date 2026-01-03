@@ -1,4 +1,4 @@
-// utils/weapons.js
+// scripts\utils\weapons.js
 import { world, system } from "@minecraft/server";
 import { debugMessage, debugWarn } from "../utils/debug.js";
 import * as mc from "@minecraft/server";

@@ -1,8 +1,9 @@
 // commands/register_systems.js
 import { registerSoldierSystem } from "./toggle_system.js";
 import { registerTeleportSystem } from "./toggle_teleport.js";
-import { system, world, CustomCommandParamType, CustomCommandStatus, CommandPermissionLevel } from "@minecraft/server";
-import { systemStates, autoUpdateFlags } from "./toggle_system.js";
+import { system, world, CustomCommandParamType, CustomCommandStatus, CommandPermissionLevel, CustomCommandSource } from "@minecraft/server";
+import { systemStates } from "./toggle_system.js";
+import { applySystemToAll } from "./applySystems.js";
 
 // Sistema de spawn
 registerSoldierSystem({
@@ -41,41 +42,11 @@ registerTeleportSystem({
         start: "humanoid:start_teleport",
         stop: "humanoid:stop_teleport",
         start_near: "humanoid:start_teleport_near",
-        stop_near: "humanoid:stop_teleport_near",
+        stop_near: "humanoid:stop_teleport_near", // No se usa actualmente
     }
 });
 
-system.beforeEvents.startup.subscribe((init) => {
-    const toggleAllAutoUpdate = {
-        name: "scpd:toggle_all_auto_update",
-        description: "Activa o desactiva la actualización automática de soldados y teleport",
-        permissionLevel: CommandPermissionLevel.Any,
-        cheatsRequired: false,
-        optionalParameters: [
-            { name: "enable", type: CustomCommandParamType.Boolean }
-        ],
-    };
-
-    init.customCommandRegistry.registerCommand(toggleAllAutoUpdate, (origin, enable) => {
-        // Por defecto false si no se pasa nada
-        const state = enable ?? false;
-
-        autoUpdateFlags.system = state;
-        autoUpdateFlags.teleport = state;
-        if (enable) {
-            console.log("Actualización automática de soldados y teleport activada")
-        } else {
-            console.log("Actualización automática de soldados y teleport desactivada")
-        }
-
-        return {
-            status: CustomCommandStatus.Success,
-            message: state
-                ? "Actualización automática de soldados y teleport activada"
-                : "Actualización automática de soldados y teleport desactivada"
-        };
-    });
-});
+// autoUpdate flags y comando de toggle removed — el sistema ahora aplica cambios de forma explícita mediante applySystemToAll
 
 
 
@@ -122,6 +93,14 @@ system.beforeEvents.startup.subscribe((init) => {
             }
 
             // console.log("[SCPDystopia] Propiedades dinámicas configuradas automáticamente:", Object.keys(defaultConfigs).join(", "));
+
+            // Aplicar los sistemas actualizados inmediatamente (usar dimensión del ejecutor si existe)
+            try {
+                const dim = (origin && origin.sourceType === CustomCommandSource.Entity && origin.sourceEntity) ? origin.sourceEntity.dimension : null;
+                for (const sysName of Object.keys(defaultConfigs)) {
+                    applySystemToAll(sysName, dim);
+                }
+            } catch (e) { /* no bloquear */ }
 
             // Retornar respuesta
             return {

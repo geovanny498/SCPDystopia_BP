@@ -1,5 +1,6 @@
 // scripts/commands/worldSave.js
 import { world } from "@minecraft/server";
+import { debugMessage, debugWarn } from "../utils/debug";
 
 /**
  * Guarda el estado de un sistema
@@ -10,9 +11,9 @@ export function saveSystemState(systemName, state) {
     try {
         const propName = `scpd_system_${systemName}`;
         world.setDynamicProperty(propName, JSON.stringify(state));
-        console.log(`[SCPDystopia] Propiedad guardada: ${propName}`);
+        debugMessage("dynamicProperties",`[SCPDystopia] Propiedad guardada: ${propName}`,"blue");
     } catch (err) {
-        console.warn(`[SCPDystopia] Error al guardar sistema ${systemName}: ${err}`);
+        debugWarn("dynamicProperties",`[SCPDystopia] Error al guardar sistema ${systemName}: ${err}`,"red");
     }
 }
 
@@ -27,7 +28,7 @@ export function loadSystemState(systemName) {
         if (!prop) return undefined;
         return JSON.parse(prop);
     } catch (err) {
-        console.warn(`[SCPDystopia] Error al cargar sistema ${systemName}: ${err}`);
+        debugWarn("dynamicProperties",`[SCPDystopia] Error al cargar sistema ${systemName}: ${err}`,"red");
         return undefined;
     }
 }

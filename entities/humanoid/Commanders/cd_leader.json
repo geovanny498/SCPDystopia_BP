@@ -1086,7 +1086,7 @@
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar §4§lModo guerra activado"
+                        "title @p actionbar §4§lModo lejos activado"
                     ]
                 }
             },
@@ -1106,7 +1106,7 @@
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar §2§lModo normal activado"
+                        "title @p actionbar §2§lModo cerca activado"
                     ]
                 }
             },

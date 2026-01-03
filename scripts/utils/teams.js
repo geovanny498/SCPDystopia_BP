@@ -1,4 +1,4 @@
-// utils/teams.js
+// scripts\utils\teams.js
 import * as mc from "@minecraft/server";
 
 export const teamGroups = {

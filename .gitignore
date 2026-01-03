@@ -1,6 +1,7 @@
 # Ignorar la carpeta node_modules
 node_modules/
-
+.github/
+.agent/
 # Ignorar archivos específicos de configuración de NPM
 package.json
 package-lock.json

@@ -297,7 +297,7 @@
             "defensive": {
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
-                    "within_radius": 15,
+                    "within_radius": 16,
                     "reselect_targets": true,
                     "entity_types": [
                         {
@@ -343,7 +343,7 @@
                                     }
                                 ]
                             },
-                            "max_dist": 15
+                            "max_dist": 16
                         },
                         {
                             "filters": {
@@ -363,7 +363,7 @@
                                     }
                                 ]
                             },
-                            "max_dist": 15
+                            "max_dist": 16
                         }
                     ],
                     "must_see_forget_duration": 6.0,
@@ -1148,7 +1148,7 @@
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar §4§lModo guerra activado"
+                        "title @p actionbar §4§lModo lejos activado"
                     ]
                 }
             },
@@ -1168,7 +1168,7 @@
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar §2§lModo normal activado"
+                        "title @p actionbar §2§lModo cerca activado"
                     ]
                 }
             },
