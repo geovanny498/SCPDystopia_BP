@@ -92,7 +92,9 @@ export function registerSoldierSystem(cfg) {
 
             // Delegar la aplicación al core (usar la dimensión del ejecutor si es jugador)
             try {
-                const dim = (origin && origin.sourceType === CustomCommandSource.Entity && origin.sourceEntity) ? origin.sourceEntity.dimension : null;
+                const dim = (origin && origin.sourceType === CustomCommandSource.Entity && origin.sourceEntity) ?
+                    origin.sourceEntity.dimension :
+                    ["overworld", "nether", "the_end"].map(id => world.getDimension(id)).filter(Boolean);
                 applySystemToAll(cfg.command, dim);
             } catch (e) { debugWarn("toggle_system", `applySystemToAll error: ${e}`); }
 
@@ -150,9 +152,7 @@ export function registerSoldierSystem(cfg) {
         } catch { }
     });
 
-    // Centralizar reaplicación: cuando una entidad aparece o se carga, actualizar lista y delegar en applySystemToEntity
-    world.afterEvents.entitySpawn.subscribe(ev => {
-        const ent = ev.entity;
+    function handleSoldierEntity(ent) {
         if (!ent) return;
 
         // Validar antes de agregar a allSoldiers
@@ -168,24 +168,16 @@ export function registerSoldierSystem(cfg) {
         for (const sysName of Object.keys(systemStates)) {
             try { applySystemToEntity(sysName, ent); } catch (e) { }
         }
+    }
+
+
+    // Centralizar reaplicación: cuando una entidad aparece o se carga, actualizar lista y delegar en applySystemToEntity
+    world.afterEvents.entitySpawn.subscribe(ev => {
+        handleSoldierEntity(ev.entity);
     });
 
     world.afterEvents.entityLoad.subscribe(ev => {
-        const ent = ev.entity;
-        if (!ent) return;
-
-        // Validar antes de agregar a allSoldiers
-        if (ent.typeId === "minecraft:player") return;
-        const name = ent.nameTag ?? "";
-        const isSpecialFoundation = specialSoldiers.foundation.includes(name);
-        const isSpecialChaos = specialSoldiers.chaos.includes(name);
-        const team = getTeam(ent);
-        if (!isSpecialFoundation && !isSpecialChaos && team !== "foundation" && team !== "chaos") return;
-
-        if (!allSoldiers.includes(ent.id)) allSoldiers.push(ent.id);
-        for (const sysName of Object.keys(systemStates)) {
-            try { applySystemToEntity(sysName, ent); } catch (e) { }
-        }
+        handleSoldierEntity(ev.entity);
     });
 
     world.afterEvents.entityRemove.subscribe(ev => {

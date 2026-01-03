@@ -71,7 +71,9 @@ export function registerTeleportSystem(cfg) {
             saveSystemState("teleport", state);
             // Delegar la aplicación al core (usar la dimensión del ejecutor si es jugador)
             try {
-                const dim = (origin && origin.sourceType === CustomCommandSource.Entity && origin.sourceEntity) ? origin.sourceEntity.dimension : null;
+                const dim = (origin && origin.sourceType === CustomCommandSource.Entity && origin.sourceEntity) ? 
+                origin.sourceEntity.dimension : 
+                ["overworld", "nether", "the_end"].map(id => world.getDimension(id)).filter(Boolean);
                 applySystemToAll("teleport", dim);
             } catch (e) { debugWarn("toggle_teleport", `applySystemToAll error: ${e}`); }
 

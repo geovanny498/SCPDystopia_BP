@@ -96,7 +96,9 @@ system.beforeEvents.startup.subscribe((init) => {
 
             // Aplicar los sistemas actualizados inmediatamente (usar dimensión del ejecutor si existe)
             try {
-                const dim = (origin && origin.sourceType === CustomCommandSource.Entity && origin.sourceEntity) ? origin.sourceEntity.dimension : null;
+                const dim = (origin && origin.sourceType === CustomCommandSource.Entity && origin.sourceEntity) ? 
+                origin.sourceEntity.dimension : 
+                ["overworld", "nether", "the_end"].map(id => world.getDimension(id)).filter(Boolean);;
                 for (const sysName of Object.keys(defaultConfigs)) {
                     applySystemToAll(sysName, dim);
                 }
