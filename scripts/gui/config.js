@@ -1,8 +1,8 @@
 // scripts\gui\config.js
-// Configuración de GUI para entidades
-// - `global` contiene categorías/entradas que estarán disponibles por defecto
-// - `entities` lista las entidades que aceptan abrir el GUI (referenciando `global`)
-// - `specific` permite añadir o sobrescribir configuraciones por entidad
+/* Configuración de GUI para entidades
+- `global` contiene categorías/entradas que estarán disponibles por defecto
+- `entities` lista las entidades que aceptan abrir el GUI (referenciando `global`)
+- `specific` permite añadir o sobrescribir configuraciones por entidad */
 export default {
     // Qué ítem debe tener el jugador en mano para abrir el menú según la facción
     // key = grupo en `entities`
@@ -12,7 +12,8 @@ export default {
     },
 
     // Lista de entidades que abrirán el GUI.
-    // Valor true indica que usarán `global` por defecto.
+    // true | false para activar/desactivar el menú.
+    // Si una entidad no está listada, no abrirá el menú.
     entities: {
         foundation: {
             "lc:dt_chara": true,
@@ -38,10 +39,13 @@ export default {
             "lc:dt_chaos_insurgency": true,
         },
     },
+
+    // Categorías y entradas globales (disponibles para todas las entidades, a menos que se sobrescriba)
     global: {
         categories: [
             {
-                category: "Movimiento / Patrulla",
+                id: "movement_patrol",
+                category: "§1Movimiento / Patrulla§r",
                 entries: [
                     {
                         label: "Seguir jugador",
@@ -55,7 +59,8 @@ export default {
                 ],
             },
             {
-                category: "Ataque / Reglas de disparo",
+                id: "attack_rules",
+                category: "§cAtaque / Reglas de disparo§r",
                 entries: [
                     {
                         label: "Solo enemigos",
@@ -72,17 +77,46 @@ export default {
                 ],
             },
             {
-                category: "Distancia al jugador",
+                id: "distance_player",
+                category: "§2Distancia al jugador§r",
                 entries: [
                     { label: "Cerca", event: "humanoid:set_tamed_close" },
                     { label: "Lejos", event: "humanoid:set_tamed_far" },
                 ],
             },
             {
+                id: "advanced_menu",
                 category: "Configuración avanzada",
                 submenu: "advanced",
             },
         ],
+    },
+
+    /* Reglas para aplicar/ocultar sistemas globales por entidad.
+    Cada clave representa un "sistema global"
+    los submenús cuentan como sistemas globales. 
+    Cada regla admite:
+    - mode: whitelist" | "blacklist"
+    - list: array de entity typeIds (ej: "lc:dt_chara")
+    Si no existe una regla para un sistema, el sistema se aplica a todas las entidades.
+    Se puede ocultar submenus 
+    */
+    global_rules: {
+        // categoría del submenu (ver abajo: "spawn").
+        "spawn": {
+            mode: "whitelist",
+            list: [
+                "lc:dt_alpha1l",
+                "lc:dt_epsilon11c",
+                "lc:dt_eta10c",
+                "lc:dt_nu7c",
+                "lc:dt_beta7c",
+                "lc:dt_epsilon6c",
+                "lc:dt_cd_commander",
+                "lc:dt_cd_leader",
+                "lc:dt_cd"
+            ]
+        },
     },
 
     // Submenus — permite definir conjuntos de categorías reutilizables
@@ -91,7 +125,36 @@ export default {
         advanced: {
             categories: [
                 {
-                    category: "Teletransportación",
+                    id: "spawn",
+                    category: "§bInvocar soldados§r",
+                    entries: [
+                        {
+                            label: "Activar",
+                            event: "humanoid:start_spawn_soldiers",
+                        },
+                        {
+                            label: "Desactivar",
+                            event: "humanoid:stop_spawn_soldiers",
+                        },
+                    ],
+                },
+                {
+                    id: "boss_bar",
+                    category: "§cBarra de vida§r",
+                    entries: [
+                        {
+                            label: "Mostrar",
+                            event: "humanoid:show_boss_bar",
+                        },
+                        {
+                            label: "Ocultar",
+                            event: "humanoid:dont_show_boss_bar",
+                        },
+                    ],
+                },
+                {
+                    id: "teleport",
+                    category: "§2Teletransportación§r",
                     entries: [
                         {
                             label: "Iniciar teletransporte",
@@ -108,27 +171,15 @@ export default {
                     ],
                 },
                 {
-                    category: "Barra de vida",
-                    entries: [
-                        {
-                            label: "Mostrar barra de vida",
-                            event: "humanoid:show_boss_bar",
-                        },
-                        {
-                            label: "Ocultar barra de vida",
-                            event: "humanoid:dont_show_boss_bar",
-                        },
-                    ],
-                },
-                {
+                    id: "invincible",
                     category: "Invencibilidad",
                     entries: [
                         {
-                            label: "Activar invencibilidad",
+                            label: "Activar",
                             event: "humanoid:start_invincible",
                         },
                         {
-                            label: "Desactivar invencibilidad",
+                            label: "Desactivar",
                             event: "humanoid:stop_invincible",
                         },
                     ],
@@ -137,7 +188,7 @@ export default {
         },
     },
     // Configuraciones específicas por entidad. Cada entrada puede tener:
-    // - `replace: true` para reemplazar las categorías globales
+    // - `replace: true` para reemplazar las categorías globales por las específicas
     // - `categories: [...]` para añadir o reemplazar
     specific: {
         // "lc:dt_chara": { replace: false, categories: [ /* ... */ ] },
@@ -218,6 +269,68 @@ export default {
                         {
                             label: "MTF Delta-1 Frisk",
                             event: "start_variant2",
+                        },
+                    ],
+                },
+            ],
+        },
+        "lc:dt_alpha1l": {
+            replace: false,
+            insertAt: "end",
+            categories: [
+                {
+                    category: "Variante",
+                    entries: [
+                        {
+                            label: "MTF Alpha-1 Commander",
+                            event: "start_variant0",
+                        },
+                        {
+                            label: "MTF Alpha-1 Commander 2",
+                            event: "start_variant1",
+                        },
+                        {
+                            label: "MTF Alpha-1 Commander 3",
+                            event: "start_variant2",
+                        },
+                        {
+                            label: "MMTF Alpha-1 Leader",
+                            event: "start_variant3",
+                        },
+                    ],
+                },
+            ],
+        },
+        "lc:dt_alpha1": {
+            replace: false,
+            insertAt: "end",
+            categories: [
+                {
+                    category: "Variante",
+                    entries: [
+                        {
+                            label: "Masculino 1",
+                            event: "start_variant0",
+                        },
+                        {
+                            label: "Masculino 2",
+                            event: "start_variant1",
+                        },
+                        {
+                            label: "Masculino 3",
+                            event: "start_variant2",
+                        },
+                        {
+                            label: "Femenino 1",
+                            event: "start_variant3",
+                        },
+                        {
+                            label: "Femenino 2",
+                            event: "start_variant4",
+                        },
+                        {
+                            label: "Femenino 3",
+                            event: "start_variant5",
                         },
                     ],
                 },

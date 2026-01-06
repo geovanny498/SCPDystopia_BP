@@ -53,11 +53,10 @@ function buildAndShowMenu(player) {
         const teleportState = loadOrDefault("teleport");
 
         const form = new ModalFormData()
-            .label("Actualizar entidades")
-            .title("SCPDystopia - Panel de Comandos")
+            .title("SCPDystopia | Panel de Comandos")
 
             // Spawn
-            .label("§b§lSistema de Spawn")
+            .label("§b§lSpawn de soldados")
             .label("§lFoundation")
             .toggle("Normales", { defaultValue: !!spawnState.foundation.enable })
             .toggle("Especiales", { defaultValue: !!spawnState.foundation.includeSpecial })
@@ -66,7 +65,7 @@ function buildAndShowMenu(player) {
             .toggle("Especiales", { defaultValue: !!spawnState.chaos.includeSpecial })
             .divider()
             // Health
-            .label("§c§lSistema de barra de vida")
+            .label("§c§lBarra de vida")
             .label("§lFoundation")
             .toggle("Normales", { defaultValue: !!healthState.foundation.enable })
             .toggle("Especiales", { defaultValue: !!healthState.foundation.includeSpecial })
@@ -75,7 +74,7 @@ function buildAndShowMenu(player) {
             .toggle("Especiales", { defaultValue: !!healthState.chaos.includeSpecial })
             .divider()
             // Teleport (dropdowns: Normal, Near, OFF)
-            .label("§a§lSistema de teleport")
+            .label("§a§lTeletransportación")
             .label("§lFoundation")
             .dropdown("Normales", ["Normal", "Near", "Off"], { defaultValueIndex: Math.max(0, TELEPORT_CHOICES.indexOf(teleportState.foundation.mode ?? "normal")) })
             .dropdown("Especiales", ["Normal", "Near", "Off"], { defaultValueIndex: Math.max(0, TELEPORT_CHOICES.indexOf(teleportState.foundation.includeSpecial ?? "false")) })
@@ -181,24 +180,22 @@ function buildAndShowMenu(player) {
     }
 }
 
-// Registrar acceso: usar la estrella del nether en la mano principal.
-
-world.afterEvents.itemUse.subscribe(ev => {
-    try {
-        const player = ev.source; // en eventos itemUse el source es el jugador
-        if (!player) return;
-        const slot = player.selectedSlotIndex;
-        const item = player.getComponent("minecraft:inventory")?.container?.getItem(slot);
-        const mainId = item?.typeId ?? item?.id ?? null;
-        debugWarn("commandMenu", `main item id=${mainId}`, "cyan");
-        if (mainId === "minecraft:nether_star") {
-            try { ev.cancel = true; } catch { }
-            buildAndShowMenu(player);
-        }
-    } catch (err) {
-        debugWarn("commandMenu", `itemUse handler error: ${err}`, "red");
-    }
-});
-
+// Sólo usado como debug
+// world.afterEvents.itemUse.subscribe(ev => {
+//     try {
+//         const player = ev.source; // en eventos itemUse el source es el jugador
+//         if (!player) return;
+//         const slot = player.selectedSlotIndex;
+//         const item = player.getComponent("minecraft:inventory")?.container?.getItem(slot);
+//         const mainId = item?.typeId ?? item?.id ?? null;
+//         debugWarn("commandMenu", `main item id=${mainId}`, "cyan");
+//         if (mainId === "minecraft:nether_star") {
+//             try { ev.cancel = true; } catch { }
+//             buildAndShowMenu(player);
+//         }
+//     } catch (err) {
+//         debugWarn("commandMenu", `itemUse handler error: ${err}`, "red");
+//     }
+// });
 
 export { buildAndShowMenu };

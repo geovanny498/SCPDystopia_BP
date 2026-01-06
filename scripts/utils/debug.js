@@ -17,6 +17,7 @@ export const DEBUG_MODULES = [
     // "applySystems",
     // "toggle_system",
     // "toggle_entity",
+    // "playerInteractWithEntity",
     "dynamicProperties"
 ];
 

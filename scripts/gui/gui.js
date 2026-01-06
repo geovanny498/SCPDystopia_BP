@@ -4,6 +4,31 @@ import { ActionFormData } from "@minecraft/server-ui";
 import config from "./config.js";
 import { debugWarn } from "../utils/debug.js";
 
+// Helpers de sistema/ids para filtrado por `config.global_rules`.
+function makeSystemId(cat) {
+    if (!cat) return null;
+    if (cat.id) return String(cat.id);
+    const name = String(cat.category || "").toLowerCase();
+    return `auto:${name.replace(/[^a-z0-9]+/g, "_").replace(/^_+|_+$/g, "")}`;
+}
+
+function isAllowedByRule(sysId, typeId) {
+    if (!sysId) return true;
+    if (!config.global_rules || !config.global_rules[sysId]) return true;
+    const rule = config.global_rules[sysId] || {};
+    const mode = rule.mode;
+    const list = Array.isArray(rule.list) ? rule.list : [];
+    const inList = list.includes(typeId);
+    if (mode === "whitelist") return inList;
+    if (mode === "blacklist") return !inList;
+    return true;
+}
+
+function shouldIncludeCategoryForEntity(cat, typeId) {
+    const sysId = makeSystemId(cat);
+    return isAllowedByRule(sysId, typeId);
+}
+
 /**
  * Devuelve las categorías separadas en:
  * - specific: categorías específicas de la entidad
@@ -15,6 +40,7 @@ function getConfigForEntity(typeId) {
         config.global && Array.isArray(config.global.categories)
             ? [...config.global.categories]
             : [];
+
 
     // Resolver si la entidad está permitida
     let entVal = undefined;
@@ -54,6 +80,28 @@ function getConfigForEntity(typeId) {
         ? [...spec.categories]
         : [];
 
+    // Aplicar filtrado a las categorías globales según `global_rules`.
+    // Para categorías que apuntan a `submenu`, no bloqueamos la categoría
+    // salvo que la categoría principal tenga su propia `id` denegada o
+    // todas las categorías del submenu queden filtradas.
+    const filteredGlobalCats = [];
+    for (const c of globalCats) {
+        if (c && c.submenu) {
+            // Si la categoría principal tiene id y está denegada, excluirla
+            if (c.id && !isAllowedByRule(c.id, typeId)) continue;
+
+            const submenuCfg = config.submenus && config.submenus[c.submenu];
+            const submenuCats = (submenuCfg && Array.isArray(submenuCfg.categories)) ? submenuCfg.categories : [];
+            const filteredSub = submenuCats.filter((sc) => shouldIncludeCategoryForEntity(sc, typeId));
+            if (!filteredSub.length) continue; // submenu vacío -> ocultar la categoría
+
+            // mantener la categoría (no modificar objeto original)
+            filteredGlobalCats.push({ ...c });
+        } else {
+            if (shouldIncludeCategoryForEntity(c, typeId)) filteredGlobalCats.push({ ...c });
+        }
+    }
+
     let merged = [];
 
     if (spec && spec.replace) {
@@ -62,10 +110,10 @@ function getConfigForEntity(typeId) {
         const insertAt = spec.insertAt === "start" ? "start" : "end";
         merged =
             insertAt === "start"
-                ? specificCats.concat(globalCats)
-                : globalCats.concat(specificCats);
+                ? specificCats.concat(filteredGlobalCats)
+                : filteredGlobalCats.concat(specificCats);
     } else {
-        merged = [...globalCats];
+        merged = [...filteredGlobalCats];
     }
 
     debugWarn(
@@ -75,7 +123,7 @@ function getConfigForEntity(typeId) {
 
     return {
         specific: specificCats,
-        global: globalCats,
+        global: spec && spec.replace ? [] : filteredGlobalCats,
         merged
     };
 }
@@ -174,9 +222,13 @@ world.beforeEvents.playerInteractWithEntity.subscribe((ev) => {
             else if (entity.name) displayName = entity.name;
         } catch { }
 
+        const soldierName = entity.nameTag
+            ? `${entity.nameTag}§r`
+            : `§b${displayName}§r`;
+
         const catForm = new ActionFormData()
-            .title("Interacciones")
-            .body(`Entidad: ${displayName}\n§rSelecciona una categoría:`);
+            .title("SCPDystopia | Interacciones")
+            .body(`§7Unidad:§r ${soldierName}`);
 
         /** 
          * Mapa real de botones → categoría
@@ -194,7 +246,7 @@ world.beforeEvents.playerInteractWithEntity.subscribe((ev) => {
 
             if (cfg.global.length) {
                 catForm.divider();
-                catForm.label("- Opciones globales -");
+                catForm.label("§7- Opciones globales -§r");
                 for (const cat of cfg.global) {
                     catForm.button(cat.category);
                     categoryButtonMap.push(cat);
@@ -203,7 +255,7 @@ world.beforeEvents.playerInteractWithEntity.subscribe((ev) => {
         } else {
             // Globales primero
             if (cfg.global.length) {
-                catForm.label("- Opciones globales -");
+                catForm.label("§7- Opciones globales -§r");
                 for (const cat of cfg.global) {
                     catForm.button(cat.category);
                     categoryButtonMap.push(cat);
@@ -269,10 +321,23 @@ world.beforeEvents.playerInteractWithEntity.subscribe((ev) => {
 
                     const submenuForm = new ActionFormData()
                         .title(group.category)
-                        .body(`Entidad: ${displayName}\n§rSelecciona una categoría:`);
+                        .body(`Entidad: ${displayName}§r`);
 
+                    // Filtrar las categorías del submenu según global_rules y entidad
                     const submenuButtonMap = [];
-                    for (const subCat of submenuCfg.categories) {
+                    const rawSubCats = Array.isArray(submenuCfg.categories) ? submenuCfg.categories : [];
+                    const filteredSubCats = rawSubCats.filter((sc) => shouldIncludeCategoryForEntity(sc, typeId));
+
+                    if (!filteredSubCats.length) {
+                        debugWarn(
+                            "playerInteractWithEntity",
+                            `submenu ${submenuId} empty after filtering for ${typeId}`,
+                            "blue"
+                        );
+                        return;
+                    }
+
+                    for (const subCat of filteredSubCats) {
                         submenuForm.button(subCat.category);
                         submenuButtonMap.push(subCat);
                     }
@@ -338,13 +403,8 @@ world.beforeEvents.playerInteractWithEntity.subscribe((ev) => {
 
                             try {
                                 entity.triggerEvent(entry.event);
-
-                                const soldierName = entity.nameTag
-                                    ? `${entity.nameTag}§r`
-                                    : `§b${displayName}§r`;
-
                                 world.sendMessage(
-                                    `§8[§aMENU§8] §7${player.name} configuró a ${soldierName} §7-> §e${group.category}§7: §f${entry.label}`
+                                    `§8[§aMENU§8] §7${player.name} configuró a ${soldierName} §7-> §e${subCategory.category}§7: §f${entry.label}`
                                 );
 
                                 debugWarn(
@@ -402,11 +462,6 @@ world.beforeEvents.playerInteractWithEntity.subscribe((ev) => {
 
                         try {
                             entity.triggerEvent(entry.event);
-
-                            const soldierName = entity.nameTag
-                                ? `${entity.nameTag}§r`
-                                : `§b${displayName}§r`;
-
                             world.sendMessage(
                                 `§8[§aMENU§8] §7${player.name} configuró a ${soldierName} §7-> §e${group.category}§7: §f${entry.label}`
                             );

@@ -997,6 +997,48 @@
                     ]
                 }
             },
+            "start_variant0": {
+                "add": {
+                    "component_groups": [
+                        "variant0"
+                    ]
+                }
+            },
+            "start_variant1": {
+                "add": {
+                    "component_groups": [
+                        "variant1"
+                    ]
+                }
+            },
+            "start_variant2": {
+                "add": {
+                    "component_groups": [
+                        "variant2"
+                    ]
+                }
+            },
+            "start_variant3": {
+                "add": {
+                    "component_groups": [
+                        "variant3"
+                    ]
+                }
+            },
+            "start_variant4": {
+                "add": {
+                    "component_groups": [
+                        "variant4"
+                    ]
+                }
+            },
+            "start_variant5": {
+                "add": {
+                    "component_groups": [
+                        "variant5"
+                    ]
+                }
+            },
             "humanoid:heal": {
                 "queue_command": {
                     "command": "effect @s regeneration 600 1 true"
