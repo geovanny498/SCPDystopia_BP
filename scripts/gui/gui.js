@@ -137,6 +137,162 @@ function itemMatches(mainId, opener) {
     return short === opener || mainId === opener || mainId.endsWith(`:${opener}`);
 }
 
+/**
+ * Muestra el menú de categorías principal
+ * @param {Player} player 
+ * @param {Entity} entity 
+ * @param {Object} cfg 
+ * @param {string} soldierName 
+ * @param {string} displayName 
+ * @param {string} typeId 
+ */
+function showCategoryMenu(player, entity, cfg, soldierName, displayName, typeId) {
+    const catForm = new ActionFormData()
+        .title("SCPDystopia | Interacciones")
+        .body(`§7Unidad:§r ${soldierName}`);
+
+    const categoryButtonMap = [];
+
+    if (cfg.specific.length && cfg.merged[0] === cfg.specific[0]) {
+        catForm.label("§8- Opciones específicas -§r");
+        for (const cat of cfg.specific) {
+            catForm.button(cat.category);
+            categoryButtonMap.push(cat);
+        }
+
+        if (cfg.global.length) {
+            catForm.divider();
+            catForm.label("§7- Opciones globales -§r");
+            for (const cat of cfg.global) {
+                catForm.button(cat.category);
+                categoryButtonMap.push(cat);
+            }
+        }
+    } else {
+        if (cfg.global.length) {
+            catForm.label("§7- Opciones globales -§r");
+            for (const cat of cfg.global) {
+                catForm.button(cat.category);
+                categoryButtonMap.push(cat);
+            }
+        }
+
+        if (cfg.specific.length) {
+            catForm.divider();
+            catForm.label("§8- Opciones específicas -§r");
+            for (const cat of cfg.specific) {
+                catForm.button(cat.category);
+                categoryButtonMap.push(cat);
+            }
+        }
+    }
+
+    catForm.show(player).then((catRes) => {
+        if (!catRes || catRes.canceled) return;
+
+        const index = typeof catRes.selection === "number" ? catRes.selection : -1;
+        const group = categoryButtonMap[index];
+        if (!group) return;
+
+        handleCategorySelection(player, entity, group, cfg, soldierName, displayName, typeId);
+    });
+}
+
+/**
+ * Maneja la selección de una categoría (submenu o entries directas)
+ * @param {Player} player 
+ * @param {Entity} entity 
+ * @param {Object} group 
+ * @param {Object} cfg 
+ * @param {string} soldierName 
+ * @param {string} displayName 
+ * @param {string} typeId 
+ */
+function handleCategorySelection(player, entity, group, cfg, soldierName, displayName, typeId) {
+    if (group.submenu) {
+        const submenuId = group.submenu;
+        const submenuCfg = config.submenus && config.submenus[submenuId];
+
+        if (!submenuCfg || !Array.isArray(submenuCfg.categories) || !submenuCfg.categories.length) {
+            debugWarn("playerInteractWithEntity", `submenu ${submenuId} not found or empty`, "blue");
+            return;
+        }
+
+        const rawSubCats = Array.isArray(submenuCfg.categories) ? submenuCfg.categories : [];
+        const filteredSubCats = rawSubCats.filter((sc) => shouldIncludeCategoryForEntity(sc, typeId));
+
+        if (!filteredSubCats.length) {
+            debugWarn("playerInteractWithEntity", `submenu ${submenuId} empty after filtering`, "blue");
+            return;
+        }
+
+        const submenuForm = new ActionFormData()
+            .title(group.category)
+            .body(`Entidad: ${displayName}§r`);
+
+        const submenuButtonMap = [];
+        for (const subCat of filteredSubCats) {
+            submenuForm.button(subCat.category);
+            submenuButtonMap.push(subCat);
+        }
+
+        submenuForm.button("§8« Volver al menú principal");
+
+        submenuForm.show(player).then((subRes) => {
+            if (!subRes || subRes.canceled) return;
+
+            const subIndex = typeof subRes.selection === "number" ? subRes.selection : -1;
+
+            // Botón de volver
+            if (subIndex === submenuButtonMap.length) {
+                showCategoryMenu(player, entity, cfg, soldierName, displayName, typeId);
+                return;
+            }
+
+            const subCategory = submenuButtonMap[subIndex];
+            if (!subCategory || !subCategory.entries) return;
+
+            showEntryMenu(player, entity, subCategory, soldierName, displayName);
+        });
+    } else if (group.entries) {
+        showEntryMenu(player, entity, group, soldierName, displayName);
+    }
+}
+
+/**
+ * Muestra el menú de entries (acciones finales)
+ * @param {Player} player 
+ * @param {Entity} entity 
+ * @param {Object} category 
+ * @param {string} soldierName 
+ * @param {string} displayName 
+ */
+function showEntryMenu(player, entity, category, soldierName, displayName) {
+    const entryForm = new ActionFormData()
+        .title(category.category)
+        .body(`Entidad: ${displayName}\n§rSelecciona una acción:`);
+
+    for (const e of category.entries) entryForm.button(e.label);
+
+    entryForm.show(player).then((entryRes) => {
+        if (!entryRes || entryRes.canceled) return;
+
+        const entryIndex = typeof entryRes.selection === "number" ? entryRes.selection : -1;
+        const entry = category.entries[entryIndex];
+        if (!entry || !entry.event) return;
+
+        try {
+            entity.triggerEvent(entry.event);
+            world.sendMessage(
+                `§8[§aMENU§8] §7${player.name} configuró a ${soldierName} §7-> §e${category.category}§7: §f${entry.label}`
+            );
+            debugWarn("playerInteractWithEntity", `triggered event ${entry.event}`, "green");
+        } catch (e) {
+            debugWarn("playerInteractWithEntity", `triggerEvent failed: ${e}`, "red");
+        }
+    });
+}
+
 world.beforeEvents.playerInteractWithEntity.subscribe((ev) => {
     try {
         const player = ev.player;
@@ -226,261 +382,8 @@ world.beforeEvents.playerInteractWithEntity.subscribe((ev) => {
             ? `${entity.nameTag}§r`
             : `§b${displayName}§r`;
 
-        const catForm = new ActionFormData()
-            .title("SCPDystopia | Interacciones")
-            .body(`§7Unidad:§r ${soldierName}`);
-
-        /** 
-         * Mapa real de botones → categoría
-         * IMPORTANTE: headers/dividers NO cuentan como botones
-         */
-        const categoryButtonMap = [];
-
-        // ¿Específicas arriba?
-        if (cfg.specific.length && cfg.merged[0] === cfg.specific[0]) {
-            catForm.label("§8- Opciones específicas -§r");
-            for (const cat of cfg.specific) {
-                catForm.button(cat.category);
-                categoryButtonMap.push(cat);
-            }
-
-            if (cfg.global.length) {
-                catForm.divider();
-                catForm.label("§7- Opciones globales -§r");
-                for (const cat of cfg.global) {
-                    catForm.button(cat.category);
-                    categoryButtonMap.push(cat);
-                }
-            }
-        } else {
-            // Globales primero
-            if (cfg.global.length) {
-                catForm.label("§7- Opciones globales -§r");
-                for (const cat of cfg.global) {
-                    catForm.button(cat.category);
-                    categoryButtonMap.push(cat);
-                }
-            }
-
-            if (cfg.specific.length) {
-                catForm.divider();
-                catForm.label("§8- Opciones específicas -§r");
-                for (const cat of cfg.specific) {
-                    catForm.button(cat.category);
-                    categoryButtonMap.push(cat);
-                }
-            }
-        }
-
         system.run(() => {
-            debugWarn(
-                "playerInteractWithEntity",
-                `showing category form to ${player.name}`
-            );
-
-            catForm.show(player).then((catRes) => {
-                debugWarn(
-                    "playerInteractWithEntity",
-                    `category result: ${JSON.stringify(catRes)}`
-                );
-
-                if (!catRes || catRes.canceled) {
-                    debugWarn(
-                        "playerInteractWithEntity",
-                        `player canceled category`,
-                        "blue"
-                    );
-                    return;
-                }
-
-                const index =
-                    typeof catRes.selection === "number"
-                        ? catRes.selection
-                        : -1;
-
-                const group = categoryButtonMap[index];
-                if (!group) return;
-
-                // Si la categoría apunta a un submenu, abrir el submenu
-                if (group.submenu) {
-                    const submenuId = group.submenu;
-                    const submenuCfg = config.submenus && config.submenus[submenuId];
-                    debugWarn(
-                        "playerInteractWithEntity",
-                        `opening submenu ${submenuId} for ${typeId}`
-                    );
-
-                    if (!submenuCfg || !Array.isArray(submenuCfg.categories) || !submenuCfg.categories.length) {
-                        debugWarn(
-                            "playerInteractWithEntity",
-                            `submenu ${submenuId} not found or empty for ${typeId}`,
-                            "blue"
-                        );
-                        return;
-                    }
-
-                    const submenuForm = new ActionFormData()
-                        .title(group.category)
-                        .body(`Entidad: ${displayName}§r`);
-
-                    // Filtrar las categorías del submenu según global_rules y entidad
-                    const submenuButtonMap = [];
-                    const rawSubCats = Array.isArray(submenuCfg.categories) ? submenuCfg.categories : [];
-                    const filteredSubCats = rawSubCats.filter((sc) => shouldIncludeCategoryForEntity(sc, typeId));
-
-                    if (!filteredSubCats.length) {
-                        debugWarn(
-                            "playerInteractWithEntity",
-                            `submenu ${submenuId} empty after filtering for ${typeId}`,
-                            "blue"
-                        );
-                        return;
-                    }
-
-                    for (const subCat of filteredSubCats) {
-                        submenuForm.button(subCat.category);
-                        submenuButtonMap.push(subCat);
-                    }
-
-                    debugWarn(
-                        "playerInteractWithEntity",
-                        `showing submenu ${submenuId} to ${player.name}`
-                    );
-
-                    submenuForm.show(player).then((subRes) => {
-                        debugWarn(
-                            "playerInteractWithEntity",
-                            `submenu result: ${JSON.stringify(subRes)}`
-                        );
-
-                        if (!subRes || subRes.canceled) {
-                            debugWarn(
-                                "playerInteractWithEntity",
-                                `player canceled submenu`,
-                                "blue"
-                            );
-                            return;
-                        }
-
-                        const subIndex = typeof subRes.selection === "number" ? subRes.selection : -1;
-                        const subCategory = submenuButtonMap[subIndex];
-                        if (!subCategory || !subCategory.entries) return;
-
-                        // Abrir el formulario de entries usando la categoría del submenu seleccionada
-                        const entryForm = new ActionFormData()
-                            .title(subCategory.category)
-                            .body(`Entidad: ${displayName}\n§rSelecciona una acción:`);
-
-                        for (const e of subCategory.entries) entryForm.button(e.label);
-
-                        debugWarn(
-                            "playerInteractWithEntity",
-                            `showing entry form (submenu -> ${subCategory.category}) to ${player.name}`
-                        );
-
-                        entryForm.show(player).then((entryRes) => {
-                            debugWarn(
-                                "playerInteractWithEntity",
-                                `entry result: ${JSON.stringify(entryRes)}`
-                            );
-
-                            if (!entryRes || entryRes.canceled) {
-                                debugWarn(
-                                    "playerInteractWithEntity",
-                                    `player canceled entry`,
-                                    "blue"
-                                );
-                                return;
-                            }
-
-                            const entryIndex =
-                                typeof entryRes.selection === "number"
-                                    ? entryRes.selection
-                                    : -1;
-
-                            const entry = subCategory.entries[entryIndex];
-                            if (!entry || !entry.event) return;
-
-                            try {
-                                entity.triggerEvent(entry.event);
-                                world.sendMessage(
-                                    `§8[§aMENU§8] §7${player.name} configuró a ${soldierName} §7-> §e${subCategory.category}§7: §f${entry.label}`
-                                );
-
-                                debugWarn(
-                                    "playerInteractWithEntity",
-                                    `triggered event ${entry.event}`,
-                                    "green"
-                                );
-                            } catch (e) {
-                                debugWarn(
-                                    "playerInteractWithEntity",
-                                    `triggerEvent failed: ${e}`,
-                                    "red"
-                                );
-                            }
-                        });
-                    });
-
-                    return;
-                }
-                // Flujo normal: categoría con entries
-                if (group.entries) {
-                    const entryForm = new ActionFormData()
-                        .title(group.category)
-                        .body(`Entidad: ${displayName}\n§rSelecciona una acción:`);
-
-                    for (const e of group.entries) entryForm.button(e.label);
-
-                    debugWarn(
-                        "playerInteractWithEntity",
-                        `showing entry form (${group.category}) to ${player.name}`
-                    );
-
-                    entryForm.show(player).then((entryRes) => {
-                        debugWarn(
-                            "playerInteractWithEntity",
-                            `entry result: ${JSON.stringify(entryRes)}`
-                        );
-
-                        if (!entryRes || entryRes.canceled) {
-                            debugWarn(
-                                "playerInteractWithEntity",
-                                `player canceled entry`,
-                                "blue"
-                            );
-                            return;
-                        }
-
-                        const entryIndex =
-                            typeof entryRes.selection === "number"
-                                ? entryRes.selection
-                                : -1;
-
-                        const entry = group.entries[entryIndex];
-                        if (!entry || !entry.event) return;
-
-                        try {
-                            entity.triggerEvent(entry.event);
-                            world.sendMessage(
-                                `§8[§aMENU§8] §7${player.name} configuró a ${soldierName} §7-> §e${group.category}§7: §f${entry.label}`
-                            );
-
-                            debugWarn(
-                                "playerInteractWithEntity",
-                                `triggered event ${entry.event}`,
-                                "green"
-                            );
-                        } catch (e) {
-                            debugWarn(
-                                "playerInteractWithEntity",
-                                `triggerEvent failed: ${e}`,
-                                "red"
-                            );
-                        }
-                    });
-                }
-            });
+            showCategoryMenu(player, entity, cfg, soldierName, displayName, typeId);
         });
     } catch (err) {
         debugWarn("playerInteractWithEntity", `GUI error: ${err}`, "red");

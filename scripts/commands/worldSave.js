@@ -11,9 +11,9 @@ export function saveSystemState(systemName, state) {
     try {
         const propName = `scpd_system_${systemName}`;
         world.setDynamicProperty(propName, JSON.stringify(state));
-        debugMessage("dynamicProperties",`[SCPDystopia] Propiedad guardada: ${propName}`,"blue");
+        debugMessage("dynamicProperties", `[SCPDystopia] Propiedad guardada: ${propName}`, "blue");
     } catch (err) {
-        debugWarn("dynamicProperties",`[SCPDystopia] Error al guardar sistema ${systemName}: ${err}`,"red");
+        debugWarn("dynamicProperties", `[SCPDystopia] Error al guardar sistema ${systemName}: ${err}`, "red");
     }
 }
 
@@ -28,7 +28,7 @@ export function loadSystemState(systemName) {
         if (!prop) return undefined;
         return JSON.parse(prop);
     } catch (err) {
-        debugWarn("dynamicProperties",`[SCPDystopia] Error al cargar sistema ${systemName}: ${err}`,"red");
+        debugWarn("dynamicProperties", `[SCPDystopia] Error al cargar sistema ${systemName}: ${err}`, "red");
         return undefined;
     }
 }

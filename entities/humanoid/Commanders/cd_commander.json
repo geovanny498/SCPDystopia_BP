@@ -1178,11 +1178,6 @@
                         "defensive",
                         "fire_mode_hit"
                     ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar §cSolo hostiles"
-                    ]
                 }
             },
             "humanoid:fire_defensive": {
@@ -1196,11 +1191,6 @@
                         "fire_enemies_only",
                         "fire_mode_hit"
                     ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar §eDefensivo (alcance reducido)"
-                    ]
                 }
             },
             "humanoid:fire_mode_hit": {
@@ -1213,11 +1203,6 @@
                     "component_groups": [
                         "fire_enemies_only",
                         "defensive"
-                    ]
-                },
-                "queue_command": {
-                    "command": [
-                        "title @p actionbar §7Solo al recibir daño"
                     ]
                 }
             },

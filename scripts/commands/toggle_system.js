@@ -137,19 +137,6 @@ export function registerSoldierSystem(cfg) {
 
             return { status: CustomCommandStatus.Success, message: `§6${cfg.desc} - Estado Actual§r\n\n${parts.join("\n\n")}` };
         });
-
-        // --- Comando reset ---
-        try {
-            init.customCommandRegistry.registerCommand({
-                name: "scpd:reset_system",
-                description: "Resetea un sistema específico o todos",
-                permissionLevel: CommandPermissionLevel.Any,
-                cheatsRequired: false
-            }, (origin, system_name) => {
-                resetAllSystems(systemStates);
-                return { status: CustomCommandStatus.Success, message: system_name ? `${system_name} reseteado` : "Todos los sistemas reseteados" };
-            });
-        } catch { }
     });
 
     function handleSoldierEntity(ent) {
@@ -171,19 +158,24 @@ export function registerSoldierSystem(cfg) {
     }
 
 
+    // ============================================================================
+    // DESACTIVADO: Los event listeners ahora se manejan en menu_events.js
+    // que respeta las reglas de applyMode (existing_only vs all)
+    // ============================================================================
+
     // Centralizar reaplicación: cuando una entidad aparece o se carga, actualizar lista y delegar en applySystemToEntity
-    world.afterEvents.entitySpawn.subscribe(ev => {
-        handleSoldierEntity(ev.entity);
-    });
+    // world.afterEvents.entitySpawn.subscribe(ev => {
+    //     handleSoldierEntity(ev.entity);
+    // });
 
-    world.afterEvents.entityLoad.subscribe(ev => {
-        handleSoldierEntity(ev.entity);
-    });
+    // world.afterEvents.entityLoad.subscribe(ev => {
+    //     handleSoldierEntity(ev.entity);
+    // });
 
-    world.afterEvents.entityRemove.subscribe(ev => {
-        const idx = allSoldiers.indexOf(ev.removedEntityId);
-        if (idx !== -1) allSoldiers.splice(idx, 1);
-    });
+    // world.afterEvents.entityRemove.subscribe(ev => {
+    //     const idx = allSoldiers.indexOf(ev.removedEntityId);
+    //     if (idx !== -1) allSoldiers.splice(idx, 1);
+    // });
 
     // Inyectar accesores en applySystems para que use las estructuras mantenidas aquí (evita ciclos de import)
     try {

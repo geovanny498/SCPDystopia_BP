@@ -4,21 +4,70 @@ import { world } from "@minecraft/server";
 // Configuración global
 // =====================
 export const DEBUG = false;          // Mensajes en el chat
-export const DEBUG_CONSOLE = false;  // Mensajes en consola
+export const DEBUG_CONSOLE = true;  // Mensajes en consola
 
 /*
 Filtros por archivo/módulo
 - []            → no muestra nada
 - ["*"]         → muestra todo
 - ["toggle_system", "commandMenu"]
+
+Módulos del Sistema de Menú:
+- commandMenu       → Flujo general del menú (menu.js)
+- menuSystem        → Formularios de sistemas (menu_system.js)
+- menuCategory      → Menú de categorías (menu_category.js)
+- menuBuilder       → Construcción de formularios (menu_builder.js)
+- menuState         → Gestión de estados (menu_state.js)
+- menuApply         → Aplicación de sistemas (menu_apply.js)
+- menuApply:entity  → Aplicación por entidad (detallado)
+- menuEvents        → Eventos de spawn/load (menu_events.js)
+- menuEvents:spawn  → Solo eventos de spawn (detallado)
+- menuRules         → Verificación de reglas (menu_rules.js)
+- menuRules:compat  → Solo verificación de compatibilidad (detallado)
+- menuRules:apply   → Solo verificación de applyMode (detallado)
+
+Módulos de Sistemas Legacy:
+- applySystems      → Sistema de aplicación antiguo
+- toggle_system     → Sistema de toggle antiguo
+- toggle_entity     → Interacción con entidades
+- playerInteractWithEntity → Interacción jugador-entidad
+
+Otros:
+- dynamicProperties → Propiedades dinámicas del mundo
 */
 export const DEBUG_MODULES = [
-    // "commandMenu",
-    // "applySystems",
-    // "toggle_system",
-    // "toggle_entity",
-    // "playerInteractWithEntity",
-    "dynamicProperties"
+    // === DEPURACIÓN DE APPLYMODE (existing_only) ===
+    "menuEvents:spawn",   // Ver qué pasa cuando spawna una entidad
+    "menuRules:apply",    // Ver verificación de applyMode
+
+    // === MENÚ: FLUJO GENERAL ===
+    // "commandMenu",        // Flujo general del menú
+    // "menuSystem",         // Formularios de sistemas
+    // "menuCategory",       // Menú de categorías
+    // "menuBuilder",        // Construcción de formularios
+
+    // === MENÚ: ESTADOS ===
+    // "menuState",          // Gestión de estados (guardar/cargar)
+
+    // === MENÚ: APLICACIÓN ===
+    // "menuApply",          // Aplicación de sistemas (general)
+    "menuApply:entity",   // Aplicación por entidad (detallado)
+
+    // === MENÚ: EVENTOS ===
+    // "menuEvents",         // Eventos de spawn/load (general)
+
+    // === MENÚ: REGLAS (NUEVO) ===
+    "menuRules",          // Verificación de reglas (general)
+    "menuRules:compat",   // Solo verificación de compatibilidad
+
+    // === SISTEMAS LEGACY ===
+    // "applySystems",       // Sistema de aplicación antiguo
+    // "toggle_system",      // Sistema de toggle antiguo
+    // "toggle_entity",      // Interacción con entidades
+    // "playerInteractWithEntity", // Interacción jugador-entidad
+
+    // === OTROS ===
+    // "dynamicProperties"   // Propiedades dinámicas del mundo
 ];
 
 function isModuleEnabled(module) {
