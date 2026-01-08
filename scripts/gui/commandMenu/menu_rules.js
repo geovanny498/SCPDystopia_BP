@@ -32,6 +32,8 @@ export const systemRules = {
         applyMode: "all"
     },
 
+    // Ejemplo para requires:
+    /* 
     distance: {
         domain: "distance",
         applyMode: "existing_only",  // ← Cambiado de "all" a "existing_only" para no colisionar con movement
@@ -40,7 +42,8 @@ export const systemRules = {
         requires: {
             movement: ["follow"]
         }
-    },
+    }, 
+    */
 
     spawn: {
         domain: "spawn",

@@ -4,7 +4,7 @@ import { world } from "@minecraft/server";
 // Configuración global
 // =====================
 export const DEBUG = false;          // Mensajes en el chat
-export const DEBUG_CONSOLE = true;  // Mensajes en consola
+export const DEBUG_CONSOLE = false;  // Mensajes en consola
 
 /*
 Filtros por archivo/módulo

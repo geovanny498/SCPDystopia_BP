@@ -50,10 +50,17 @@ export const systems = {
         // Opciones para dropdown con eventos asociados
         options: [
             {
-                value: "follow",
-                label: "Seguir jugador",
+                value: "follow_close",
+                label: "Seguir jugador (Cerca)",
                 events: {
-                    start: "mtf:to_move"
+                    start: "humanoid:set_tamed_close"
+                }
+            },
+            {
+                value: "follow_far",
+                label: "Seguir jugador (Lejos)",
+                events: {
+                    start: "humanoid:set_tamed_far"
                 }
             },
             {
@@ -88,52 +95,6 @@ export const systems = {
         defaults: {
             [Factions.FOUNDATION]: { mode: "free", includeSpecial: "free" },
             [Factions.CHAOS]: { mode: "free", includeSpecial: "free" }
-        }
-    },
-
-    distance: {
-        id: "distance",
-        displayName: "§2§lDistancia al jugador",
-        description: "§8(Sólo entidades existentes)",
-        category: "movement_patrol",
-        dynamicProperty: "scpd_system_distance",
-        controlType: ControlType.DROPDOWN,
-        supportsSpecials: true,
-
-        // Opciones para dropdown con eventos asociados
-        options: [
-            {
-                value: "close",
-                label: "Cerca",
-                events: {
-                    start: "humanoid:set_tamed_close"
-                }
-            },
-            {
-                value: "far",
-                label: "Lejos",
-                events: {
-                    start: "humanoid:set_tamed_far"
-                }
-            }
-        ],
-
-        factions: {
-            [Factions.FOUNDATION]: {
-                label: "§lFoundation",
-                normalLabel: "Normales",
-                specialLabel: "Especiales"
-            },
-            [Factions.CHAOS]: {
-                label: "§2§lChaos",
-                normalLabel: "Normales",
-                specialLabel: "Especiales"
-            }
-        },
-
-        defaults: {
-            [Factions.FOUNDATION]: { mode: "close", includeSpecial: "close" },
-            [Factions.CHAOS]: { mode: "close", includeSpecial: "close" }
         }
     },
 
@@ -329,8 +290,8 @@ export const categories = {
     movement_patrol: {
         id: "movement_patrol",
         displayName: "§1§lMovimiento / Patrulla",
-        description: "",
-        systems: ["movement", "distance"]
+        description: "§8(Sólo entidades existentes)",
+        systems: ["movement"]
     },
     combat: {
         id: "combat",
@@ -348,7 +309,7 @@ export const categories = {
         id: "all",
         displayName: "§lTodos los Sistemas",
         description: "",
-        systems: ["movement", "fire", "distance", "spawn", "health", "teleport"]
+        systems: ["movement", "fire", "spawn", "health", "teleport"]
     }
 };
 

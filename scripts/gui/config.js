@@ -48,14 +48,21 @@ export default {
                 category: "§1Movimiento / Patrulla§r",
                 entries: [
                     {
-                        label: "Seguir jugador",
-                        event: "mtf:to_move",
+                        label: "Seguir jugador (Cerca)",
+                        event: "humanoid:set_tamed_close",
+                    },
+                    {
+                        label: "Seguir jugador (Lejos)",
+                        event: "humanoid:set_tamed_far",
                     },
                     {
                         label: "Caminar libremente",
                         event: "mtf:to_move_free",
                     },
-                    { label: "Detenerse", event: "mtf:to_stop" },
+                    {
+                        label: "Detenerse",
+                        event: "mtf:to_stop",
+                    },
                 ],
             },
             {
@@ -77,20 +84,13 @@ export default {
                 ],
             },
             {
-                id: "distance_player",
-                category: "§2Distancia al jugador§r",
-                entries: [
-                    { label: "Cerca", event: "humanoid:set_tamed_close" },
-                    { label: "Lejos", event: "humanoid:set_tamed_far" },
-                ],
-            },
-            {
                 id: "advanced_menu",
                 category: "Configuración avanzada",
                 submenu: "advanced",
             },
         ],
     },
+
 
     /* Reglas para aplicar/ocultar sistemas globales por entidad.
     Cada clave representa un "sistema global"

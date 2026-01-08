@@ -1033,11 +1033,14 @@
             "minecraft:on_tame": {
                 "add": {
                     "component_groups": [
+                        "start_move",
                         "tamed"
                     ]
                 },
                 "remove": {
                     "component_groups": [
+                        "stop_move",
+                        "start_move_free",
                         "tamed_far"
                     ]
                 }
@@ -1045,40 +1048,40 @@
             "humanoid:set_tamed_far": {
                 "add": {
                     "component_groups": [
-                        "tamed_far",
-                        "start_move"
+                        "start_move",
+                        "tamed_far"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "tamed",
                         "stop_move",
-                        "start_move_free"
+                        "start_move_free",
+                        "tamed"
                     ]
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar §4§lModo lejos activado"
+                        "title @p actionbar §4§lSeguir jugador (Lejos)"
                     ]
                 }
             },
             "humanoid:set_tamed_close": {
                 "add": {
                     "component_groups": [
-                        "tamed",
-                        "start_move"
+                        "start_move",
+                        "tamed"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "tamed_far",
                         "stop_move",
-                        "start_move_free"
+                        "start_move_free",
+                        "tamed_far"
                     ]
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar §2§lModo cerca activado"
+                        "title @p actionbar §2§lSeguir jugador (Cerca)"
                     ]
                 }
             },
@@ -1098,7 +1101,7 @@
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar Seguir jugador"
+                        "title @p actionbar §e§l[LEGACY] Seguir jugador"
                     ]
                 }
             },
