@@ -938,8 +938,8 @@
             "minecraft:jump.static": {},
             "minecraft:can_climb": {},
             "minecraft:follow_range": {
-                "value": 128,
-                "max": 128
+                "value": 1024,
+                "max": 1024
             },
             "minecraft:physics": {},
             "minecraft:pushable": {

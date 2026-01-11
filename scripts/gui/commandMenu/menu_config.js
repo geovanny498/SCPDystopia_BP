@@ -40,7 +40,7 @@ export const specialUnits = {
 export const systems = {
     movement: {
         id: "movement",
-        displayName: "§1§lMovimiento / Patrulla",
+        displayName: "§1Movimiento / Patrulla",
         description: "§8(Sólo entidades existentes)",
         category: "movement_patrol",
         dynamicProperty: "scpd_system_movement",
@@ -100,7 +100,7 @@ export const systems = {
 
     fire: {
         id: "fire",
-        displayName: "§c§lModo de Disparo",
+        displayName: "§cModo de Disparo",
         description: "",
         category: "combat",
         dynamicProperty: "scpd_system_fire",
@@ -154,7 +154,7 @@ export const systems = {
 
     spawn: {
         id: "spawn",
-        displayName: "§1§lSpawn de soldados",
+        displayName: "§1Spawn de soldados",
         description: "",
         category: "advanced",
         dynamicProperty: "scpd_system_spawn",
@@ -190,7 +190,7 @@ export const systems = {
 
     health: {
         id: "health",
-        displayName: "§c§lBarra de vida",
+        displayName: "§cBarra de vida",
         description: "",
         category: "advanced",
         dynamicProperty: "scpd_system_health",
@@ -226,7 +226,7 @@ export const systems = {
 
     teleport: {
         id: "teleport",
-        displayName: "§2§lTeletransportacion",
+        displayName: "§2Teletransportación",
         description: "",
         category: "advanced",
         dynamicProperty: "scpd_system_teleport",
@@ -289,19 +289,19 @@ export const systems = {
 export const categories = {
     movement_patrol: {
         id: "movement_patrol",
-        displayName: "§1§lMovimiento / Patrulla",
+        displayName: "§1Movimiento / Patrulla",
         description: "§8(Sólo entidades existentes)",
         systems: ["movement"]
     },
     combat: {
         id: "combat",
-        displayName: "§c§lAtaque / Reglas de disparo",
+        displayName: "§cAtaque / Reglas de disparo",
         description: "",
         systems: ["fire"]
     },
     advanced: {
         id: "advanced",
-        displayName: "§6§lConfiguración avanzada",
+        displayName: "§6Configuración avanzada",
         description: "",
         systems: ["spawn", "health", "teleport"]
     },

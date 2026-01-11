@@ -228,7 +228,7 @@ function handleCategorySelection(player, entity, group, cfg, soldierName, displa
 
         const submenuForm = new ActionFormData()
             .title(group.category)
-            .body(`Entidad: ${displayName}§r`);
+            .body(`§7Unidad:§r ${soldierName}`);
 
         const submenuButtonMap = [];
         for (const subCat of filteredSubCats) {
@@ -270,7 +270,7 @@ function handleCategorySelection(player, entity, group, cfg, soldierName, displa
 function showEntryMenu(player, entity, category, soldierName, displayName) {
     const entryForm = new ActionFormData()
         .title(category.category)
-        .body(`Entidad: ${displayName}\n§rSelecciona una acción:`);
+        .body(`§7Unidad:§r ${soldierName}\n§rSelecciona una acción:`);
 
     for (const e of category.entries) entryForm.button(e.label);
 
