@@ -19,4 +19,4 @@ tag @e[name="§8§lMTF Nu-7 Commander"] add fire
 tag @e[name="§6§lMTF Beta-7 Commander"] add fire
 tag @e[name="§e§lMTF Epsilon-6 Commander"] add fire
 
-event entity @e[tag=fire] humanoid:fire_enemies_only
+event entity @e[tag=fire] humanoid:fire_armed_presence

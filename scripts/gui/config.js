@@ -48,19 +48,19 @@ export default {
                 category: "§1Movimiento / Patrulla§r",
                 entries: [
                     {
-                        label: "Seguir jugador (Cerca)",
+                        label: "§aSeguir jugador (Cerca)",
                         event: "humanoid:set_tamed_close",
                     },
                     {
-                        label: "Seguir jugador (Lejos)",
+                        label: "§6Seguir jugador (Lejos)",
                         event: "humanoid:set_tamed_far",
                     },
                     {
-                        label: "Caminar libremente",
+                        label: "§9Caminar libremente",
                         event: "mtf:to_move_free",
                     },
                     {
-                        label: "Detenerse",
+                        label: "§cDetenerse",
                         event: "mtf:to_stop",
                     },
                 ],
@@ -70,15 +70,19 @@ export default {
                 category: "§cAtaque / Reglas de disparo§r",
                 entries: [
                     {
-                        label: "Solo enemigos",
-                        event: "humanoid:fire_enemies_only",
+                        label: "§cGuerra Abierta",
+                        event: "humanoid:fire_open_warfare",
                     },
                     {
-                        label: "Defensivo (alcance reducido)",
+                        label: "§aPresencia Armada",
+                        event: "humanoid:fire_armed_presence",
+                    },
+                    {
+                        label: "§9Defensivo (alcance reducido)",
                         event: "humanoid:fire_defensive",
                     },
                     {
-                        label: "Solo al recibir daño",
+                        label: "§6Solo al recibir daño",
                         event: "humanoid:fire_mode_hit",
                     },
                 ],
@@ -129,11 +133,11 @@ export default {
                     category: "§bInvocar soldados§r",
                     entries: [
                         {
-                            label: "Activar",
+                            label: "§aActivar",
                             event: "humanoid:start_spawn_soldiers",
                         },
                         {
-                            label: "Desactivar",
+                            label: "§cDesactivar",
                             event: "humanoid:stop_spawn_soldiers",
                         },
                     ],
@@ -143,11 +147,11 @@ export default {
                     category: "§cBarra de vida§r",
                     entries: [
                         {
-                            label: "Mostrar",
+                            label: "§aMostrar",
                             event: "humanoid:show_boss_bar",
                         },
                         {
-                            label: "Ocultar",
+                            label: "§cOcultar",
                             event: "humanoid:dont_show_boss_bar",
                         },
                     ],
@@ -157,15 +161,15 @@ export default {
                     category: "§2Teletransportación§r",
                     entries: [
                         {
-                            label: "Iniciar teletransporte",
+                            label: "§aIniciar teletransporte",
                             event: "humanoid:start_teleport",
                         },
                         {
-                            label: "Iniciar teletransporte cercano",
+                            label: "§6Iniciar teletransporte cercano",
                             event: "humanoid:start_teleport_near",
                         },
                         {
-                            label: "Detener teletransporte",
+                            label: "§cDetener teletransporte",
                             event: "humanoid:stop_teleport",
                         },
                     ],
@@ -175,11 +179,11 @@ export default {
                     category: "Invencibilidad",
                     entries: [
                         {
-                            label: "Activar",
+                            label: "§aActivar",
                             event: "humanoid:start_invincible",
                         },
                         {
-                            label: "Desactivar",
+                            label: "§cDesactivar",
                             event: "humanoid:stop_invincible",
                         },
                     ],

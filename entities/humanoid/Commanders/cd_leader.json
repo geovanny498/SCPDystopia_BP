@@ -160,7 +160,7 @@
                     "damage": 18
                 }
             },
-            "fire_enemies_only": {
+            "open_warfare": {
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
                     "within_radius": 128,
@@ -292,6 +292,101 @@
                     ]
                 }
             },
+            "armed_presence": {
+                "minecraft:behavior.nearest_attackable_target": {
+                    "priority": -1,
+                    "within_radius": 30,
+                    "reselect_targets": true,
+                    "entity_types": [
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "scp096"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "scp001_gg"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "enderman"
+                                    },
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "operator": "!=",
+                                        "value": "scp280"
+                                    },
+                                    {
+                                        "other_with_families": [
+                                            "monster",
+                                            "warden",
+                                            "scp",
+                                            "mtf",
+                                            "scpfoundation",
+                                            "foundation",
+                                            "villager"
+                                        ]
+                                    }
+                                ]
+                            },
+                            "max_dist": 30
+                        },
+                        {
+                            "filters": {
+                                "all_of": [
+                                    {
+                                        "test": "is_family",
+                                        "subject": "other",
+                                        "value": "player"
+                                    }
+                                ],
+                                "any_of": [
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:netherite_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:diamond_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "minecraft:iron_helmet"
+                                    },
+                                    {
+                                        "test": "has_equipment",
+                                        "subject": "other",
+                                        "domain": "head",
+                                        "operator": "==",
+                                        "value": "gabrielaplok:nv_goggles"
+                                    }
+                                ]
+                            },
+                            "max_dist": 30
+                        }
+                    ],
+                    "must_see_forget_duration": 6.0,
+                    "must_see": true
+                }
+            },
             "defensive": {
                 "minecraft:behavior.nearest_attackable_target": {
                     "priority": -1,
@@ -385,45 +480,9 @@
                     ],
                     "must_see_forget_duration": 6.0,
                     "must_see": true
-                },
-                "minecraft:behavior.hurt_by_target": {
-                    "priority": 2,
-                    "entity_types": [
-                        {
-                            "filters": {
-                                "all_of": [
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "operator": "!=",
-                                        "value": "chaos_insurgency"
-                                    }
-                                ]
-                            },
-                            "max_dist": 70
-                        },
-                        {
-                            "filters": {
-                                "all_of": [
-                                    {
-                                        "test": "is_family",
-                                        "subject": "other",
-                                        "value": "player"
-                                    },
-                                    {
-                                        "test": "has_equipment",
-                                        "subject": "other",
-                                        "domain": "head",
-                                        "operator": "!=",
-                                        "value": "minecraft:golden_helmet"
-                                    }
-                                ]
-                            },
-                            "max_dist": 70
-                        }
-                    ]
                 }
             },
+            // Hurt by target compartido para armed_presence y defensive, usar solo para modo "solo al recibir daño" 
             "fire_mode_hit": {
                 "minecraft:behavior.hurt_by_target": {
                     "priority": 2,
@@ -971,7 +1030,7 @@
                                 "minecraft:ranged_attack",
                                 "start_move",
                                 "calm",
-                                "fire_enemies_only"
+                                "armed_presence" // menos agresivo por defecto
                             ]
                         }
                     }
@@ -1089,7 +1148,7 @@
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar §4§lSeguir jugador (Lejos)"
+                        "title @p actionbar §6Seguir jugador (Lejos)"
                     ]
                 }
             },
@@ -1109,7 +1168,7 @@
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar §2§lSeguir jugador (Cerca)"
+                        "title @p actionbar §aSeguir jugador (Cerca)"
                     ]
                 }
             },
@@ -1149,7 +1208,7 @@
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar Detenerse"
+                        "title @p actionbar §cDetenerse"
                     ]
                 }
             },
@@ -1169,33 +1228,50 @@
                 },
                 "queue_command": {
                     "command": [
-                        "title @p actionbar Caminar libremente"
+                        "title @p actionbar §9Caminar libremente"
                     ]
                 }
             },
-            "humanoid:fire_enemies_only": {
+            "humanoid:fire_open_warfare": {
                 "add": {
                     "component_groups": [
-                        "fire_enemies_only"
+                        "open_warfare" // Tiene hurt_by_target propio
                     ]
                 },
                 "remove": {
                     "component_groups": [
+                        "armed_presence",
                         "defensive",
+                        // Quitar hurt_by_target compartido entre todos menos fire_open_warfare
                         "fire_mode_hit"
+                    ]
+                }
+            },
+            "humanoid:fire_armed_presence": {
+                "add": {
+                    "component_groups": [
+                        "armed_presence",
+                        "fire_mode_hit"
+                    ]
+                },
+                "remove": {
+                    "component_groups": [
+                        "open_warfare",
+                        "defensive"
                     ]
                 }
             },
             "humanoid:fire_defensive": {
                 "add": {
                     "component_groups": [
-                        "defensive"
+                        "defensive",
+                        "fire_mode_hit"
                     ]
                 },
                 "remove": {
                     "component_groups": [
-                        "fire_enemies_only",
-                        "fire_mode_hit"
+                        "open_warfare",
+                        "armed_presence"
                     ]
                 }
             },
@@ -1207,7 +1283,8 @@
                 },
                 "remove": {
                     "component_groups": [
-                        "fire_enemies_only",
+                        "open_warfare",
+                        "armed_presence",
                         "defensive"
                     ]
                 }

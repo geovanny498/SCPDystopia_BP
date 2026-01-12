@@ -51,28 +51,28 @@ export const systems = {
         options: [
             {
                 value: "follow_close",
-                label: "Seguir jugador (Cerca)",
+                label: "§aSeguir jugador (Cerca)",
                 events: {
                     start: "humanoid:set_tamed_close"
                 }
             },
             {
                 value: "follow_far",
-                label: "Seguir jugador (Lejos)",
+                label: "§6Seguir jugador (Lejos)",
                 events: {
                     start: "humanoid:set_tamed_far"
                 }
             },
             {
                 value: "free",
-                label: "Caminar libremente",
+                label: "§9Caminar libremente",
                 events: {
                     start: "mtf:to_move_free"
                 }
             },
             {
                 value: "stop",
-                label: "Detenerse",
+                label: "§cDetenerse",
                 events: {
                     start: "mtf:to_stop"
                 }
@@ -111,22 +111,29 @@ export const systems = {
         // IMPORTANTE: Siempre debe tener uno de los 3 modos activos
         options: [
             {
-                value: "enemies_only",
-                label: "Solo Hostiles",
+                value: "open_warfare",
+                label: "§cGuerra Abierta",
                 events: {
-                    start: "humanoid:fire_enemies_only"
+                    start: "humanoid:fire_open_warfare"
+                }
+            },
+            {
+                value: "armed_presence",
+                label: "§aPresencia Armada",
+                events: {
+                    start: "humanoid:fire_armed_presence"
                 }
             },
             {
                 value: "defensive",
-                label: "Defensivo (alcance reducido)",
+                label: "§9Defensivo (alcance reducido)",
                 events: {
                     start: "humanoid:fire_defensive"
                 }
             },
             {
                 value: "on_hit",
-                label: "Al Recibir Daño",
+                label: "§6Al Recibir Daño",
                 events: {
                     start: "humanoid:fire_mode_hit"
                 }
@@ -147,8 +154,8 @@ export const systems = {
         },
 
         defaults: {
-            [Factions.FOUNDATION]: { mode: "enemies_only", includeSpecial: "enemies_only" },
-            [Factions.CHAOS]: { mode: "enemies_only", includeSpecial: "enemies_only" }
+            [Factions.FOUNDATION]: { mode: "armed_presence", includeSpecial: "armed_presence" },
+            [Factions.CHAOS]: { mode: "armed_presence", includeSpecial: "armed_presence" }
         }
     },
 
@@ -237,7 +244,7 @@ export const systems = {
         options: [
             {
                 value: "normal",
-                label: "Normal",
+                label: "§aNormal",
                 events: {
                     start: "humanoid:start_teleport",
                     // stop: "humanoid:stop_teleport"
@@ -245,7 +252,7 @@ export const systems = {
             },
             {
                 value: "near",
-                label: "Cercano",
+                label: "§6Cercano",
                 events: {
                     start: "humanoid:start_teleport_near",
                     // stop: "humanoid:stop_teleport_near"
@@ -253,7 +260,7 @@ export const systems = {
             },
             {
                 value: "false",
-                label: "Desactivado",
+                label: "§cDesactivado",
                 events: {
                     stop: "humanoid:stop_teleport"
                 }
